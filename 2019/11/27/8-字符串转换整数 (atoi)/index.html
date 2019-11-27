@@ -7,18 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Hello World - Hexo</title>
+<title>8-字符串转换整数 (atoi) - Hexo</title>
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="8-字符串转换整数 (atoi) @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com  1. 题目请你来实现一个atoi函数，使其能将字符串转换成整数。 首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。 当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="8-字符串转换整数 (atoi)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;8-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0%20(atoi)&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="8-字符串转换整数 (atoi) @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com  1. 题目请你来实现一个atoi函数，使其能将字符串转换成整数。 首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。 当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-27T01:58:51.884Z">
+<meta property="og:updated_time" content="2019-10-24T02:21:58.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -78,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/favicon.png" alt="Hello World" height="28">
+                <img src="/images/favicon.png" alt="8-字符串转换整数 (atoi)" height="28">
             
             </a>
         </div>
@@ -134,13 +134,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-27T01:58:51.884Z">2019-11-27</time>
+                <time class="level-item has-text-grey" datetime="2019-11-27T08:33:15.346Z">2019-11-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 123 words)
+                    6 minutes read (About 860 words)
                 </span>
                 
                 
@@ -149,23 +149,38 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                8-字符串转换整数 (atoi)
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <h1 id="8-字符串转换整数-atoi"><a href="#8-字符串转换整数-atoi" class="headerlink" title="8-字符串转换整数 (atoi)"></a>8-字符串转换整数 (atoi)</h1><blockquote>
+<p>@Author：CSU张扬<br>@Email：<a href="mailto:csuzhangyang@gmail.com" target="_blank" rel="noopener">csuzhangyang@gmail.com</a> or <a href="mailto:csuzhangyang@qq.com" target="_blank" rel="noopener">csuzhangyang@qq.com</a></p>
+</blockquote>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>请你来实现一个<code>atoi</code>函数，使其能将字符串转换成整数。</p>
+<p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。</p>
+<p>当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</p>
+<p>该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。</p>
+<p>注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。</p>
+<p>在任何情况下，若函数不能进行有效的转换时，请返回 0。</p>
+<p>说明：<br>假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−2^31,  2^31 − 1]。如果数值超过这个范围，请返回  INT_MAX (2^31 − 1) 或 INT_MIN (−2^31) 。</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-string">"42"</span></span><br><span class="line">输出: <span class="hljs-number">42</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-string">"   -42"</span></span><br><span class="line">输出: <span class="hljs-number">-42</span></span><br><span class="line">解释: 第一个非空白字符为 <span class="hljs-string">'-'</span>, 它是一个负号。</span><br><span class="line">     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 <span class="hljs-number">-42</span> 。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-string">"4193 with words"</span></span><br><span class="line">输出: <span class="hljs-number">4193</span></span><br><span class="line">解释: 转换截止于数字 <span class="hljs-string">'3'</span> ，因为它的下一个字符不为数字。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">4</span>:</span><br><span class="line">输入: <span class="hljs-string">"words and 987"</span></span><br><span class="line">输出: <span class="hljs-number">0</span></span><br><span class="line">解释: 第一个非空字符是 <span class="hljs-string">'w'</span>, 但它不是数字或正、负号。</span><br><span class="line">     因此无法执行有效的转换。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">5</span>:</span><br><span class="line">输入: <span class="hljs-string">"-91283472332"</span></span><br><span class="line">输出: <span class="hljs-number">-2147483648</span></span><br><span class="line">解释: 数字 <span class="hljs-string">"-91283472332"</span> 超过 <span class="hljs-number">32</span> 位有符号整数范围。</span><br><span class="line">     因此返回 INT_MIN (−<span class="hljs-number">231</span>) 。</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/string-to-integer-atoi" target="_blank" rel="noopener">https://leetcode-cn.com/problems/string-to-integer-atoi</a></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><ol>
+<li>先找出第一个非空字符的下标 <code>noSpaceIndex</code></li>
+<li>判断正负性 <code>negative</code>，找出数字开始的下标 <code>startIndex</code></li>
+<li>计算出当前下标的数字 <code>curDigit</code>，判断是否溢出</li>
+<li>horner法则求出和。</li>
+</ol>
+<p><strong>需要注意的是溢出的处理办法：</strong><br><code>if (res &gt; INT_MAX/10 || (res &gt;= INT_MAX/10 &amp;&amp; curDigit &gt; 7))</code></p>
+<ol>
+<li>首先我们知道 <code>INT_MAX = 2^31 - 1 = 2147483647，INT_MIN = -2^31 = -2147483648;</code>，<code>res</code>是结果的绝对值。  </li>
+<li>我们要理解为什么正负溢出对的处理方式相同。<br>举四个例子即可：2147483647，2147483648，-2147483647，-2147483648。<br>其中只有 <code>2147483648</code> 和 <code>-2147483648</code> 会判断成溢出，实际上 <code>-2147483648</code> 是没有溢出的，但是我们最终得到的结果都是<code>INT_MIN = -2147483648</code>，所以并无大碍。</li>
+</ol>
+<blockquote>
+<p>执行用时 :4 ms, 在所有 cpp 提交中击败了93.61%的用户<br>内存消耗 :8.3 MB, 在所有 cpp 提交中击败了93.80%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">myAtoi</span><span class="hljs-params">(<span class="hljs-built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">bool</span> negative = <span class="hljs-literal">false</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> startIndex = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> curDigit = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (str[startIndex] == <span class="hljs-string">' '</span>)</span><br><span class="line">            startIndex ++;</span><br><span class="line">        <span class="hljs-keyword">if</span> (str[startIndex] == <span class="hljs-string">'-'</span>) &#123;</span><br><span class="line">            negative = <span class="hljs-literal">true</span>;</span><br><span class="line">            startIndex ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (str[startIndex] == <span class="hljs-string">'+'</span>) &#123;</span><br><span class="line">            startIndex ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = startIndex;i &lt; str.size() &amp;&amp; <span class="hljs-built_in">isdigit</span>(str[i]); ++ i) &#123;</span><br><span class="line">            curDigit = str[i] - <span class="hljs-string">'0'</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (res &gt; INT_MAX/<span class="hljs-number">10</span> || (res &gt;= INT_MAX/<span class="hljs-number">10</span> &amp;&amp; curDigit &gt; <span class="hljs-number">7</span>))</span><br><span class="line">                <span class="hljs-keyword">return</span> (negative ? INT_MIN : INT_MAX);</span><br><span class="line">            res = res * <span class="hljs-number">10</span> + curDigit;</span><br><span class="line">            <span class="hljs-comment">// res = res * 10 - 48 + static_cast&lt;int&gt;(str[i]);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> (negative ? -res : res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -216,12 +231,19 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/new-blog/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/9-%E5%9B%9E%E6%96%87%E6%95%B0/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">new blog</span>
+                <span class="level-item">9-回文数</span>
             </a>
         </div>
         
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/27/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/">
+                <span class="level-item">7-整数反转</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
         
     </div>
 </div>
@@ -714,7 +736,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/favicon.png" alt="Hello World" height="28">
+                    <img src="/images/favicon.png" alt="8-字符串转换整数 (atoi)" height="28">
                 
                 </a>
                 <p class="is-size-7">

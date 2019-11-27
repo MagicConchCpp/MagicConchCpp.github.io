@@ -7,18 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Hello World - Hexo</title>
+<title>22-括号生成 - Hexo</title>
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="22-括号生成 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Medium 72.20% string &#x2F; backtracking google &#x2F; uber &#x2F; zenefits">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="22-括号生成">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="22-括号生成 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Medium 72.20% string &#x2F; backtracking google &#x2F; uber &#x2F; zenefits">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-27T01:58:51.884Z">
+<meta property="og:updated_time" content="2019-11-21T05:37:16.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -78,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/favicon.png" alt="Hello World" height="28">
+                <img src="/images/favicon.png" alt="22-括号生成" height="28">
             
             </a>
         </div>
@@ -134,13 +134,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-27T01:58:51.884Z">2019-11-27</time>
+                <time class="level-item has-text-grey" datetime="2019-11-27T08:33:15.583Z">2019-11-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 123 words)
+                    8 minutes read (About 1145 words)
                 </span>
                 
                 
@@ -149,23 +149,77 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                22-括号生成
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <h1 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22-括号生成"></a>22-括号生成</h1><blockquote>
+<p>@Author：CSU张扬<br>@Email：<a href="mailto:csuzhangyang@gmail.com" target="_blank" rel="noopener">csuzhangyang@gmail.com</a> or <a href="mailto:csuzhangyang@qq.com" target="_blank" rel="noopener">csuzhangyang@qq.com</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Category</th>
+<th align="center">Difficulty</th>
+<th align="center">Pass rate</th>
+<th align="center">Tags</th>
+<th align="center">Companies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">algorithms</td>
+<td align="center">Medium</td>
+<td align="center">72.20%</td>
+<td align="center">string / backtracking</td>
+<td align="center">google / uber / zenefits</td>
+</tr>
+</tbody></table>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给出 $n$ 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且<strong>有效的</strong>括号组合。</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">例如，给出 n = <span class="hljs-number">3</span>，生成结果为：</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  <span class="hljs-string">"((()))"</span>,</span><br><span class="line">  <span class="hljs-string">"(()())"</span>,</span><br><span class="line">  <span class="hljs-string">"(())()"</span>,</span><br><span class="line">  <span class="hljs-string">"()(())"</span>,</span><br><span class="line">  <span class="hljs-string">"()()()"</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/generate-parentheses/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/generate-parentheses/</a></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：回溯"><a href="#2-1-解法一：回溯" class="headerlink" title="2.1 解法一：回溯"></a>2.1 解法一：回溯</h3><p>以 <code>n = 3</code> 为例：我们的字符串 <code>s</code> 一共有 <code>6</code> 个位置来放置 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code>。</p>
+<ol>
+<li>首先我们知道：第一个位置一定是 <code>&#39;(&#39;</code>，此时 <code>s = ( _ _ _ _ _</code>。</li>
+<li>此时我们考虑第二个位置，我们选择可以放置<code>&#39;(&#39;</code> 或 <code>&#39;)&#39;</code>。<br><strong>那么什么情况下，我们可以有两个选择呢？</strong><br>很容易想到，应该是当 <code>&#39;(&#39;</code> 的数量大于 <code>&#39;)&#39;</code> 的数量 <strong>并且</strong> <code>&#39;(&#39;</code> 的数量小于 <code>n</code> 时，即 <code>if (left &lt; N &amp;&amp; left &gt; right)</code>。<br>可以思考 <code>s = ( ( ) _ _ _</code> 和 <code>s = ( ( ( ) _ _</code>这两种情况下，下一个位置应该放哪种括号。</li>
+<li>步骤2中，我们可以有两个选择。那么我们接下来就应该考虑什么情况下只有一种选择。</li>
+<li><strong>只能放置 <code>&#39;(&#39;</code></strong>。<br>易知，当 <code>&#39;(&#39;</code> 的数量等于 <code>&#39;)&#39;</code> 的数量时，我们只能向后添加 <code>&#39;(&#39;</code> 。<br>可以思考 <code>s = ( ( ) ) _ _</code> 和 <code>s = ( ) ( ) _ _</code>这两种情况下，下一个位置应该放哪种括号。</li>
+<li><strong>只能放置 <code>&#39;)&#39;</code></strong>。<br>易知，当 <code>&#39;(&#39;</code> 的数量等于 <code>n</code> 时，我们只能向后添加 <code>&#39;)&#39;</code> 。<br>可以思考 <code>s = ( ( ( _ _ _</code> 和 <code>s = ( ) ( ( _ _</code>这两种情况下，下一个位置应该放哪种括号。</li>
+</ol>
+<p>我们的回溯函数 <code>void backtrack(int left, int right, const string &amp;s)</code> 中，<code>left</code> 和 <code>right</code> 代表的是 <code>s</code> 中左右括号的数量。<br>当 <code>left + right == 2 * N</code> 时，回溯结束。</p>
+<p><strong>注意：</strong><br>初始情况下，我们必须要先添加一个 <code>&#39;(&#39;</code>，此时 <code>s =  ( _ _ _ _ _</code>，所以参数 <code>left = 1, right = 0</code>。</p>
+<blockquote>
+<p>执行用时: 4 ms, 在所有 cpp 提交中击败了96.60%的用户<br>内存消耗: 17.4 MB, 在所有 cpp 提交中击败了36.95%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; res;</span><br><span class="line">    <span class="hljs-keyword">int</span> N;</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; generateParenthesis(<span class="hljs-keyword">int</span> n) &#123;</span><br><span class="line">        N = n;</span><br><span class="line">        <span class="hljs-built_in">string</span> s = <span class="hljs-string">""</span>;</span><br><span class="line">        backtrack(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, s + <span class="hljs-string">"("</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> &amp;s)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (left + right == <span class="hljs-number">2</span> * N) &#123;</span><br><span class="line">            res.push_back(s);</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (left &lt; N &amp;&amp; left &gt; right) &#123;</span><br><span class="line">            backtrack(left + <span class="hljs-number">1</span>, right, s + <span class="hljs-string">"("</span>);</span><br><span class="line">            backtrack(left, right + <span class="hljs-number">1</span>, s + <span class="hljs-string">")"</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (left == N) &#123;</span><br><span class="line">            backtrack(left, right + <span class="hljs-number">1</span>, s + <span class="hljs-string">")"</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (left == right) &#123;</span><br><span class="line">            backtrack(left + <span class="hljs-number">1</span>, right, s + <span class="hljs-string">"("</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="2-2-解法二：动态规划"><a href="#2-2-解法二：动态规划" class="headerlink" title="2.2 解法二：动态规划"></a>2.2 解法二：动态规划</h3><blockquote>
+<p>参考 <a href="https://leetcode.com/rockrock2/" target="_blank" rel="noopener">rockrock2</a>，<a href="https://leetcode-cn.com/problems/generate-parentheses/solution/zui-jian-dan-yi-dong-de-dong-tai-gui-hua-bu-lun-da/" target="_blank" rel="noopener">Yuyu</a></p>
+</blockquote>
+<p>首先看 <code>n</code> 较小时的结果。</p>
+<ol>
+<li><code>n = 0</code> 是，<code>res = { &quot;&quot; }</code>，为空。</li>
+<li><code>n = 1</code> 是，<code>res = { &quot;()&quot; }</code>。</li>
+<li><code>n = 2</code> 是，<code>res = { &quot;(())&quot;, &quot;()()&quot; }</code>。</li>
+<li><code>n = 3</code> 是，<code>res = { &quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot; }</code>。</li>
+</ol>
+<p>问题来了，你没有考虑过每一个 <code>n</code> 的结果，都和比它小的 <code>n</code> 的结果，有点关联？</p>
+<p>我们可以这么看待这个问题：</p>
+<ol>
+<li><code>n = i</code> 的结果其实就是比 <code>n = i - 1</code> 多了一对括号。我们可能会想，那么这对括号应该如何放置呢？而事实上，我们应该这样想，那么 <code>n = 1..i-1</code> 的结果，应该如何放到这对括号里呢？也就是这对括号，是不动的。</li>
+<li>我们只有两个地方可以放，一是这一对括号内部，二是括号外部。<br><strong>外部：</strong> 其实放在括号左侧或者右侧都行。但是放在右侧，结果会按照字典序排列，因此我们选择放在右侧。但是要知道，放在左侧也是可以的。</li>
+<li>我们要对所有 <code>n &lt; i</code> 的情况遍历，要保证最后括号一共 <code>i</code> 对。<ol>
+<li>所以如果内部放 <code>n = 0</code> 的结果，右侧就要放 <code>n = i - 1</code> 的结果，排列所有情况。</li>
+<li>如果内部放 <code>n = 1</code> 的结果，右侧就要放 <code>n = i - 2</code> 的结果，排列所有情况。</li>
+<li>以此类推。。。<br>最后，内部放 <code>n = i - 1</code> 的结果，右侧就要放 <code>n = 0</code> 的结果，排列所有情况。</li>
+</ol>
+</li>
+<li>我们可以得出状态方程：<code>dp[i] = &#39;(&#39; + dp[k] + &#39;)&#39; + dp[i-1-k], k = 0..i-1</code></li>
+</ol>
+<blockquote>
+<p>执行用时: 8 ms, 在所有 cpp 提交中击败了82.13%的用户<br>内存消耗: 9.9 MB, 在所有 cpp 提交中击败了97.08%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// dp[0] = ""</span></span><br><span class="line"><span class="hljs-comment">// dp[i] = '(' + dp[k] + ')' + dp[i-1-k], k = 0..i-1 (按字典序)</span></span><br><span class="line"><span class="hljs-comment">// 或者dp[i] = dp[k] + '(' + dp[i-1-k] + ')', k = 0..i-1 (非字典序)</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; generateParenthesis(<span class="hljs-keyword">int</span> n) &#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt; <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; &gt; dp(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;());</span><br><span class="line">        dp[<span class="hljs-number">0</span>] = &#123;<span class="hljs-string">""</span>&#125;;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">1</span>; i &lt; n + <span class="hljs-number">1</span>; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> k = <span class="hljs-number">0</span>; k &lt; i; ++ k) &#123;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> s1 : dp[k]) &#123;</span><br><span class="line">                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> s2 : dp[i - <span class="hljs-number">1</span> - k]) &#123;</span><br><span class="line">                        dp[i].push_back(<span class="hljs-string">"("</span> + s1 + <span class="hljs-string">")"</span> + s2);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -215,13 +269,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/new-blog/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">new blog</span>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/27/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">
+                <span class="level-item">21-合并两个有序链表</span>
+                <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
-        
         
     </div>
 </div>
@@ -714,7 +768,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/favicon.png" alt="Hello World" height="28">
+                    <img src="/images/favicon.png" alt="22-括号生成" height="28">
                 
                 </a>
                 <p class="is-size-7">

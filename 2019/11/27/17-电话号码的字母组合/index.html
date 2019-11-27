@@ -7,18 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Hello World - Hexo</title>
+<title>17-电话号码的字母组合 - Hexo</title>
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="17-电话号码的字母组合 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Medium 51.27% string &#x2F; backtracking amazon &#x2F; dropbox &#x2F; fac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="17-电话号码的字母组合">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="17-电话号码的字母组合 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Medium 51.27% string &#x2F; backtracking amazon &#x2F; dropbox &#x2F; fac">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-27T01:58:51.884Z">
+<meta property="og:updated_time" content="2019-11-13T02:07:18.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -78,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/favicon.png" alt="Hello World" height="28">
+                <img src="/images/favicon.png" alt="17-电话号码的字母组合" height="28">
             
             </a>
         </div>
@@ -134,13 +134,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-27T01:58:51.884Z">2019-11-27</time>
+                <time class="level-item has-text-grey" datetime="2019-11-27T08:33:15.527Z">2019-11-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 123 words)
+                    8 minutes read (About 1216 words)
                 </span>
                 
                 
@@ -149,23 +149,90 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                17-电话号码的字母组合
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <h1 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17-电话号码的字母组合"></a>17-电话号码的字母组合</h1><blockquote>
+<p>@Author：CSU张扬<br>@Email：<a href="mailto:csuzhangyang@gmail.com" target="_blank" rel="noopener">csuzhangyang@gmail.com</a> or <a href="mailto:csuzhangyang@qq.com" target="_blank" rel="noopener">csuzhangyang@qq.com</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Category</th>
+<th align="center">Difficulty</th>
+<th align="center">Pass rate</th>
+<th align="center">Tags</th>
+<th align="center">Companies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">algorithms</td>
+<td align="center">Medium</td>
+<td align="center">51.27%</td>
+<td align="center">string / backtracking</td>
+<td align="center">amazon / dropbox / facebook / google / uber</td>
+</tr>
+</tbody></table>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 <code>1</code> 不对应任何字母。</p>
+<img src="pictures/17.png" width="300" height="300" alt="图片名称">
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line"></span><br><span class="line">输入：<span class="hljs-string">"23"</span></span><br><span class="line">输出：[<span class="hljs-string">"ad"</span>, <span class="hljs-string">"ae"</span>, <span class="hljs-string">"af"</span>, <span class="hljs-string">"bd"</span>, <span class="hljs-string">"be"</span>, <span class="hljs-string">"bf"</span>, <span class="hljs-string">"cd"</span>, <span class="hljs-string">"ce"</span>, <span class="hljs-string">"cf"</span>].</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><strong>说明:</strong><br>尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：递归法"><a href="#2-1-解法一：递归法" class="headerlink" title="2.1 解法一：递归法"></a>2.1 解法一：递归法</h3><p>以 <code>digits = &quot;23&quot;</code>为例：</p>
+<ol>
+<li><p>我们递归函数只接受两个参数：上一次的结果 <code>res</code> ，这一次要结合的数字 <code>digits[i]</code>。</p>
+</li>
+<li><p>首先用第一个数字初始化我们的 <code>res</code>，例如第一个数字是 <code>2</code> ，那么 <code>res = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;}</code> 。</p>
+</li>
+<li><p>第二个数字是 <code>3</code>，<code>m[3] = &quot;def&quot;</code>。那么 <code>m[3]</code> 和 <code>res = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;}</code>怎么组合呢？</p>
+</li>
+<li><p>首先 <code>res</code> 暂时只有3个元素，和 <code>m[3]</code> 组合后应该有 $3 \times 3 = 9$ 个元素。</p>
+</li>
+<li><p>总的来说，元素的添加顺序是，</p>
+<ol>
+<li><p><code>res.push_back(res[0] + &#39;e&#39;); res.push_back(res[0] + &#39;f&#39;);</code><br>结果：<code>res = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;ae&quot;, &quot;be&quot;, &quot;ce&quot;}</code></p>
+</li>
+<li><p><code>res.push_back(res[1] + &#39;e&#39;); res.push_back(res[1] + &#39;f&#39;);</code><br>结果：<code>res = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;ae&quot;, &quot;be&quot;, &quot;ce&quot;, &quot;af&quot;, &quot;bf&quot;, &quot;cf&quot;}</code></p>
+</li>
+<li><p><code>res[0] += &#39;d&#39;; res[1] += &#39;d&#39;; res[2] += &#39;d&#39;;</code><br>结果：<code>res = {&quot;ad&quot;, &quot;bd&quot;, &quot;cd&quot;, &quot;ae&quot;, &quot;be&quot;, &quot;ce&quot;, &quot;af&quot;, &quot;bf&quot;, &quot;cf&quot;}</code></p>
+</li>
+</ol>
+</li>
+<li><p>我们得出一个规律，假设当前数字中所含字母长度为 <code>l</code>（n=3或4）。我们可以将前 <code>l-1</code> 个字母和 <code>res</code> 进行排列组合加入到 <code>res</code>中。为什么要剩下一个字母呢，因为我们 <code>res</code> 中还有一些元素仍然是上次的结果，我们把最后一个字母直接加入到上次的结果的元素后。</p>
+</li>
+<li><p>当然你也可以选择将所以字母和 <code>res</code> 进行排列组合，然后删除前面的无效的元素。</p>
+</li>
+</ol>
+<blockquote>
+<p>执行用时: 4 ms, 在所有 cpp 提交中击败了 77.47% 的用户<br>内存消耗: 8.4 MB, 在所有 cpp 提交中击败了 90.68% 的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">string</span> m[<span class="hljs-number">10</span>] = &#123;<span class="hljs-string">""</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-string">"def"</span>, <span class="hljs-string">"ghi"</span>, <span class="hljs-string">"jkl"</span>, <span class="hljs-string">"mno"</span>, <span class="hljs-string">"pqrs"</span>, <span class="hljs-string">"tuv"</span>, <span class="hljs-string">"wxyz"</span>&#125;;</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; letterCombinations(<span class="hljs-built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; res;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>; i &lt; digits.size(); ++ i) &#123;</span><br><span class="line">            combine(res, digits[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">combine</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; &amp;res, <span class="hljs-keyword">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = res.size();</span><br><span class="line">        <span class="hljs-keyword">int</span> digit = <span class="hljs-keyword">static_cast</span>&lt;<span class="hljs-keyword">int</span>&gt;(ch) - <span class="hljs-number">48</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> l = m[digit].size();</span><br><span class="line">        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; l; ++ j) &#123;</span><br><span class="line">                <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-number">1</span>, m[digit][j])</span></span>;</span><br><span class="line">                res.push_back(s);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>; i &lt; n; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; l - <span class="hljs-number">1</span>; ++ j)</span><br><span class="line">                res.push_back(res[i] + m[digit][j]);</span><br><span class="line">            res[i] += m[digit][l - <span class="hljs-number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-解法二：使用队列"><a href="#2-2-解法二：使用队列" class="headerlink" title="2.2 解法二：使用队列"></a>2.2 解法二：使用队列</h3><ol>
+<li>每次从队头取出一个元素，与m[]中字符串中的每个字符分别组合，然后放入队尾。</li>
+</ol>
+<blockquote>
+<p>执行用时: 0 ms, 在所有 cpp 提交中击败了 100.00% 的用户<br>内存消耗: 8.7 MB, 在所有 cpp 提交中击败了 48.35% 的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; letterCombinations(<span class="hljs-built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">string</span>&gt; m = &#123; &#123;<span class="hljs-string">'2'</span>, <span class="hljs-string">"abc"</span>&#125;, &#123;<span class="hljs-string">'3'</span>, <span class="hljs-string">"def"</span>&#125;, &#123;<span class="hljs-string">'4'</span>, <span class="hljs-string">"ghi"</span>&#125;, &#123;<span class="hljs-string">'5'</span>, <span class="hljs-string">"jkl"</span>&#125;,</span><br><span class="line">                                &#123;<span class="hljs-string">'6'</span>, <span class="hljs-string">"mno"</span>&#125;, &#123;<span class="hljs-string">'7'</span>, <span class="hljs-string">"pqrs"</span>&#125;, &#123;<span class="hljs-string">'8'</span>, <span class="hljs-string">"tuv"</span>&#125;, &#123;<span class="hljs-string">'9'</span>, <span class="hljs-string">"wxyz"</span>&#125; &#125;;</span><br><span class="line">        <span class="hljs-built_in">queue</span>&lt;<span class="hljs-built_in">string</span>&gt; q;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; res;</span><br><span class="line">        <span class="hljs-comment">// 先处理第一个数字。是为了使q不为空。</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i : m[digits[<span class="hljs-number">0</span>]]) &#123;</span><br><span class="line">            <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-number">1</span>, i)</span></span>;</span><br><span class="line">            q.push(s);</span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">1</span>; i &lt; digits.size(); ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> len = q.size();</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; len; ++ j) &#123;</span><br><span class="line">                <span class="hljs-built_in">string</span> s = q.front();</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> k = <span class="hljs-number">0</span>; k &lt; m[digits[i]].size(); ++ k) &#123;</span><br><span class="line">                    q.push(s + m[digits[i]][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                q.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            res.push_back(q.front());</span><br><span class="line">            q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="2-3-深度优先遍历"><a href="#2-3-深度优先遍历" class="headerlink" title="2.3 深度优先遍历"></a>2.3 深度优先遍历</h3><blockquote>
+<p>第一段代码来自 <a href="https://leetcode.com/zefengsong/" target="_blank" rel="noopener">zefengsong</a>。<br>第二份代码是参考 <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/yan-du-you-xian-bian-li-by-gqxing/" target="_blank" rel="noopener">GQXING</a> 修改了的第一份代码。<br>图来自 <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/dian-hua-hao-ma-de-zi-mu-zu-he-by-leetcode/" target="_blank" rel="noopener">LeetCode</a></p>
+</blockquote>
+<p>如图所示。<br><img src="pictures/17_solution.png" alt="1"></p>
+<blockquote>
+<p>执行用时: 0 ms, 在所有 cpp 提交中击败了 100.00% 的用户<br>内存消耗: 8.5 MB, 在所有 cpp 提交中击败了 79.75% 的用户</p>
+</blockquote>
+<p><strong>代码一：</strong> <code>path</code> 引用传值。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; letterCombinations(<span class="hljs-built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;res;</span><br><span class="line">        <span class="hljs-keyword">if</span>(digits.empty()) <span class="hljs-keyword">return</span> res;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;letter(&#123;<span class="hljs-string">""</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-string">"def"</span>, <span class="hljs-string">"ghi"</span>, <span class="hljs-string">"jkl"</span>, <span class="hljs-string">"mno"</span>, <span class="hljs-string">"pqrs"</span>, <span class="hljs-string">"tuv"</span>, <span class="hljs-string">"wxyz"</span>&#125;);</span><br><span class="line">        <span class="hljs-built_in">string</span> path = <span class="hljs-string">""</span>;</span><br><span class="line">        DFS(digits, <span class="hljs-number">0</span>, path, res, letter);</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-built_in">string</span> digits, <span class="hljs-keyword">int</span> pos, <span class="hljs-built_in">string</span>&amp; path, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; res, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; letter)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(pos == digits.size())&#123;</span><br><span class="line">            res.push_back(path);</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> c: letter[digits[pos] - <span class="hljs-string">'0'</span>])&#123;</span><br><span class="line">            path.push_back(c);</span><br><span class="line">            DFS(digits, pos + <span class="hljs-number">1</span>, path, res, letter);</span><br><span class="line">            path.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码二：</strong> <code>path</code> 非引用传值。</p>
+<p>虽然我们知道，在传递字符串时，最好使用引用传值。但是我们的目的是在一次递归里不修改 <code>path</code> 的值(否则我们就要像代码1一样，还要删除 <code>path</code> 的尾元素)，所以我们不使用引用传值。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; letterCombinations(<span class="hljs-built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;res;</span><br><span class="line">        <span class="hljs-keyword">if</span>(digits.empty()) <span class="hljs-keyword">return</span> res;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;letter(&#123;<span class="hljs-string">""</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-string">"def"</span>, <span class="hljs-string">"ghi"</span>, <span class="hljs-string">"jkl"</span>, <span class="hljs-string">"mno"</span>, <span class="hljs-string">"pqrs"</span>, <span class="hljs-string">"tuv"</span>, <span class="hljs-string">"wxyz"</span>&#125;);</span><br><span class="line">        <span class="hljs-built_in">string</span> path = <span class="hljs-string">""</span>;</span><br><span class="line">        DFS(digits, <span class="hljs-number">0</span>, path, res, letter);</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-built_in">string</span> digits, <span class="hljs-keyword">int</span> pos, <span class="hljs-built_in">string</span> path, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; res, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; letter)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(pos == digits.size())&#123;</span><br><span class="line">            res.push_back(path);</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> c: letter[digits[pos] - <span class="hljs-string">'0'</span>])&#123;</span><br><span class="line">            DFS(digits, pos + <span class="hljs-number">1</span>, path + c, res, letter);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -216,12 +283,19 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/new-blog/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">new blog</span>
+                <span class="level-item">18-四数之和</span>
             </a>
         </div>
         
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/27/16-%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">
+                <span class="level-item">16-最接近的三数之和</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
         
     </div>
 </div>
@@ -714,7 +788,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/favicon.png" alt="Hello World" height="28">
+                    <img src="/images/favicon.png" alt="17-电话号码的字母组合" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -7,18 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Hello World - Hexo</title>
+<title>18-四数之和 - Hexo</title>
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="18-四数之和 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Medium 36.01% array &#x2F; hash-table &#x2F; two-pointers linkedin   1. 题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="18-四数之和">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;27&#x2F;18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="18-四数之和 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Medium 36.01% array &#x2F; hash-table &#x2F; two-pointers linkedin   1. 题">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-27T01:58:51.884Z">
+<meta property="og:updated_time" content="2019-11-14T02:43:07.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -78,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/favicon.png" alt="Hello World" height="28">
+                <img src="/images/favicon.png" alt="18-四数之和" height="28">
             
             </a>
         </div>
@@ -134,13 +134,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-27T01:58:51.884Z">2019-11-27</time>
+                <time class="level-item has-text-grey" datetime="2019-11-27T08:33:15.546Z">2019-11-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 123 words)
+                    5 minutes read (About 713 words)
                 </span>
                 
                 
@@ -149,23 +149,56 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World
+                18-四数之和
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <h1 id="18-四数之和"><a href="#18-四数之和" class="headerlink" title="18-四数之和"></a>18-四数之和</h1><blockquote>
+<p>@Author：CSU张扬<br>@Email：<a href="mailto:csuzhangyang@gmail.com" target="_blank" rel="noopener">csuzhangyang@gmail.com</a> or <a href="mailto:csuzhangyang@qq.com" target="_blank" rel="noopener">csuzhangyang@qq.com</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Category</th>
+<th align="center">Difficulty</th>
+<th align="center">Pass rate</th>
+<th align="center">Tags</th>
+<th align="center">Companies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">algorithms</td>
+<td align="center">Medium</td>
+<td align="center">36.01%</td>
+<td align="center">array / hash-table / two-pointers</td>
+<td align="center">linkedin</td>
+</tr>
+</tbody></table>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个包含 $n$ 个整数的数组 <code>nums</code> 和一个目标值 <code>target</code>，判断 <code>nums</code> 中是否存在四个元素 $a$，$b$，$c$ 和 $d$ ，使得 $a + b + c + d$ 的值与 <code>target</code> 相等？找出所有满足条件且不重复的四元组。</p>
+<p><strong>注意：</strong></p>
+<p>答案中不可以包含重复的四元组。</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"></span><br><span class="line">给定数组 nums = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-2</span>, <span class="hljs-number">2</span>]，和 target = <span class="hljs-number">0</span>。</span><br><span class="line"></span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [<span class="hljs-number">-1</span>,  <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>],</span><br><span class="line">  [<span class="hljs-number">-2</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>],</span><br><span class="line">  [<span class="hljs-number">-2</span>,  <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum</a></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：双指针法"><a href="#2-1-解法一：双指针法" class="headerlink" title="2.1 解法一：双指针法"></a>2.1 解法一：双指针法</h3><p>与前面三数之和类似，还是采用双指针法，双指针是用来选择后两个数的，因此前面还需要两个循环，来选择前两个数。</p>
+<p>需要注意的是这四个数，都需要进行去重处理。双指针的去重我不再赘述，详情参考 <a href="https://blog.csdn.net/qq_36408085/article/details/102907454" target="_blank" rel="noopener">LeetCode(C++)刷题计划：15-三数之和</a>。</p>
+<p>下面我们讲一下，前两个数的去重代码，以 <code>nums = [0, 0, 1, 1, 1, 2]</code> 为例。</p>
+<ol>
+<li>首先第一个数的去重代码 <code>if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) continue;</code><ol>
+<li><code>nums[i] == nums[i - 1]</code> 的作用就是判断当前数是否和前一个数相等。</li>
+<li><code>i &gt; 0</code>，是为了防止第一个数的 <code>nums[0] == nums[-1]</code>，这样数组就越界了。</li>
+</ol>
+</li>
+<li>第二个数的去重代码 <code>if (k &gt; i + 1 &amp;&amp; nums[k] == nums[k - 1]) continue;</code><ol>
+<li><code>nums[k] == nums[k - 1]</code> 的作用和前面一样。</li>
+<li><code>k &gt; i + 1</code> 的目的倒不是防止越界，因为不可能越界。它主要为了防止过度去重。<br>举个例子：<code>nums = [0, 0, 1, 1, 1, 2]</code>。<br>当 <code>i = 2</code> 时, <code>nums[i] = 1</code>。此时 <code>k = i + 1 = 3</code>, <code>nums[k] = 1</code>。<br>如果我们没有 <code>k &gt; i + 1</code> 这句，他会认为 <code>nums[k]</code> 是重复数据(因为 <code>nums[k] == nums[k - 1]</code>)。但是实际上是<code>nums[k]</code> 和 <code>nums[i]</code> (k = i + 1)在比较是否相等，然而这两个数是可以相等的。<br><strong>我们需要避免的是</strong>，在同一个 <code>nums[i]</code> 下，连续的 <code>nums[k]</code> 不能相等， <code>nums[i]</code> 不在我们的比较范围内。</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>执行用时: 76 ms, 在所有 cpp 提交中击败了42.69%的用户<br>内存消耗: 8.9 MB, 在所有 cpp 提交中击败了96.88%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; fourSum(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target) &#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">4</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> res;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>; i &lt; n - <span class="hljs-number">3</span>; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i - <span class="hljs-number">1</span>])</span><br><span class="line">                <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> k = i + <span class="hljs-number">1</span>; k &lt; n - <span class="hljs-number">2</span>; ++ k) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (k &gt; i + <span class="hljs-number">1</span> &amp;&amp; nums[k] == nums[k - <span class="hljs-number">1</span>])</span><br><span class="line">                    <span class="hljs-keyword">continue</span>;</span><br><span class="line">                <span class="hljs-keyword">int</span> l = k + <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">int</span> r = n - <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                    <span class="hljs-keyword">int</span> sum = nums[i] + nums[k] + nums[l] + nums[r];</span><br><span class="line">                    <span class="hljs-keyword">if</span> (sum == target) &#123;</span><br><span class="line">                        res.push_back(&#123;nums[i], nums[k], nums[l], nums[r]&#125;);</span><br><span class="line">                        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[l] == nums[++ l]) &#123; &#125;</span><br><span class="line">                        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[r] == nums[--r ]) &#123; &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                        ++ l;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                        -- r;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -216,12 +249,19 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/new-blog/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/27/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">new blog</span>
+                <span class="level-item">19-删除链表的倒数第N个节点</span>
             </a>
         </div>
         
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/27/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">
+                <span class="level-item">17-电话号码的字母组合</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
         
     </div>
 </div>
@@ -714,7 +754,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/favicon.png" alt="Hello World" height="28">
+                    <img src="/images/favicon.png" alt="18-四数之和" height="28">
                 
                 </a>
                 <p class="is-size-7">
