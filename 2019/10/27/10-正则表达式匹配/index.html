@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>10-正则表达式匹配 - Hexo</title>
+
+
+    <meta name="description" content="10-正则表达式匹配 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Hard 25.22% string &#x2F; dynamic-programming &#x2F; backtracking airb">
+<meta name="keywords" content="string,dynamic-programming,backtracking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10-正则表达式匹配">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;27&#x2F;10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="10-正则表达式匹配 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Hard 25.22% string &#x2F; dynamic-programming &#x2F; backtracking airb">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-11-28T04:55:00.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/avatar.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/favicon.png" alt="10-正则表达式匹配" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/%20%20%20%20%20%20/%E4%B8%BB%E9%A1%B5">home</a>
+                
+                <a class="navbar-item"
+                href="/categories%20/%E5%88%86%E7%B1%BB%20%20%20%20%20%20%20%20%EF%BC%88%E6%B7%BB%E5%8A%A0%E6%AD%A4%E8%A1%8C%E5%8D%B3%E5%8F%AF%EF%BC%89">categories</a>
+                
+                <a class="navbar-item"
+                href="/archives%20%20%20/%E5%BD%92%E6%A1%A3">archives</a>
+                
+                <a class="navbar-item"
+                href="/tags%20%20%20/%E6%A0%87%E7%AD%BE">tags</a>
+                
+                <a class="navbar-item"
+                href="/about%20%20%20/%E5%85%B3%E4%BA%8E">about</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/MagicConchCpp">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-27T08:29:57.000Z">2019-10-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 minutes read (About 1991 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                10-正则表达式匹配
+            
+        </h1>
+        <div class="content">
+            <h1 id="10-正则表达式匹配"><a href="#10-正则表达式匹配" class="headerlink" title="10-正则表达式匹配"></a>10-正则表达式匹配</h1><blockquote>
+<p>@Author：CSU张扬<br>@Email：<a href="mailto:csuzhangyang@gmail.com" target="_blank" rel="noopener">csuzhangyang@gmail.com</a> or <a href="mailto:csuzhangyang@qq.com" target="_blank" rel="noopener">csuzhangyang@qq.com</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Category</th>
+<th align="center">Difficulty</th>
+<th align="center">Pass rate</th>
+<th align="center">Tags</th>
+<th align="center">Companies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">algorithms</td>
+<td align="center">Hard</td>
+<td align="center">25.22%</td>
+<td align="center">string / dynamic-programming / backtracking</td>
+<td align="center">airbnb / facebook / google / twitter / uber</td>
+</tr>
+</tbody></table>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘*’ 的正则表达式匹配。</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">'.'</span> 匹配任意单个字符</span><br><span class="line"><span class="hljs-string">'*'</span> 匹配零个或多个前面的那一个元素</span><br></pre></td></tr></table></figure>
+
+<p>所谓匹配，是要涵盖 <strong>整个</strong> 字符串 s的，而不是部分字符串。</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>s 可能为空，且只包含从 <code>a-z</code> 的小写字母。</li>
+<li>p 可能为空，且只包含从 <code>a-z</code> 的小写字母，以及字符 <code>.</code> 和 <code>*</code>。</li>
+</ul>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="hljs-string">"aa"</span></span><br><span class="line">p = <span class="hljs-string">"a"</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line">解释: <span class="hljs-string">"a"</span> 无法匹配 <span class="hljs-string">"aa"</span> 整个字符串。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="hljs-string">"aa"</span></span><br><span class="line">p = <span class="hljs-string">"a*"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line">解释: 因为 <span class="hljs-string">'*'</span> 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 <span class="hljs-string">'a'</span>。因此，字符串 <span class="hljs-string">"aa"</span> 可被视为 <span class="hljs-string">'a'</span> 重复了一次。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="hljs-string">"ab"</span></span><br><span class="line">p = <span class="hljs-string">".*"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line">解释: <span class="hljs-string">".*"</span> 表示可匹配零个或多个（<span class="hljs-string">'*'</span>）任意字符（<span class="hljs-string">'.'</span>）。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">4</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="hljs-string">"aab"</span></span><br><span class="line">p = <span class="hljs-string">"c*a*b"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line">解释: 因为 <span class="hljs-string">'*'</span> 表示零个或多个，这里 <span class="hljs-string">'c'</span> 为 <span class="hljs-number">0</span> 个, <span class="hljs-string">'a'</span> 被重复一次。因此可以匹配字符串 <span class="hljs-string">"aab"</span>。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">5</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="hljs-string">"mississippi"</span></span><br><span class="line">p = <span class="hljs-string">"mis*is*p*."</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/regular-expression-matching" target="_blank" rel="noopener">https://leetcode-cn.com/problems/regular-expression-matching</a></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：递归法"><a href="#2-1-解法一：递归法" class="headerlink" title="2.1 解法一：递归法"></a>2.1 解法一：递归法</h3><blockquote>
+<p>参考：<a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/di-gui-dong-tai-gui-hua-by-joy-teng/" target="_blank" rel="noopener">Joy</a></p>
+</blockquote>
+<ol>
+<li><p>p为空。s为空，则返回true；s不为空，则返回false。</p>
+</li>
+<li><p>当p的第二个元素是 <code>*</code> 时，<strong>有两种情况，满足一种就可以（即 <code>||</code> ）</strong>：</p>
+<ol>
+<li><strong>剔除p中前两个元素，再来判断是否匹配。</strong><br> 例如：<code>s = &quot;aab&quot;</code>, <code>p = &quot;c*a*b&quot;</code>。其中 <code>c*</code> 可以是0个c，所以可以无视掉。<br> 直接判断<code>s = &quot;aab&quot;</code> 和 <code>p = &quot;a*b&quot;</code>是否匹配。  </li>
+<li><strong>当 <code>s[0] == p[0] || p[0] == &#39;.&#39;</code> 时，剔除s中第一个元素，再来判断是否匹配。</strong><br> 例如：<code>s = &quot;aab&quot;</code>, <code>p = &quot;a*b&quot;</code>。<code>a*</code>可以匹配0~多个，<code>s[0] = &#39;a&#39;</code>被匹配，可以删除。接下来比较<code>s = &quot;ab&quot;</code> 和 <code>p = &quot;a*b&quot;</code>是否匹配。</li>
+</ol>
+</li>
+<li><p><strong>如果第二个元素不是 <code>*</code>，那就只能是 <code>a-z</code> 或者 <code>&#39;.&#39;</code> 了。</strong><br>当第一个元素两两匹配时，我们就可以删除掉这俩元素了，因为没有 <code>*</code>的情况下，<code>a-z</code> 和 <code>&#39;.&#39;</code>只能匹配一次。<br>例如：<code>s = &quot;aab&quot;</code>, <code>p = &quot;.a*b&quot;</code>。因为 <code>p[1] = &#39;a&#39;</code>, <code>p[0] = &#39;.&#39;, s[0] = &#39;a&#39;</code>，两者匹配。所以剔除掉首元素，接下来判断<code>s = &quot;ab&quot;</code>, <code>p = &quot;a*b&quot;</code>是否匹配。</p>
+</li>
+</ol>
+<blockquote>
+<p>执行用时: 300 ms, 在所有 cpp 提交中击败了29.78%的用户<br>内存消耗: 15.5 MB, 在所有 cpp 提交中击败了14.56%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isMatch</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s, <span class="hljs-built_in">string</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (p.empty())</span><br><span class="line">            <span class="hljs-keyword">return</span> s.empty();</span><br><span class="line">        <span class="hljs-keyword">if</span> (p.size() &gt; <span class="hljs-number">1</span> &amp;&amp; p[<span class="hljs-number">1</span>] == <span class="hljs-string">'*'</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> isMatch(s, p.substr(<span class="hljs-number">2</span>)) || (!s.empty() &amp;&amp; (s[<span class="hljs-number">0</span>] == p[<span class="hljs-number">0</span>] || p[<span class="hljs-number">0</span>] == <span class="hljs-string">'.'</span>) &amp;&amp; isMatch(s.substr(<span class="hljs-number">1</span>), p));</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            <span class="hljs-keyword">return</span> !s.empty() &amp;&amp; (s[<span class="hljs-number">0</span>] == p[<span class="hljs-number">0</span>] || p[<span class="hljs-number">0</span>] == <span class="hljs-string">'.'</span>) &amp;&amp; isMatch(s.substr(<span class="hljs-number">1</span>), p.substr(<span class="hljs-number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-解法二：动态规划"><a href="#2-2-解法二：动态规划" class="headerlink" title="2.2 解法二：动态规划"></a>2.2 解法二：动态规划</h3><blockquote>
+<p>参考：<a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/dong-tai-gui-hua-zen-yao-cong-0kai-shi-si-kao-da-b/" target="_blank" rel="noopener">乔碧萝殿下❤</a>，<a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/zheng-ze-biao-da-shi-pi-pei-dong-tai-gui-hua-by-jy/" target="_blank" rel="noopener">Krahets</a></p>
+</blockquote>
+<p><strong>dp数组的样子:</strong> <code>s=&quot;abb&quot;,p=&quot;ab*c*&quot;</code>，方便大家理解。<br>为什么加 <code>&#39;#&#39;</code> 见步骤5。<br><code>1</code> 表示 <code>true</code>，<code>0</code> 表示 <code>false</code>。</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="hljs-meta"># a b * c *</span></span><br><span class="line"># <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span></span><br><span class="line">a <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">b <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">b <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>建立二维数组 <code>dp</code>，<code>dp[i][j]</code> 表示 <code>s</code> 的前 <code>i</code> 个元素和 <code>p</code> 的前 <code>j</code> 个元素是否匹配。</p>
+</li>
+<li><p>首先分析最简单的情况：<code>s[i] == p[j]</code>。此时若s的前<code>i-1</code>个元素和p的前<code>j-1</code>个元素相匹配，那么s的前<code>i</code>个元素和p的前<code>j</code>个元素也必相匹配。即此时的状态转移方程为: <code>dp[i][j] = dp[i - 1][j - 1]</code>。</p>
+</li>
+<li><p>第二种情况，当 <code>p[j] == &#39;.&#39;</code> 时，和2中情况相同，状态转移方程仍为：<code>dp[i][j] = dp[i - 1][j - 1]</code>。</p>
+</li>
+<li><p>第三种比较复杂的情况，当 <code>p[j] == &#39;*&#39;</code>时。此时我们必须要考虑 <code>&#39;*&#39;</code> 之前的元素，分为以下两种情况：  </p>
+<ol>
+<li><strong><code>s[i] != p[j - 1]</code>：<code>dp[i][j] = dp[i][j - 2]</code></strong>，此时表示 <code>*</code> 前面的字母根本和 <code>s[i]</code> 中字母不相同。<br>例如： <code>s = &quot;abb&quot;, p = &quot;ab*c*&quot;</code>，对于p中第二个 <code>*</code> 来说，其前面的字母<code>c</code>满足这种情况，<code>c*</code>相当于匹配了0次c，相当于直接剔除 <code>c*</code>，是否匹配取决于<code>s = &quot;abb&quot;, p = &quot;ab*&quot;</code>。</li>
+<li><strong><code>s[i] == p[j - 1] || p[j] == &#39;.&#39;</code></strong>，此时表示匹配上了，但是不知道匹配了几次。<ul>
+<li><strong>匹配多次： <code>dp[i][j] = dp[i-1][j]</code></strong><br>例如：<code>s = &quot;abbb&quot;, p = &quot;ab*&quot;</code>，此时代表匹配了<code>3</code>次<code>b</code>。<br>和<code>s = &quot;abb&quot;, p = &quot;ab*</code>的匹配状态相同，继而又和<code>s = &quot;ab&quot;, p = &quot;ab*</code>的匹配状态相同。</li>
+<li><strong>匹配一次：<code>dp[i][j] = dp[i][j - 1]</code></strong><br>例如：<code>s = &quot;ab&quot;, p = &quot;ab*&quot;</code>。若<code>s = &quot;ab&quot;, p = &quot;ab</code>匹配，那么它肯定也匹配。</li>
+<li><strong>匹配零次：<code>dp[i][j] = dp[i][j - 2]</code></strong><br>例如：<code>s = &quot;ab&quot;, p = &quot;abc*&quot;</code>，对于<code>c</code>来说匹配了0次，那么<code>c*</code>就没有什么意义，也就可以剔除掉<code>c*</code>。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>考虑边界值的问题。</strong><br>因为如果当 <code>i=0</code> 时，<code>dp[i][j] = dp[i - 1][j - 1]</code>就会数组越界。这里我们的处理办法是行和列各增加一个维度，即: <code>dp[m + 1][n + 1]</code>。<br>这时读者可能会有疑问，还有 <code>dp[j - 2]</code> 的情况呢，你这里只增加了 <code>1</code> ，<code>j = 0</code> 时仍然会数组越界啊？实际上我们观察步骤4，<code>dp[j - 2]</code>只出现在 <code>p[j] == &#39;*&#39;</code> 的情况下，而 <code>*</code> 不可能是 <code>p</code> 的首元素的。</p>
+</li>
+<li><p><strong>数组 <code>dp</code> 的初始化。</strong><br>我们只需要对<strong>第一列</strong>和<strong>第一行</strong>进行初始化即可，其他地方均赋值为 <code>false</code>。我们的行和列都比原来增加了1，我们可以假设在 <code>s</code> 和 <code>p</code> 前面都加了一个字符<code>&#39;#&#39;</code>。<br>例如 <code>s = &quot;#abb&quot;, p = &quot;#ab*c*&quot;</code>，那么dp的第一行就是代表 <code>s[0]</code> 和 <code>p</code> 的前 <code>j</code> 个元素是否匹配。此时 <code>dp[0][0] = true</code>，因为 <code>s[0] = p[0] = &#39;#&#39;</code>。  </p>
+<ol>
+<li><p><strong>第一行的初始化：</strong><br>因为我们的 <code>p</code> 始终和 <code>&#39;#&#39;</code>进行匹配判断，并且 <code>p[0] = &#39;#&#39;</code> ，那么后面只要出现了 <code>&#39;*&#39;</code>，那它肯定匹配了0次；单独出现 <code>a-z</code> 或者 <code>&#39;.&#39;</code> 肯定无法与 <code>s[0] = &#39;#&#39;</code> 匹配，因为 <code>p</code> 首元素就是 <code>#</code>。</p>
+</li>
+<li><p><strong>第一列的初始化：</strong><br>例如 <code>s = &quot;#abb&quot;, p = &quot;#ab*c*&quot;</code>，那么dp的第一行就是 <code>p[0]</code> 和 <code>s</code> 的前 <code>i</code> 个元素是否匹配。我们可以看出，只有 <code>p[0] = s[0] = &#39;#&#39;</code> 是匹配的，其他地方都不匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#&#39;</code> 匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#a&#39;</code> 不匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#ab&#39;</code> 也不匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#abb&#39;</code> 也不匹配。</p>
+<p>下面举两个例子方便大家理解初始化规则，只需看第一列和第一行即可。<br><strong>初始化例子1：</strong><code>s = &quot;#abb&quot;, p = &quot;#ab*c*&quot;</code>时：</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="hljs-meta"># a b * c *</span></span><br><span class="line"># <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span></span><br><span class="line">a <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">b <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">b <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化例子2：</strong><code>s = &quot;#abb&quot;, p = &quot;#a*b*c*&quot;</code>时：</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="hljs-meta"># a * b * c *</span></span><br><span class="line"># <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">a <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">b <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br><span class="line">b <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>执行用时: 4 ms, 在所有 cpp 提交中击败了98.13%的用户<br>内存消耗: 8.4 MB, 在所有 cpp 提交中击败了91.48%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isMatch</span><span class="hljs-params">(<span class="hljs-built_in">string</span> s, <span class="hljs-built_in">string</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> m = s.size();</span><br><span class="line">        <span class="hljs-keyword">int</span> n = p.size();</span><br><span class="line">        <span class="hljs-keyword">bool</span> dp[m + <span class="hljs-number">1</span>][n + <span class="hljs-number">1</span>];</span><br><span class="line">        <span class="hljs-comment">// 初始化</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;i : dp)</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;j : i)</span><br><span class="line">                j = <span class="hljs-literal">false</span>;</span><br><span class="line">        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; n; ++ j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (p[j] == <span class="hljs-string">'*'</span>)</span><br><span class="line">                dp[<span class="hljs-number">0</span>][j + <span class="hljs-number">1</span>] = dp[<span class="hljs-number">0</span>][j - <span class="hljs-number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>; i &lt; m; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; n; ++ j) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (s[i] == p[j] || p[j] == <span class="hljs-string">'.'</span>)</span><br><span class="line">                    dp[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] = dp[i][j];</span><br><span class="line">                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p[j] == <span class="hljs-string">'*'</span>) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (s[i] != p[j - <span class="hljs-number">1</span>] &amp;&amp; p[j - <span class="hljs-number">1</span>] != <span class="hljs-string">'.'</span>)</span><br><span class="line">                        dp[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] = dp[i + <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];</span><br><span class="line">                    <span class="hljs-keyword">else</span></span><br><span class="line">                         dp[i + <span class="hljs-number">1</span>][j + <span class="hljs-number">1</span>] = dp[i][j + <span class="hljs-number">1</span>] || dp[i + <span class="hljs-number">1</span>][j] || dp[i + <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-解法三：有限状态自动机"><a href="#2-3-解法三：有限状态自动机" class="headerlink" title="2.3 解法三：有限状态自动机"></a>2.3 解法三：有限状态自动机</h3><p>没学过，日后再更。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/backtracking/" rel="tag">backtracking</a>, <a class="has-link-grey -link" href="/tags/dynamic-programming/" rel="tag">dynamic-programming</a>, <a class="has-link-grey -link" href="/tags/string/" rel="tag">string</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/28/11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">11-盛最多水的容器</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/26/9-%E5%9B%9E%E6%96%87%E6%95%B0/">
+                <span class="level-item">9-回文数</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="神奇海螺">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        神奇海螺
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        菠萝城堡
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>长沙</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            22
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Category
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            1
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            11
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/MagicConchCpp">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    Catalogue
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#10-正则表达式匹配">
+        <span class="has-mr-6">1</span>
+        <span>10-正则表达式匹配</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-题目">
+        <span class="has-mr-6">1.1</span>
+        <span>1. 题目</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-解法">
+        <span class="has-mr-6">1.2</span>
+        <span>2. 解法</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-解法一：递归法">
+        <span class="has-mr-6">1.2.1</span>
+        <span>2.1 解法一：递归法</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-解法二：动态规划">
+        <span class="has-mr-6">1.2.2</span>
+        <span>2.2 解法二：动态规划</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-解法三：有限状态自动机">
+        <span class="has-mr-6">1.2.3</span>
+        <span>2.3 解法三：有限状态自动机</span>
+        </a></li></ul></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/LeetCode-C/">
+            <span class="level-start">
+                <span class="level-item">LeetCode(C++)</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/array/" style="font-size: 15px;">array</a> <a href="/tags/backtracking/" style="font-size: 10px;">backtracking</a> <a href="/tags/binary-search/" style="font-size: 10px;">binary-search</a> <a href="/tags/divide-and-conquer/" style="font-size: 10px;">divide-and-conquer</a> <a href="/tags/dynamic-programming/" style="font-size: 12.5px;">dynamic-programming</a> <a href="/tags/hash-table/" style="font-size: 12.5px;">hash-table</a> <a href="/tags/linked-list/" style="font-size: 10px;">linked-list</a> <a href="/tags/math/" style="font-size: 17.5px;">math</a> <a href="/tags/sliding-window/" style="font-size: 10px;">sliding-window</a> <a href="/tags/string/" style="font-size: 20px;">string</a> <a href="/tags/two-pointers/" style="font-size: 12.5px;">two-pointers</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="22-括号生成">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.583Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">22-括号生成</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="21-合并两个有序链表">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.573Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">21-合并两个有序链表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="20-有效的括号">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.563Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" class="title has-link-black-ter is-size-6 has-text-weight-normal">20-有效的括号</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="19-删除链表的倒数第N个节点">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.557Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/" class="title has-link-black-ter is-size-6 has-text-weight-normal">19-删除链表的倒数第N个节点</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="18-四数之和">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.546Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">18-四数之和</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">12</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/array/">
+                        <span class="tag">array</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/backtracking/">
+                        <span class="tag">backtracking</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary-search/">
+                        <span class="tag">binary-search</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/divide-and-conquer/">
+                        <span class="tag">divide-and-conquer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dynamic-programming/">
+                        <span class="tag">dynamic-programming</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hash-table/">
+                        <span class="tag">hash-table</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linked-list/">
+                        <span class="tag">linked-list</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/math/">
+                        <span class="tag">math</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sliding-window/">
+                        <span class="tag">sliding-window</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/string/">
+                        <span class="tag">string</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/two-pointers/">
+                        <span class="tag">two-pointers</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="22-括号生成">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.583Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" class="title has-link-black-ter is-size-6 has-text-weight-normal">22-括号生成</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="21-合并两个有序链表">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.573Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">21-合并两个有序链表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="20-有效的括号">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.563Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" class="title has-link-black-ter is-size-6 has-text-weight-normal">20-有效的括号</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="19-删除链表的倒数第N个节点">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.557Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/" class="title has-link-black-ter is-size-6 has-text-weight-normal">19-删除链表的倒数第N个节点</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/27/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="18-四数之和">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-27T08:33:15.546Z">2019-11-27</time></div>
+                    <a href="/2019/11/27/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">18-四数之和</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">12</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/array/">
+                        <span class="tag">array</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/backtracking/">
+                        <span class="tag">backtracking</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/binary-search/">
+                        <span class="tag">binary-search</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/divide-and-conquer/">
+                        <span class="tag">divide-and-conquer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dynamic-programming/">
+                        <span class="tag">dynamic-programming</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hash-table/">
+                        <span class="tag">hash-table</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linked-list/">
+                        <span class="tag">linked-list</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/math/">
+                        <span class="tag">math</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/sliding-window/">
+                        <span class="tag">sliding-window</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/string/">
+                        <span class="tag">string</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/two-pointers/">
+                        <span class="tag">two-pointers</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/favicon.png" alt="10-正则表达式匹配" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 John Doe&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
