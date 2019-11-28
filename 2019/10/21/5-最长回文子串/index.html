@@ -19,7 +19,7 @@
 <meta property="og:description" content="5-最长回文子串 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Hard 36.29% string &#x2F; dynamic-programming amazon &#x2F; bloomberg &#x2F;">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-28T04:17:55.992Z">
+<meta property="og:updated_time" content="2019-11-28T05:01:29.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -197,9 +197,12 @@
 <li>对于3中的情况，我们需要加一步判断来解决该问题。即s1中<code>abc</code>和s2中<code>abc</code>他们的下标是否对应。对于s2中子串<code>abc</code>来讲，其中<code>a</code>在s1逆置之前的下标应该是8(即:<code>s1.size() - 1</code>)。通用的说法就是，当<code>s2[j] == s[i]</code>时，设s2中的该字符c在s2中的下标为j，它在逆置之前，在s1中的下标为jBefore，那么<code>jBefore = s1.size() - 1 - j</code>，此时s1中下标为i，d[i][j]是该回文串的长度，那么就必须满足<code>i = jBefore + d[i][j] - 1</code>。那么我们可以推断出，当<code>s1[i] == s[j]</code>时，只要满足该条件，那么就是回文子串。</li>
 </ol>
 <h4 id="2-1-2-动态规划法"><a href="#2-1-2-动态规划法" class="headerlink" title="2.1.2 动态规划法"></a>2.1.2 动态规划法</h4><ol>
-<li>我们设置一个二维<code>n*n</code>数组<code>d</code>表示两个字符串每个字符相等的关系。（字符串长度为n）</li>
-<li>若<code>s1[i] == s[j]</code>，则<code>d[i][j] = d[i-1][j-1] + 1</code>。当<code>i=0</code>或者<code>j=0</code>时，上述公式会越界。所以我们直接令<code>d[i][j] = 1</code>。</li>
-<li>例如<code>s1 = &quot;afbcbfae&quot;</code>，那么d为<table>
+<li><p>我们设置一个二维<code>n*n</code>数组<code>d</code>表示两个字符串每个字符相等的关系。（字符串长度为n）</p>
+</li>
+<li><p>若<code>s1[i] == s[j]</code>，则<code>d[i][j] = d[i-1][j-1] + 1</code>。当<code>i=0</code>或者<code>j=0</code>时，上述公式会越界。所以我们直接令<code>d[i][j] = 1</code>。</p>
+</li>
+<li><p>例如<code>s1 = &quot;afbcbfae&quot;</code>，那么d为</p>
+<table>
 <thead>
 <tr>
 <th align="center">s1\s2</th>
@@ -301,42 +304,11 @@
 <td align="center">0</td>
 <td align="center">0</td>
 </tr>
-<tr>
-<td align="center">我们只需记录下d中最大数对应的下标即可。</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">我们观察到<code>d[2][3]=3</code>(行为i，列为j)，此时<code>j = 3, jBefroe = 8-1-3 = 4; i = 2而jBefore + d[i][j] - 1 = 4+3-1 = 6</code>,所以此时不是回文子串。</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">再看<code>d[6][7]=7</code>，此时<code>j = 7, jBefroe = 8-1-7 = 0; i = 6而jBefore + d[i][j] - 1 = 0+7-1 = 6</code>,所以此时是回文子串。</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
 </tbody></table>
+<p> 我们只需记录下d中最大数对应的下标即可。<br> 我们观察到<code>d[2][3]=3</code>(行为i，列为j)，此时<code>j = 3, jBefroe = 8-1-3 = 4; i = 2而jBefore + d[i][j] - 1 = 4+3-1 = 6</code>,所以此时不是回文子串。<br> 再看<code>d[6][7]=7</code>，此时<code>j = 7, jBefroe = 8-1-7 = 0; i = 6而jBefore + d[i][j] - 1 = 0+7-1 = 6</code>,所以此时是回文子串。  </p>
 </li>
-<li>对于<code>s1 = &quot;abc123cba&quot;</code>来说，d为<table>
+<li><p>对于<code>s1 = &quot;abc123cba&quot;</code>来说，d为</p>
+<table>
 <thead>
 <tr>
 <th align="center">s1\s2</th>
@@ -459,31 +431,8 @@
 <td align="center">0</td>
 <td align="center">3</td>
 </tr>
-<tr>
-<td align="center">我们观察到<code>d[2][2]=3</code>(行为i，列为j)，此时<code>j = 2, jBefroe = 9-1-2 = 6; i=2而jBefore + d[i][j] - 1 = 6+3-1 = 7</code>,所以此时不是回文子串。</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">再看<code>d[8][8]=3</code>，此时<code>j = 8, jBefroe = 9-1-8 = 0; i = 8而jBefore + d[i][j] - 1 = 0+3-1 = 2</code>,所以此时也不是回文子串。</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
 </tbody></table>
+<p> 我们观察到<code>d[2][2]=3</code>(行为i，列为j)，此时<code>j = 2, jBefroe = 9-1-2 = 6; i=2而jBefore + d[i][j] - 1 = 6+3-1 = 7</code>,所以此时不是回文子串。<br> 再看<code>d[8][8]=3</code>，此时<code>j = 8, jBefroe = 9-1-8 = 0; i = 8而jBefore + d[i][j] - 1 = 0+3-1 = 2</code>,所以此时也不是回文子串。</p>
 </li>
 </ol>
 <blockquote>
