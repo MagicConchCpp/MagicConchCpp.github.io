@@ -17,18 +17,18 @@ textarea {
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
   .is-2-column .container {
-    max-width: 1728px;
-    width: 1728px;
+    max-width: 1600px;
+    width: 1600px;
   }
 }
 @media screen and (min-width: 1472px) {
   .is-2-column .container {
-    max-width: 1920px;
-    width: 1920px;
+    max-width: 1792px;
+    width: 1792px;
   }
   .is-1-column .container {
-    max-width: 1728px;
-    width: 1728px;
+    max-width: 1600px;
+    width: 1600px;
   }
 }
 @media screen and (max-width: 768px) {
