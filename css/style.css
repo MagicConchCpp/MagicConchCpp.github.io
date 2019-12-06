@@ -17,18 +17,18 @@ textarea {
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
   .is-2-column .container {
-    max-width: 960px;
-    width: 960px;
+    max-width: 1024px;
+    width: 1024px;
   }
 }
 @media screen and (min-width: 1472px) {
   .is-2-column .container {
-    max-width: 1152px;
-    width: 1152px;
+    max-width: 1216px;
+    width: 1216px;
   }
   .is-1-column .container {
-    max-width: 960px;
-    width: 960px;
+    max-width: 1024px;
+    width: 1024px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -392,7 +392,7 @@ img.thumbnail {
 .content code,
 .content pre {
   font-size: 0.85em;
-  font-family: "Source Code Pro", consolas, "Microsoft YaHei";
+  font-family: "Source Code Pro", monospace, "Microsoft YaHei";
 }
 .content code {
   color: #ff3860;
@@ -446,7 +446,7 @@ figure.highlight figcaption:after {
 }
 figure.highlight figcaption span {
   font-weight: 500;
-  font-family: "Source Code Pro", consolas, "Microsoft YaHei";
+  font-family: "Source Code Pro", monospace, "Microsoft YaHei";
 }
 figure.highlight figcaption .fold,
 figure.highlight figcaption a {
