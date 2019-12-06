@@ -2,7 +2,7 @@
  *       Override CSS Framework
  * --------------------------------- */
 html {
-  font-size: 16px;
+  font-size: 14px;
 }
 body {
   background-color: #f7f7f7;
@@ -392,7 +392,7 @@ img.thumbnail {
 .content code,
 .content pre {
   font-size: 0.85em;
-  font-family: "Source Code Pro", monospace, "Microsoft YaHei";
+  font-family: "Source Code Pro", consolas, "Microsoft YaHei";
 }
 .content code {
   color: #ff3860;
@@ -446,7 +446,7 @@ figure.highlight figcaption:after {
 }
 figure.highlight figcaption span {
   font-weight: 500;
-  font-family: "Source Code Pro", monospace, "Microsoft YaHei";
+  font-family: "Source Code Pro", consolas, "Microsoft YaHei";
 }
 figure.highlight figcaption .fold,
 figure.highlight figcaption a {
