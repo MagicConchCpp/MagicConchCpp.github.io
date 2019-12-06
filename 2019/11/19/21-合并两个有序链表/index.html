@@ -10,16 +10,16 @@
 <title>21-合并两个有序链表 - Magic Conch</title>
 
 
-    <meta name="description" content="21-合并两个有序链表 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Easy 57.92% linked-list amazon &#x2F; apple &#x2F; linkedin &#x2F; microso">
+    <meta name="description" content="Category Difficulty Pass rate Tags Companies    algorithms Easy 57.92% linked-list amazon &#x2F; apple &#x2F; linkedin &#x2F; microsoft   1. 题目将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 1234示例：输入：1-&amp;gt;2-&amp;gt;">
 <meta name="keywords" content="linked-list">
 <meta property="og:type" content="article">
 <meta property="og:title" content="21-合并两个有序链表">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch">
-<meta property="og:description" content="21-合并两个有序链表 @Author：CSU张扬@Email：csuzhangyang@gmail.com or csuzhangyang@qq.com     Category Difficulty Pass rate Tags Companies    algorithms Easy 57.92% linked-list amazon &#x2F; apple &#x2F; linkedin &#x2F; microso">
+<meta property="og:description" content="Category Difficulty Pass rate Tags Companies    algorithms Easy 57.92% linked-list amazon &#x2F; apple &#x2F; linkedin &#x2F; microsoft   1. 题目将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 1234示例：输入：1-&amp;gt;2-&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-28T09:26:00.445Z">
+<meta property="og:updated_time" content="2019-12-06T03:06:25.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes 读完 (大约 725 个字)
+                    6 minutes 读完 (大约 930 个字)
                 </span>
                 
                 
@@ -164,10 +164,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21-合并两个有序链表"></a>21-合并两个有序链表</h1><blockquote>
-<p>@Author：CSU张扬<br>@Email：<a href="mailto:csuzhangyang@gmail.com" target="_blank" rel="noopener">csuzhangyang@gmail.com</a> or <a href="mailto:csuzhangyang@qq.com" target="_blank" rel="noopener">csuzhangyang@qq.com</a></p>
-</blockquote>
-<table>
+            <table>
 <thead>
 <tr>
 <th align="center">Category</th>
@@ -199,7 +196,19 @@
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="hljs-comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode *next;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="hljs-comment"> * &#125;;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function">ListNode* <span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode* h = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);</span><br><span class="line">        ListNode* head = h;</span><br><span class="line">        <span class="hljs-keyword">while</span>(l1 &amp;&amp; l2) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (l1-&gt;val &lt; l2-&gt;val) &#123;</span><br><span class="line">                h-&gt;next = <span class="hljs-keyword">new</span> ListNode(l1-&gt;val);</span><br><span class="line">                h = h-&gt;next;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                h-&gt;next = <span class="hljs-keyword">new</span> ListNode(l2-&gt;val);</span><br><span class="line">                h = h-&gt;next;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (l1) &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span>(l1) &#123;</span><br><span class="line">                h-&gt;next = <span class="hljs-keyword">new</span> ListNode(l1-&gt;val);</span><br><span class="line">                h = h-&gt;next;</span><br><span class="line">                l1 = l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (l2) &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span>(l2) &#123;</span><br><span class="line">                h-&gt;next = <span class="hljs-keyword">new</span> ListNode(l2-&gt;val);</span><br><span class="line">                h = h-&gt;next;</span><br><span class="line">                l2 = l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode* ptrDelete = head;</span><br><span class="line">        head = head-&gt;next;</span><br><span class="line">        <span class="hljs-keyword">delete</span> ptrDelete;</span><br><span class="line">        <span class="hljs-keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-解法二：递归"><a href="#2-2-解法二：递归" class="headerlink" title="2.2 解法二：递归"></a>2.2 解法二：递归</h3><blockquote>
+<h3 id="2-2-解法二：递归（两种）"><a href="#2-2-解法二：递归（两种）" class="headerlink" title="2.2 解法二：递归（两种）"></a>2.2 解法二：递归（两种）</h3><h4 id="2-2-1-简单递归"><a href="#2-2-1-简单递归" class="headerlink" title="2.2.1 简单递归"></a>2.2.1 简单递归</h4><blockquote>
+<p>参考<a href="https://leetcode.com/zxyperfect/" target="_blank" rel="noopener">zxyperfect</a></p>
+</blockquote>
+<ol>
+<li><strong>递归思路：</strong><br> 我们每次从两个链表的头结点选出一个较小的放在结果中，并在原链表中删除该结点，然后继续比较两个链表。直至一个链表为空。</li>
+<li><strong>递归结束条件：</strong><br>当某个链表为空时，递归结束，但我们返回的是另一个链表。因为另一个链表剩下的肯定是值最大的那部分。例如：<code>if(l1 == nullptr) { return l2; }</code>。</li>
+</ol>
+<blockquote>
+<p>执行用时: 12 ms, 在所有 cpp 提交中击败了69.38%的用户<br>内存消耗: 9 MB, 在所有 cpp 提交中击败了74.60%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function">ListNode *<span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode *l1, ListNode *l2)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(l1 == <span class="hljs-literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span>(l2 == <span class="hljs-literal">nullptr</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span>(l1-&gt;val &lt;= l2-&gt;val)&#123;</span><br><span class="line">            l1-&gt;next = mergeTwoLists(l1-&gt;next, l2);</span><br><span class="line">            <span class="hljs-keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">else</span>&#123;</span><br><span class="line">            l2-&gt;next = mergeTwoLists(l1, l2-&gt;next);</span><br><span class="line">            <span class="hljs-keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-利用swap函数递归"><a href="#2-2-2-利用swap函数递归" class="headerlink" title="2.2.2 利用swap函数递归"></a>2.2.2 利用swap函数递归</h4><blockquote>
 <p>参考 <a href="https://leetcode.com/StefanPochmann/" target="_blank" rel="noopener">StefanPochmann</a></p>
 </blockquote>
 <p><strong>swap函数介绍：</strong><br><code>swap(a, b)</code> ：交换a和b。在此结构体中的意思就是 <code>a-&gt;next</code> 和 <code>b-&gt;next</code> 交换，<code>a-&gt;val</code> 和 <code>b-&gt;val</code> 也交换。</p>
@@ -373,25 +382,29 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#21-合并两个有序链表">
-        <span class="has-mr-6">1</span>
-        <span>21-合并两个有序链表</span>
-        </a><ul class="menu-list"><li>
         <a class="is-flex" href="#1-题目">
-        <span class="has-mr-6">1.1</span>
+        <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
         <a class="is-flex" href="#2-解法">
-        <span class="has-mr-6">1.2</span>
+        <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#2-1-解法一：归并排序">
-        <span class="has-mr-6">1.2.1</span>
+        <span class="has-mr-6">2.1</span>
         <span>2.1 解法一：归并排序</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-解法二：递归">
-        <span class="has-mr-6">1.2.2</span>
-        <span>2.2 解法二：递归</span>
+        <a class="is-flex" href="#2-2-解法二：递归（两种）">
+        <span class="has-mr-6">2.2</span>
+        <span>2.2 解法二：递归（两种）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-2-1-简单递归">
+        <span class="has-mr-6">2.2.1</span>
+        <span>2.2.1 简单递归</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-2-利用swap函数递归">
+        <span class="has-mr-6">2.2.2</span>
+        <span>2.2.2 利用swap函数递归</span>
         </a></li></ul></li></ul></li></ul>
             </div>
         </div>
