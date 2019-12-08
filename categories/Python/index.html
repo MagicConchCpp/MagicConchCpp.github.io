@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes 读完 (大约 430 个字)
+                    3 minutes 读完 (大约 408 个字)
                 </span>
                 
                 
@@ -168,20 +168,21 @@
             
         </h1>
         <div class="content">
-            <h2 id="利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图"><a href="#利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图" class="headerlink" title="利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图"></a>利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图</h2><blockquote>
+            <blockquote>
 <p><a href="https://pycallgraph.readthedocs.io/en/master/guide/index.html" target="_blank" rel="noopener">参考 https://pycallgraph.readthedocs.io/en/master/guide/index.html</a></p>
 </blockquote>
-<h3 id="1-下载并安装graphviz"><a href="#1-下载并安装graphviz" class="headerlink" title="1.下载并安装graphviz"></a>1.下载并安装graphviz</h3><ol>
+<h2 id="1-下载并安装graphviz"><a href="#1-下载并安装graphviz" class="headerlink" title="1.下载并安装graphviz"></a>1.下载并安装graphviz</h2><ol>
 <li><a href="https://graphviz.gitlab.io/_pages/Download/windows/graphviz-2.38.msi" target="_blank" rel="noopener">下载地址: https://graphviz.gitlab.io/_pages/Download/windows/graphviz-2.38.msi</a></li>
 <li>安装（路径可任意选择）</li>
 <li>配置环境变量，在Path中添加：</li>
 </ol>
 <figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如我安装在F:\Program Files (x86)，那么就添加环境变量F:\Program Files (x86)\Graphviz2.38\bin</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-安装pycallgraph库"><a href="#2-安装pycallgraph库" class="headerlink" title="2.安装pycallgraph库"></a>2.安装pycallgraph库</h3><ul>
+<h2 id="2-安装pycallgraph库"><a href="#2-安装pycallgraph库" class="headerlink" title="2.安装pycallgraph库"></a>2.安装pycallgraph库</h2><ul>
 <li>cmd窗口命令行输入：<code>pip install pycallgraph</code></li>
 </ul>
-<h3 id="3-使用"><a href="#3-使用" class="headerlink" title="3.使用"></a>3.使用</h3><h4 id="注意：你的程序-只有你的操作-使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。"><a href="#注意：你的程序-只有你的操作-使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。" class="headerlink" title="注意：你的程序 只有你的操作 使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。"></a>注意：你的程序 只有你的操作 使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。</h4><p>在代码开头调用该库，如下：</p>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3.使用"></a>3.使用</h2><p><strong>注意：你的程序, 只有你运行中使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。</strong></p>
+<p>在代码开头调用该库，如下：</p>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> PyCallGraph</span><br><span class="line"><span class="hljs-keyword">from</span> pycallgraph.output <span class="hljs-keyword">import</span> GraphvizOutput</span><br><span class="line"><span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> Config</span><br><span class="line"><span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> GlobbingFilter</span><br></pre></td></tr></table></figure>
 
 <p>主函数操作：</p>
