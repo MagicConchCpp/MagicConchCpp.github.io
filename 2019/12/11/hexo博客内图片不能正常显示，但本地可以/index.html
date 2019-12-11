@@ -7,19 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Hexo博客遇到的问题 - Magic Conch Cpp</title>
+<title>hexo博客内图片不能正常显示，但本地文件可以显示 - Magic Conch Cpp</title>
 
 
-    <meta name="description" content="记录我在使用Hexo搭建博客中出现的问题及解决办法。  2019&#x2F;12&#x2F;06：hexo d 时，提示连接Github的22端口超时。 2019&#x2F;12&#x2F;11: 博客内的图片不能正常显示。">
+    <meta name="description" content="1.1 问题描述markdown文件中，插入图片的方式为 ![](文件路径) ，此时markdown文件可以正常显示图片。但是一上传到博客上，便不能正常显示。">
 <meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo博客遇到的问题">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;06&#x2F;Hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98&#x2F;index.html">
+<meta property="og:title" content="hexo博客内图片不能正常显示，但本地文件可以显示">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
-<meta property="og:description" content="记录我在使用Hexo搭建博客中出现的问题及解决办法。  2019&#x2F;12&#x2F;06：hexo d 时，提示连接Github的22端口超时。 2019&#x2F;12&#x2F;11: 博客内的图片不能正常显示。">
+<meta property="og:description" content="1.1 问题描述markdown文件中，插入图片的方式为 ![](文件路径) ，此时markdown文件可以正常显示图片。但是一上传到博客上，便不能正常显示。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-11T11:08:34.214Z">
+<meta property="og:updated_time" content="2019-12-11T11:28:07.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/favicon.png" alt="Hexo博客遇到的问题" height="28">
+                <img src="/images/favicon.png" alt="hexo博客内图片不能正常显示，但本地文件可以显示" height="28">
             
             </a>
         </div>
@@ -141,7 +141,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-06T06:34:10.000Z">2019-12-06</time>
+                <time class="level-item has-text-grey" datetime="2019-12-11T09:00:10.000Z">2019-12-11</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 minutes 读完 (大约 1257 个字)
+                    6 minutes 读完 (大约 837 个字)
                 </span>
                 
                 
@@ -160,49 +160,13 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hexo博客遇到的问题
+                hexo博客内图片不能正常显示，但本地文件可以显示
             
         </h1>
         <div class="content">
-            <p>记录我在使用Hexo搭建博客中出现的问题及解决办法。</p>
-<ol>
-<li>2019/12/06：<code>hexo d</code> 时，提示连接Github的22端口超时。</li>
-<li>2019/12/11: 博客内的图片不能正常显示。<a id="more"></a>
-
-</li>
-</ol>
-<h2 id="1-执行hexo-d-时，提示连接Github的22端口超时"><a href="#1-执行hexo-d-时，提示连接Github的22端口超时" class="headerlink" title="1. 执行hexo d 时，提示连接Github的22端口超时"></a>1. 执行<code>hexo d</code> 时，提示连接Github的22端口超时</h2><h3 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a>1.1 问题描述</h3><p>具体错误信息如下：</p>
-<p><img src="/2019/12/06/Hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/hexo-1_1.png" alt="1"></p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="hljs-number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="hljs-keyword">not</span> read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="hljs-keyword">and</span> the repository exists.</span><br><span class="line">FATAL Something<span class="hljs-number">'</span>s wrong. Maybe you can find the solution here: https:<span class="hljs-comment">//hexo.io/docs/troubleshooting.html</span></span><br><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (F:\Program Files\hexo\node_modules\hexo-util\lib\spawn.js:<span class="hljs-number">51</span>:<span class="hljs-number">21</span>)</span><br><span class="line">    at ChildProcess.emit (events.js:<span class="hljs-number">210</span>:<span class="hljs-number">5</span>)</span><br><span class="line">    at ChildProcess.cp.emit (F:\Program Files\hexo\node_modules\cross-spawn\lib\enoent.js:<span class="hljs-number">34</span>:<span class="hljs-number">29</span>)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="hljs-number">272</span>:<span class="hljs-number">12</span>)</span><br></pre></td></tr></table></figure>
-
-<p>一开始我把目光聚焦在后面的 <code>Error: Spawn failed</code> 上，但是没有学过前端的我并看不懂。<br>但是，真正的错误是在上面一部分信息里。</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="hljs-number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="hljs-keyword">not</span> read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="hljs-keyword">and</span> the repository exists.</span><br><span class="line"></span><br><span class="line">ssh：连接到主机github.com端口<span class="hljs-number">22</span>：连接超时</span><br><span class="line">致命：无法从远程存储库读取。</span><br><span class="line">请确保您具有正确的访问权限，并且存储库存在。</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-解决办法"><a href="#1-2-解决办法" class="headerlink" title="1.2 解决办法"></a>1.2 解决办法</h3><p>直接暴力解决：<strong>重新配置密钥</strong></p>
-<ol>
-<li><p><code>git bash</code> 窗口依次输入:（注意：双引号里改为你的Github的名字和邮箱）</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="hljs-string">"MagicConchCpp"</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="hljs-string">"csuzhangyang@gmail.com"</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成新秘钥：</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="hljs-string">"csuzhangyang@gmail.com"</span></span><br></pre></td></tr></table></figure>
-
-<p>选择文件路径，然后遇到下面这个直接回车。</p>
- <figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="hljs-string">"csuzhangyang@gmail.com"</span></span><br><span class="line">Generating <span class="hljs-keyword">public</span>/<span class="hljs-keyword">private</span> rsa key pair.</span><br><span class="line">Enter file in which to save the key (/c/Users/lenovo/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
-
-<p> 文件已经存在，是否重写？输入 <code>y</code> ，回车。</p>
- <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/c/Users/lenovo/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br></pre></td></tr></table></figure>
-
-<p> 然后设置密码什么的，不用管，直接两下回车。</p>
- <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in /c/Users/lenovo/.ssh/id_rsa.</span><br><span class="line">Your <span class="hljs-keyword">public</span> key has been saved in /c/Users/lenovo/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新秘钥保存在 <code>/c/Users/lenovo/.ssh/id_rsa.pub</code><br>打开这个文件，复制其中的的内容。<br>在 <code>github</code> 中，打开 <code>setting -&gt; SSH and GPG keys</code> 。删除原来的，把新的复制进去，即解决。重新执行 <code>hexo d</code>。</p>
-</li>
-</ol>
-<hr>
-<h2 id="2-博客内图片不能正常显示，但本地文件可以显示"><a href="#2-博客内图片不能正常显示，但本地文件可以显示" class="headerlink" title="2. 博客内图片不能正常显示，但本地文件可以显示"></a>2. 博客内图片不能正常显示，但本地文件可以显示</h2><h3 id="2-1-问题描述"><a href="#2-1-问题描述" class="headerlink" title="2.1 问题描述"></a>2.1 问题描述</h3><p>markdown文件中，插入图片的方式为 <code>![](文件路径)</code> ，此时markdown文件可以正常显示图片。<br>但是一上传到博客上，便不能正常显示。</p>
-<h3 id="2-2-解决办法"><a href="#2-2-解决办法" class="headerlink" title="2.2 解决办法"></a>2.2 解决办法</h3><ol>
+            <h2 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a>1.1 问题描述</h2><p>markdown文件中，插入图片的方式为 <code>![](文件路径)</code> ，此时markdown文件可以正常显示图片。<br>但是一上传到博客上，便不能正常显示。</p>
+<a id="more"></a>
+<h2 id="1-2-解决办法"><a href="#1-2-解决办法" class="headerlink" title="1.2 解决办法"></a>1.2 解决办法</h2><ol>
 <li><p>修改 <strong>hexo 目录下</strong>的 .config.yml 文件，<br>将 <code>post_asset_folder: false</code> 修改为 <code>post_asset_folder: true</code>。</p>
 </li>
 <li><p>安装一个图片路径转换的插件。<br>在hexo文件夹下打开 Git bush。输入</p>
@@ -212,16 +176,23 @@
 <p>如果你之前安装了这个错误的插件，请将 <strong>/node_modules/hexo-asset-image/index.js</strong><br>这个文件替换成下面的代码：</p>
  <figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">'use strict'</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> cheerio = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cheerio'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPosition</span>(<span class="hljs-params">str, m, i</span>) </span>&#123;</span><br><span class="line"><span class="hljs-keyword">return</span> str.split(m, i).join(m).length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> version = <span class="hljs-built_in">String</span>(hexo.version).split(<span class="hljs-string">'.'</span>);</span><br><span class="line">hexo.extend.filter.register(<span class="hljs-string">'after_post_render'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>&#123;</span><br><span class="line"><span class="hljs-keyword">var</span> config = hexo.config;</span><br><span class="line"><span class="hljs-keyword">if</span>(config.post_asset_folder)&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> link = data.permalink;</span><br><span class="line"><span class="hljs-keyword">if</span>(version.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">Number</span>(version[<span class="hljs-number">0</span>]) == <span class="hljs-number">3</span>)</span><br><span class="line">    <span class="hljs-keyword">var</span> beginPos = getPosition(link, <span class="hljs-string">'/'</span>, <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">    <span class="hljs-keyword">var</span> beginPos = getPosition(link, <span class="hljs-string">'/'</span>, <span class="hljs-number">3</span>) + <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-comment">// In hexo 3.1.1, the permalink of "about" page is like ".../about/index.html".</span></span><br><span class="line"><span class="hljs-keyword">var</span> endPos = link.lastIndexOf(<span class="hljs-string">'/'</span>) + <span class="hljs-number">1</span>;</span><br><span class="line">link = link.substring(beginPos, endPos);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> toprocess = [<span class="hljs-string">'excerpt'</span>, <span class="hljs-string">'more'</span>, <span class="hljs-string">'content'</span>];</span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; toprocess.length; i++)&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> key = toprocess[i];</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">var</span> $ = cheerio.load(data[key], &#123;</span><br><span class="line">    ignoreWhitespace: <span class="hljs-literal">false</span>,</span><br><span class="line">    xmlMode: <span class="hljs-literal">false</span>,</span><br><span class="line">    lowerCaseTags: <span class="hljs-literal">false</span>,</span><br><span class="line">    decodeEntities: <span class="hljs-literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    $(<span class="hljs-string">'img'</span>).each(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> ($(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'src'</span>))&#123;</span><br><span class="line">        <span class="hljs-comment">// For windows style path, we replace '\' to '/'.</span></span><br><span class="line">        <span class="hljs-keyword">var</span> src = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'src'</span>).replace(<span class="hljs-string">'\\'</span>, <span class="hljs-string">'/'</span>);</span><br><span class="line">        <span class="hljs-keyword">if</span>(!<span class="hljs-regexp">/http[s]*.*|\/\/.*/</span>.test(src) &amp;&amp;</span><br><span class="line">            !<span class="hljs-regexp">/^\s*\//</span>.test(src)) &#123;</span><br><span class="line">            <span class="hljs-comment">// For "about" page, the first part of "src" can't be removed.</span></span><br><span class="line">            <span class="hljs-comment">// In addition, to support multi-level local directory.</span></span><br><span class="line">            <span class="hljs-keyword">var</span> linkArray = link.split(<span class="hljs-string">'/'</span>).filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">elem</span>)</span>&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> elem != <span class="hljs-string">''</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="hljs-keyword">var</span> srcArray = src.split(<span class="hljs-string">'/'</span>).filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">elem</span>)</span>&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> elem != <span class="hljs-string">''</span> &amp;&amp; elem != <span class="hljs-string">'.'</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="hljs-keyword">if</span>(srcArray.length &gt; <span class="hljs-number">1</span>)</span><br><span class="line">            srcArray.shift();</span><br><span class="line">            src = srcArray.join(<span class="hljs-string">'/'</span>);</span><br><span class="line">            $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'src'</span>, config.root + link + src);</span><br><span class="line">            <span class="hljs-built_in">console</span>.info&amp;&amp;<span class="hljs-built_in">console</span>.info(<span class="hljs-string">"update link as:--&gt;"</span>+config.root + link + src);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">        <span class="hljs-built_in">console</span>.info&amp;&amp;<span class="hljs-built_in">console</span>.info(<span class="hljs-string">"no src attr, skipped..."</span>);</span><br><span class="line">        <span class="hljs-built_in">console</span>.info&amp;&amp;<span class="hljs-built_in">console</span>.info($(<span class="hljs-keyword">this</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    data[key] = $.html();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装完上述插件后，当我们创建新文章时 <code>hexo new post &quot;new article&quot;</code> ，就自动在 <code>new article.md</code> 文件的同目录下创建一个同名的文件夹，这里就是文件夹 <code>new article</code> 。我们把在 <code>new article.md</code> 使用的图片放入该文件夹中。</p>
+<li><p>安装完上述插件后，当我们创建新文章时 <code>hexo new post &quot;new article&quot;</code> ，就自动在 <code>new article.md</code> 文件的同目录下创建一个同名的文件夹，这里就是文件夹 <code>new article</code> 。我们把在 <code>new article.md</code> 使用的图片放入该文件夹中。  </p>
 </li>
+</ol>
+<p><strong>我们的文件目录如下所示：</strong>  </p>
+<pre><code><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- _post  </span><br><span class="line">    - pictures</span><br><span class="line">        - hexo.png</span><br><span class="line">    - <span class="hljs-keyword">new</span> article  </span><br><span class="line">        - hexo.png  </span><br><span class="line">    - <span class="hljs-keyword">new</span> article.md</span><br></pre></td></tr></table></figure></code></pre><ol start="4">
 <li><p>这里我们给出两种办法来引用图片。</p>
 <ol>
-<li>直接使用代码 <code>![1](hexo.png)</code> ，<code>hexo.png</code> 是我们存在 <code>new article</code> 文件夹内的图片。这时你会发现markdown预览中无法显示这张图片，但是当你将博客上传到网站时，网站上是可以正常显示的。</li>
-<li>本地无法预览也是件很不舒服的事情，</li>
+<li><p>直接使用代码 <code>![](hexo.png)</code> （虽然没有写文件夹的名字，但是可以的），<code>hexo.png</code> 是我们存在 <code>new article</code> 文件夹内的图片。这时你会发现markdown预览中无法显示这张图片，但是当你将博客上传到网站时，网站上是可以正常显示的。</p>
+</li>
+<li><p>使用代码 <code>![](new article/hexo.png)</code>不仅可以本地预览，上传到网站也可以正常显示。</p>
+</li>
+<li><p>本地无法预览也是件很不舒服的事情，其实我们还可以另外创建一个文件夹 <code>pictures</code> ，里面专门存放所有文章的图片，代码 <code>![](pictures/hexo.png)</code> 不仅可以本地预览，上传到网站也可以正常显示。</p>
+<p><strong>注意：</strong> 不管采取哪种办法，都要创建一个和md文件同名的文件夹，里面放上需要的图片。<br>如果 <strong>2和3</strong> 中代码无法实现网站上的正常显示，那就使用 <strong>1</strong> 中的代码。<br>因为 <strong>2和3</strong> 中代码我无法保证每个人都成功。</p>
+</li>
 </ol>
 </li>
 </ol>
-<p><img src="/2019/12/06/Hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/hexo-1_1.png" alt="1"><br><img src="/2019/12/06/Hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/hexo-1_1.png" alt="2"><br><img src="/2019/12/06/Hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/hexo-1_1.png" alt="2"></p>
 
         </div>
         
@@ -246,17 +217,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/08/23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">23-合并K个排序链表</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/21/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/">
-                <span class="level-item">22-括号生成</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/11/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">
+                <span class="level-item">24-两两交换链表中的节点</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -319,7 +283,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            29
+                            30
                         </p>
                     </a>
                 </div>
@@ -382,30 +346,14 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-执行hexo-d-时，提示连接Github的22端口超时">
-        <span class="has-mr-6">1</span>
-        <span>1. 执行hexo d 时，提示连接Github的22端口超时</span>
-        </a><ul class="menu-list"><li>
         <a class="is-flex" href="#1-1-问题描述">
-        <span class="has-mr-6">1.1</span>
+        <span class="has-mr-6">1</span>
         <span>1.1 问题描述</span>
         </a></li><li>
         <a class="is-flex" href="#1-2-解决办法">
-        <span class="has-mr-6">1.2</span>
-        <span>1.2 解决办法</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#2-博客内图片不能正常显示，但本地文件可以显示">
         <span class="has-mr-6">2</span>
-        <span>2. 博客内图片不能正常显示，但本地文件可以显示</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-问题描述">
-        <span class="has-mr-6">2.1</span>
-        <span>2.1 问题描述</span>
-        </a></li><li>
-        <a class="is-flex" href="#2-2-解决办法">
-        <span class="has-mr-6">2.2</span>
-        <span>2.2 解决办法</span>
-        </a></li></ul></li></ul>
+        <span>1.2 解决办法</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
@@ -425,7 +373,7 @@
                 <span class="level-item">Hexo</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/LaTeX/">
@@ -492,7 +440,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Hexo/">
                         <span class="tag">Hexo</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -641,7 +589,7 @@
                     <span class="level-item">December 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -727,6 +675,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-11T09:00:10.000Z">2019-12-11</time></div>
+                    <a href="/2019/12/11/hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo博客内图片不能正常显示，但本地文件可以显示</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-11T02:25:51.000Z">2019-12-11</time></div>
                     <a href="/2019/12/11/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" class="title has-link-black-ter is-size-6 has-text-weight-normal">24-两两交换链表中的节点</a>
                     <p class="is-size-7 is-uppercase">
@@ -754,7 +715,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-06T06:34:10.000Z">2019-12-06</time></div>
-                    <a href="/2019/12/06/Hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo博客遇到的问题</a>
+                    <a href="/2019/12/06/hexo%20d%E6%97%B6%EF%BC%8C%E6%8F%90%E7%A4%BA%E8%BF%9E%E6%8E%A5Github%E7%9A%8422%E7%AB%AF%E5%8F%A3%E8%B6%85%E6%97%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">执行`hexo d` 时，提示连接Github的22端口超时</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
                     </p>
@@ -775,19 +736,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-19T15:52:16.000Z">2019-11-19</time></div>
-                    <a href="/2019/11/19/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">21-合并两个有序链表</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -796,7 +744,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/MATLAB/" style="font-size: 10px;">MATLAB</a> <a href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">UNIX网络编程</a> <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/backtracking/" style="font-size: 14px;">backtracking</a> <a href="/tags/binary-search/" style="font-size: 10px;">binary-search</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide-and-conquer</a> <a href="/tags/dynamic-programming/" style="font-size: 12px;">dynamic-programming</a> <a href="/tags/graphviz/" style="font-size: 10px;">graphviz</a> <a href="/tags/hash-table/" style="font-size: 14px;">hash-table</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/linked-list/" style="font-size: 16px;">linked-list</a> <a href="/tags/math/" style="font-size: 18px;">math</a> <a href="/tags/pycallgraph/" style="font-size: 10px;">pycallgraph</a> <a href="/tags/sliding-window/" style="font-size: 10px;">sliding-window</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/string/" style="font-size: 20px;">string</a> <a href="/tags/two-pointers/" style="font-size: 18px;">two-pointers</a>
+        <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/MATLAB/" style="font-size: 10px;">MATLAB</a> <a href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">UNIX网络编程</a> <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/backtracking/" style="font-size: 14px;">backtracking</a> <a href="/tags/binary-search/" style="font-size: 10px;">binary-search</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide-and-conquer</a> <a href="/tags/dynamic-programming/" style="font-size: 12px;">dynamic-programming</a> <a href="/tags/graphviz/" style="font-size: 10px;">graphviz</a> <a href="/tags/hash-table/" style="font-size: 14px;">hash-table</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/linked-list/" style="font-size: 16px;">linked-list</a> <a href="/tags/math/" style="font-size: 18px;">math</a> <a href="/tags/pycallgraph/" style="font-size: 10px;">pycallgraph</a> <a href="/tags/sliding-window/" style="font-size: 10px;">sliding-window</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/string/" style="font-size: 20px;">string</a> <a href="/tags/two-pointers/" style="font-size: 18px;">two-pointers</a>
     </div>
 </div>
     
@@ -817,7 +765,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/favicon.png" alt="Hexo博客遇到的问题" height="28">
+                    <img src="/images/favicon.png" alt="hexo博客内图片不能正常显示，但本地文件可以显示" height="28">
                 
                 </a>
                 <p class="is-size-7">
