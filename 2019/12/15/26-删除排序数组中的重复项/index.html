@@ -7,19 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>16-最接近的三数之和 - Magic Conch Cpp</title>
+<title>26-删除排序数组中的重复项 - Magic Conch Cpp</title>
 
 
-    <meta name="description" content="Category Difficulty Pass rate Tags Companies    algorithms Medium 41.91% array &#x2F; two-pointers bloomberg   1. 题目给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只">
+    <meta name="description" content="Category Difficulty Pass rate Tags Companies    algorithms Easy 46.91% array &#x2F; two-pointers bloomberg &#x2F; facebook &#x2F; microsoft   1. 题目给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须">
 <meta name="keywords" content="array,two-pointers">
 <meta property="og:type" content="article">
-<meta property="og:title" content="16-最接近的三数之和">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;07&#x2F;16-%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C&#x2F;index.html">
+<meta property="og:title" content="26-删除排序数组中的重复项">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;15&#x2F;26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
-<meta property="og:description" content="Category Difficulty Pass rate Tags Companies    algorithms Medium 41.91% array &#x2F; two-pointers bloomberg   1. 题目给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只">
+<meta property="og:description" content="Category Difficulty Pass rate Tags Companies    algorithms Easy 46.91% array &#x2F; two-pointers bloomberg &#x2F; facebook &#x2F; microsoft   1. 题目给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-06T03:06:25.774Z">
+<meta property="og:updated_time" content="2019-12-15T02:40:20.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -89,7 +89,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/favicon.png" alt="16-最接近的三数之和" height="28">
+                <img src="/images/favicon.png" alt="26-删除排序数组中的重复项" height="28">
             
             </a>
         </div>
@@ -149,7 +149,7 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-07T14:50:07.000Z">2019-11-07</time>
+                <time class="level-item has-text-grey" datetime="2019-12-15T02:17:40.000Z">2019-12-15</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
@@ -159,7 +159,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes 读完 (大约 336 个字)
+                    5 minutes 读完 (大约 750 个字)
                 </span>
                 
                 
@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                16-最接近的三数之和
+                26-删除排序数组中的重复项
             
         </h1>
         <div class="content">
@@ -189,24 +189,44 @@ var _hmt = _hmt || [];
 </thead>
 <tbody><tr>
 <td align="center">algorithms</td>
-<td align="center">Medium</td>
-<td align="center">41.91%</td>
+<td align="center">Easy</td>
+<td align="center">46.91%</td>
 <td align="center">array / two-pointers</td>
-<td align="center">bloomberg</td>
+<td align="center">bloomberg / facebook / microsoft</td>
 </tr>
 </tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个包括 <em>n</em> 个整数的数组 <code>nums</code> 和 一个目标值 <code>target</code>。找出 <code>nums</code> 中的三个整数，使得它们的和与 <code>target</code> 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例如，给定数组 nums = [<span class="hljs-number">-1</span>，<span class="hljs-number">2</span>，<span class="hljs-number">1</span>，<span class="hljs-number">-4</span>], 和 target = <span class="hljs-number">1.</span></span><br><span class="line"></span><br><span class="line">与 target 最接近的三个数的和为 <span class="hljs-number">2.</span> (<span class="hljs-number">-1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">1</span> = <span class="hljs-number">2</span>).</span><br></pre></td></tr></table></figure>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个排序数组，你需要在<strong>原地</strong>删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在<strong>原地</strong>修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">给定数组 nums = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],</span><br><span class="line">函数应该返回新的长度 <span class="hljs-number">2</span>, 并且原数组 nums 的前两个元素被修改为 <span class="hljs-number">1</span>, <span class="hljs-number">2</span>。</span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">给定 nums = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],</span><br><span class="line">函数应该返回新的长度 <span class="hljs-number">5</span>, 并且原数组 nums 的前五个元素被修改为 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>。</span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/3sum-closest/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/3sum-closest/</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：双指针法"><a href="#2-1-解法一：双指针法" class="headerlink" title="2.1 解法一：双指针法"></a>2.1 解法一：双指针法</h3><ol>
-<li>与第15题三数之和类似。三数之和是当和为 <code>target</code> 是我们需要的值，此题则是$|sum - target|$最小时，是我们需要的值。</li>
-<li>其余部分和三数之和相同。参考链接：<a href="https://blog.csdn.net/qq_36408085/article/details/102907454" target="_blank" rel="noopener">15 - 三数之和</a></li>
+<p><strong>说明:</strong></p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以“<strong>引用</strong>”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span></span><br><span class="line"><span class="hljs-keyword">int</span> len = removeDuplicates(nums);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><ol>
+<li><code>index</code> 记录我们不重复的数字的个数。</li>
+<li>如果 <code>nums[i] != nums[i - 1]</code> ，则就出现了新的不重复的值，令 <code>nums[index] = nums[i]</code> 即可。</li>
+</ol>
+<p><strong>注意以下几个细节：</strong></p>
+<ol>
+<li>第一个数字（<code>nums[0]</code>）肯定是要记录下来的，也就是不变的，所以我们判断条件是 <code>nums[i] != nums[i - 1]</code> ，而不是 <code>nums[i] != nums[i + 1]</code> 。</li>
+<li><code>index</code> 实际是从下标1，开始赋值的。</li>
 </ol>
 <blockquote>
-<p>执行用时: 12 ms, 在所有 cpp 提交中击败了 72.29% 的用户<br>内存消耗: 8.7 MB, 在所有 cpp 提交中击败了 87.01% 的用户</p>
+<p>执行用时: 24 ms, 在所有 cpp 提交中击败了91.69%的用户<br>内存消耗: 9.8 MB, 在所有 cpp 提交中击败了86.78%的用户</p>
 </blockquote>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">threeSumClosest</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nums.size() &lt; <span class="hljs-number">3</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        <span class="hljs-keyword">int</span> sum;</span><br><span class="line">        <span class="hljs-keyword">long</span> res = INT_MAX;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> k = <span class="hljs-number">0</span>; k &lt; nums.size() - <span class="hljs-number">2</span>; ++ k) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> l = k + <span class="hljs-number">1</span>;</span><br><span class="line">            <span class="hljs-keyword">int</span> r = nums.size() - <span class="hljs-number">1</span>;</span><br><span class="line">            <span class="hljs-keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                sum = nums[k] + nums[l] + nums[r];</span><br><span class="line">                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">abs</span>(sum - target) &lt; <span class="hljs-built_in">abs</span>(res - target))</span><br><span class="line">                        res = sum;</span><br><span class="line">                <span class="hljs-keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[l] == nums[++ l]) &#123; &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; nums[r] == nums[-- r]) &#123; &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">return</span> target;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-comment">// nums[0]不变，index从1开始赋值。</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">1</span>; i &lt; n; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (nums[i] != nums[i - <span class="hljs-number">1</span>]) &#123;</span><br><span class="line">                index ++;</span><br><span class="line">                nums[index] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> index + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-解法二"><a href="#2-2-解法二" class="headerlink" title="2.2 解法二"></a>2.2 解法二</h3><ol>
+<li>在 <strong>解法一</strong> 中，我们是判断相邻两个数不相等时，则出现了新的不重复数。实际上数组是递增的，当后一个数大于前一个数时，也是出现了新的不重复数。</li>
+<li>该程序巧妙的解决了当数组为空时的特殊情况。<br> 当数组为空时，<code>i = 0</code>；非空时，<code>i = 1</code>。</li>
+</ol>
+<blockquote>
+<p>执行用时: 20 ms, 在所有 cpp 提交中击败了98.93%的用户<br>内存消耗: 9.8 MB, 在所有 cpp 提交中击败了87.97%的用户</p>
+</blockquote>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> i = !nums.empty();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> n : nums)</span><br><span class="line">            <span class="hljs-keyword">if</span> (n &gt; nums[i - <span class="hljs-number">1</span>])</span><br><span class="line">                nums[i ++] = n;</span><br><span class="line">        <span class="hljs-keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -232,16 +252,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/10/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/15/27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">17-电话号码的字母组合</span>
+                <span class="level-item">27-移除元素</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/04/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                <span class="level-item">15-三数之和</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/12/25-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+                <span class="level-item">25-K个一组翻转链表</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -397,9 +417,13 @@ var _hmt = _hmt || [];
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一：双指针法">
+        <a class="is-flex" href="#2-1-解法一">
         <span class="has-mr-6">2.1</span>
-        <span>2.1 解法一：双指针法</span>
+        <span>2.1 解法一</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-解法二">
+        <span class="has-mr-6">2.2</span>
+        <span>2.2 解法二</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -812,7 +836,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/favicon.png" alt="16-最接近的三数之和" height="28">
+                    <img src="/images/favicon.png" alt="26-删除排序数组中的重复项" height="28">
                 
                 </a>
                 <p class="is-size-7">
