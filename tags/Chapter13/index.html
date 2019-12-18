@@ -7,13 +7,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: sliding-window - Magic Conch Cpp</title>
+<title>标签: Chapter13 - Magic Conch Cpp</title>
 
 
     <meta name="description" content="Cpper的小破站">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Magic Conch Cpp">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;sliding-window&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;Chapter13&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="Cpper的小破站">
 <meta property="og:locale" content="zh-Hans">
@@ -141,7 +141,7 @@ var _hmt = _hmt || [];
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">sliding-window</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Chapter13</a></li>
         </ul>
         </nav>
     </div>
@@ -154,17 +154,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-17T12:47:31.000Z">2019-10-17</time>
+                <time class="level-item has-text-grey" datetime="2019-12-18T07:51:49.000Z">2019-12-18</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
+                <a class="has-link-grey -link" href="/categories/C-Primer-5th/">C++ Primer(5th)</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/C-Primer-5th/Exercises/">Exercises</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes 读完 (大约 734 个字)
+                    10 minutes 读完 (大约 1485 个字)
                 </span>
                 
                 
@@ -173,37 +173,21 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/10/17/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">3-无重复字符的最长子串</a>
+                <a class="has-link-black-ter" href="/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/">习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。</a>
             
         </h1>
         <div class="content">
-            <table>
-<thead>
-<tr>
-<th align="center">Category</th>
-<th align="center">Difficulty</th>
-<th align="center">Pass rate</th>
-<th align="center">Tags</th>
-<th align="center">Companies</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">algorithms</td>
-<td align="center">Medium</td>
-<td align="center">36.10%</td>
-<td align="center">hash-table / two-pointers / string / sliding-window</td>
-<td align="center">adobe / amazon / bloomberg / yelp</td>
-</tr>
-</tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个字符串，请你找出其中不含有重复字符的<strong>最长子串</strong>的长度。</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-string">"abcabcbb"</span></span><br><span class="line">输出: <span class="hljs-number">3</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="hljs-string">"abc"</span>，所以其长度为 <span class="hljs-number">3</span>。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-string">"bbbbb"</span></span><br><span class="line">输出: <span class="hljs-number">1</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="hljs-string">"b"</span>，所以其长度为 <span class="hljs-number">1</span>。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-string">"pwwkew"</span></span><br><span class="line">输出: <span class="hljs-number">3</span></span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="hljs-string">"wke"</span>，所以其长度为 <span class="hljs-number">3</span>。</span><br><span class="line">     请注意，你的答案必须是**子串**的长度，<span class="hljs-string">"pwke"</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p><strong>练习13.13</strong>：理解拷贝控制成员和构造函数的一个好方法是定义一个简单的类，为该类定义这些成员，每个成员都打印出自己的名字：</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">X</span> &#123;</span></span><br><span class="line">    X() &#123; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"X()"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; &#125;</span><br><span class="line">    X(<span class="hljs-keyword">const</span> X&amp;) &#123; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"X(const X&amp;)"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>给 X 添加拷贝赋值运算符和析构函数，并编写一个程序以不同方式使用 X 的对象：将它们作为非引用和引用参数传递；动态分配它们；将它们存放于容器中；诸如此类。观察程序的输出，直到你确认理解了什么时候会使用拷贝控制成员，以及为什么会使用它们。<br>当你观察程序输出时，记住编译器可以略过对拷贝构造函数的调用。</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/17/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more">阅读更多</a>
                 </div>
             </div>
         </div>
