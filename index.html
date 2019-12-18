@@ -144,6 +144,72 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-18T07:51:49.000Z">2019-12-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C-Primer-5th-Notes/">C++Primer(5th) Notes</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes 读完 (大约 1485 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/">习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p><strong>练习13.13</strong>：理解拷贝控制成员和构造函数的一个好方法是定义一个简单的类，为该类定义这些成员，每个成员都打印出自己的名字：</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">X</span> &#123;</span></span><br><span class="line">    X() &#123; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"X()"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; &#125;</span><br><span class="line">    X(<span class="hljs-keyword">const</span> X&amp;) &#123; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"X(const X&amp;)"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>给 X 添加拷贝赋值运算符和析构函数，并编写一个程序以不同方式使用 X 的对象：将它们作为非引用和引用参数传递；动态分配它们；将它们存放于容器中；诸如此类。观察程序的输出，直到你确认理解了什么时候会使用拷贝控制成员，以及为什么会使用它们。<br>当你观察程序输出时，记住编译器可以略过对拷贝构造函数的调用。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="level is-size-7 has-text-grey">
+    <div class="level-left">
+        <i class="far fa-eye"></i>
+        <span>&nbsp;</span>
+        <span id="busuanzi_container_page_pv" style="display: inline;">
+            <span id="busuanzi_value_page_pv">0</span>
+        </span>
+    </div>
+</div>
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-12-15T02:41:54.000Z">2019-12-15</time>
                 
                 <div class="level-item">
@@ -845,94 +911,6 @@ var _hmt = _hmt || [];
     </div>
 </div>
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-15T14:49:12.000Z">2019-11-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes 读完 (大约 343 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/15/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">20-有效的括号</a>
-            
-        </h1>
-        <div class="content">
-            <table>
-<thead>
-<tr>
-<th align="center">Category</th>
-<th align="center">Difficulty</th>
-<th align="center">Pass rate</th>
-<th align="center">Tags</th>
-<th align="center">Companies</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">algorithms</td>
-<td align="center">Easy</td>
-<td align="center">39.88%</td>
-<td align="center">string / stack</td>
-<td align="center">airbnb / amazon / bloomberg / facebook / google / microsoft / twitter / zenefits</td>
-</tr>
-</tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;{&#39;</code>，<code>&#39;}&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<ol>
-<li>左括号必须用相同类型的右括号闭合。</li>
-<li>左括号必须以正确的顺序闭合。</li>
-</ol>
-<p>注意空字符串可被认为是有效字符串。</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-string">"()"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-string">"()[]&#123;&#125;"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-string">"(]"</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">4</span>:</span><br><span class="line">输入: <span class="hljs-string">"([)]"</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">5</span>:</span><br><span class="line">输入: <span class="hljs-string">"&#123;[]&#125;"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/15/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-<div class="level is-size-7 has-text-grey">
-    <div class="level-left">
-        <i class="far fa-eye"></i>
-        <span>&nbsp;</span>
-        <span id="busuanzi_container_page_pv" style="display: inline;">
-            <span id="busuanzi_value_page_pv">0</span>
-        </span>
-    </div>
-</div>
-
 
     
 <div class="card card-transparent">
@@ -1001,7 +979,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            33
+                            34
                         </p>
                     </a>
                 </div>
@@ -1013,7 +991,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -1025,7 +1003,7 @@ var _hmt = _hmt || [];
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            19
+                            21
                         </p>
                     </a>
                 </div>
@@ -1066,6 +1044,14 @@ var _hmt = _hmt || [];
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/C-Primer-5th-Notes/">
+            <span class="level-start">
+                <span class="level-item">C++Primer(5th) Notes</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Hexo/">
             <span class="level-start">
                 <span class="level-item">Hexo</span>
@@ -1185,6 +1171,13 @@ var _hmt = _hmt || [];
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/copy-constructor/">
+                        <span class="tag">copy constructor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/divide-and-conquer/">
                         <span class="tag">divide-and-conquer</span>
                         <span class="tag is-grey">2</span>
@@ -1268,6 +1261,13 @@ var _hmt = _hmt || [];
                     </a>
                 </div>
                 
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vector/">
+                        <span class="tag">vector</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -1287,7 +1287,7 @@ var _hmt = _hmt || [];
                     <span class="level-item">December 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1373,6 +1373,19 @@ var _hmt = _hmt || [];
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-18T07:51:49.000Z">2019-12-18</time></div>
+                    <a href="/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C-Primer-5th-Notes/">C++Primer(5th) Notes</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T02:41:54.000Z">2019-12-15</time></div>
                     <a href="/2019/12/15/27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">27-移除元素</a>
                     <p class="is-size-7 is-uppercase">
@@ -1421,19 +1434,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-11T02:25:51.000Z">2019-12-11</time></div>
-                    <a href="/2019/12/11/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" class="title has-link-black-ter is-size-6 has-text-weight-normal">24-两两交换链表中的节点</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1442,7 +1442,7 @@ var _hmt = _hmt || [];
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/MATLAB/" style="font-size: 10px;">MATLAB</a> <a href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">UNIX网络编程</a> <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/backtracking/" style="font-size: 14px;">backtracking</a> <a href="/tags/binary-search/" style="font-size: 10px;">binary-search</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide-and-conquer</a> <a href="/tags/dynamic-programming/" style="font-size: 12px;">dynamic-programming</a> <a href="/tags/graphviz/" style="font-size: 10px;">graphviz</a> <a href="/tags/hash-table/" style="font-size: 14px;">hash-table</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/linked-list/" style="font-size: 16px;">linked-list</a> <a href="/tags/math/" style="font-size: 16px;">math</a> <a href="/tags/pycallgraph/" style="font-size: 10px;">pycallgraph</a> <a href="/tags/sliding-window/" style="font-size: 10px;">sliding-window</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/string/" style="font-size: 20px;">string</a> <a href="/tags/two-pointers/" style="font-size: 18px;">two-pointers</a>
+        <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/MATLAB/" style="font-size: 10px;">MATLAB</a> <a href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">UNIX网络编程</a> <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/backtracking/" style="font-size: 14px;">backtracking</a> <a href="/tags/binary-search/" style="font-size: 10px;">binary-search</a> <a href="/tags/copy-constructor/" style="font-size: 10px;">copy constructor</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide-and-conquer</a> <a href="/tags/dynamic-programming/" style="font-size: 12px;">dynamic-programming</a> <a href="/tags/graphviz/" style="font-size: 10px;">graphviz</a> <a href="/tags/hash-table/" style="font-size: 14px;">hash-table</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/linked-list/" style="font-size: 16px;">linked-list</a> <a href="/tags/math/" style="font-size: 16px;">math</a> <a href="/tags/pycallgraph/" style="font-size: 10px;">pycallgraph</a> <a href="/tags/sliding-window/" style="font-size: 10px;">sliding-window</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/string/" style="font-size: 20px;">string</a> <a href="/tags/two-pointers/" style="font-size: 18px;">two-pointers</a> <a href="/tags/vector/" style="font-size: 10px;">vector</a>
     </div>
 </div>
     
