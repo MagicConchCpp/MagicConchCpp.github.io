@@ -195,11 +195,11 @@ var _hmt = _hmt || [];
 <td align="center">google / uber / zenefits</td>
 </tr>
 </tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给出 $n$ 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且<strong>有效的</strong>括号组合。</p>
+<h2><span id="1-题目">1. 题目</span></h2><p>给出 $n$ 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且<strong>有效的</strong>括号组合。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">例如，给出 n = <span class="hljs-number">3</span>，生成结果为：</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  <span class="hljs-string">"((()))"</span>,</span><br><span class="line">  <span class="hljs-string">"(()())"</span>,</span><br><span class="line">  <span class="hljs-string">"(())()"</span>,</span><br><span class="line">  <span class="hljs-string">"()(())"</span>,</span><br><span class="line">  <span class="hljs-string">"()()()"</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/generate-parentheses/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/generate-parentheses/</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：回溯"><a href="#2-1-解法一：回溯" class="headerlink" title="2.1 解法一：回溯"></a>2.1 解法一：回溯</h3><p>以 <code>n = 3</code> 为例：我们的字符串 <code>s</code> 一共有 <code>6</code> 个位置来放置 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code>。</p>
+<h2><span id="2-解法">2. 解法</span></h2><h3><span id="21-解法一回溯">2.1 解法一：回溯</span></h3><p>以 <code>n = 3</code> 为例：我们的字符串 <code>s</code> 一共有 <code>6</code> 个位置来放置 <code>&#39;(&#39;</code> 和 <code>&#39;)&#39;</code>。</p>
 <ol>
 <li>首先我们知道：第一个位置一定是 <code>&#39;(&#39;</code>，此时 <code>s = ( _ _ _ _ _</code>。</li>
 <li>此时我们考虑第二个位置，我们选择可以放置<code>&#39;(&#39;</code> 或 <code>&#39;)&#39;</code>。<br><strong>那么什么情况下，我们可以有两个选择呢？</strong><br>很容易想到，应该是当 <code>&#39;(&#39;</code> 的数量大于 <code>&#39;)&#39;</code> 的数量 <strong>并且</strong> <code>&#39;(&#39;</code> 的数量小于 <code>n</code> 时，即 <code>if (left &lt; N &amp;&amp; left &gt; right)</code>。<br>可以思考 <code>s = ( ( ) _ _ _</code> 和 <code>s = ( ( ( ) _ _</code>这两种情况下，下一个位置应该放哪种括号。</li>
@@ -214,7 +214,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; res;</span><br><span class="line">    <span class="hljs-keyword">int</span> N;</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; generateParenthesis(<span class="hljs-keyword">int</span> n) &#123;</span><br><span class="line">        N = n;</span><br><span class="line">        <span class="hljs-built_in">string</span> s = <span class="hljs-string">""</span>;</span><br><span class="line">        backtrack(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, s + <span class="hljs-string">"("</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> &amp;s)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (left + right == <span class="hljs-number">2</span> * N) &#123;</span><br><span class="line">            res.push_back(s);</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (left &lt; N &amp;&amp; left &gt; right) &#123;</span><br><span class="line">            backtrack(left + <span class="hljs-number">1</span>, right, s + <span class="hljs-string">"("</span>);</span><br><span class="line">            backtrack(left, right + <span class="hljs-number">1</span>, s + <span class="hljs-string">")"</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (left == N) &#123;</span><br><span class="line">            backtrack(left, right + <span class="hljs-number">1</span>, s + <span class="hljs-string">")"</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (left == right) &#123;</span><br><span class="line">            backtrack(left + <span class="hljs-number">1</span>, right, s + <span class="hljs-string">"("</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-解法二：动态规划"><a href="#2-2-解法二：动态规划" class="headerlink" title="2.2 解法二：动态规划"></a>2.2 解法二：动态规划</h3><blockquote>
+<h3><span id="22-解法二动态规划">2.2 解法二：动态规划</span></h3><blockquote>
 <p>参考 <a href="https://leetcode.com/rockrock2/" target="_blank" rel="noopener">rockrock2</a>，<a href="https://leetcode-cn.com/problems/generate-parentheses/solution/zui-jian-dan-yi-dong-de-dong-tai-gui-hua-bu-lun-da/" target="_blank" rel="noopener">Yuyu</a></p>
 </blockquote>
 <p>首先看 <code>n</code> 较小时的结果。</p>
@@ -423,19 +423,19 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-题目">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
-        <a class="is-flex" href="#2-解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一：回溯">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1</span>
         <span>2.1 解法一：回溯</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-解法二：动态规划">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.2</span>
         <span>2.2 解法二：动态规划</span>
         </a></li></ul></li></ul>

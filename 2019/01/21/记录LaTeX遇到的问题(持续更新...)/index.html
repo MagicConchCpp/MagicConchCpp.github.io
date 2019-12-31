@@ -194,7 +194,7 @@ var _hmt = _hmt || [];
 </blockquote>
 </li>
 </ol>
-<h2 id="脚注："><a href="#脚注：" class="headerlink" title="脚注："></a>脚注：</h2><ol>
+<h2><span id="脚注">脚注：</span></h2><ol>
 <li><p>对于在标题(section)中加脚注，要在\footnote前加上\protect。例如：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\section&#123;语音信号的数字水印技术（LSB算法\protect\footnote&#123;即LeastSignificant Bits（最低有效位）算法。&#125;）&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -206,13 +206,13 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<h2 id="段落缩进"><a href="#段落缩进" class="headerlink" title="段落缩进"></a>段落缩进</h2><ol>
+<h2><span id="段落缩进">段落缩进</span></h2><ol>
 <li><p>强制缩进，在开头加上以下命令：（em是当前文字的宽度）</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\hspace*&#123;2em&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><ol>
+<h2><span id="数学公式">数学公式</span></h2><ol>
 <li><p>阴影盒子不加gather环境如何居中。前后加上$$即可。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\shadowbox&#123;$Y(k)=\frac&#123;1&#125;&#123;2&#125;\left(X(k+\omega\pi)+X(k-\omega\pi)\right)$&#125;$$</span><br></pre></td></tr></table></figure>
 </li>
@@ -221,13 +221,13 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<h2 id="图表"><a href="#图表" class="headerlink" title="图表"></a>图表</h2><ol>
+<h2><span id="图表">图表</span></h2><ol>
 <li><p>修改图表的图1，图2，变成按章节的图1.1，图2.2等。. 改成 - 可以显示成 图1-1.</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\renewcommand &#123;\thetable&#125; &#123;\thesection&#123;&#125;.\arabic&#123;table&#125;&#125;</span><br><span class="line">\renewcommand &#123;\thefigure&#125; &#123;\thesection&#123;&#125;.\arabic&#123;figure&#125;&#125;</span><br><span class="line">% 每一章都要手动清零</span><br><span class="line">\setcounter&#123;table&#125;&#123;0&#125;</span><br><span class="line">\setcounter&#123;figure&#125;&#123;0&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2 id="页面总体设计"><a href="#页面总体设计" class="headerlink" title="页面总体设计"></a>页面总体设计</h2><ol>
+<h2><span id="页面总体设计">页面总体设计</span></h2><ol>
 <li><p>调节页边距</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;geometry&#125;</span><br><span class="line">%\geometry&#123;a4paper,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm&#125;</span><br><span class="line">% 中等</span><br><span class="line">\geometry&#123;a4paper,left=2.54cm,right=2.54cm,top=1.91cm,bottom=1.91cm&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -236,13 +236,13 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<h2 id="插入代码"><a href="#插入代码" class="headerlink" title="插入代码"></a>插入代码</h2><ol>
+<h2><span id="插入代码">插入代码</span></h2><ol>
 <li><p>代码字体、大小控制</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% 导言区</span><br><span class="line">\usepackage&#123;fontspec&#125;</span><br><span class="line">\newfontfamily\consolas&#123;Consolas&#125;</span><br><span class="line">\lstset&#123;numbers=left,language=Matlab,basicstyle=\footnotesize\consolas,numberstyle=\footnotesize,tabsize=2, keywordstyle= \color&#123;blue!70&#125;,frame=shadowbox, rulesepcolor= \color&#123;red!20!green!20!blue!20&#125; &#125; 	%插入代码的格式（序号位置，语言，代码字体大小、字体名称，序号字体大小，缩进，关键词颜色，阴影）</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ol>
+<h2><span id="正文">正文</span></h2><ol>
 <li><p>局部文字 使用某种字体</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">% 导言区</span><br><span class="line">\usepackage&#123;fontspec&#125;</span><br><span class="line">\newfontfamily\consolas&#123;Consolas&#125;</span><br><span class="line">\newfontfamily\monaco&#123;Monaco&#125;</span><br><span class="line"></span><br><span class="line">%正文区</span><br><span class="line">&#123;\consolas def choosesave()&#125;</span><br><span class="line">&#123;\monaco def choosesave()&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -251,7 +251,7 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ol>
+<h2><span id="列表">列表</span></h2><ol>
 <li><p>列表带圈数字可以增加到二位数<a href="https://liam0205.me/2014/05/08/latex-circled-numbers/" target="_blank" rel="noopener">参考链接</a></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;enumitem&#125;</span><br><span class="line">\usepackage&#123;tikz&#125;</span><br><span class="line">\usepackage&#123;etoolbox&#125;</span><br><span class="line">% line width可以调整圈的粗细，inner sep调节圈的大小(可以为负数)。</span><br><span class="line">\newcommand&#123;\circled&#125;[2][]&#123;\tikz[baseline=(char.base),line width = 0.7pt]</span><br><span class="line">    &#123;\node[shape = circle, draw, inner sep = 1pt]</span><br><span class="line">    (char) &#123;\phantom&#123;\ifblank&#123;#1&#125;&#123;#2&#125;&#123;#1&#125;&#125;&#125;;%</span><br><span class="line">    \node at (char.center) &#123;\makebox[0pt][c]&#123;#2&#125;&#125;;&#125;&#125;</span><br><span class="line">\robustify&#123;\circled&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\newcommand&#123;\dcircled&#125;[1]&#123;\circled[00]&#123;#1&#125;&#125;</span><br><span class="line">\begin&#123;enumerate&#125;[label=\dcircled&#123;\arabic*&#125;, noitemsep]</span><br><span class="line">\item I</span><br><span class="line">\item am</span><br><span class="line">\item happy</span><br><span class="line">\item to</span><br><span class="line">\item join</span><br><span class="line">\item with</span><br><span class="line">\item you</span><br><span class="line">\item today</span><br><span class="line">\item in</span><br><span class="line">\item what</span><br><span class="line">\item will</span><br><span class="line">\item go</span><br><span class="line">\item down</span><br><span class="line">\item in</span><br><span class="line">\item history</span><br><span class="line">\item as</span><br><span class="line">\item the</span><br><span class="line">\item greatest</span><br><span class="line">\item demonstration</span><br><span class="line">\item for</span><br><span class="line">\item freedom</span><br><span class="line">\item in</span><br><span class="line">\item the</span><br><span class="line">\item history</span><br><span class="line">\item of</span><br><span class="line">\item our</span><br><span class="line">\item nation.</span><br><span class="line">\end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -269,7 +269,7 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ol>
+<h2><span id="表格">表格</span></h2><ol>
 <li><p>表格不同的列使用不同的字体</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\heiti&#125;r &gt;&#123;\kaishu&#125;l&#125;</span><br><span class="line">黑体 &amp; 楷体</span><br><span class="line">还是黑体 &amp; 还是楷体</span><br><span class="line">\end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -296,7 +296,7 @@ var _hmt = _hmt || [];
 
 </li>
 </ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<h3><span id="参考文献">参考文献</span></h3><ol>
 <li><p>添加参考文献到目录中，加入第二行的代码，<strong>编译两次</strong></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;thebibliography&#125;&#123;99&#125;</span><br><span class="line">\addcontentsline&#123;toc&#125;&#123;section&#125;&#123;参考文献&#125; % 加入这一行，编译两次</span><br><span class="line">\bibitem&#123;1&#125; 梁建武,杨迎泽. 微机原理与接口技术. 北京: 中国铁道出版社. 2016, 02.</span><br><span class="line">\bibitem&#123;2&#125; 王爽. 汇编语言(第三版). 北京:清华大学出版社. 2014, 04.</span><br><span class="line">\bibitem&#123;3&#125; Star ES8086使用说明.</span><br><span class="line">\end&#123;thebibliography&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -483,43 +483,43 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#脚注：">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
         <span>脚注：</span>
         </a></li><li>
-        <a class="is-flex" href="#段落缩进">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
         <span>段落缩进</span>
         </a></li><li>
-        <a class="is-flex" href="#数学公式">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">3</span>
         <span>数学公式</span>
         </a></li><li>
-        <a class="is-flex" href="#图表">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">4</span>
         <span>图表</span>
         </a></li><li>
-        <a class="is-flex" href="#页面总体设计">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">5</span>
         <span>页面总体设计</span>
         </a></li><li>
-        <a class="is-flex" href="#插入代码">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">6</span>
         <span>插入代码</span>
         </a></li><li>
-        <a class="is-flex" href="#正文">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">7</span>
         <span>正文</span>
         </a></li><li>
-        <a class="is-flex" href="#列表">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">8</span>
         <span>列表</span>
         </a></li><li>
-        <a class="is-flex" href="#表格">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">9</span>
         <span>表格</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#参考文献">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">9.1</span>
         <span>参考文献</span>
         </a></li></ul></li></ul>

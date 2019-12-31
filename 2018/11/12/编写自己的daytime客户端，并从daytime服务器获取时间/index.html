@@ -177,13 +177,13 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <h2 id="1-首先下载《UNIX网络编程》配套源代码"><a href="#1-首先下载《UNIX网络编程》配套源代码" class="headerlink" title="1. 首先下载《UNIX网络编程》配套源代码"></a>1. 首先下载《UNIX网络编程》配套源代码</h2><p><a href="http://www.unpbook.com/" target="_blank" rel="noopener">源代码地址</a></p>
+            <h2><span id="1-首先下载unix网络编程配套源代码">1. 首先下载《UNIX网络编程》配套源代码</span></h2><p><a href="http://www.unpbook.com/" target="_blank" rel="noopener">源代码地址</a></p>
 <hr>
 <a id="more"></a>
-<h2 id="2-复制到虚拟机内-以Ubuntu系统为例-并解压。"><a href="#2-复制到虚拟机内-以Ubuntu系统为例-并解压。" class="headerlink" title="2. 复制到虚拟机内(以Ubuntu系统为例),并解压。"></a>2. 复制到虚拟机内(以Ubuntu系统为例),并解压。</h2><p>解压命令：<strong><code>tar zxvf unpv13e.tar.gz</code></strong></p>
+<h2><span id="2-复制到虚拟机内以ubuntu系统为例并解压">2. 复制到虚拟机内(以Ubuntu系统为例),并解压。</span></h2><p>解压命令：<strong><code>tar zxvf unpv13e.tar.gz</code></strong></p>
 <hr>
 <p><strong>以下加粗部分的代码块，均为要在终端执行的命令。</strong></p>
-<h2 id="3-在终端进入unpv13e目录。"><a href="#3-在终端进入unpv13e目录。" class="headerlink" title="3. 在终端进入unpv13e目录。"></a>3. 在终端进入unpv13e目录。</h2><ul>
+<h2><span id="3-在终端进入unpv13e目录">3. 在终端进入unpv13e目录。</span></h2><ul>
 <li><p>终端执行 <strong><code>./configure</code></strong></p>
 <p>如果出错，先执行命令 <strong><code>chmod +x configure</code></strong>  ，再执行   <strong><code>./configure</code></strong></p>
 </li>
@@ -193,23 +193,23 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <hr>
-<h2 id="4-将libunp-a文件复制到-usr-lib"><a href="#4-将libunp-a文件复制到-usr-lib" class="headerlink" title="4. 将libunp.a文件复制到/usr/lib/"></a>4. 将libunp.a文件复制到/usr/lib/</h2><ul>
+<h2><span id="4-将libunpa文件复制到usrlib">4. 将libunp.a文件复制到/usr/lib/</span></h2><ul>
 <li>返回到unpv13e目录， <strong><code>cd ..</code></strong></li>
 <li>执行复制命令，<strong><code>sudo cp libunp.a /usr/lib</code></strong></li>
 </ul>
 <hr>
-<h2 id="5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中"><a href="#5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中" class="headerlink" title="5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中"></a>5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中</h2><ul>
+<h2><span id="5-修改unpv13elibunph并将它和unpv13econfigh拷贝到usrinclude中">5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中</span></h2><ul>
 <li>用vim编辑unp.h, <strong><code>vim lib/unp.h</code></strong>, 将<em>#include “../config.h”*修改为</em>#include “config.h”*</li>
 <li>拷贝unp.h,  <strong><code>sudo cp lib/unp.h /usr/include</code></strong></li>
 <li>拷贝configure.h,  <strong><code>sudo cp config.h /usr/include</code></strong></li>
 </ul>
 <hr>
-<h2 id="6-安装xinetd服务"><a href="#6-安装xinetd服务" class="headerlink" title="6.安装xinetd服务"></a>6.安装xinetd服务</h2><ul>
+<h2><span id="6安装xinetd服务">6.安装xinetd服务</span></h2><ul>
 <li>Ubuntu系统中：执行命令， <strong><code>apt install xinetd</code></strong></li>
 <li>Centos系统中：执行命令， <strong><code>yum  -y  install  xinetd*</code></strong></li>
 </ul>
 <hr>
-<h2 id="7-执行daytime客户端"><a href="#7-执行daytime客户端" class="headerlink" title="7. 执行daytime客户端"></a>7. 执行daytime客户端</h2><ul>
+<h2><span id="7-执行daytime客户端">7. 执行daytime客户端</span></h2><ul>
 <li><p>找到文件daytimetcpcli.c，在unpv13e/intro目录中，利用cd命令进入该目录。</p>
 </li>
 <li><p>编译该文件， <strong><code>gcc daytimetcpcli.c -lunp</code></strong></p>
@@ -243,12 +243,12 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <hr>
-<h2 id="8-注"><a href="#8-注" class="headerlink" title="8. 注"></a>8. 注</h2><ul>
+<h2><span id="8-注">8. 注</span></h2><ul>
 <li>daytime服务器有许多种，127.0.0.1只是本机地址时间，可以更换别的服务器。</li>
 <li>目前手头只有Ubuntu 18系统和Centos6.8系统，因此只有这两个系统的教程。</li>
 </ul>
 <hr>
-<h2 id="9-结果"><a href="#9-结果" class="headerlink" title="9. 结果"></a>9. 结果</h2><ol>
+<h2><span id="9-结果">9. 结果</span></h2><ol>
 <li><p>Ubuntu下</p>
 <p> <img src="/2018/11/12/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/ubuntu.jpg" alt="1"></p>
 </li>
@@ -438,39 +438,39 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-首先下载《UNIX网络编程》配套源代码">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
         <span>1. 首先下载《UNIX网络编程》配套源代码</span>
         </a></li><li>
-        <a class="is-flex" href="#2-复制到虚拟机内-以Ubuntu系统为例-并解压。">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
         <span>2. 复制到虚拟机内(以Ubuntu系统为例),并解压。</span>
         </a></li><li>
-        <a class="is-flex" href="#3-在终端进入unpv13e目录。">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">3</span>
         <span>3. 在终端进入unpv13e目录。</span>
         </a></li><li>
-        <a class="is-flex" href="#4-将libunp-a文件复制到-usr-lib">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">4</span>
         <span>4. 将libunp.a文件复制到/usr/lib/</span>
         </a></li><li>
-        <a class="is-flex" href="#5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">5</span>
         <span>5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中</span>
         </a></li><li>
-        <a class="is-flex" href="#6-安装xinetd服务">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">6</span>
         <span>6.安装xinetd服务</span>
         </a></li><li>
-        <a class="is-flex" href="#7-执行daytime客户端">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">7</span>
         <span>7. 执行daytime客户端</span>
         </a></li><li>
-        <a class="is-flex" href="#8-注">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">8</span>
         <span>8. 注</span>
         </a></li><li>
-        <a class="is-flex" href="#9-结果">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">9</span>
         <span>9. 结果</span>
         </a></li></ul>

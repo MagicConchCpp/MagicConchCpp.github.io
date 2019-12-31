@@ -195,31 +195,31 @@ var _hmt = _hmt || [];
 <td align="center">airbnb / amazon / facebook / google / linkedin / microsoft / twitter / uber</td>
 </tr>
 </tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>合并 $k$ 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。</p>
+<h2><span id="1-题目">1. 题目</span></h2><p>合并 $k$ 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入:</span><br><span class="line">[</span><br><span class="line">  <span class="hljs-number">1</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>,</span><br><span class="line">  <span class="hljs-number">1</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>,</span><br><span class="line">  <span class="hljs-number">2</span>-&gt;<span class="hljs-number">6</span></span><br><span class="line">]</span><br><span class="line">输出: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>-&gt;<span class="hljs-number">6</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/merge-k-sorted-lists" target="_blank" rel="noopener">https://leetcode-cn.com/problems/merge-k-sorted-lists</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：全部合并再排序"><a href="#2-1-解法一：全部合并再排序" class="headerlink" title="2.1 解法一：全部合并再排序"></a>2.1 解法一：全部合并再排序</h3><p>暴力而有效的解法：<br>我们将 $k$ 个链表全部放入向量中，然后进行排序，最后再放回到一个链表中。</p>
+<h2><span id="2-解法">2. 解法</span></h2><h3><span id="21-解法一全部合并再排序">2.1 解法一：全部合并再排序</span></h3><p>暴力而有效的解法：<br>我们将 $k$ 个链表全部放入向量中，然后进行排序，最后再放回到一个链表中。</p>
 <p>当然我们也可以使用优先队列，那么在放入元素时自动进行了排序。</p>
 <p>两者的性能是几乎没有任何差别的。</p>
-<h4 id="2-1-1-向量-vector"><a href="#2-1-1-向量-vector" class="headerlink" title="2.1.1 向量 vector"></a>2.1.1 向量 vector</h4><blockquote>
+<h4><span id="211-向量-vector">2.1.1 向量 vector</span></h4><blockquote>
 <p>执行用时: 32 ms, 在所有 cpp 提交中击败了89.24%的用户<br>内存消耗: 11.7 MB, 在所有 cpp 提交中击败了63.01%的用户</p>
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="hljs-comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode *next;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="hljs-comment"> * &#125;;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function">ListNode* <span class="hljs-title">mergeKLists</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; elem;</span><br><span class="line">        ListNode *head = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);</span><br><span class="line">        ListNode *h = head;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;vec : lists) &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span>(vec) &#123;</span><br><span class="line">                elem.push_back(vec-&gt;val);</span><br><span class="line">                vec = vec-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(elem.begin(), elem.end());</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i : elem) &#123;</span><br><span class="line">            head-&gt;next = <span class="hljs-keyword">new</span> ListNode(i);</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *ptrDelete = h;</span><br><span class="line">        h = h-&gt;next;</span><br><span class="line">        <span class="hljs-keyword">delete</span> ptrDelete;</span><br><span class="line">        <span class="hljs-keyword">return</span> h;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-1-2-优先队列-priority-queue"><a href="#2-1-2-优先队列-priority-queue" class="headerlink" title="2.1.2 优先队列 priority_queue"></a>2.1.2 优先队列 priority_queue</h4><blockquote>
+<h4><span id="212-优先队列-priority_queue">2.1.2 优先队列 priority_queue</span></h4><blockquote>
 <p>执行用时: 36 ms, 在所有 cpp 提交中击败了78.17%的用户<br>内存消耗: 11.6 MB, 在所有 cpp 提交中击败了66.99%的用户</p>
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function">ListNode* <span class="hljs-title">mergeKLists</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;, greater&lt;<span class="hljs-keyword">int</span>&gt;&gt; q;</span><br><span class="line">        ListNode *head = <span class="hljs-keyword">new</span> ListNode(<span class="hljs-number">0</span>);</span><br><span class="line">        ListNode *h = head;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;vec : lists) &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span>(vec) &#123;</span><br><span class="line">                q.push(vec-&gt;val);</span><br><span class="line">                vec = vec-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            head-&gt;next = <span class="hljs-keyword">new</span> ListNode(q.top());</span><br><span class="line">            q.pop();</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *ptrDelete = h;</span><br><span class="line">        h = h-&gt;next;</span><br><span class="line">        <span class="hljs-keyword">delete</span> ptrDelete;</span><br><span class="line">        <span class="hljs-keyword">return</span> h;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-解法二：两两合并链表"><a href="#2-2-解法二：两两合并链表" class="headerlink" title="2.2 解法二：两两合并链表"></a>2.2 解法二：两两合并链表</h3><p>利用 <a href="https://www.faker.top/2019/11/19/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" target="_blank" rel="noopener">LeetCode-21题：合并两个有序链表</a> ，将合并 $k$ 个链表转化为合并 $k-1$ 次两个链表。  </p>
+<h3><span id="22-解法二两两合并链表">2.2 解法二：两两合并链表</span></h3><p>利用 <a href="https://www.faker.top/2019/11/19/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" target="_blank" rel="noopener">LeetCode-21题：合并两个有序链表</a> ，将合并 $k$ 个链表转化为合并 $k-1$ 次两个链表。  </p>
 <p>也就是将前两个链表合并成新的链表，新链表再和第三个链表合并，合并出的新链表再和第四个链表合并……<br>不过这个方法的复杂度很高。</p>
 <blockquote>
 <p>执行用时: 1428 ms, 在所有 cpp 提交中击败了5.02%的用户<br>内存消耗: 13.9 MB, 在所有 cpp 提交中击败了17.09%的用户</p>
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function">ListNode* <span class="hljs-title">mergeKLists</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        ListNode *res = <span class="hljs-literal">nullptr</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> vec : lists) &#123;</span><br><span class="line">            res = mergeTwoLists(res, vec);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function">ListNode* <span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode* a, ListNode* b)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!a || b &amp;&amp; a-&gt;val &gt; b-&gt;val) swap(a, b);</span><br><span class="line">        <span class="hljs-keyword">if</span> (a) a-&gt;next = mergeTwoLists(a-&gt;next, b);</span><br><span class="line">        <span class="hljs-keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-解法三：分治"><a href="#2-3-解法三：分治" class="headerlink" title="2.3 解法三：分治"></a>2.3 解法三：分治</h3><blockquote>
+<h3><span id="23-解法三分治">2.3 解法三：分治</span></h3><blockquote>
 <p>参考 <a href="https://leetcode-cn.com/problems/merge-k-sorted-lists/solution/23-he-bing-kge-pai-xu-lian-biao-yi-bu-bu-you-hua-d/" target="_blank" rel="noopener">Sun</a></p>
 </blockquote>
 <ol>
@@ -412,31 +412,31 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-题目">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
-        <a class="is-flex" href="#2-解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一：全部合并再排序">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1</span>
         <span>2.1 解法一：全部合并再排序</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-1-向量-vector">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1.1</span>
         <span>2.1.1 向量 vector</span>
         </a></li><li>
-        <a class="is-flex" href="#2-1-2-优先队列-priority-queue">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1.2</span>
         <span>2.1.2 优先队列 priority_queue</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#2-2-解法二：两两合并链表">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.2</span>
         <span>2.2 解法二：两两合并链表</span>
         </a></li><li>
-        <a class="is-flex" href="#2-3-解法三：分治">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.3</span>
         <span>2.3 解法三：分治</span>
         </a></li></ul></li></ul>
