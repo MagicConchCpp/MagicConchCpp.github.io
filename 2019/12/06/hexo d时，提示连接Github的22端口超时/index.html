@@ -181,14 +181,14 @@ var _hmt = _hmt || [];
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="hljs-number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="hljs-keyword">not</span> read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="hljs-keyword">and</span> the repository exists.</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
-<h2><span id="11-问题描述">1.1 问题描述</span></h2><p>具体错误信息如下：</p>
+<h2 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a>1.1 问题描述</h2><p>具体错误信息如下：</p>
 <p><img src="/2019/12/06/hexo%20d%E6%97%B6%EF%BC%8C%E6%8F%90%E7%A4%BA%E8%BF%9E%E6%8E%A5Github%E7%9A%8422%E7%AB%AF%E5%8F%A3%E8%B6%85%E6%97%B6/hexo-1_1.png" alt="1"></p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="hljs-number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="hljs-keyword">not</span> read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="hljs-keyword">and</span> the repository exists.</span><br><span class="line">FATAL Something<span class="hljs-number">'</span>s wrong. Maybe you can find the solution here: https:<span class="hljs-comment">//hexo.io/docs/troubleshooting.html</span></span><br><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (F:\Program Files\hexo\node_modules\hexo-util\lib\spawn.js:<span class="hljs-number">51</span>:<span class="hljs-number">21</span>)</span><br><span class="line">    at ChildProcess.emit (events.js:<span class="hljs-number">210</span>:<span class="hljs-number">5</span>)</span><br><span class="line">    at ChildProcess.cp.emit (F:\Program Files\hexo\node_modules\cross-spawn\lib\enoent.js:<span class="hljs-number">34</span>:<span class="hljs-number">29</span>)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="hljs-number">272</span>:<span class="hljs-number">12</span>)</span><br></pre></td></tr></table></figure>
 
 <p>一开始我把目光聚焦在后面的 <code>Error: Spawn failed</code> 上，但是没有学过前端的我并看不懂。<br>但是，真正的错误是在上面一部分信息里。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="hljs-number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="hljs-keyword">not</span> read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="hljs-keyword">and</span> the repository exists.</span><br><span class="line"></span><br><span class="line">ssh：连接到主机github.com端口<span class="hljs-number">22</span>：连接超时</span><br><span class="line">致命：无法从远程存储库读取。</span><br><span class="line">请确保您具有正确的访问权限，并且存储库存在。</span><br></pre></td></tr></table></figure>
 
-<h2><span id="12-解决办法">1.2 解决办法</span></h2><p>直接暴力解决：<strong>重新配置密钥</strong></p>
+<h2 id="1-2-解决办法"><a href="#1-2-解决办法" class="headerlink" title="1.2 解决办法"></a>1.2 解决办法</h2><p>直接暴力解决：<strong>重新配置密钥</strong></p>
 <ol>
 <li><p><code>git bash</code> 窗口依次输入:（注意：双引号里改为你的Github的名字和邮箱）</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="hljs-string">"MagicConchCpp"</span></span><br></pre></td></tr></table></figure>
@@ -392,11 +392,11 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#1-1-问题描述">
         <span class="has-mr-6">1</span>
         <span>1.1 问题描述</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#1-2-解决办法">
         <span class="has-mr-6">2</span>
         <span>1.2 解决办法</span>
         </a></li></ul>

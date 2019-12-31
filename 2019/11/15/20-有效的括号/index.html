@@ -195,7 +195,7 @@ var _hmt = _hmt || [];
 <td align="center">airbnb / amazon / bloomberg / facebook / google / microsoft / twitter / zenefits</td>
 </tr>
 </tbody></table>
-<h2><span id="1-题目">1. 题目</span></h2><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;{&#39;</code>，<code>&#39;}&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串，判断字符串是否有效。</p>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个只包括 <code>&#39;(&#39;</code>，<code>&#39;)&#39;</code>，<code>&#39;{&#39;</code>，<code>&#39;}&#39;</code>，<code>&#39;[&#39;</code>，<code>&#39;]&#39;</code> 的字符串，判断字符串是否有效。</p>
 <p>有效字符串需满足：</p>
 <ol>
 <li>左括号必须用相同类型的右括号闭合。</li>
@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-string">"()"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-string">"()[]&#123;&#125;"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-string">"(]"</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">4</span>:</span><br><span class="line">输入: <span class="hljs-string">"([)]"</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">5</span>:</span><br><span class="line">输入: <span class="hljs-string">"&#123;[]&#125;"</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/valid-parentheses/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/valid-parentheses/</a></p>
-<h2><span id="2-解法">2. 解法</span></h2><ol>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><ol>
 <li>通过栈来解决。</li>
 <li>遇见左括号就压入栈中，遇见右括号，则判断当前栈顶元素是否是对应的左括号。若是，则将该左括号出栈；若不是，则返回 <code>false</code>。</li>
 <li>最后根据栈是否为空来判断括号是否有效，栈为空则有效。</li>
@@ -396,11 +396,11 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#1-题目">
         <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-解法">
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a></li></ul>

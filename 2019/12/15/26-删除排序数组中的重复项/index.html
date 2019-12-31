@@ -195,7 +195,7 @@ var _hmt = _hmt || [];
 <td align="center">bloomberg / facebook / microsoft</td>
 </tr>
 </tbody></table>
-<h2><span id="1-题目">1. 题目</span></h2><p>给定一个排序数组，你需要在<strong>原地</strong>删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个排序数组，你需要在<strong>原地</strong>删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
 <p>不要使用额外的数组空间，你必须在<strong>原地</strong>修改输入数组并在使用 O(1) 额外空间的条件下完成。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">给定数组 nums = [<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],</span><br><span class="line">函数应该返回新的长度 <span class="hljs-number">2</span>, 并且原数组 nums 的前两个元素被修改为 <span class="hljs-number">1</span>, <span class="hljs-number">2</span>。</span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">给定 nums = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],</span><br><span class="line">函数应该返回新的长度 <span class="hljs-number">5</span>, 并且原数组 nums 的前五个元素被修改为 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>。</span><br><span class="line">你不需要考虑数组中超出新长度后面的元素。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
 <p>你可以想象内部操作如下:</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span></span><br><span class="line"><span class="hljs-keyword">int</span> len = removeDuplicates(nums);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span></span><br><span class="line"><span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span></span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2><span id="2-解法">2. 解法</span></h2><h3><span id="21-解法一">2.1 解法一</span></h3><ol>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><ol>
 <li><code>index</code> 记录我们不重复的数字的个数。</li>
 <li>如果 <code>nums[i] != nums[i - 1]</code> ，则就出现了新的不重复的值，令 <code>nums[index] = nums[i]</code> 即可。</li>
 </ol>
@@ -219,7 +219,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-comment">// nums[0]不变，index从1开始赋值。</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">1</span>; i &lt; n; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (nums[i] != nums[i - <span class="hljs-number">1</span>]) &#123;</span><br><span class="line">                index ++;</span><br><span class="line">                nums[index] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> index + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3><span id="22-解法二">2.2 解法二</span></h3><ol>
+<h3 id="2-2-解法二"><a href="#2-2-解法二" class="headerlink" title="2.2 解法二"></a>2.2 解法二</h3><ol>
 <li>在 <strong>解法一</strong> 中，我们是判断相邻两个数不相等时，则出现了新的不重复数。实际上数组是递增的，当后一个数大于前一个数时，也是出现了新的不重复数。</li>
 <li>该程序巧妙的解决了当数组为空时的特殊情况。<br> 当数组为空时，<code>i = 0</code>；非空时，<code>i = 1</code>。</li>
 </ol>
@@ -409,19 +409,19 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#1-题目">
         <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-解法">
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-1-解法一">
         <span class="has-mr-6">2.1</span>
         <span>2.1 解法一</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-2-解法二">
         <span class="has-mr-6">2.2</span>
         <span>2.2 解法二</span>
         </a></li></ul></li></ul>

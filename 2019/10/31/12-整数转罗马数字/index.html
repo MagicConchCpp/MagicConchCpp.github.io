@@ -195,7 +195,7 @@ var _hmt = _hmt || [];
 <td align="center">twitter</td>
 </tr>
 </tbody></table>
-<h2><span id="1-题目">1. 题目</span></h2><p>罗马数字包含以下七种字符： <code>I</code>，<code>V</code>，<code>X</code>，<code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。</p>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>罗马数字包含以下七种字符： <code>I</code>，<code>V</code>，<code>X</code>，<code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             <span class="hljs-number">1</span></span><br><span class="line">V             <span class="hljs-number">5</span></span><br><span class="line">X             <span class="hljs-number">10</span></span><br><span class="line">L             <span class="hljs-number">50</span></span><br><span class="line">C             <span class="hljs-number">100</span></span><br><span class="line">D             <span class="hljs-number">500</span></span><br><span class="line">M             <span class="hljs-number">1000</span></span><br></pre></td></tr></table></figure>
 
 <p>例如， 罗马数字 2 写做 <code>II</code> ，即为两个并列的 1。12 写做 <code>XII</code> ，即为 <code>X + II</code> 。 27 写做 <code>XXVII</code>, 即为 <code>XX + V + II</code> 。</p>
@@ -209,7 +209,7 @@ var _hmt = _hmt || [];
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-number">3</span></span><br><span class="line">输出: <span class="hljs-string">"III"</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-number">4</span></span><br><span class="line">输出: <span class="hljs-string">"IV"</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-number">9</span></span><br><span class="line">输出: <span class="hljs-string">"IX"</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">4</span>:</span><br><span class="line">输入: <span class="hljs-number">58</span></span><br><span class="line">输出: <span class="hljs-string">"LVIII"</span></span><br><span class="line">解释: L = <span class="hljs-number">50</span>, V = <span class="hljs-number">5</span>, III = <span class="hljs-number">3.</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">5</span>:</span><br><span class="line">输入: <span class="hljs-number">1994</span></span><br><span class="line">输出: <span class="hljs-string">"MCMXCIV"</span></span><br><span class="line">解释: M = <span class="hljs-number">1000</span>, CM = <span class="hljs-number">900</span>, XC = <span class="hljs-number">90</span>, IV = <span class="hljs-number">4.</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/integer-to-roman/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/integer-to-roman/</a></p>
-<h2><span id="2-解法">2. 解法</span></h2><h3><span id="21-解法一字典寻找法">2.1 解法一：字典寻找法</span></h3><ol>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：字典寻找法"><a href="#2-1-解法一：字典寻找法" class="headerlink" title="2.1 解法一：字典寻找法"></a>2.1 解法一：字典寻找法</h3><ol>
 <li>我们将个、十、百、千位所有可能出现的数字的罗马字母都罗列出来，然后求出所求数字的个、十、百、千位的值，找出对应的罗马字母即可。</li>
 </ol>
 <blockquote>
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">intToRoman</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-built_in">string</span> ge[<span class="hljs-number">10</span>] = &#123;<span class="hljs-string">""</span>, <span class="hljs-string">"I"</span>, <span class="hljs-string">"II"</span>, <span class="hljs-string">"III"</span>, <span class="hljs-string">"IV"</span>, <span class="hljs-string">"V"</span>, <span class="hljs-string">"VI"</span>, <span class="hljs-string">"VII"</span>, <span class="hljs-string">"VIII"</span>, <span class="hljs-string">"IX"</span>&#125;;</span><br><span class="line">        <span class="hljs-built_in">string</span> shi[<span class="hljs-number">10</span>] = &#123;<span class="hljs-string">""</span>, <span class="hljs-string">"X"</span>, <span class="hljs-string">"XX"</span>, <span class="hljs-string">"XXX"</span>, <span class="hljs-string">"XL"</span>, <span class="hljs-string">"L"</span>, <span class="hljs-string">"LX"</span>, <span class="hljs-string">"LXX"</span>, <span class="hljs-string">"LXXX"</span>, <span class="hljs-string">"XC"</span>&#125;;</span><br><span class="line">        <span class="hljs-built_in">string</span> bai[<span class="hljs-number">10</span>] = &#123;<span class="hljs-string">""</span>, <span class="hljs-string">"C"</span>, <span class="hljs-string">"CC"</span>, <span class="hljs-string">"CCC"</span>, <span class="hljs-string">"CD"</span>, <span class="hljs-string">"D"</span>, <span class="hljs-string">"DC"</span>, <span class="hljs-string">"DCC"</span>, <span class="hljs-string">"DCCC"</span>, <span class="hljs-string">"CM"</span>&#125;;</span><br><span class="line">        <span class="hljs-built_in">string</span> qian[<span class="hljs-number">4</span>] = &#123;<span class="hljs-string">""</span>, <span class="hljs-string">"M"</span>, <span class="hljs-string">"MM"</span>, <span class="hljs-string">"MMM"</span>&#125;;</span><br><span class="line">        <span class="hljs-keyword">return</span> qian[num / <span class="hljs-number">1000</span>] + bai[(num % <span class="hljs-number">1000</span>) / <span class="hljs-number">100</span>] + shi[(num % <span class="hljs-number">100</span>) / <span class="hljs-number">10</span>] + ge[num % <span class="hljs-number">10</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3><span id="22-解法二贪心算法">2.2 解法二：贪心算法</span></h3><ol>
+<h3 id="2-2-解法二：贪心算法"><a href="#2-2-解法二：贪心算法" class="headerlink" title="2.2 解法二：贪心算法"></a>2.2 解法二：贪心算法</h3><ol>
 <li>我们列出所有最小单位的罗马字母组合，假设输入整数为 <code>num</code>。</li>
 <li>从最大的数开始匹配，看 <code>num</code> 能匹配几次，每次匹配 <code>num</code> 都要减去这个数。</li>
 <li>若 <code>num</code> 开始小于最大的数，则从第二大的数再次开始匹配，直至 <code>num</code> 变为 <code>0</code>。</li>
@@ -413,19 +413,19 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#1-题目">
         <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-解法">
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-1-解法一：字典寻找法">
         <span class="has-mr-6">2.1</span>
         <span>2.1 解法一：字典寻找法</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-2-解法二：贪心算法">
         <span class="has-mr-6">2.2</span>
         <span>2.2 解法二：贪心算法</span>
         </a></li></ul></li></ul>

@@ -195,17 +195,17 @@ var _hmt = _hmt || [];
 <td align="center">adobe / apple / dropbox / google / microsoft / yahoo / zenefits</td>
 </tr>
 </tbody></table>
-<h2><span id="1-题目">1. 题目</span></h2><p>给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。<br>请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 <strong>O(log(m + n))</strong>。<br>你可以假设 nums1 和 nums2 不会同时为空。</p>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。<br>请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 <strong>O(log(m + n))</strong>。<br>你可以假设 nums1 和 nums2 不会同时为空。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:  </span><br><span class="line">nums1 = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>]</span><br><span class="line">nums2 = [<span class="hljs-number">2</span>]  </span><br><span class="line">则中位数是 <span class="hljs-number">2.0</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:  </span><br><span class="line">nums1 = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]</span><br><span class="line">nums2 = [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]  </span><br><span class="line">则中位数是 (<span class="hljs-number">2</span> + <span class="hljs-number">3</span>)/<span class="hljs-number">2</span> = <span class="hljs-number">2.5</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays" target="_blank" rel="noopener">https://leetcode-cn.com/problems/median-of-two-sorted-arrays</a></p>
-<h2><span id="2-解法">2. 解法</span></h2><h3><span id="21-解法一归并排序">2.1 解法一：归并排序</span></h3><p>将两个数组进行归并排序，从小到大依次存入vector中。取中位数即可。</p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：归并排序"><a href="#2-1-解法一：归并排序" class="headerlink" title="2.1 解法一：归并排序"></a>2.1 解法一：归并排序</h3><p>将两个数组进行归并排序，从小到大依次存入vector中。取中位数即可。</p>
 <blockquote>
 <p>执行用时: 24 ms, 在所有 cpp 提交中击败了76.59%的用户<br>内存消耗: 11.3 MB, 在所有 cpp 提交中击败了72.07%的用户</p>
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">findMedianSortedArrays</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums1, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">double</span>&gt; v;</span><br><span class="line">        <span class="hljs-keyword">int</span> i1 = <span class="hljs-number">0</span>, i2 = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span>(i1 != nums1.size() &amp;&amp; i2 != nums2.size()) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (nums1[i1] &lt;= nums2[i2]) &#123;</span><br><span class="line">                v.push_back(nums1[i1]);</span><br><span class="line">                ++ i1;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                v.push_back(nums2[i2]);</span><br><span class="line">                ++ i2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (i1 != nums1.size()) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (i1; i1 &lt; nums1.size(); ++ i1)</span><br><span class="line">                v.push_back(nums1[i1]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (i2; i2 &lt; nums2.size(); ++ i2)</span><br><span class="line">                v.push_back(nums2[i2]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> ((nums1.size() + nums2.size())%<span class="hljs-number">2</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> v[(nums1.size() + nums2.size())/<span class="hljs-number">2</span>];</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            <span class="hljs-keyword">return</span> (v[(nums1.size() + nums2.size())/<span class="hljs-number">2</span>] + v[(nums1.size() + nums2.size())/<span class="hljs-number">2</span> - <span class="hljs-number">1</span>]) / <span class="hljs-number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3><span id="22-解法二递归二分法">2.2 解法二：递归二分法</span></h3><ol>
+<h3 id="2-2-解法二：递归二分法"><a href="#2-2-解法二：递归二分法" class="headerlink" title="2.2 解法二：递归二分法"></a>2.2 解法二：递归二分法</h3><ol>
 <li>题目要求复杂度为O(log(m+n))，所以肯定要使用二分法。</li>
 <li>同时我们可以将题目转化为求第k个最小数，即<code>k=(m+n)/2</code>；</li>
 <li>对两个序列的第<code>k/2</code>个值进行比较，若<code>nums1[k] &gt; nums2[k]</code>，则nums2的前<code>k/2</code>个数中肯定没有我们要求的第k个最小数。我们将前nums2中前k/2个数剔除。</li>
@@ -401,19 +401,19 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#1-题目">
         <span class="has-mr-6">1</span>
         <span>1. 题目</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-解法">
         <span class="has-mr-6">2</span>
         <span>2. 解法</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-1-解法一：归并排序">
         <span class="has-mr-6">2.1</span>
         <span>2.1 解法一：归并排序</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
+        <a class="is-flex" href="#2-2-解法二：递归二分法">
         <span class="has-mr-6">2.2</span>
         <span>2.2 解法二：递归二分法</span>
         </a></li></ul></li></ul>
