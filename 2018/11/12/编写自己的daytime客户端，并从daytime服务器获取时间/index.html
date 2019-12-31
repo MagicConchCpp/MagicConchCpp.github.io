@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
 </ul>
 <hr>
 <h2 id="5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中"><a href="#5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中" class="headerlink" title="5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中"></a>5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中</h2><ul>
-<li>用vim编辑unp.h, <strong><code>vim lib/unp.h</code></strong>, 将<em>#include “../config.h”*修改为</em>#include “config.h”*</li>
+<li>用vim编辑unp.h, <strong><code>vim lib/unp.h</code></strong>, 将<em>#include “../config.h”</em>修改为<em>#include “config.h”</em></li>
 <li>拷贝unp.h,  <strong><code>sudo cp lib/unp.h /usr/include</code></strong></li>
 <li>拷贝configure.h,  <strong><code>sudo cp config.h /usr/include</code></strong></li>
 </ul>
