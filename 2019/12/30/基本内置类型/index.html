@@ -10,16 +10,16 @@
 <title>2.1 基本内置类型 - Magic Conch Cpp</title>
 
 
-    <meta name="description" content="[toc]">
+    <meta name="description" content="本文目录： 2.1.1 算术类型(arithmetic type)【1】算术类型的分类【2】算术类型的尺寸【3】带&#x2F;无符号类型【4】如何选择类型2.1.2 类型转换(convert)【1】六种类型转换的情况【2】含有无符号类型的表达式2.1.3 字面值常量(literal)【1】整型、浮点型、字符、字符串、布尔、指针字面值【2】转义序列【3】指定字面值的类型">
 <meta name="keywords" content="Chapter02">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.1 基本内置类型">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;30&#x2F;%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
-<meta property="og:description" content="[toc]">
+<meta property="og:description" content="本文目录： 2.1.1 算术类型(arithmetic type)【1】算术类型的分类【2】算术类型的尺寸【3】带&#x2F;无符号类型【4】如何选择类型2.1.2 类型转换(convert)【1】六种类型转换的情况【2】含有无符号类型的表达式2.1.3 字面值常量(literal)【1】整型、浮点型、字符、字符串、布尔、指针字面值【2】转义序列【3】指定字面值的类型">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-31T08:55:04.808Z">
+<meta property="og:updated_time" content="2019-12-31T09:06:00.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -159,7 +159,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    11 minutes 读完 (大约 1650 个字)
+                    12 minutes 读完 (大约 1788 个字)
                 </span>
                 
                 
@@ -177,9 +177,11 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <p>[toc]</p>
+            <p>本文目录：</p>
+<p><strong>2.1.1 算术类型(arithmetic type)</strong><br>【1】算术类型的分类<br>【2】算术类型的尺寸<br>【3】带/无符号类型<br>【4】如何选择类型<br><strong>2.1.2 类型转换(convert)</strong><br>【1】六种类型转换的情况<br>【2】含有无符号类型的表达式<br><strong>2.1.3 字面值常量(literal)</strong><br>【1】整型、浮点型、字符、字符串、布尔、指针字面值<br>【2】转义序列<br>【3】指定字面值的类型  </p>
+<!-- toc -->
 <a id="more"></a>
-<h2 id="2-1-1-算术类型-arithmetic-type"><a href="#2-1-1-算术类型-arithmetic-type" class="headerlink" title="2.1.1 算术类型(arithmetic type)"></a>2.1.1 算术类型(arithmetic type)</h2><h3 id="算术类型的分类"><a href="#算术类型的分类" class="headerlink" title="算术类型的分类"></a>算术类型的分类</h3>
+<h2 id="2-1-1-算术类型-arithmetic-type"><a href="#2-1-1-算术类型-arithmetic-type" class="headerlink" title="2.1.1 算术类型(arithmetic type)"></a>2.1.1 算术类型(arithmetic type)</h2><h3 id="【1】算术类型的分类"><a href="#【1】算术类型的分类" class="headerlink" title="【1】算术类型的分类"></a>【1】算术类型的分类</h3>
 $$
 \text{内置类型} \begin{cases}
     \text{算术类型} \begin{cases}
@@ -195,7 +197,7 @@ $$
 $$
 
 
-<h3 id="算术类型的尺寸"><a href="#算术类型的尺寸" class="headerlink" title="算术类型的尺寸"></a>算术类型的尺寸</h3><p>算术类型的尺寸在不同机器上有所差距，下表列出 C++ 标准规定的尺寸的最小值。</p>
+<h3 id="【2】算术类型的尺寸"><a href="#【2】算术类型的尺寸" class="headerlink" title="【2】算术类型的尺寸"></a>【2】算术类型的尺寸</h3><p>算术类型的尺寸在不同机器上有所差距，下表列出 C++ 标准规定的尺寸的最小值。</p>
 <table>
 <thead>
 <tr>
@@ -271,18 +273,18 @@ $$
 <li>C++规定，一个 <code>int</code> 至少和一个 <code>short</code> 一样大，一个 <code>long</code> 至少和一个 <code>int</code> 一样大，一个 <code>long long</code> 至少和一个 <code>long</code> 一样大。</li>
 <li>通常，<code>float</code> 为32位， <code>double</code> 为64位， <code>long double</code> 为96位或128位。类型 <code>float</code> 和 <code>double</code> 分别有7和16个有效位。</li>
 </ol>
-<h3 id="带-无符号类型"><a href="#带-无符号类型" class="headerlink" title="带/无符号类型"></a>带/无符号类型</h3><ol>
+<h3 id="【3】带-无符号类型"><a href="#【3】带-无符号类型" class="headerlink" title="【3】带/无符号类型"></a>【3】带/无符号类型</h3><ol>
 <li><code>int</code>, <code>short</code>, <code>long</code>, <code>long long</code> 都是带符号的，在他们前面加上 <code>unsigned</code> 就可以得到无符号类型。<br><strong>注意</strong>：类型 <code>unsigned int</code> 可以缩写为 <code>unsigned</code> 。</li>
 <li>字符型分为三种：<code>char</code>, <code>signed char</code>, <code>unsigned char</code>。因为类型 <code>char</code> 是无符号还是带符号的，对于不同编译器来说，是不同的。<br><strong>注意</strong>：如果你需要一个不大的整数进行运算（算术表达式），明确指定它是 <code>signed char</code> 或者 <code>unsigned char</code> 。</li>
 </ol>
-<h3 id="如何选择类型"><a href="#如何选择类型" class="headerlink" title="如何选择类型"></a>如何选择类型</h3><ol>
+<h3 id="【4】如何选择类型"><a href="#【4】如何选择类型" class="headerlink" title="【4】如何选择类型"></a>【4】如何选择类型</h3><ol>
 <li>明确知道数值不可能为负时，选无符号类型。</li>
 <li>使用 <code>int</code> 进行整数运算。</li>
 <li>在算术表达式中，不要使用 <code>char</code> 或 <code>bool</code> 。如果你需要一个不大的整数进行运算（算术表达式），明确指定它是 <code>signed char</code> 或者 <code>unsigned char</code> 。</li>
 <li>执行浮点数运算选用 <code>double</code> 。因为 <code>float</code> 精度不够且两者计算代价相差无几。</li>
 </ol>
 <hr>
-<h2 id="2-1-2-类型转换"><a href="#2-1-2-类型转换" class="headerlink" title="2.1.2 类型转换"></a>2.1.2 类型转换</h2><h3 id="六种类型转换的情况"><a href="#六种类型转换的情况" class="headerlink" title="六种类型转换的情况"></a>六种类型转换的情况</h3><ol>
+<h2 id="2-1-2-类型转换"><a href="#2-1-2-类型转换" class="headerlink" title="2.1.2 类型转换"></a>2.1.2 类型转换</h2><h3 id="【1】六种类型转换的情况"><a href="#【1】六种类型转换的情况" class="headerlink" title="【1】六种类型转换的情况"></a>【1】六种类型转换的情况</h3><ol>
 <li><strong>非布尔-&gt;布尔</strong>：值为 0 则转换为 <code>false</code> ，否则为 <code>true</code> 。</li>
 <li><strong>布尔-&gt;非布尔</strong>：值为 <code>flase</code> 则转换为 0 ，值为 <code>true</code> 则为 1 。</li>
 <li><strong>浮点数-&gt;整数</strong>：去掉小数，只取整数部分。</li>
@@ -290,7 +292,7 @@ $$
 <li><strong>当赋给 <em>无符号类型</em> 一个超出它范围的数</strong>，结果是该数对 <em>无符号类型表示数值总数</em> 取模后的余数。例如：<code>unsigned char c = -1</code> ，实际结果是对256取模后的余数，即255。</li>
 <li><strong>当赋给 <em>带符号类型</em> 一个超出它范围的数</strong>，结果是<strong>未定义的</strong>。程序可能继续工作、可能崩溃，也可能产生垃圾数据。<br><strong>例如</strong>：用 <code>g++</code> 运行 <code>int b = INT_MAX + 1;</code> , 输出 <code>b = INT_MIN = -2147483648</code>。这意味着在某些编译器下，含有无法预知的行为的程序也能正确执行。</li>
 </ol>
-<h3 id="含有无符号类型的表达式"><a href="#含有无符号类型的表达式" class="headerlink" title="含有无符号类型的表达式"></a>含有无符号类型的表达式</h3><p>当一个表达式既有无符号数，又有 <code>int</code> 值时，那个 <code>int</code> 值就会转换成无符号数。<br>把负值转化成无符号数，相当于给一个无符号数赋一个负值，参考上述 <strong>5</strong>。</p>
+<h3 id="【2】含有无符号类型的表达式"><a href="#【2】含有无符号类型的表达式" class="headerlink" title="【2】含有无符号类型的表达式"></a>【2】含有无符号类型的表达式</h3><p>当一个表达式既有无符号数，又有 <code>int</code> 值时，那个 <code>int</code> 值就会转换成无符号数。<br>把负值转化成无符号数，相当于给一个无符号数赋一个负值，参考上述 <strong>5</strong>。</p>
 <p><strong>例1：</strong></p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">unsigned</span> u = <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> i = <span class="hljs-number">-42</span>;</span><br><span class="line"><span class="hljs-built_in">cout</span> &lt;&lt; u + i &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 
@@ -301,21 +303,21 @@ $$
 <p>假设 <code>int</code> 为32位，输出 $(2^{32}-1) \times 1=4294967295$ 。</p>
 <hr>
 <h2 id="2-1-3-字面值常量-literal"><a href="#2-1-3-字面值常量-literal" class="headerlink" title="2.1.3 字面值常量(literal)"></a>2.1.3 字面值常量(literal)</h2><p>形如 -42 的值被称作 <strong>字面值常量</strong> 。</p>
-<h3 id="整型、浮点型、字符、字符串、布尔、指针字面值"><a href="#整型、浮点型、字符、字符串、布尔、指针字面值" class="headerlink" title="整型、浮点型、字符、字符串、布尔、指针字面值"></a>整型、浮点型、字符、字符串、布尔、指针字面值</h3><p>整型字面值可以写作十进制数、八进制数、十六进制数。默认情况下，十进制字面值是带符号数，八进制和十六进制字面值即可能是带符号，也可能是无符号的。</p>
+<h3 id="【1】整型、浮点型、字符、字符串、布尔、指针字面值"><a href="#【1】整型、浮点型、字符、字符串、布尔、指针字面值" class="headerlink" title="【1】整型、浮点型、字符、字符串、布尔、指针字面值"></a>【1】整型、浮点型、字符、字符串、布尔、指针字面值</h3><p>整型字面值可以写作十进制数、八进制数、十六进制数。默认情况下，十进制字面值是带符号数，八进制和十六进制字面值即可能是带符号，也可能是无符号的。</p>
 <p>十进制字面值是 <code>int</code>, <code>long</code>, <code>long long</code> 中，最小的那个，前提是能容纳下当前的值。<br>八进制和十六进制字面值是 <code>int</code>, <code>long</code>, <code>long long</code>, <code>unsigned int</code>, <code>unsigned long</code>, <code>unsigned long long</code> 中，最小的那个，前提是能容纳下当前的值。<br>若最大的数据类型都放不下，将产生错误。</p>
 <p><strong>注意：</strong> 类型 <code>short</code> 没有对应的字面值。</p>
 <p>默认的，浮点数字面值是一个 <code>double</code> 类型。浮点数字面值表现为一个小数或者科学计数法。<br><code>3.14159 ; 2.14159E0 ; 0. ; 0e0 ; .001</code> 。</p>
 <p>由单引号括起来的一个字符成为 <code>char</code> 型字面值，双引号括起来的零个或多个字符则是字符串字面值。</p>
 <p><code>true</code> 和 <code>false</code> 是布尔类型的字面值。</p>
 <p><code>nullptr</code> 是指针字面值。</p>
-<h3 id="转义序列"><a href="#转义序列" class="headerlink" title="转义序列"></a>转义序列</h3><ul>
+<h3 id="【2】转义序列"><a href="#【2】转义序列" class="headerlink" title="【2】转义序列"></a>【2】转义序列</h3><ul>
 <li>不可打印字符：退格等控制字符</li>
 <li>特殊含义的字符：单双引号、问号、反斜线等</li>
 </ul>
 <p>C++规定的转义序列：<br><code>\n \t\a \v \b \&quot; \\ \? \&#39; \r \f</code></p>
 <p>泛华的转义序列，形式是 <code>\x</code> 后跟1个或多个十六进制数，或者 <code>\</code> 后跟着1个、2个、3个八进制数。<br>例如：<code>\7(响铃) \12(换行) \40(空格) \x4d(字符M)</code></p>
 <p>若反斜线 <code>\</code> 后跟的八进制数超过三个，只有前3个构成转义序列。<br>例如：<code>\1234</code>，表示八进制数 123 对应的字符和数字 4 。<br><code>\x</code> 则会用到后面跟的所有数，不过大多数机器 <code>char</code> 只有8位，<code>\x</code> 也不会跟着很多数，超过可能会报错。</p>
-<h3 id="指定字面值的类型"><a href="#指定字面值的类型" class="headerlink" title="指定字面值的类型"></a>指定字面值的类型</h3><p>字符和字符串字面值：</p>
+<h3 id="【3】指定字面值的类型"><a href="#【3】指定字面值的类型" class="headerlink" title="【3】指定字面值的类型"></a>【3】指定字面值的类型</h3><p>字符和字符串字面值：</p>
 <table>
 <thead>
 <tr>
@@ -567,49 +569,49 @@ $$
         <span class="has-mr-6">1</span>
         <span>2.1.1 算术类型(arithmetic type)</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#算术类型的分类">
+        <a class="is-flex" href="#【1】算术类型的分类">
         <span class="has-mr-6">1.1</span>
-        <span>算术类型的分类</span>
+        <span>【1】算术类型的分类</span>
         </a></li><li>
-        <a class="is-flex" href="#算术类型的尺寸">
+        <a class="is-flex" href="#【2】算术类型的尺寸">
         <span class="has-mr-6">1.2</span>
-        <span>算术类型的尺寸</span>
+        <span>【2】算术类型的尺寸</span>
         </a></li><li>
-        <a class="is-flex" href="#带-无符号类型">
+        <a class="is-flex" href="#【3】带-无符号类型">
         <span class="has-mr-6">1.3</span>
-        <span>带/无符号类型</span>
+        <span>【3】带/无符号类型</span>
         </a></li><li>
-        <a class="is-flex" href="#如何选择类型">
+        <a class="is-flex" href="#【4】如何选择类型">
         <span class="has-mr-6">1.4</span>
-        <span>如何选择类型</span>
+        <span>【4】如何选择类型</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#2-1-2-类型转换">
         <span class="has-mr-6">2</span>
         <span>2.1.2 类型转换</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#六种类型转换的情况">
+        <a class="is-flex" href="#【1】六种类型转换的情况">
         <span class="has-mr-6">2.1</span>
-        <span>六种类型转换的情况</span>
+        <span>【1】六种类型转换的情况</span>
         </a></li><li>
-        <a class="is-flex" href="#含有无符号类型的表达式">
+        <a class="is-flex" href="#【2】含有无符号类型的表达式">
         <span class="has-mr-6">2.2</span>
-        <span>含有无符号类型的表达式</span>
+        <span>【2】含有无符号类型的表达式</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#2-1-3-字面值常量-literal">
         <span class="has-mr-6">3</span>
         <span>2.1.3 字面值常量(literal)</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#整型、浮点型、字符、字符串、布尔、指针字面值">
+        <a class="is-flex" href="#【1】整型、浮点型、字符、字符串、布尔、指针字面值">
         <span class="has-mr-6">3.1</span>
-        <span>整型、浮点型、字符、字符串、布尔、指针字面值</span>
+        <span>【1】整型、浮点型、字符、字符串、布尔、指针字面值</span>
         </a></li><li>
-        <a class="is-flex" href="#转义序列">
+        <a class="is-flex" href="#【2】转义序列">
         <span class="has-mr-6">3.2</span>
-        <span>转义序列</span>
+        <span>【2】转义序列</span>
         </a></li><li>
-        <a class="is-flex" href="#指定字面值的类型">
+        <a class="is-flex" href="#【3】指定字面值的类型">
         <span class="has-mr-6">3.3</span>
-        <span>指定字面值的类型</span>
+        <span>【3】指定字面值的类型</span>
         </a></li></ul></li></ul>
             </div>
         </div>
