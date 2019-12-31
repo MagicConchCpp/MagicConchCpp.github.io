@@ -10,13 +10,13 @@
 <title>利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图 - Magic Conch Cpp</title>
 
 
-    <meta name="description" content="参考 https:&#x2F;&#x2F;pycallgraph.readthedocs.io&#x2F;en&#x2F;master&#x2F;guide&#x2F;index.html  1.下载并安装graphviz 下载地址: https:&#x2F;&#x2F;graphviz.gitlab.io&#x2F;_pages&#x2F;Download&#x2F;windows&#x2F;graphviz-2.38.msi 安装（路径可任意选择） 配置环境变量，在Path中添加：  1例如我安装在F:\Pr">
+    <meta name="description" content="参考 https:&#x2F;&#x2F;pycallgraph.readthedocs.io&#x2F;en&#x2F;master&#x2F;guide&#x2F;index.html  1.下载并安装graphviz# 下载地址: https:&#x2F;&#x2F;graphviz.gitlab.io&#x2F;_pages&#x2F;Download&#x2F;windows&#x2F;graphviz-2.38.msi 安装（路径可任意选择） 配置环境变量，在Path中添加：  1例如我安装在F:\P">
 <meta name="keywords" content="graphviz,pycallgraph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;11&#x2F;%E5%88%A9%E7%94%A8graphviz%E8%BD%AF%E4%BB%B6%E5%92%8Cpycallgraph%E5%BA%93%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90Python%E4%BB%A3%E7%A0%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%9B%BE&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
-<meta property="og:description" content="参考 https:&#x2F;&#x2F;pycallgraph.readthedocs.io&#x2F;en&#x2F;master&#x2F;guide&#x2F;index.html  1.下载并安装graphviz 下载地址: https:&#x2F;&#x2F;graphviz.gitlab.io&#x2F;_pages&#x2F;Download&#x2F;windows&#x2F;graphviz-2.38.msi 安装（路径可任意选择） 配置环境变量，在Path中添加：  1例如我安装在F:\Pr">
+<meta property="og:description" content="参考 https:&#x2F;&#x2F;pycallgraph.readthedocs.io&#x2F;en&#x2F;master&#x2F;guide&#x2F;index.html  1.下载并安装graphviz# 下载地址: https:&#x2F;&#x2F;graphviz.gitlab.io&#x2F;_pages&#x2F;Download&#x2F;windows&#x2F;graphviz-2.38.msi 安装（路径可任意选择） 配置环境变量，在Path中添加：  1例如我安装在F:\P">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-12-08T07:00:22.115Z">
@@ -180,17 +180,17 @@ var _hmt = _hmt || [];
             <blockquote>
 <p><a href="https://pycallgraph.readthedocs.io/en/master/guide/index.html" target="_blank" rel="noopener">参考 https://pycallgraph.readthedocs.io/en/master/guide/index.html</a></p>
 </blockquote>
-<h2 id="1-下载并安装graphviz"><a href="#1-下载并安装graphviz" class="headerlink" title="1.下载并安装graphviz"></a>1.下载并安装graphviz</h2><ol>
+<h2><span id="1-xia-zai-bing-an-zhuang-graphviz">1.下载并安装graphviz</span><a href="#1-xia-zai-bing-an-zhuang-graphviz" class="header-anchor">#</a></h2><ol>
 <li><a href="https://graphviz.gitlab.io/_pages/Download/windows/graphviz-2.38.msi" target="_blank" rel="noopener">下载地址: https://graphviz.gitlab.io/_pages/Download/windows/graphviz-2.38.msi</a></li>
 <li>安装（路径可任意选择）</li>
 <li>配置环境变量，在Path中添加：</li>
 </ol>
 <figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如我安装在F:\Program Files (x86)，那么就添加环境变量F:\Program Files (x86)\Graphviz2.38\bin</span><br></pre></td></tr></table></figure>
 
-<h2 id="2-安装pycallgraph库"><a href="#2-安装pycallgraph库" class="headerlink" title="2.安装pycallgraph库"></a>2.安装pycallgraph库</h2><ul>
+<h2><span id="2-an-zhuang-pycallgraph-ku">2.安装pycallgraph库</span><a href="#2-an-zhuang-pycallgraph-ku" class="header-anchor">#</a></h2><ul>
 <li>cmd窗口命令行输入：<code>pip install pycallgraph</code></li>
 </ul>
-<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3.使用"></a>3.使用</h2><p><strong>注意：你的程序, 只有你运行中使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。</strong></p>
+<h2><span id="3-shi-yong">3.使用</span><a href="#3-shi-yong" class="header-anchor">#</a></h2><p><strong>注意：你的程序, 只有你运行中使用了某个函数，才能显示在流图中。用户没有使用的功能则不会出现在流图中。</strong></p>
 <p>在代码开头调用该库，如下：</p>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> PyCallGraph</span><br><span class="line"><span class="hljs-keyword">from</span> pycallgraph.output <span class="hljs-keyword">import</span> GraphvizOutput</span><br><span class="line"><span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> Config</span><br><span class="line"><span class="hljs-keyword">from</span> pycallgraph <span class="hljs-keyword">import</span> GlobbingFilter</span><br></pre></td></tr></table></figure>
 
@@ -382,17 +382,17 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-下载并安装graphviz">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>1.下载并安装graphviz</span>
+        <span>1.下载并安装graphviz#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-安装pycallgraph库">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
-        <span>2.安装pycallgraph库</span>
+        <span>2.安装pycallgraph库#</span>
         </a></li><li>
-        <a class="is-flex" href="#3-使用">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">3</span>
-        <span>3.使用</span>
+        <span>3.使用#</span>
         </a></li></ul>
             </div>
         </div>

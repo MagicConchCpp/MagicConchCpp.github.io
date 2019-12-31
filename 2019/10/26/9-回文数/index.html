@@ -195,13 +195,13 @@ var _hmt = _hmt || [];
 <td align="center">Unknown</td>
 </tr>
 </tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<h2><span id="1-ti-mu">1. 题目</span><a href="#1-ti-mu" class="header-anchor">#</a></h2><p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-number">121</span></span><br><span class="line">输出: <span class="hljs-literal">true</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-number">-121</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line">解释: 从左向右读, 为 <span class="hljs-number">-121</span> 。 从右向左读, 为 <span class="hljs-number">121</span>- 。因此它不是一个回文数。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-number">10</span></span><br><span class="line">输出: <span class="hljs-literal">false</span></span><br><span class="line">解释: 从右向左读, 为 <span class="hljs-number">01</span> 。因此它不是一个回文数。</span><br></pre></td></tr></table></figure>
 
 <p><strong>进阶:</strong><br>你能不将整数转为字符串来解决这个问题吗？</p>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/palindrome-number" target="_blank" rel="noopener">https://leetcode-cn.com/problems/palindrome-number</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><ol>
+<h2><span id="2-jie-fa">2. 解法</span><a href="#2-jie-fa" class="header-anchor">#</a></h2><h3><span id="2-1-jie-fa-yi">2.1 解法一</span><a href="#2-1-jie-fa-yi" class="header-anchor">#</a></h3><ol>
 <li><p>我们将该数字翻转得到的数字和原数字相等，此时它就是回文数。</p>
 </li>
 <li><p>考虑翻转后会溢出的问题，我们设置翻转后的数字设置为long类型即可。</p>
@@ -216,7 +216,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isPalindrome</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> temp = x;</span><br><span class="line">        <span class="hljs-keyword">long</span> reverse = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (temp) &#123;</span><br><span class="line">            reverse = reverse * <span class="hljs-number">10</span> + temp % <span class="hljs-number">10</span>;</span><br><span class="line">            temp = temp / <span class="hljs-number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> (reverse == x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-解法二"><a href="#2-2-解法二" class="headerlink" title="2.2 解法二"></a>2.2 解法二</h3><ol>
+<h3><span id="2-2-jie-fa-er">2.2 解法二</span><a href="#2-2-jie-fa-er" class="header-anchor">#</a></h3><ol>
 <li>我们没有必要将整个数字翻转，只需要将后一半数字反转，再与前一半的数字相比较即可。</li>
 <li>例如1234321，后一半的数是321，翻转得到123，前一半的数是123，两者相等，则是回文数。  </li>
 </ol>
@@ -407,21 +407,21 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-题目">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>1. 题目</span>
+        <span>1. 题目#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
-        <span>2. 解法</span>
+        <span>2. 解法#</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1</span>
-        <span>2.1 解法一</span>
+        <span>2.1 解法一#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-解法二">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.2</span>
-        <span>2.2 解法二</span>
+        <span>2.2 解法二#</span>
         </a></li></ul></li></ul>
             </div>
         </div>

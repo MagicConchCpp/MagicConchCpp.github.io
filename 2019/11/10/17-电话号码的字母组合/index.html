@@ -195,7 +195,7 @@ var _hmt = _hmt || [];
 <td align="center">amazon / dropbox / facebook / google / uber</td>
 </tr>
 </tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
+<h2><span id="1-ti-mu">1. 题目</span><a href="#1-ti-mu" class="header-anchor">#</a></h2><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
 <p>给出数字到字母的映射如下（与电话按键相同）。注意 <code>1</code> 不对应任何字母。</p>
 <img src="/2019/11/10/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/17.png" width="300" height="300" alt="图片名称">
 
@@ -204,7 +204,7 @@ var _hmt = _hmt || [];
 <p><strong>说明:</strong><br>尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。</p>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：递归法"><a href="#2-1-解法一：递归法" class="headerlink" title="2.1 解法一：递归法"></a>2.1 解法一：递归法</h3><p>以 <code>digits = &quot;23&quot;</code>为例：</p>
+<h2><span id="2-jie-fa">2. 解法</span><a href="#2-jie-fa" class="header-anchor">#</a></h2><h3><span id="2-1-jie-fa-yi-di-gui-fa">2.1 解法一：递归法</span><a href="#2-1-jie-fa-yi-di-gui-fa" class="header-anchor">#</a></h3><p>以 <code>digits = &quot;23&quot;</code>为例：</p>
 <ol>
 <li><p>我们递归函数只接受两个参数：上一次的结果 <code>res</code> ，这一次要结合的数字 <code>digits[i]</code>。</p>
 </li>
@@ -234,7 +234,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">string</span> m[<span class="hljs-number">10</span>] = &#123;<span class="hljs-string">""</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"abc"</span>, <span class="hljs-string">"def"</span>, <span class="hljs-string">"ghi"</span>, <span class="hljs-string">"jkl"</span>, <span class="hljs-string">"mno"</span>, <span class="hljs-string">"pqrs"</span>, <span class="hljs-string">"tuv"</span>, <span class="hljs-string">"wxyz"</span>&#125;;</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; letterCombinations(<span class="hljs-built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; res;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>; i &lt; digits.size(); ++ i) &#123;</span><br><span class="line">            combine(res, digits[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">combine</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; &amp;res, <span class="hljs-keyword">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> n = res.size();</span><br><span class="line">        <span class="hljs-keyword">int</span> digit = <span class="hljs-keyword">static_cast</span>&lt;<span class="hljs-keyword">int</span>&gt;(ch) - <span class="hljs-number">48</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> l = m[digit].size();</span><br><span class="line">        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; l; ++ j) &#123;</span><br><span class="line">                <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-number">1</span>, m[digit][j])</span></span>;</span><br><span class="line">                res.push_back(s);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>; i &lt; n; ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; l - <span class="hljs-number">1</span>; ++ j)</span><br><span class="line">                res.push_back(res[i] + m[digit][j]);</span><br><span class="line">            res[i] += m[digit][l - <span class="hljs-number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-解法二：使用队列"><a href="#2-2-解法二：使用队列" class="headerlink" title="2.2 解法二：使用队列"></a>2.2 解法二：使用队列</h3><ol>
+<h3><span id="2-2-jie-fa-er-shi-yong-dui-lie">2.2 解法二：使用队列</span><a href="#2-2-jie-fa-er-shi-yong-dui-lie" class="header-anchor">#</a></h3><ol>
 <li>每次从队头取出一个元素，与m[]中字符串中的每个字符分别组合，然后放入队尾。</li>
 </ol>
 <blockquote>
@@ -242,7 +242,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; letterCombinations(<span class="hljs-built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">string</span>&gt; m = &#123; &#123;<span class="hljs-string">'2'</span>, <span class="hljs-string">"abc"</span>&#125;, &#123;<span class="hljs-string">'3'</span>, <span class="hljs-string">"def"</span>&#125;, &#123;<span class="hljs-string">'4'</span>, <span class="hljs-string">"ghi"</span>&#125;, &#123;<span class="hljs-string">'5'</span>, <span class="hljs-string">"jkl"</span>&#125;,</span><br><span class="line">                                &#123;<span class="hljs-string">'6'</span>, <span class="hljs-string">"mno"</span>&#125;, &#123;<span class="hljs-string">'7'</span>, <span class="hljs-string">"pqrs"</span>&#125;, &#123;<span class="hljs-string">'8'</span>, <span class="hljs-string">"tuv"</span>&#125;, &#123;<span class="hljs-string">'9'</span>, <span class="hljs-string">"wxyz"</span>&#125; &#125;;</span><br><span class="line">        <span class="hljs-built_in">queue</span>&lt;<span class="hljs-built_in">string</span>&gt; q;</span><br><span class="line">        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; res;</span><br><span class="line">        <span class="hljs-comment">// 先处理第一个数字。是为了使q不为空。</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i : m[digits[<span class="hljs-number">0</span>]]) &#123;</span><br><span class="line">            <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-number">1</span>, i)</span></span>;</span><br><span class="line">            q.push(s);</span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i = <span class="hljs-number">1</span>; i &lt; digits.size(); ++ i) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> len = q.size();</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> j = <span class="hljs-number">0</span>; j &lt; len; ++ j) &#123;</span><br><span class="line">                <span class="hljs-built_in">string</span> s = q.front();</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> k = <span class="hljs-number">0</span>; k &lt; m[digits[i]].size(); ++ k) &#123;</span><br><span class="line">                    q.push(s + m[digits[i]][k]);</span><br><span class="line">                &#125;</span><br><span class="line">                q.pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">            res.push_back(q.front());</span><br><span class="line">            q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-深度优先遍历"><a href="#2-3-深度优先遍历" class="headerlink" title="2.3 深度优先遍历"></a>2.3 深度优先遍历</h3><blockquote>
+<h3><span id="2-3-shen-du-you-xian-bian-li">2.3 深度优先遍历</span><a href="#2-3-shen-du-you-xian-bian-li" class="header-anchor">#</a></h3><blockquote>
 <p>第一段代码来自 <a href="https://leetcode.com/zefengsong/" target="_blank" rel="noopener">zefengsong</a>。<br>第二份代码是参考 <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/yan-du-you-xian-bian-li-by-gqxing/" target="_blank" rel="noopener">GQXING</a> 修改了的第一份代码。<br>图来自 <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/dian-hua-hao-ma-de-zi-mu-zu-he-by-leetcode/" target="_blank" rel="noopener">LeetCode</a></p>
 </blockquote>
 <p>如图所示。<br><img src="/2019/11/10/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/17_solution.png" alt="2"></p>
@@ -437,25 +437,25 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-题目">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>1. 题目</span>
+        <span>1. 题目#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
-        <span>2. 解法</span>
+        <span>2. 解法#</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一：递归法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1</span>
-        <span>2.1 解法一：递归法</span>
+        <span>2.1 解法一：递归法#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-解法二：使用队列">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.2</span>
-        <span>2.2 解法二：使用队列</span>
+        <span>2.2 解法二：使用队列#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-3-深度优先遍历">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.3</span>
-        <span>2.3 深度优先遍历</span>
+        <span>2.3 深度优先遍历#</span>
         </a></li></ul></li></ul>
             </div>
         </div>

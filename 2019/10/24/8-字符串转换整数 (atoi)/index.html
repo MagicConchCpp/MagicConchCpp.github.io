@@ -195,7 +195,7 @@ var _hmt = _hmt || [];
 <td align="center">amazon / bloomberg / microsoft / uber</td>
 </tr>
 </tbody></table>
-<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>请你来实现一个<code>atoi</code>函数，使其能将字符串转换成整数。</p>
+<h2><span id="1-ti-mu">1. 题目</span><a href="#1-ti-mu" class="header-anchor">#</a></h2><p>请你来实现一个<code>atoi</code>函数，使其能将字符串转换成整数。</p>
 <p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。</p>
 <p>当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</p>
 <p>该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。</p>
@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="hljs-number">1</span>:</span><br><span class="line">输入: <span class="hljs-string">"42"</span></span><br><span class="line">输出: <span class="hljs-number">42</span></span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">2</span>:</span><br><span class="line">输入: <span class="hljs-string">"   -42"</span></span><br><span class="line">输出: <span class="hljs-number">-42</span></span><br><span class="line">解释: 第一个非空白字符为 <span class="hljs-string">'-'</span>, 它是一个负号。</span><br><span class="line">     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 <span class="hljs-number">-42</span> 。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">3</span>:</span><br><span class="line">输入: <span class="hljs-string">"4193 with words"</span></span><br><span class="line">输出: <span class="hljs-number">4193</span></span><br><span class="line">解释: 转换截止于数字 <span class="hljs-string">'3'</span> ，因为它的下一个字符不为数字。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">4</span>:</span><br><span class="line">输入: <span class="hljs-string">"words and 987"</span></span><br><span class="line">输出: <span class="hljs-number">0</span></span><br><span class="line">解释: 第一个非空字符是 <span class="hljs-string">'w'</span>, 但它不是数字或正、负号。</span><br><span class="line">     因此无法执行有效的转换。</span><br><span class="line"></span><br><span class="line">示例 <span class="hljs-number">5</span>:</span><br><span class="line">输入: <span class="hljs-string">"-91283472332"</span></span><br><span class="line">输出: <span class="hljs-number">-2147483648</span></span><br><span class="line">解释: 数字 <span class="hljs-string">"-91283472332"</span> 超过 <span class="hljs-number">32</span> 位有符号整数范围。</span><br><span class="line">     因此返回 INT_MIN (−<span class="hljs-number">231</span>) 。</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/string-to-integer-atoi" target="_blank" rel="noopener">https://leetcode-cn.com/problems/string-to-integer-atoi</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><ol>
+<h2><span id="2-jie-fa">2. 解法</span><a href="#2-jie-fa" class="header-anchor">#</a></h2><h3><span id="2-1-jie-fa-yi">2.1 解法一</span><a href="#2-1-jie-fa-yi" class="header-anchor">#</a></h3><ol>
 <li>先找出第一个非空字符的下标 <code>noSpaceIndex</code></li>
 <li>判断正负性 <code>negative</code>，找出数字开始的下标 <code>startIndex</code></li>
 <li>计算出当前下标的数字 <code>curDigit</code>，判断是否溢出</li>
@@ -402,17 +402,17 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-题目">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>1. 题目</span>
+        <span>1. 题目#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
-        <span>2. 解法</span>
+        <span>2. 解法#</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2.1</span>
-        <span>2.1 解法一</span>
+        <span>2.1 解法一#</span>
         </a></li></ul></li></ul>
             </div>
         </div>

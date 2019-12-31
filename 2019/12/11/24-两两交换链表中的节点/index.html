@@ -195,12 +195,12 @@ var _hmt = _hmt || [];
 <td align="center">bloomberg / microsoft / uber</td>
 </tr>
 </tbody></table>
-<h1 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h1><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
+<h1><span id="1-ti-mu">1. 题目</span><a href="#1-ti-mu" class="header-anchor">#</a></h1><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
 <p><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际的进行节点交换。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">给定 <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>, 你应该返回 <span class="hljs-number">2</span>-&gt;<span class="hljs-number">1</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">3.</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs" target="_blank" rel="noopener">https://leetcode-cn.com/problems/swap-nodes-in-pairs</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：递归解法"><a href="#2-1-解法一：递归解法" class="headerlink" title="2.1 解法一：递归解法"></a>2.1 解法一：递归解法</h3><p>我们以 <code>1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6</code> 为例。  </p>
+<h2><span id="2-jie-fa">2. 解法</span><a href="#2-jie-fa" class="header-anchor">#</a></h2><h3><span id="2-1-jie-fa-yi-di-gui-jie-fa">2.1 解法一：递归解法</span><a href="#2-1-jie-fa-yi-di-gui-jie-fa" class="header-anchor">#</a></h3><p>我们以 <code>1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6</code> 为例。  </p>
 <ol>
 <li>我们拿出中间两个节点进行分析，例如 <code>3 -&gt; 4</code> 。</li>
 <li>我们最终要使 <code>4</code> 指向 <code>3</code> ，上一个节点指向 <code>4</code>，<code>3</code> 指向下一个节点。<br>即 <code>上一节点 -&gt; 4 -&gt; 3 -&gt; 下一节点</code>。</li>
@@ -217,7 +217,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="hljs-comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode *next;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="hljs-comment"> * &#125;;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function">ListNode* <span class="hljs-title">swapPairs</span><span class="hljs-params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (head == <span class="hljs-literal">nullptr</span> || head-&gt;next == <span class="hljs-literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *next = head-&gt;next;</span><br><span class="line">        head-&gt;next = swapPairs(next-&gt;next);</span><br><span class="line">        next-&gt;next = head;</span><br><span class="line">        <span class="hljs-keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-解法二：非递归解法"><a href="#2-2-解法二：非递归解法" class="headerlink" title="2.2 解法二：非递归解法"></a>2.2 解法二：非递归解法</h3><p>我们用两个图来描述这个算法的过程。  </p>
+<h3><span id="2-2-jie-fa-er-fei-di-gui-jie-fa">2.2 解法二：非递归解法</span><a href="#2-2-jie-fa-er-fei-di-gui-jie-fa" class="header-anchor">#</a></h3><p>我们用两个图来描述这个算法的过程。  </p>
 <ul>
 <li>实线箭头是原来的链表结构，虚线是我们改变之后的。</li>
 <li>①②③④是我们交换链表的过程顺序。</li>
@@ -412,21 +412,21 @@ var _hmt = _hmt || [];
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-题目">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>1. 题目</span>
+        <span>1. 题目#</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1</span>
-        <span>2. 解法</span>
+        <span>2. 解法#</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-解法一：递归解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1.1</span>
-        <span>2.1 解法一：递归解法</span>
+        <span>2.1 解法一：递归解法#</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-解法二：非递归解法">
+        <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1.2</span>
-        <span>2.2 解法二：非递归解法</span>
+        <span>2.2 解法二：非递归解法#</span>
         </a></li></ul></li></ul></li></ul>
             </div>
         </div>
