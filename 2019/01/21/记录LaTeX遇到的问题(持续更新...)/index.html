@@ -1,183 +1,275 @@
 <!DOCTYPE html>
-<html  lang="zh">
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<meta name="generator" content="Hexo 4.0.0" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-<title>记录LaTeX遇到的问题(持续更新...) - Magic Conch Cpp</title>
+<link rel="stylesheet" href="/css/main.css">
 
 
-    <meta name="description" content="用于记录使用 $\LaTeX$ 过程中遇到的问题，有以下几大方面：  脚注 段落缩进 数学公式 图表 页面总体设计 插入代码 正文 列表 表格 参考文献">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="用于记录使用 $\LaTeX$ 过程中遇到的问题，有以下几大方面：  脚注 段落缩进 数学公式 图表 页面总体设计 插入代码 正文 列表 表格 参考文献">
 <meta name="keywords" content="LaTeX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录LaTeX遇到的问题(持续更新...)">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;01&#x2F;21&#x2F;%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="用于记录使用 $\LaTeX$ 过程中遇到的问题，有以下几大方面：  脚注 段落缩进 数学公式 图表 页面总体设计 插入代码 正文 列表 表格 参考文献">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-12-07T14:20:29.723Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/01/21/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/">
 
 
-
-
-
-
-
-<link rel="icon" href="/images/avatar.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
-
-
-    
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    
-    
-    <script>
-var _hmt = _hmt || [];
-(function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?a6dba2feb420abcedb0287a1fb9c9b25";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-})();
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
 </script>
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
+
+  <title>记录LaTeX遇到的问题(持续更新...) | Magic Conch Cpp</title>
+  
 
 
-<link rel="stylesheet" href="/css/style.css">
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/favicon.png" alt="记录LaTeX遇到的问题(持续更新...)" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item"
-                href="/">主页</a>
-                
-                <a class="navbar-item"
-                href="/categories">分类</a>
-                
-                <a class="navbar-item"
-                href="/archives">归档</a>
-                
-                <a class="navbar-item"
-                href="/tags">标签</a>
-                
-                <a class="navbar-item"
-                href="/about">关于</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/MagicConchCpp">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" target="_blank" rel="noopener">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Magic Conch Cpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
+        <p class="site-subtitle">Pineapple Castle</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+
+  </li>
+  </ul>
+
 </nav>
+</div>
+    </header>
+
     
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-21T07:43:50.000Z">2019-01-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/LaTeX/">LaTeX</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 minutes 读完 (大约 1992 个字)
-                </span>
-                
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
             
-                记录LaTeX遇到的问题(持续更新...)
-            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记录LaTeX遇到的问题(持续更新...)
         </h1>
-        <div class="content">
-            <p>用于记录使用 $\LaTeX$ 过程中遇到的问题，有以下几大方面：</p>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-21 15:43:50" itemprop="dateCreated datePublished" datetime="2019-01-21T15:43:50+08:00">2019-01-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-07 22:20:29" itemprop="dateModified" datetime="2019-12-07T22:20:29+08:00">2019-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LaTeX/" itemprop="url" rel="index">
+                    <span itemprop="name">LaTeX</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/01/21/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/01/21/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>用于记录使用 $\LaTeX$ 过程中遇到的问题，有以下几大方面：</p>
 <ol>
 <li>脚注</li>
 <li>段落缩进</li>
@@ -194,960 +286,403 @@ var _hmt = _hmt || [];
 </blockquote>
 </li>
 </ol>
-<h2><span id="jiao-zhu">脚注：</span><a href="#jiao-zhu" class="header-anchor">#</a></h2><ol>
+<h2 id="脚注："><a href="#脚注：" class="headerlink" title="脚注："></a>脚注：</h2><ol>
 <li><p>对于在标题(section)中加脚注，要在\footnote前加上\protect。例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\section&#123;语音信号的数字水印技术（LSB算法\protect\footnote&#123;即LeastSignificant Bits（最低有效位）算法。&#125;）&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\section&#123;语音信号的数字水印技术（LSB算法\protect\footnote&#123;即LeastSignificant Bits（最低有效位）算法。&#125;）&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>如果出现脚注计数不从1开始，可以在代码前加上命令：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\setcounter&#123;footnote&#125;&#123;0&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\setcounter&#123;footnote&#125;&#123;0&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>去除目录中出现的脚注：中括号内放入目录（即标题）显示的内容</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\section[语音信号的数字水印技术（LSB算法）]&#123;语音信号的数字水印技术（LSB算法\protect\footnote&#123;即LeastSignificant Bits（最低有效位）算法&#125;）&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\section[语音信号的数字水印技术（LSB算法）]&#123;语音信号的数字水印技术（LSB算法\protect\footnote&#123;即LeastSignificant Bits（最低有效位）算法&#125;）&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="duan-luo-suo-jin">段落缩进</span><a href="#duan-luo-suo-jin" class="header-anchor">#</a></h2><ol>
+<h2 id="段落缩进"><a href="#段落缩进" class="headerlink" title="段落缩进"></a>段落缩进</h2><ol>
 <li><p>强制缩进，在开头加上以下命令：（em是当前文字的宽度）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\hspace*&#123;2em&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\hspace*&#123;2em&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="shu-xue-gong-shi">数学公式</span><a href="#shu-xue-gong-shi" class="header-anchor">#</a></h2><ol>
+<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><ol>
 <li><p>阴影盒子不加gather环境如何居中。前后加上$$即可。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\shadowbox&#123;$Y(k)=\frac&#123;1&#125;&#123;2&#125;\left(X(k+\omega\pi)+X(k-\omega\pi)\right)$&#125;$$</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\shadowbox&#123;$Y(k)=\frac&#123;1&#125;&#123;2&#125;\left(X(k+\omega\pi)+X(k-\omega\pi)\right)$&#125;$$</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>多行公式显示(加*表示不编号，不加则编号)</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation*&#125;</span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">f&apos;(n) &amp;= f(n)+\sum_&#123;n=0&#125;^&#123;N－1&#125;g(k)W(k)cos[\frac &#123;(2n + 1)k\pi &#125;&#123;2N&#125;]\\</span><br><span class="line">      &amp;= f(n)+w(n,k)</span><br><span class="line"> \end&#123;split&#125;</span><br><span class="line"> \end&#123;equation*&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;equation*&#125;</span><br><span class="line">\begin&#123;split&#125;</span><br><span class="line">f&apos;(n) &amp;= f(n)+\sum_&#123;n=0&#125;^&#123;N－1&#125;g(k)W(k)cos[\frac &#123;(2n + 1)k\pi &#125;&#123;2N&#125;]\\</span><br><span class="line">      &amp;= f(n)+w(n,k)</span><br><span class="line"> \end&#123;split&#125;</span><br><span class="line"> \end&#123;equation*&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="tu-biao">图表</span><a href="#tu-biao" class="header-anchor">#</a></h2><ol>
+<h2 id="图表"><a href="#图表" class="headerlink" title="图表"></a>图表</h2><ol>
 <li><p>修改图表的图1，图2，变成按章节的图1.1，图2.2等。. 改成 - 可以显示成 图1-1.</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\renewcommand &#123;\thetable&#125; &#123;\thesection&#123;&#125;.\arabic&#123;table&#125;&#125;</span><br><span class="line">\renewcommand &#123;\thefigure&#125; &#123;\thesection&#123;&#125;.\arabic&#123;figure&#125;&#125;</span><br><span class="line">% 每一章都要手动清零</span><br><span class="line">\setcounter&#123;table&#125;&#123;0&#125;</span><br><span class="line">\setcounter&#123;figure&#125;&#123;0&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\renewcommand &#123;\thetable&#125; &#123;\thesection&#123;&#125;.\arabic&#123;table&#125;&#125;</span><br><span class="line">\renewcommand &#123;\thefigure&#125; &#123;\thesection&#123;&#125;.\arabic&#123;figure&#125;&#125;</span><br><span class="line">% 每一章都要手动清零</span><br><span class="line">\setcounter&#123;table&#125;&#123;0&#125;</span><br><span class="line">\setcounter&#123;figure&#125;&#123;0&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="ye-mian-zong-ti-she-ji">页面总体设计</span><a href="#ye-mian-zong-ti-she-ji" class="header-anchor">#</a></h2><ol>
+<h2 id="页面总体设计"><a href="#页面总体设计" class="headerlink" title="页面总体设计"></a>页面总体设计</h2><ol>
 <li><p>调节页边距</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;geometry&#125;</span><br><span class="line">%\geometry&#123;a4paper,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm&#125;</span><br><span class="line">% 中等</span><br><span class="line">\geometry&#123;a4paper,left=2.54cm,right=2.54cm,top=1.91cm,bottom=1.91cm&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;geometry&#125;</span><br><span class="line">%\geometry&#123;a4paper,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm&#125;</span><br><span class="line">% 中等</span><br><span class="line">\geometry&#123;a4paper,left=2.54cm,right=2.54cm,top=1.91cm,bottom=1.91cm&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>页眉和页脚（加在导言区）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;fancyhdr&#125;</span><br><span class="line">\usepackage&#123;lastpage&#125;</span><br><span class="line">\pagestyle&#123;fancy&#125;</span><br><span class="line">\fancyhf&#123;&#125;</span><br><span class="line">\fancyhead[C]&#123;\leftmark&#125;</span><br><span class="line">\fancyfoot[C]&#123;Page \thepage\ of \pageref&#123;LastPage&#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;fancyhdr&#125;</span><br><span class="line">\usepackage&#123;lastpage&#125;</span><br><span class="line">\pagestyle&#123;fancy&#125;</span><br><span class="line">\fancyhf&#123;&#125;</span><br><span class="line">\fancyhead[C]&#123;\leftmark&#125;</span><br><span class="line">\fancyfoot[C]&#123;Page \thepage\ of \pageref&#123;LastPage&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="cha-ru-dai-ma">插入代码</span><a href="#cha-ru-dai-ma" class="header-anchor">#</a></h2><ol>
+<h2 id="插入代码"><a href="#插入代码" class="headerlink" title="插入代码"></a>插入代码</h2><ol>
 <li><p>代码字体、大小控制</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% 导言区</span><br><span class="line">\usepackage&#123;fontspec&#125;</span><br><span class="line">\newfontfamily\consolas&#123;Consolas&#125;</span><br><span class="line">\lstset&#123;numbers=left,language=Matlab,basicstyle=\footnotesize\consolas,numberstyle=\footnotesize,tabsize=2, keywordstyle= \color&#123;blue!70&#125;,frame=shadowbox, rulesepcolor= \color&#123;red!20!green!20!blue!20&#125; &#125; 	%插入代码的格式（序号位置，语言，代码字体大小、字体名称，序号字体大小，缩进，关键词颜色，阴影）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% 导言区</span><br><span class="line">\usepackage&#123;fontspec&#125;</span><br><span class="line">\newfontfamily\consolas&#123;Consolas&#125;</span><br><span class="line">\lstset&#123;numbers=left,language=Matlab,basicstyle=\footnotesize\consolas,numberstyle=\footnotesize,tabsize=2, keywordstyle= \color&#123;blue!70&#125;,frame=shadowbox, rulesepcolor= \color&#123;red!20!green!20!blue!20&#125; &#125; 	%插入代码的格式（序号位置，语言，代码字体大小、字体名称，序号字体大小，缩进，关键词颜色，阴影）</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="zheng-wen">正文</span><a href="#zheng-wen" class="header-anchor">#</a></h2><ol>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ol>
 <li><p>局部文字 使用某种字体</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">% 导言区</span><br><span class="line">\usepackage&#123;fontspec&#125;</span><br><span class="line">\newfontfamily\consolas&#123;Consolas&#125;</span><br><span class="line">\newfontfamily\monaco&#123;Monaco&#125;</span><br><span class="line"></span><br><span class="line">%正文区</span><br><span class="line">&#123;\consolas def choosesave()&#125;</span><br><span class="line">&#123;\monaco def choosesave()&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">% 导言区</span><br><span class="line">\usepackage&#123;fontspec&#125;</span><br><span class="line">\newfontfamily\consolas&#123;Consolas&#125;</span><br><span class="line">\newfontfamily\monaco&#123;Monaco&#125;</span><br><span class="line"></span><br><span class="line">%正文区</span><br><span class="line">&#123;\consolas def choosesave()&#125;</span><br><span class="line">&#123;\monaco def choosesave()&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>强制空行</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">% 强制空行1cm</span><br><span class="line">\vspace&#123;1cm&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">% 强制空行1cm</span><br><span class="line">\vspace&#123;1cm&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="lie-biao">列表</span><a href="#lie-biao" class="header-anchor">#</a></h2><ol>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ol>
 <li><p>列表带圈数字可以增加到二位数<a href="https://liam0205.me/2014/05/08/latex-circled-numbers/" target="_blank" rel="noopener">参考链接</a></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;enumitem&#125;</span><br><span class="line">\usepackage&#123;tikz&#125;</span><br><span class="line">\usepackage&#123;etoolbox&#125;</span><br><span class="line">% line width可以调整圈的粗细，inner sep调节圈的大小(可以为负数)。</span><br><span class="line">\newcommand&#123;\circled&#125;[2][]&#123;\tikz[baseline=(char.base),line width = 0.7pt]</span><br><span class="line">    &#123;\node[shape = circle, draw, inner sep = 1pt]</span><br><span class="line">    (char) &#123;\phantom&#123;\ifblank&#123;#1&#125;&#123;#2&#125;&#123;#1&#125;&#125;&#125;;%</span><br><span class="line">    \node at (char.center) &#123;\makebox[0pt][c]&#123;#2&#125;&#125;;&#125;&#125;</span><br><span class="line">\robustify&#123;\circled&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\newcommand&#123;\dcircled&#125;[1]&#123;\circled[00]&#123;#1&#125;&#125;</span><br><span class="line">\begin&#123;enumerate&#125;[label=\dcircled&#123;\arabic*&#125;, noitemsep]</span><br><span class="line">\item I</span><br><span class="line">\item am</span><br><span class="line">\item happy</span><br><span class="line">\item to</span><br><span class="line">\item join</span><br><span class="line">\item with</span><br><span class="line">\item you</span><br><span class="line">\item today</span><br><span class="line">\item in</span><br><span class="line">\item what</span><br><span class="line">\item will</span><br><span class="line">\item go</span><br><span class="line">\item down</span><br><span class="line">\item in</span><br><span class="line">\item history</span><br><span class="line">\item as</span><br><span class="line">\item the</span><br><span class="line">\item greatest</span><br><span class="line">\item demonstration</span><br><span class="line">\item for</span><br><span class="line">\item freedom</span><br><span class="line">\item in</span><br><span class="line">\item the</span><br><span class="line">\item history</span><br><span class="line">\item of</span><br><span class="line">\item our</span><br><span class="line">\item nation.</span><br><span class="line">\end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;enumitem&#125;</span><br><span class="line">\usepackage&#123;tikz&#125;</span><br><span class="line">\usepackage&#123;etoolbox&#125;</span><br><span class="line">% line width可以调整圈的粗细，inner sep调节圈的大小(可以为负数)。</span><br><span class="line">\newcommand&#123;\circled&#125;[2][]&#123;\tikz[baseline=(char.base),line width = 0.7pt]</span><br><span class="line">    &#123;\node[shape = circle, draw, inner sep = 1pt]</span><br><span class="line">    (char) &#123;\phantom&#123;\ifblank&#123;#1&#125;&#123;#2&#125;&#123;#1&#125;&#125;&#125;;%</span><br><span class="line">    \node at (char.center) &#123;\makebox[0pt][c]&#123;#2&#125;&#125;;&#125;&#125;</span><br><span class="line">\robustify&#123;\circled&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\newcommand&#123;\dcircled&#125;[1]&#123;\circled[00]&#123;#1&#125;&#125;</span><br><span class="line">\begin&#123;enumerate&#125;[label=\dcircled&#123;\arabic*&#125;, noitemsep]</span><br><span class="line">\item I</span><br><span class="line">\item am</span><br><span class="line">\item happy</span><br><span class="line">\item to</span><br><span class="line">\item join</span><br><span class="line">\item with</span><br><span class="line">\item you</span><br><span class="line">\item today</span><br><span class="line">\item in</span><br><span class="line">\item what</span><br><span class="line">\item will</span><br><span class="line">\item go</span><br><span class="line">\item down</span><br><span class="line">\item in</span><br><span class="line">\item history</span><br><span class="line">\item as</span><br><span class="line">\item the</span><br><span class="line">\item greatest</span><br><span class="line">\item demonstration</span><br><span class="line">\item for</span><br><span class="line">\item freedom</span><br><span class="line">\item in</span><br><span class="line">\item the</span><br><span class="line">\item history</span><br><span class="line">\item of</span><br><span class="line">\item our</span><br><span class="line">\item nation.</span><br><span class="line">\end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列表编号加上颜色（创建一个新环境即可）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\newenvironment&#123;colorlist&#125;[1]&#123;\begin&#123;list&#125;&#123;\textcolor&#123;blue&#125;&#123;\ding&#123;#1&#125;&#125;&#125;&#123;&#125;&#125;</span><br><span class="line">&#123;\end&#123;list&#125;&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;colorlist&#125;&#123;42&#125;</span><br><span class="line">\item</span><br><span class="line">\item</span><br><span class="line">\end&#123;colorlist&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\newenvironment&#123;colorlist&#125;[1]&#123;\begin&#123;list&#125;&#123;\textcolor&#123;blue&#125;&#123;\ding&#123;#1&#125;&#125;&#125;&#123;&#125;&#125;</span><br><span class="line">&#123;\end&#123;list&#125;&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;colorlist&#125;&#123;42&#125;</span><br><span class="line">\item</span><br><span class="line">\item</span><br><span class="line">\end&#123;colorlist&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列表变为数字或字母</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;enumerate&#125;</span><br><span class="line">\begin&#123;enumerate&#125;[(i)]</span><br><span class="line">\item Xidian</span><br><span class="line">\item Computer</span><br><span class="line">\item Application</span><br><span class="line">\end&#123;enumerate&#125;</span><br><span class="line">% 可以使用 A，a，I，i，1 作为可选项产生 \Alph，\alph，\Roman，\roman，\arabic 的效果。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;enumerate&#125;</span><br><span class="line">\begin&#123;enumerate&#125;[(i)]</span><br><span class="line">\item Xidian</span><br><span class="line">\item Computer</span><br><span class="line">\item Application</span><br><span class="line">\end&#123;enumerate&#125;</span><br><span class="line">% 可以使用 A，a，I，i，1 作为可选项产生 \Alph，\alph，\Roman，\roman，\arabic 的效果。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列表编号开始值，设置为任意数值</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">    % 对于数字编号</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">    \addtocounter&#123;enumi&#125;&#123;41&#125;</span><br><span class="line">        \item This item is numbered `42.&apos;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">    % 对于字母编号</span><br><span class="line">    \begin&#123;enumerate&#125;[(a)]</span><br><span class="line">    \addtocounter&#123;enumi&#125;&#123;5&#125;% This cannot be more than 25</span><br><span class="line">        \item This one is ``numbered&apos;&apos; `(f)&apos;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br><span class="line"></span><br><span class="line">% （如果您有更深层次的嵌套列表，相关的计数器是enumii，enumiii和enumiv。）</span><br><span class="line">% 双层嵌套</span><br><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">    % 对于数字编号</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">    \addtocounter&#123;enumi&#125;&#123;41&#125;</span><br><span class="line">        \item This item is numbered `42.&apos;</span><br><span class="line">    % 对于字母编号</span><br><span class="line">    \begin&#123;enumerate&#125;[(a)]</span><br><span class="line">    \addtocounter&#123;enumii&#125;&#123;5&#125;% This cannot be more than 25</span><br><span class="line">        \item This one is ``numbered&apos;&apos; `(f)&apos;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">    % 对于数字编号</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">    \addtocounter&#123;enumi&#125;&#123;41&#125;</span><br><span class="line">        \item This item is numbered `42.&apos;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">    % 对于字母编号</span><br><span class="line">    \begin&#123;enumerate&#125;[(a)]</span><br><span class="line">    \addtocounter&#123;enumi&#125;&#123;5&#125;% This cannot be more than 25</span><br><span class="line">        \item This one is ``numbered&apos;&apos; `(f)&apos;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br><span class="line"></span><br><span class="line">% （如果您有更深层次的嵌套列表，相关的计数器是enumii，enumiii和enumiv。）</span><br><span class="line">% 双层嵌套</span><br><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">    % 对于数字编号</span><br><span class="line">    \begin&#123;enumerate&#125;</span><br><span class="line">    \addtocounter&#123;enumi&#125;&#123;41&#125;</span><br><span class="line">        \item This item is numbered `42.&apos;</span><br><span class="line">    % 对于字母编号</span><br><span class="line">    \begin&#123;enumerate&#125;[(a)]</span><br><span class="line">    \addtocounter&#123;enumii&#125;&#123;5&#125;% This cannot be more than 25</span><br><span class="line">        \item This one is ``numbered&apos;&apos; `(f)&apos;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">    \end&#123;enumerate&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列表之间的行距缩小：导言区加入如下命令</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;enumitem&#125;</span><br><span class="line">\setenumerate[1]&#123;itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt&#125;</span><br><span class="line">\setitemize[1]&#123;itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt&#125;</span><br><span class="line">\setdescription&#123;itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;enumitem&#125;</span><br><span class="line">\setenumerate[1]&#123;itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt&#125;</span><br><span class="line">\setitemize[1]&#123;itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt&#125;</span><br><span class="line">\setdescription&#123;itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h2><span id="biao-ge">表格</span><a href="#biao-ge" class="header-anchor">#</a></h2><ol>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ol>
 <li><p>表格不同的列使用不同的字体</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\heiti&#125;r &gt;&#123;\kaishu&#125;l&#125;</span><br><span class="line">黑体 &amp; 楷体</span><br><span class="line">还是黑体 &amp; 还是楷体</span><br><span class="line">\end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\heiti&#125;r &gt;&#123;\kaishu&#125;l&#125;</span><br><span class="line">黑体 &amp; 楷体</span><br><span class="line">还是黑体 &amp; 还是楷体</span><br><span class="line">\end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>表格不同的列使用不同的字号</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\small&#125;r &gt;&#123;\Huge&#125;l&#125;</span><br><span class="line">小 &amp; 大</span><br><span class="line">小小 &amp; 大大</span><br><span class="line">\end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\small&#125;r &gt;&#123;\Huge&#125;l&#125;</span><br><span class="line">小 &amp; 大</span><br><span class="line">小小 &amp; 大大</span><br><span class="line">\end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>表格设置文字两端对齐</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\heiti&#125;r &gt;&#123;\kaishu&#125;l&#125;</span><br><span class="line">% 两端对齐，用4em是因为有最多四个字，根据实际情况修改该值。</span><br><span class="line">  \makebox[4em][s]&#123;课\hspace&#123;\fill&#125;程&#125;：&amp; 微机原理与接口技术\\</span><br><span class="line">  \makebox[4em][s]&#123;学生姓名&#125;：          &amp; 神奇海螺\\</span><br><span class="line">  \makebox[4em][s]&#123;三\hspace&#123;\fill&#125;个\hspace&#123;\fill&#125;字&#125;：          &amp; 杨老师\\</span><br><span class="line">  \makebox[4em][s]&#123;学\hspace&#123;\fill&#125;院&#125;：&amp; 信息科学与工程学院\\</span><br><span class="line">  \end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;tabular&#125;&#123;&gt;&#123;\heiti&#125;r &gt;&#123;\kaishu&#125;l&#125;</span><br><span class="line">% 两端对齐，用4em是因为有最多四个字，根据实际情况修改该值。</span><br><span class="line">  \makebox[4em][s]&#123;课\hspace&#123;\fill&#125;程&#125;：&amp; 微机原理与接口技术\\</span><br><span class="line">  \makebox[4em][s]&#123;学生姓名&#125;：          &amp; 神奇海螺\\</span><br><span class="line">  \makebox[4em][s]&#123;三\hspace&#123;\fill&#125;个\hspace&#123;\fill&#125;字&#125;：          &amp; 杨老师\\</span><br><span class="line">  \makebox[4em][s]&#123;学\hspace&#123;\fill&#125;院&#125;：&amp; 信息科学与工程学院\\</span><br><span class="line">  \end&#123;tabular&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>跨页表格（使用longtable环境）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;longtable&#125;</span><br><span class="line">\newcommand\meta[1]&#123;\emph&#123;$\langle$#1$\rangle$&#125;&#125;</span><br><span class="line">\begin&#123;longtable&#125;&#123;|l|l|&#125;</span><br><span class="line">\hline</span><br><span class="line">\endfirsthead</span><br><span class="line">\multicolumn&#123;2&#125;&#123;l&#125;&#123;（续表）&#125;\\</span><br><span class="line">\hline</span><br><span class="line">\endhead</span><br><span class="line">\multicolumn&#123;2&#125;&#123;c&#125;&#123;\itshape 接下一页表格......&#125;\\[2ex]</span><br><span class="line">\endfoot</span><br><span class="line">\hline</span><br><span class="line">\endlastfoot</span><br><span class="line">% 下面是你的表格内容</span><br><span class="line">% =================================================== %</span><br><span class="line">\hline</span><br><span class="line">D0～D7 &amp; 双向数据总线，以便和 CPU 之间传递命令、数据和状态。\\</span><br><span class="line">\hline</span><br><span class="line">CLK    &amp; 时钟输入线，以产生内部时钟 \\</span><br><span class="line">\hline</span><br><span class="line">% ==================================================== %</span><br><span class="line">\end&#123;longtable&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;longtable&#125;</span><br><span class="line">\newcommand\meta[1]&#123;\emph&#123;$\langle$#1$\rangle$&#125;&#125;</span><br><span class="line">\begin&#123;longtable&#125;&#123;|l|l|&#125;</span><br><span class="line">\hline</span><br><span class="line">\endfirsthead</span><br><span class="line">\multicolumn&#123;2&#125;&#123;l&#125;&#123;（续表）&#125;\\</span><br><span class="line">\hline</span><br><span class="line">\endhead</span><br><span class="line">\multicolumn&#123;2&#125;&#123;c&#125;&#123;\itshape 接下一页表格......&#125;\\[2ex]</span><br><span class="line">\endfoot</span><br><span class="line">\hline</span><br><span class="line">\endlastfoot</span><br><span class="line">% 下面是你的表格内容</span><br><span class="line">% =================================================== %</span><br><span class="line">\hline</span><br><span class="line">D0～D7 &amp; 双向数据总线，以便和 CPU 之间传递命令、数据和状态。\\</span><br><span class="line">\hline</span><br><span class="line">CLK    &amp; 时钟输入线，以产生内部时钟 \\</span><br><span class="line">\hline</span><br><span class="line">% ==================================================== %</span><br><span class="line">\end&#123;longtable&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><a href="http://blog.sina.com.cn/s/blog_6cb9ecd10100lpln.html" target="_blank" rel="noopener">表格内的内容添加脚注</a></p>
 <p>在tabular环境中添加脚注，不能简单地使用\footnote{……}。应该在要添加脚注的地方使用\footnotemark[n]标记，其中n表示脚注的编号；在<strong>tabular或table环境外</strong>则用\footnotetext[n]{……}填入脚注内容，注意这里的[n]应该与表格中的\footnotemark中的[n]一一对应。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;table&#125;[htbp]</span><br><span class="line">\centering</span><br><span class="line">\begin&#123;tabular&#125;&#123;ll&#125;</span><br><span class="line">  \toprule</span><br><span class="line">  % after \\: \hline or \cline&#123;col1-col2&#125; \cline&#123;col3-col4&#125; ...</span><br><span class="line">  $D_4 D_3$ &amp; 功能 \\</span><br><span class="line">  \midrule</span><br><span class="line">  00 &amp; 8字符显示，左端输入\footnotemark[1] \\</span><br><span class="line">  01 &amp; 16字符显示，左端输入 \\</span><br><span class="line">  10 &amp; 8字符显示，左端输入 \\</span><br><span class="line">  11 &amp; 16字符显示，右端输入 \\</span><br><span class="line">  \bottomrule</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br><span class="line">\footnotetext[1]&#123;RESET后，设定该种方式&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;table&#125;[htbp]</span><br><span class="line">\centering</span><br><span class="line">\begin&#123;tabular&#125;&#123;ll&#125;</span><br><span class="line">  \toprule</span><br><span class="line">  % after \\: \hline or \cline&#123;col1-col2&#125; \cline&#123;col3-col4&#125; ...</span><br><span class="line">  $D_4 D_3$ &amp; 功能 \\</span><br><span class="line">  \midrule</span><br><span class="line">  00 &amp; 8字符显示，左端输入\footnotemark[1] \\</span><br><span class="line">  01 &amp; 16字符显示，左端输入 \\</span><br><span class="line">  10 &amp; 8字符显示，左端输入 \\</span><br><span class="line">  11 &amp; 16字符显示，右端输入 \\</span><br><span class="line">  \bottomrule</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">\end&#123;table&#125;</span><br><span class="line">\footnotetext[1]&#123;RESET后，设定该种方式&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>表格中添加列表环境(1)</p>
 <p>缺点：表格中每一个格子内，必须有列表的序号（·或者123…）。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;array&#125;</span><br><span class="line">\makeatletter</span><br><span class="line">\newcolumntype&#123;e&#125;[1]&#123;%--- Enumerated cells ---</span><br><span class="line">   &gt;&#123;\minipage[t]&#123;\linewidth&#125;%</span><br><span class="line">     \NoHyper%                Hyperref adds a vertical space</span><br><span class="line">     \let\\\tabularnewline</span><br><span class="line">     \enumerate</span><br><span class="line">        \addtolength&#123;\rightskip&#125;&#123;0pt plus 50pt&#125;% for raggedright</span><br><span class="line">        \setlength&#123;\itemsep&#125;&#123;-\parsep&#125;&#125;%</span><br><span class="line">   p&#123;#1&#125;%</span><br><span class="line">   &lt;&#123;\@finalstrut\@arstrutbox\endenumerate</span><br><span class="line">     \endNoHyper</span><br><span class="line">     \endminipage&#125;&#125;</span><br><span class="line"></span><br><span class="line">\newcolumntype&#123;i&#125;[1]&#123;%--- Itemized cells ---</span><br><span class="line">   &gt;&#123;\minipage[t]&#123;\linewidth&#125;%</span><br><span class="line">        \let\\\tabularnewline</span><br><span class="line">        \itemize</span><br><span class="line">           \addtolength&#123;\rightskip&#125;&#123;0pt plus 50pt&#125;%</span><br><span class="line">           \setlength&#123;\itemsep&#125;&#123;-\parsep&#125;&#125;%</span><br><span class="line">   p&#123;#1&#125;%</span><br><span class="line">   &lt;&#123;\@finalstrut\@arstrutbox\enditemize\endminipage&#125;&#125;</span><br><span class="line"></span><br><span class="line">\AtBeginDocument&#123;%</span><br><span class="line">    \@ifpackageloaded&#123;hyperref&#125;&#123;&#125;%</span><br><span class="line">        &#123;\let\NoHyper\relax\let\endNoHyper\relax&#125;&#125;</span><br><span class="line">\makeatother</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;tabular&#125;[t]&#123;|i&#123;2.5cm&#125;|e&#123;3cm&#125;|&#125;</span><br><span class="line">\hline</span><br><span class="line">  \item Item A</span><br><span class="line">  \item Item B   &amp;</span><br><span class="line">  \item Item 1</span><br><span class="line">  \item Item 2   \\</span><br><span class="line">\hline  </span><br><span class="line">  \item Item C   &amp;</span><br><span class="line">  \item Item 3</span><br><span class="line">  \item Item 4   \\</span><br><span class="line">\hline</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;array&#125;</span><br><span class="line">\makeatletter</span><br><span class="line">\newcolumntype&#123;e&#125;[1]&#123;%--- Enumerated cells ---</span><br><span class="line">   &gt;&#123;\minipage[t]&#123;\linewidth&#125;%</span><br><span class="line">     \NoHyper%                Hyperref adds a vertical space</span><br><span class="line">     \let\\\tabularnewline</span><br><span class="line">     \enumerate</span><br><span class="line">        \addtolength&#123;\rightskip&#125;&#123;0pt plus 50pt&#125;% for raggedright</span><br><span class="line">        \setlength&#123;\itemsep&#125;&#123;-\parsep&#125;&#125;%</span><br><span class="line">   p&#123;#1&#125;%</span><br><span class="line">   &lt;&#123;\@finalstrut\@arstrutbox\endenumerate</span><br><span class="line">     \endNoHyper</span><br><span class="line">     \endminipage&#125;&#125;</span><br><span class="line"></span><br><span class="line">\newcolumntype&#123;i&#125;[1]&#123;%--- Itemized cells ---</span><br><span class="line">   &gt;&#123;\minipage[t]&#123;\linewidth&#125;%</span><br><span class="line">        \let\\\tabularnewline</span><br><span class="line">        \itemize</span><br><span class="line">           \addtolength&#123;\rightskip&#125;&#123;0pt plus 50pt&#125;%</span><br><span class="line">           \setlength&#123;\itemsep&#125;&#123;-\parsep&#125;&#125;%</span><br><span class="line">   p&#123;#1&#125;%</span><br><span class="line">   &lt;&#123;\@finalstrut\@arstrutbox\enditemize\endminipage&#125;&#125;</span><br><span class="line"></span><br><span class="line">\AtBeginDocument&#123;%</span><br><span class="line">    \@ifpackageloaded&#123;hyperref&#125;&#123;&#125;%</span><br><span class="line">        &#123;\let\NoHyper\relax\let\endNoHyper\relax&#125;&#125;</span><br><span class="line">\makeatother</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;tabular&#125;[t]&#123;|i&#123;2.5cm&#125;|e&#123;3cm&#125;|&#125;</span><br><span class="line">\hline</span><br><span class="line">  \item Item A</span><br><span class="line">  \item Item B   &amp;</span><br><span class="line">  \item Item 1</span><br><span class="line">  \item Item 2   \\</span><br><span class="line">\hline  </span><br><span class="line">  \item Item C   &amp;</span><br><span class="line">  \item Item 3</span><br><span class="line">  \item Item 4   \\</span><br><span class="line">\hline</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>表格中添加列表环境(2)</p>
 <p>特点：克服了(1)的缺点，但是每一个列表之间距离很大。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;table&#125;</span><br><span class="line">  \centering</span><br><span class="line">  \begin&#123;tabular&#125;&#123;|p&#123;2cm&#125;|p&#123;6cm&#125;|p&#123;6cm&#125;|&#125;</span><br><span class="line"> \hline</span><br><span class="line"> 结构 &amp; 背景 &amp; 重点/贡献\\</span><br><span class="line"> \hline</span><br><span class="line"> 三层结构 &amp;</span><br><span class="line"> \begin&#123;itemize&#125;</span><br><span class="line">   \item 雾计算基本结构</span><br><span class="line"> \end&#123;itemize&#125;</span><br><span class="line">    &amp;</span><br><span class="line">   \begin&#123;itemize&#125;</span><br><span class="line">   \item 将计算和存储设施扩展到网络边缘并减轻云数据中心的负担。</span><br><span class="line">  \end&#123;itemize&#125; \\</span><br><span class="line"> \hline</span><br><span class="line"> 基于SDN的雾计算 &amp;</span><br><span class="line"> \begin&#123;itemize&#125;</span><br><span class="line">   \item 数据和控制平面的分离。</span><br><span class="line">   \item 在边缘元素中集成控制器功能，即边缘切换。</span><br><span class="line">   \item 与雾和云管理软件进行通信。</span><br><span class="line">   \end&#123;itemize&#125; &amp;	</span><br><span class="line"> \begin&#123;itemize&#125;</span><br><span class="line">   \item 改进控制器开关延迟性能。</span><br><span class="line">   \item 有效地管理边缘切换的搜索，编译和网络资源。</span><br><span class="line">   \item 处理与雾相关的流量，旨在减少延迟和碳足迹。</span><br><span class="line"> \end&#123;itemize&#125; \\</span><br><span class="line">\hline</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">  \caption&#123;三层结构和 SDN 结构的区别&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;table&#125;</span><br><span class="line">  \centering</span><br><span class="line">  \begin&#123;tabular&#125;&#123;|p&#123;2cm&#125;|p&#123;6cm&#125;|p&#123;6cm&#125;|&#125;</span><br><span class="line"> \hline</span><br><span class="line"> 结构 &amp; 背景 &amp; 重点/贡献\\</span><br><span class="line"> \hline</span><br><span class="line"> 三层结构 &amp;</span><br><span class="line"> \begin&#123;itemize&#125;</span><br><span class="line">   \item 雾计算基本结构</span><br><span class="line"> \end&#123;itemize&#125;</span><br><span class="line">    &amp;</span><br><span class="line">   \begin&#123;itemize&#125;</span><br><span class="line">   \item 将计算和存储设施扩展到网络边缘并减轻云数据中心的负担。</span><br><span class="line">  \end&#123;itemize&#125; \\</span><br><span class="line"> \hline</span><br><span class="line"> 基于SDN的雾计算 &amp;</span><br><span class="line"> \begin&#123;itemize&#125;</span><br><span class="line">   \item 数据和控制平面的分离。</span><br><span class="line">   \item 在边缘元素中集成控制器功能，即边缘切换。</span><br><span class="line">   \item 与雾和云管理软件进行通信。</span><br><span class="line">   \end&#123;itemize&#125; &amp;	</span><br><span class="line"> \begin&#123;itemize&#125;</span><br><span class="line">   \item 改进控制器开关延迟性能。</span><br><span class="line">   \item 有效地管理边缘切换的搜索，编译和网络资源。</span><br><span class="line">   \item 处理与雾相关的流量，旨在减少延迟和碳足迹。</span><br><span class="line"> \end&#123;itemize&#125; \\</span><br><span class="line">\hline</span><br><span class="line">\end&#123;tabular&#125;</span><br><span class="line">  \caption&#123;三层结构和 SDN 结构的区别&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h3><span id="can-kao-wen-xian">参考文献</span><a href="#can-kao-wen-xian" class="header-anchor">#</a></h3><ol>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li><p>添加参考文献到目录中，加入第二行的代码，<strong>编译两次</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;thebibliography&#125;&#123;99&#125;</span><br><span class="line">\addcontentsline&#123;toc&#125;&#123;section&#125;&#123;参考文献&#125; % 加入这一行，编译两次</span><br><span class="line">\bibitem&#123;1&#125; 梁建武,杨迎泽. 微机原理与接口技术. 北京: 中国铁道出版社. 2016, 02.</span><br><span class="line">\bibitem&#123;2&#125; 王爽. 汇编语言(第三版). 北京:清华大学出版社. 2014, 04.</span><br><span class="line">\bibitem&#123;3&#125; Star ES8086使用说明.</span><br><span class="line">\end&#123;thebibliography&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;thebibliography&#125;&#123;99&#125;</span><br><span class="line">\addcontentsline&#123;toc&#125;&#123;section&#125;&#123;参考文献&#125; % 加入这一行，编译两次</span><br><span class="line">\bibitem&#123;1&#125; 梁建武,杨迎泽. 微机原理与接口技术. 北京: 中国铁道出版社. 2016, 02.</span><br><span class="line">\bibitem&#123;2&#125; 王爽. 汇编语言(第三版). 北京:清华大学出版社. 2014, 04.</span><br><span class="line">\bibitem&#123;3&#125; Star ES8086使用说明.</span><br><span class="line">\end&#123;thebibliography&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/15/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">1-两数之和</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/12/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/">
-                <span class="level-item">《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
-        
-<div id="valine-thread" class="content"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#valine-thread' ,
-        notify: false,
-        verify: false,
-        app_id: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
-        app_key: 'WP50t0qc1XHHrY4RoTTMzS6w',
-        placeholder: 'Say something...'
-    });
-</script>
-
-    </div>
-</div>
-
-
-<div class="level is-size-7 has-text-grey">
-    <div class="level-left">
-        <i class="far fa-eye"></i>
-        <span>&nbsp;</span>
-        <span id="busuanzi_container_page_pv" style="display: inline;">
-            <span id="busuanzi_value_page_pv">0</span>
-        </span>
-    </div>
-</div></div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/avatar.png" alt="神奇海螺">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        神奇海螺
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        菠萝城堡
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>长沙</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/archives">
-                        <p class="title has-text-weight-normal">
-                            35
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <a href="/categories">
-                        <p class="title has-text-weight-normal">
-                            9
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <a href="/tags">
-                        <p class="title has-text-weight-normal">
-                            21
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/MagicConchCpp">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="RSS" href="/">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    目录
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1</span>
-        <span>脚注：#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">2</span>
-        <span>段落缩进#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">3</span>
-        <span>数学公式#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">4</span>
-        <span>图表#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">5</span>
-        <span>页面总体设计#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">6</span>
-        <span>插入代码#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">7</span>
-        <span>正文#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">8</span>
-        <span>列表#</span>
-        </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">9</span>
-        <span>表格#</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">9.1</span>
-        <span>参考文献#</span>
-        </a></li></ul></li></ul>
-            </div>
-        </div>
     </div>
 
     
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/C-Primer-5th-Notes/">
-            <span class="level-start">
-                <span class="level-item">C++Primer(5th) Notes</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/C-Primer-5th-Notes/The-Basics-of-C/">
-            <span class="level-start">
-                <span class="level-item">The Basics of C++</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Hexo/">
-            <span class="level-start">
-                <span class="level-item">Hexo</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/LaTeX/">
-            <span class="level-start">
-                <span class="level-item">LaTeX</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/LeetCode-C/">
-            <span class="level-start">
-                <span class="level-item">LeetCode(C++)</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">27</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/MATLAB/">
-            <span class="level-start">
-                <span class="level-item">MATLAB</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Python/">
-            <span class="level-start">
-                <span class="level-item">Python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/UNIX/">
-            <span class="level-start">
-                <span class="level-item">UNIX</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/UNIX/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-            <span class="level-start">
-                <span class="level-item">UNIX网络编程</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li></ul></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Chapter02/">
-                        <span class="tag">Chapter02</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Chapter13/">
-                        <span class="tag">Chapter13</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Hexo/">
-                        <span class="tag">Hexo</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/LaTeX/">
-                        <span class="tag">LaTeX</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/MATLAB/">
-                        <span class="tag">MATLAB</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                        <span class="tag">UNIX网络编程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/array/">
-                        <span class="tag">array</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/backtracking/">
-                        <span class="tag">backtracking</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/binary-search/">
-                        <span class="tag">binary-search</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/divide-and-conquer/">
-                        <span class="tag">divide-and-conquer</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dynamic-programming/">
-                        <span class="tag">dynamic-programming</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/graphviz/">
-                        <span class="tag">graphviz</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/hash-table/">
-                        <span class="tag">hash-table</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/heap/">
-                        <span class="tag">heap</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linked-list/">
-                        <span class="tag">linked-list</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/math/">
-                        <span class="tag">math</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/pycallgraph/">
-                        <span class="tag">pycallgraph</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/sliding-window/">
-                        <span class="tag">sliding-window</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stack/">
-                        <span class="tag">stack</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/string/">
-                        <span class="tag">string</span>
-                        <span class="tag is-grey">11</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/two-pointers/">
-                        <span class="tag">two-pointers</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">10</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">12</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-30T06:33:51.000Z">2019-12-30</time></div>
-                    <a href="/2019/12/30/%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">2.1 基本内置类型</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C-Primer-5th-Notes/">C++Primer(5th) Notes</a> / <a class="has-link-grey -link" href="/categories/C-Primer-5th-Notes/The-Basics-of-C/">The Basics of C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-18T07:51:49.000Z">2019-12-18</time></div>
-                    <a href="/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C-Primer-5th-Notes/">C++Primer(5th) Notes</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T02:41:54.000Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">27-移除元素</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-15T02:17:40.000Z">2019-12-15</time></div>
-                    <a href="/2019/12/15/26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" class="title has-link-black-ter is-size-6 has-text-weight-normal">26-删除排序数组中的重复项</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-12T11:26:47.000Z">2019-12-12</time></div>
-                    <a href="/2019/12/12/25-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">25-K个一组翻转链表</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/LeetCode-C/">LeetCode(C++)</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/Chapter02/" style="font-size: 10px;">Chapter02</a> <a href="/tags/Chapter13/" style="font-size: 10px;">Chapter13</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/LaTeX/" style="font-size: 10px;">LaTeX</a> <a href="/tags/MATLAB/" style="font-size: 10px;">MATLAB</a> <a href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">UNIX网络编程</a> <a href="/tags/array/" style="font-size: 18px;">array</a> <a href="/tags/backtracking/" style="font-size: 14px;">backtracking</a> <a href="/tags/binary-search/" style="font-size: 10px;">binary-search</a> <a href="/tags/divide-and-conquer/" style="font-size: 12px;">divide-and-conquer</a> <a href="/tags/dynamic-programming/" style="font-size: 12px;">dynamic-programming</a> <a href="/tags/graphviz/" style="font-size: 10px;">graphviz</a> <a href="/tags/hash-table/" style="font-size: 14px;">hash-table</a> <a href="/tags/heap/" style="font-size: 10px;">heap</a> <a href="/tags/linked-list/" style="font-size: 16px;">linked-list</a> <a href="/tags/math/" style="font-size: 16px;">math</a> <a href="/tags/pycallgraph/" style="font-size: 10px;">pycallgraph</a> <a href="/tags/sliding-window/" style="font-size: 10px;">sliding-window</a> <a href="/tags/stack/" style="font-size: 10px;">stack</a> <a href="/tags/string/" style="font-size: 20px;">string</a> <a href="/tags/two-pointers/" style="font-size: 18px;">two-pointers</a>
-    </div>
-</div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
-</div>
 
-                
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/favicon.png" alt="记录LaTeX遇到的问题(持续更新...)" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2019 ZhangYang&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
-                <br>
-                <span id="busuanzi_container_site_uv">
-                共<span id="busuanzi_value_site_uv">0</span>个访客
-                </span>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LaTeX/" rel="tag"># LaTeX</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/12/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/" rel="prev" title="《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间">
+      <i class="fa fa-chevron-left"></i> 《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/15/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" rel="next" title="1-两数之和">
+      1-两数之和 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-</footer>
+      </footer>
+    
+  </article>
+  
+  
+  
 
-<span id="busuanzi_container_site_uv">
-    感谢
-    <span id="busuanzi_value_site_uv">0</span>
-    位用户的
-</span>
-<span id="busuanzi_container_site_pv">
-    <span id="busuanzi_value_site_pv">0</span>
-    次浏览
-</span>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh-Hans");</script>
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
 
 <script>
-var IcarusThemeSettings = {
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-};
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚注："><span class="nav-number">1.</span> <span class="nav-text">脚注：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段落缩进"><span class="nav-number">2.</span> <span class="nav-text">段落缩进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学公式"><span class="nav-number">3.</span> <span class="nav-text">数学公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图表"><span class="nav-number">4.</span> <span class="nav-text">图表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面总体设计"><span class="nav-number">5.</span> <span class="nav-text">页面总体设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入代码"><span class="nav-number">6.</span> <span class="nav-text">插入代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">7.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">8.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">9.</span> <span class="nav-text">表格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">9.1.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
 
-    
-    
-<script src="/js/animation.js"></script>
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-    
-    
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhangYang"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">ZhangYang</p>
+  <div class="site-description" itemprop="description">Cpper的小破站</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangYang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
     });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+
+  
+
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
     });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
+      appKey: 'WP50t0qc1XHHrY4RoTTMzS6w',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
 });
 </script>
-    
-    
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
 </body>
 </html>
