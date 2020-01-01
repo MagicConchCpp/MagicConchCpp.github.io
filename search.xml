@@ -18,7 +18,7 @@
   </entry>
   <entry>
     <title>2.1 基本内置类型</title>
-    <url>/2019/12/30/%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/</url>
+    <url>/2019/12/30/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<ul>
 <li><a href="#2-1-1-算术类型-arithmetic-type">2.1.1 算术类型(arithmetic type)</a><ul>
 <li><a href="#【1】算术类型的分类">【1】算术类型的分类</a></li>
@@ -248,7 +248,7 @@ $$
 <p><strong>注意</strong>：</p>
 <ol>
 <li>对于一个整型字面值来说，我们指定的是最小匹配类型，依据当前值选择最小的尺寸。</li>
-<li>我们还行组合后缀使用，例如 <code>UL</code> 为后缀，将根据具体数值选取 <code>unsigned long</code> 还是 <code>unsigned long long</code>。</li>
+<li>我们还能组合后缀使用，例如 <code>UL</code> 为后缀，将根据具体数值选取 <code>unsigned long</code> 还是 <code>unsigned long long</code>。</li>
 </ol>
 ]]></content>
       <categories>
