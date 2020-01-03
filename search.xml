@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>hexo博客新建菜单，并在该菜单内添加单篇/多篇文章</title>
-    <url>/2020/01/01/h3-hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</url>
+    <url>/2020/01/01/Hexo/h3-hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</url>
     <content><![CDATA[<ul>
 <li><a href="#1-如何添加新的菜单">1 如何添加新的菜单</a></li>
 <li><a href="#2-更改菜单名">2 更改菜单名</a><ul>
@@ -26,7 +26,7 @@
 <li>打开 <code>hexo/source/schedule/index.md</code> ，修改成 <code>title: 札记</code>，写成你想要的名字即可。</li>
 </ol>
 <h2 id="3-使菜单-schedule-里面只包含一篇文章"><a href="#3-使菜单-schedule-里面只包含一篇文章" class="headerlink" title="3 使菜单 schedule 里面只包含一篇文章"></a>3 使菜单 schedule 里面只包含一篇文章</h2><p>具体效果就是，我们点击这个 <code>schedule</code> 就相当于打开了一篇文章，适合用来写日记。</p>
-<p><img src="/2020/01/01/h3-hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/hexo-3_1.png" alt="1"></p>
+<p><img src="/2020/01/01/Hexo/h3-hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/hexo-3_1.png" alt="1"></p>
 <ol>
 <li><p>打开 <code>hexo/source/schedule</code> 文件夹，里面只有一个 <code>index.md</code> 文件。我们在这个文件夹里新建文件 <code>notes.md</code> 。该文件，就是你想要展示的那篇文章。</p>
 </li>
@@ -53,23 +53,16 @@
   </entry>
   <entry>
     <title>hexo-icarus主题下, 文章内部的目录问题</title>
-    <url>/2019/12/31/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/</url>
+    <url>/2019/12/31/Hexo/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
 <li>首先icarus主题，本身就支持目录功能，只要在md文件首部加上 <code>toc: true</code> ，就可以在文章左侧生成目录，且可以正常跳转。</li>
 <li>在我们浏览网站首页时，每一个文章只会显示一部分的内容，并且有一个 <strong>read more</strong> 按钮，供我们阅读全文。</li>
 </ol>
 ]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Icarus</tag>
-      </tags>
   </entry>
   <entry>
     <title>2.1 基本内置类型</title>
-    <url>/2019/12/30/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/</url>
+    <url>/2019/12/30/CPP-Primer/Notes/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<ul>
 <li><a href="#2-1-1-算术类型-arithmetic-type">2.1.1 算术类型(arithmetic type)</a><ul>
 <li><a href="#【1】算术类型的分类">【1】算术类型的分类</a></li>
@@ -312,7 +305,7 @@ $$
   </entry>
   <entry>
     <title>习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。</title>
-    <url>/2019/12/18/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <url>/2019/12/18/CPP-Primer/Exercise/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p><strong>练习13.13</strong>：理解拷贝控制成员和构造函数的一个好方法是定义一个简单的类，为该类定义这些成员，每个成员都打印出自己的名字：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">X</span> &#123;</span></span><br><span class="line">    X() &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"X()"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line">    X(<span class="keyword">const</span> X&amp;) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"X(const X&amp;)"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -379,7 +372,7 @@ $$
   </entry>
   <entry>
     <title>27-移除元素</title>
-    <url>/2019/12/15/27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</url>
+    <url>/2019/12/15/LeetCode/27-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -428,7 +421,7 @@ $$
   </entry>
   <entry>
     <title>26-删除排序数组中的重复项</title>
-    <url>/2019/12/15/26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</url>
+    <url>/2019/12/15/LeetCode/26-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -490,7 +483,7 @@ $$
   </entry>
   <entry>
     <title>25-K个一组翻转链表</title>
-    <url>/2019/12/12/25-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
+    <url>/2019/12/12/LeetCode/25-k%E4%B8%AA%E4%B8%80%E7%BB%84%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -545,7 +538,7 @@ $$
   </entry>
   <entry>
     <title>hexo博客内图片不能正常显示，但本地文件可以显示</title>
-    <url>/2019/12/11/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/</url>
+    <url>/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/</url>
     <content><![CDATA[<h2 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a>1.1 问题描述</h2><p>markdown文件中，插入图片的方式为 <code>![](文件路径)</code> ，此时markdown文件可以正常显示图片。<br>但是一上传到博客上，便不能正常显示。</p>
 <a id="more"></a>
 <h2 id="1-2-解决办法"><a href="#1-2-解决办法" class="headerlink" title="1.2 解决办法"></a>1.2 解决办法</h2><ol>
@@ -588,7 +581,7 @@ $$
   </entry>
   <entry>
     <title>24-两两交换链表中的节点</title>
-    <url>/2019/12/11/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</url>
+    <url>/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -636,8 +629,8 @@ $$
 <li>注意，<code>p</code> 指针最后会更新（如④所示）。</li>
 <li>当 <code>p</code> 之后的结点数不足两个时，循环结束。</li>
 </ul>
-<p><img src="/2019/12/11/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_1.png" alt="1"></p>
-<p><img src="/2019/12/11/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_2.png" alt="2"></p>
+<p><img src="/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_1.png" alt="1"></p>
+<p><img src="/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_2.png" alt="2"></p>
 <blockquote>
 <p>执行用时: 8 ms, 在所有 cpp 提交中击败了49.37%的用户<br>内存消耗: 8.6 MB, 在所有 cpp 提交中击败了79.04%的用户</p>
 </blockquote>
@@ -652,7 +645,7 @@ $$
   </entry>
   <entry>
     <title>23-合并K个排序链表</title>
-    <url>/2019/12/08/23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
+    <url>/2019/12/08/LeetCode/23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -718,13 +711,13 @@ $$
   </entry>
   <entry>
     <title>执行 hexo d 时，提示连接Github的22端口超时</title>
-    <url>/2019/12/06/h1-hexo%20d%E6%97%B6%EF%BC%8C%E6%8F%90%E7%A4%BA%E8%BF%9E%E6%8E%A5Github%E7%9A%8422%E7%AB%AF%E5%8F%A3%E8%B6%85%E6%97%B6/</url>
+    <url>/2019/12/06/Hexo/h1-hexo%20d%E6%97%B6%EF%BC%8C%E6%8F%90%E7%A4%BA%E8%BF%9E%E6%8E%A5Github%E7%9A%8422%E7%AB%AF%E5%8F%A3%E8%B6%85%E6%97%B6/</url>
     <content><![CDATA[<p><strong>问题预览：</strong></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="keyword">not</span> read from remote repository.</span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="keyword">and</span> the repository exists.</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
 <h2 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a>1.1 问题描述</h2><p>具体错误信息如下：</p>
-<p><img src="/2019/12/06/h1-hexo%20d%E6%97%B6%EF%BC%8C%E6%8F%90%E7%A4%BA%E8%BF%9E%E6%8E%A5Github%E7%9A%8422%E7%AB%AF%E5%8F%A3%E8%B6%85%E6%97%B6/hexo-1_1.png" alt="1"></p>
+<p><img src="/2019/12/06/Hexo/h1-hexo%20d%E6%97%B6%EF%BC%8C%E6%8F%90%E7%A4%BA%E8%BF%9E%E6%8E%A5Github%E7%9A%8422%E7%AB%AF%E5%8F%A3%E8%B6%85%E6%97%B6/hexo-1_1.png" alt="1"></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ssh: connect to host github.com port <span class="number">22</span>: Connection timed out</span><br><span class="line">fatal: Could <span class="keyword">not</span> read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line"><span class="keyword">and</span> the repository exists.</span><br><span class="line">FATAL Something<span class="number">'</span>s wrong. Maybe you can find the solution here: https:<span class="comment">//hexo.io/docs/troubleshooting.html</span></span><br><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (F:\Program Files\hexo\node_modules\hexo-util\lib\spawn.js:<span class="number">51</span>:<span class="number">21</span>)</span><br><span class="line">    at ChildProcess.emit (events.js:<span class="number">210</span>:<span class="number">5</span>)</span><br><span class="line">    at ChildProcess.cp.emit (F:\Program Files\hexo\node_modules\cross-spawn\lib\enoent.js:<span class="number">34</span>:<span class="number">29</span>)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">272</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
 
 <p>一开始我把目光聚焦在后面的 <code>Error: Spawn failed</code> 上，但是没有学过前端的我并看不懂。<br>但是，真正的错误是在上面一部分信息里。</p>
@@ -762,7 +755,7 @@ $$
   </entry>
   <entry>
     <title>22-括号生成</title>
-    <url>/2019/11/21/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</url>
+    <url>/2019/11/21/LeetCode/22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -838,7 +831,7 @@ $$
   </entry>
   <entry>
     <title>21-合并两个有序链表</title>
-    <url>/2019/11/19/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
+    <url>/2019/11/19/LeetCode/21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -907,7 +900,7 @@ $$
   </entry>
   <entry>
     <title>20-有效的括号</title>
-    <url>/2019/11/15/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</url>
+    <url>/2019/11/15/LeetCode/20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -956,7 +949,7 @@ $$
   </entry>
   <entry>
     <title>19-删除链表的倒数第N个节点</title>
-    <url>/2019/11/14/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/</url>
+    <url>/2019/11/14/LeetCode/19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1028,7 +1021,7 @@ $$
   </entry>
   <entry>
     <title>18-四数之和</title>
-    <url>/2019/11/14/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <url>/2019/11/14/LeetCode/18-%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1084,7 +1077,7 @@ $$
   </entry>
   <entry>
     <title>17-电话号码的字母组合</title>
-    <url>/2019/11/10/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/</url>
+    <url>/2019/11/10/LeetCode/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1105,7 +1098,7 @@ $$
 </tbody></table>
 <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定一个仅包含数字 <code>2-9</code> 的字符串，返回所有它能表示的字母组合。</p>
 <p>给出数字到字母的映射如下（与电话按键相同）。注意 <code>1</code> 不对应任何字母。</p>
-<img src="/2019/11/10/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/17.png" width="300" height="300" alt="图片名称">
+<img src="/2019/11/10/LeetCode/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/17.png" width="300" height="300" alt="图片名称">
 
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">示例:</span><br><span class="line"></span><br><span class="line">输入：<span class="string">"23"</span></span><br><span class="line">输出：[<span class="string">"ad"</span>, <span class="string">"ae"</span>, <span class="string">"af"</span>, <span class="string">"bd"</span>, <span class="string">"be"</span>, <span class="string">"bf"</span>, <span class="string">"cd"</span>, <span class="string">"ce"</span>, <span class="string">"cf"</span>].</span><br></pre></td></tr></table></figure>
 
@@ -1153,7 +1146,7 @@ $$
 <h3 id="2-3-深度优先遍历"><a href="#2-3-深度优先遍历" class="headerlink" title="2.3 深度优先遍历"></a>2.3 深度优先遍历</h3><blockquote>
 <p>第一段代码来自 <a href="https://leetcode.com/zefengsong/" target="_blank" rel="noopener">zefengsong</a>。<br>第二份代码是参考 <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/yan-du-you-xian-bian-li-by-gqxing/" target="_blank" rel="noopener">GQXING</a> 修改了的第一份代码。<br>图来自 <a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/solution/dian-hua-hao-ma-de-zi-mu-zu-he-by-leetcode/" target="_blank" rel="noopener">LeetCode</a></p>
 </blockquote>
-<p>如图所示。<br><img src="/2019/11/10/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/17_solution.png" alt="2"></p>
+<p>如图所示。<br><img src="/2019/11/10/LeetCode/17-%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88/17_solution.png" alt="2"></p>
 <blockquote>
 <p>执行用时: 0 ms, 在所有 cpp 提交中击败了 100.00% 的用户<br>内存消耗: 8.5 MB, 在所有 cpp 提交中击败了 79.75% 的用户</p>
 </blockquote>
@@ -1174,7 +1167,7 @@ $$
   </entry>
   <entry>
     <title>16-最接近的三数之和</title>
-    <url>/2019/11/07/16-%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <url>/2019/11/07/LeetCode/16-%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1216,7 +1209,7 @@ $$
   </entry>
   <entry>
     <title>15-三数之和</title>
-    <url>/2019/11/04/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <url>/2019/11/04/LeetCode/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1271,7 +1264,7 @@ $$
   </entry>
   <entry>
     <title>14-最长公共前缀</title>
-    <url>/2019/11/02/14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</url>
+    <url>/2019/11/02/LeetCode/14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1324,7 +1317,7 @@ $$
   </entry>
   <entry>
     <title>13-罗马数字转整数</title>
-    <url>/2019/11/01/13-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</url>
+    <url>/2019/11/01/LeetCode/13-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1382,7 +1375,7 @@ $$
   </entry>
   <entry>
     <title>12-整数转罗马数字</title>
-    <url>/2019/10/31/12-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/</url>
+    <url>/2019/10/31/LeetCode/12-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1448,7 +1441,7 @@ $$
   </entry>
   <entry>
     <title>11-盛最多水的容器</title>
-    <url>/2019/10/28/11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</url>
+    <url>/2019/10/28/LeetCode/11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1469,7 +1462,7 @@ $$
 </tbody></table>
 <h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给定 $n$ 个非负整数 $a1，a2，…，an$，每个数代表坐标中的一个点 $(i, ai)$ 。在坐标内画 $n$ 条垂直线，垂直线 $i$ 的两个端点分别为 $(i, ai)$ 和 $(i, 0)$。找出其中的两条线，使得它们与 $x$ 轴共同构成的容器可以容纳最多的水。</p>
 <p><strong>说明</strong>：你不能倾斜容器，且 $n$ 的值至少为 2。</p>
-<p><img src="/2019/10/28/11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/11.jpg" alt="1"></p>
+<p><img src="/2019/10/28/LeetCode/11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/11.jpg" alt="1"></p>
 <p>图中垂直线代表输入数组 <code>[1,8,6,2,5,4,8,3,7]</code>。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 <strong>49</strong>。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入: [<span class="number">1</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">7</span>]</span><br><span class="line">输出: <span class="number">49</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -1502,7 +1495,7 @@ $$
   </entry>
   <entry>
     <title>10-正则表达式匹配</title>
-    <url>/2019/10/27/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</url>
+    <url>/2019/10/27/LeetCode/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1612,7 +1605,7 @@ $$
   </entry>
   <entry>
     <title>9-回文数</title>
-    <url>/2019/10/26/9-%E5%9B%9E%E6%96%87%E6%95%B0/</url>
+    <url>/2019/10/26/LeetCode/9-%E5%9B%9E%E6%96%87%E6%95%B0/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1671,7 +1664,7 @@ $$
   </entry>
   <entry>
     <title>8-字符串转换整数 (atoi)</title>
-    <url>/2019/10/24/8-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0%20(atoi)/</url>
+    <url>/2019/10/24/LeetCode/8-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0%20(atoi)/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1726,7 +1719,7 @@ $$
   </entry>
   <entry>
     <title>7-整数反转</title>
-    <url>/2019/10/22/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/</url>
+    <url>/2019/10/22/LeetCode/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1765,7 +1758,7 @@ $$
   </entry>
   <entry>
     <title>6-Z字形变换</title>
-    <url>/2019/10/21/6-Z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</url>
+    <url>/2019/10/21/LeetCode/6-Z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -1832,7 +1825,7 @@ $$
   </entry>
   <entry>
     <title>5-最长回文子串</title>
-    <url>/2019/10/21/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
+    <url>/2019/10/21/LeetCode/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -2134,7 +2127,7 @@ $$
   </entry>
   <entry>
     <title>4-寻找两个有序数组的中位数</title>
-    <url>/2019/10/19/4-%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</url>
+    <url>/2019/10/19/LeetCode/4-%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -2189,7 +2182,7 @@ $$
   </entry>
   <entry>
     <title>3-无重复字符的最长子串</title>
-    <url>/2019/10/17/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
+    <url>/2019/10/17/LeetCode/3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -2231,14 +2224,14 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>two-pointers</tag>
         <tag>string</tag>
+        <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
   <entry>
     <title>2-两数相加</title>
-    <url>/2019/10/16/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <url>/2019/10/16/LeetCode/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -2277,7 +2270,7 @@ $$
   </entry>
   <entry>
     <title>1-两数之和</title>
-    <url>/2019/10/15/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    <url>/2019/10/15/LeetCode/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
     <content><![CDATA[<table>
 <thead>
 <tr>
@@ -2316,7 +2309,7 @@ $$
   </entry>
   <entry>
     <title>记录LaTeX遇到的问题(持续更新...)</title>
-    <url>/2019/01/21/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/</url>
+    <url>/2019/01/21/other/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/</url>
     <content><![CDATA[<p>用于记录使用 $\LaTeX$ 过程中遇到的问题，有以下几大方面：</p>
 <ol>
 <li>脚注</li>
@@ -2451,7 +2444,7 @@ $$
   </entry>
   <entry>
     <title>《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间</title>
-    <url>/2018/11/12/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/</url>
+    <url>/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/</url>
     <content><![CDATA[<h2 id="1-首先下载《UNIX网络编程》配套源代码"><a href="#1-首先下载《UNIX网络编程》配套源代码" class="headerlink" title="1. 首先下载《UNIX网络编程》配套源代码"></a>1. 首先下载《UNIX网络编程》配套源代码</h2><p><a href="http://www.unpbook.com/" target="_blank" rel="noopener">源代码地址</a></p>
 <hr>
 <a id="more"></a>
@@ -2525,10 +2518,10 @@ $$
 <hr>
 <h2 id="9-结果"><a href="#9-结果" class="headerlink" title="9. 结果"></a>9. 结果</h2><ol>
 <li><p>Ubuntu下</p>
-<p> <img src="/2018/11/12/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/ubuntu.jpg" alt="1"></p>
+<p> <img src="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/ubuntu.jpg" alt="1"></p>
 </li>
 <li><p>Centos下</p>
-<p> <img src="/2018/11/12/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/centos.png" alt="2"></p>
+<p> <img src="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/centos.png" alt="2"></p>
 </li>
 </ol>
 ]]></content>
@@ -2542,7 +2535,7 @@ $$
   </entry>
   <entry>
     <title>利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图</title>
-    <url>/2018/10/11/%E5%88%A9%E7%94%A8graphviz%E8%BD%AF%E4%BB%B6%E5%92%8Cpycallgraph%E5%BA%93%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90Python%E4%BB%A3%E7%A0%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%9B%BE/</url>
+    <url>/2018/10/11/other/%E5%88%A9%E7%94%A8graphviz%E8%BD%AF%E4%BB%B6%E5%92%8Cpycallgraph%E5%BA%93%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90Python%E4%BB%A3%E7%A0%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%9B%BE/</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://pycallgraph.readthedocs.io/en/master/guide/index.html" target="_blank" rel="noopener">参考 https://pycallgraph.readthedocs.io/en/master/guide/index.html</a></p>
 </blockquote>
@@ -2565,7 +2558,7 @@ $$
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 你的主函数代码。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    config = Config()</span><br><span class="line">    <span class="comment"># 关系图中包括(include)哪些函数名。</span></span><br><span class="line">    <span class="comment">#如果是某一类的函数，例如类gobang，则可以直接写'gobang.*'，表示以gobang.开头的所有函数。（利用正则表达式）。</span></span><br><span class="line">    config.trace_filter = GlobbingFilter(include=[</span><br><span class="line">        <span class="string">'main'</span>,</span><br><span class="line">        <span class="string">'draw_chessboard'</span>,</span><br><span class="line">        <span class="string">'draw_chessman'</span>,</span><br><span class="line">        <span class="string">'draw_chessboard_with_chessman'</span>,</span><br><span class="line">        <span class="string">'choose_save'</span>,</span><br><span class="line">        <span class="string">'choose_turn'</span>,</span><br><span class="line">        <span class="string">'choose_mode'</span>,</span><br><span class="line">        <span class="string">'choose_button'</span>,</span><br><span class="line">        <span class="string">'save_chess'</span>,</span><br><span class="line">        <span class="string">'load_chess'</span>,</span><br><span class="line">        <span class="string">'play_chess'</span>,</span><br><span class="line">        <span class="string">'pop_window'</span>,</span><br><span class="line">        <span class="string">'tip'</span>,</span><br><span class="line">        <span class="string">'get_score'</span>,</span><br><span class="line">        <span class="string">'max_score'</span>,</span><br><span class="line">        <span class="string">'win'</span>,</span><br><span class="line">        <span class="string">'key_control'</span></span><br><span class="line">    ])</span><br><span class="line">    <span class="comment"># 该段作用是关系图中不包括(exclude)哪些函数。(正则表达式规则)</span></span><br><span class="line">    <span class="comment"># config.trace_filter = GlobbingFilter(exclude=[</span></span><br><span class="line">    <span class="comment">#     'pycallgraph.*',</span></span><br><span class="line">    <span class="comment">#     '*.secret_function',</span></span><br><span class="line">    <span class="comment">#     'FileFinder.*',</span></span><br><span class="line">    <span class="comment">#     'ModuleLockManager.*',</span></span><br><span class="line">    <span class="comment">#     'SourceFilLoader.*'</span></span><br><span class="line">    <span class="comment"># ])</span></span><br><span class="line">    graphviz = GraphvizOutput()</span><br><span class="line">    graphviz.output_file = <span class="string">'graph.png'</span></span><br><span class="line">    <span class="keyword">with</span> PyCallGraph(output=graphviz, config=config):</span><br><span class="line">        main()</span><br></pre></td></tr></table></figure>
 
 <p>产生的图片效果如下所示：</p>
-<p><img src="/2018/10/11/%E5%88%A9%E7%94%A8graphviz%E8%BD%AF%E4%BB%B6%E5%92%8Cpycallgraph%E5%BA%93%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90Python%E4%BB%A3%E7%A0%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%9B%BE/pycallgraph.png" alt="basic"></p>
+<p><img src="/2018/10/11/other/%E5%88%A9%E7%94%A8graphviz%E8%BD%AF%E4%BB%B6%E5%92%8Cpycallgraph%E5%BA%93%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90Python%E4%BB%A3%E7%A0%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%9B%BE/pycallgraph.png" alt="basic"></p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -2577,7 +2570,7 @@ $$
   </entry>
   <entry>
     <title>如何保存MATLAB GUI界面中的图片</title>
-    <url>/2018/09/16/%E5%A6%82%E4%BD%95%E4%BF%9D%E5%AD%98MATLAB%20GUI%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/</url>
+    <url>/2018/09/16/other/%E5%A6%82%E4%BD%95%E4%BF%9D%E5%AD%98MATLAB%20GUI%E7%95%8C%E9%9D%A2%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/</url>
     <content><![CDATA[<blockquote>
 <p>代码来源自网络，作者未知，侵删。<br>原生支持png，bmp，jpg格式。另外自行添加了清晰度比较高的eps格式（荐）。</p>
 </blockquote>

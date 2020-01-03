@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="1. 首先下载《UNIX网络编程》配套源代码源代码地址">
+<meta name="keywords" content="UNIX网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;12&#x2F;other&#x2F;%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4&#x2F;index.html">
+<meta property="og:site_name" content="Magic Conch Cpp">
+<meta property="og:description" content="1. 首先下载《UNIX网络编程》配套源代码源代码地址">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;12&#x2F;other&#x2F;%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4&#x2F;ubuntu.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;12&#x2F;other&#x2F;%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4&#x2F;centos.png">
+<meta property="og:updated_time" content="2019-12-08T06:58:23.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;12&#x2F;other&#x2F;%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4&#x2F;ubuntu.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间 | Magic Conch Cpp</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Magic Conch Cpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Pineapple Castle</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-12 09:17:55" itemprop="dateCreated datePublished" datetime="2018-11-12T09:17:55+08:00">2018-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-08 14:58:23" itemprop="dateModified" datetime="2019-12-08T14:58:23+08:00">2019-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UNIX/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">UNIX网络编程</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/" class="post-meta-item leancloud_visitors" data-flag-title="《UNIX网络编程》第一步：编写自己的daytime客户端，并从daytime服务器获取时间" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-首先下载《UNIX网络编程》配套源代码"><a href="#1-首先下载《UNIX网络编程》配套源代码" class="headerlink" title="1. 首先下载《UNIX网络编程》配套源代码"></a>1. 首先下载《UNIX网络编程》配套源代码</h2><p><a href="http://www.unpbook.com/" target="_blank" rel="noopener">源代码地址</a></p>
+<hr>
+<a id="more"></a>
+<h2 id="2-复制到虚拟机内-以Ubuntu系统为例-并解压。"><a href="#2-复制到虚拟机内-以Ubuntu系统为例-并解压。" class="headerlink" title="2. 复制到虚拟机内(以Ubuntu系统为例),并解压。"></a>2. 复制到虚拟机内(以Ubuntu系统为例),并解压。</h2><p>解压命令：<strong><code>tar zxvf unpv13e.tar.gz</code></strong></p>
+<hr>
+<p><strong>以下加粗部分的代码块，均为要在终端执行的命令。</strong></p>
+<h2 id="3-在终端进入unpv13e目录。"><a href="#3-在终端进入unpv13e目录。" class="headerlink" title="3. 在终端进入unpv13e目录。"></a>3. 在终端进入unpv13e目录。</h2><ul>
+<li><p>终端执行 <strong><code>./configure</code></strong></p>
+<p>如果出错，先执行命令 <strong><code>chmod +x configure</code></strong>  ，再执行   <strong><code>./configure</code></strong></p>
+</li>
+<li><p>进入lib目录  <strong><code>cd lib</code></strong>  ，并执行命令  <strong><code>make</code></strong></p>
+</li>
+<li><p>返回上一级目录 <strong><code>cd ..</code></strong> ，并进入libfree目录 <strong><code>cd libfree</code></strong> ，再执行 <strong><code>make</code></strong>（这一步可能会有error，没关系，只要在unpv13e文件夹中生成了libunp.a文件就可以）<br><strong><em>最终会在unpv13e文件夹中生成libunp.a文件</em></strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="4-将libunp-a文件复制到-usr-lib"><a href="#4-将libunp-a文件复制到-usr-lib" class="headerlink" title="4. 将libunp.a文件复制到/usr/lib/"></a>4. 将libunp.a文件复制到/usr/lib/</h2><ul>
+<li>返回到unpv13e目录， <strong><code>cd ..</code></strong></li>
+<li>执行复制命令，<strong><code>sudo cp libunp.a /usr/lib</code></strong></li>
+</ul>
+<hr>
+<h2 id="5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中"><a href="#5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中" class="headerlink" title="5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中"></a>5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中</h2><ul>
+<li>用vim编辑unp.h, <strong><code>vim lib/unp.h</code></strong>, 将<em>#include “../config.h”*修改为</em>#include “config.h”*</li>
+<li>拷贝unp.h,  <strong><code>sudo cp lib/unp.h /usr/include</code></strong></li>
+<li>拷贝configure.h,  <strong><code>sudo cp config.h /usr/include</code></strong></li>
+</ul>
+<hr>
+<h2 id="6-安装xinetd服务"><a href="#6-安装xinetd服务" class="headerlink" title="6.安装xinetd服务"></a>6.安装xinetd服务</h2><ul>
+<li>Ubuntu系统中：执行命令， <strong><code>apt install xinetd</code></strong></li>
+<li>Centos系统中：执行命令， <strong><code>yum  -y  install  xinetd*</code></strong></li>
+</ul>
+<hr>
+<h2 id="7-执行daytime客户端"><a href="#7-执行daytime客户端" class="headerlink" title="7. 执行daytime客户端"></a>7. 执行daytime客户端</h2><ul>
+<li><p>找到文件daytimetcpcli.c，在unpv13e/intro目录中，利用cd命令进入该目录。</p>
+</li>
+<li><p>编译该文件， <strong><code>gcc daytimetcpcli.c -lunp</code></strong></p>
+</li>
+<li><p>会生成a.out文件，再执行 <strong><code>./a.out 127.0.0.1</code></strong>，获取本机时间。</p>
+</li>
+</ul>
+<p><strong>如果出现错误：</strong> connect error:Connection refused,表示daytime服务器程序没设置好。</p>
+<p><strong>Ubuntu系统的解决办法：</strong></p>
+<ul>
+<li><p>找到/etc/xinetd.d目录，<strong><code>cd /etc/xinetd.d</code></strong></p>
+</li>
+<li><p>用vim编辑daytime文件，<strong><code>sudo vim daytime</code></strong>（要用超级用户权限才可以修改，因此要加上sudo）</p>
+</li>
+<li><p>daytime文件中的两个<em>disable = yes</em> 改为 <em>disable = no</em>，保存退出vim。</p>
+</li>
+<li><p>重启xinetd服务，执行命令，<strong><code>service xinetd restart</code></strong></p>
+</li>
+<li><p>此时再次执行步骤7。</p>
+</li>
+</ul>
+<p><strong>Centos系统的解决办法：</strong></p>
+<ul>
+<li><p>找到/etc/xinetd.d目录，<strong><code>cd /etc/xinetd.d</code></strong></p>
+</li>
+<li><p>将daytime-stream和daytime-dgram两个文件中的<em>disable = yes</em> 均改为 <em>disable = no</em>。用vim编辑这两个文件，<strong><code>sudo vim daytime-stream</code></strong>和<strong><code>sudo vim daytime-dgram</code></strong>（要用超级用户权限才可以修改，因此要加上sudo）。</p>
+</li>
+<li><p>回到主目录，<strong><code>cd ~</code></strong>。重启xinetd服务，执行命令，<strong><code>/etc/init.d/xinetd restart</code></strong></p>
+</li>
+<li><p>此时再次执行步骤7。</p>
+</li>
+</ul>
+<hr>
+<h2 id="8-注"><a href="#8-注" class="headerlink" title="8. 注"></a>8. 注</h2><ul>
+<li>daytime服务器有许多种，127.0.0.1只是本机地址时间，可以更换别的服务器。</li>
+<li>目前手头只有Ubuntu 18系统和Centos6.8系统，因此只有这两个系统的教程。</li>
+</ul>
+<hr>
+<h2 id="9-结果"><a href="#9-结果" class="headerlink" title="9. 结果"></a>9. 结果</h2><ol>
+<li><p>Ubuntu下</p>
+<p> <img src="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/ubuntu.jpg" alt="1"></p>
+</li>
+<li><p>Centos下</p>
+<p> <img src="/2018/11/12/other/%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84daytime%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%B9%B6%E4%BB%8Edaytime%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4/centos.png" alt="2"></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag"># UNIX网络编程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/11/other/%E5%88%A9%E7%94%A8graphviz%E8%BD%AF%E4%BB%B6%E5%92%8Cpycallgraph%E5%BA%93%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90Python%E4%BB%A3%E7%A0%81%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%9B%BE/" rel="prev" title="利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图">
+      <i class="fa fa-chevron-left"></i> 利用graphviz软件和pycallgraph库自动生成Python代码函数调用关系图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/21/other/%E8%AE%B0%E5%BD%95LaTeX%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0...)/" rel="next" title="记录LaTeX遇到的问题(持续更新...)">
+      记录LaTeX遇到的问题(持续更新...) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-首先下载《UNIX网络编程》配套源代码"><span class="nav-text">1. 首先下载《UNIX网络编程》配套源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-复制到虚拟机内-以Ubuntu系统为例-并解压。"><span class="nav-text">2. 复制到虚拟机内(以Ubuntu系统为例),并解压。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-在终端进入unpv13e目录。"><span class="nav-text">3. 在终端进入unpv13e目录。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-将libunp-a文件复制到-usr-lib"><span class="nav-text">4. 将libunp.a文件复制到/usr/lib/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-修改unpv13e-lib-unp-h，并将它和unpv13e-config-h拷贝到-usr-include中"><span class="nav-text">5. 修改unpv13e/lib/unp.h，并将它和unpv13e/config.h拷贝到/usr/include中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-安装xinetd服务"><span class="nav-text">6.安装xinetd服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-执行daytime客户端"><span class="nav-text">7. 执行daytime客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-注"><span class="nav-text">8. 注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-结果"><span class="nav-text">9. 结果</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhangYang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ZhangYang</p>
+  <div class="site-description" itemprop="description">Cpper的小破站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page" rel="noopener" target="_blank">Liam</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/fnlingnzb-learner/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fnlingnzb-learner&#x2F;" rel="noopener" target="_blank">Boblim</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yuxtech.github.io/" title="https:&#x2F;&#x2F;yuxtech.github.io" rel="noopener" target="_blank">向禹</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mengso.com/" title="https:&#x2F;&#x2F;mengso.com" rel="noopener" target="_blank">萌搜</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangYang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
+      appKey: 'WP50t0qc1XHHrY4RoTTMzS6w',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

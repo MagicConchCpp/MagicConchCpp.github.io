@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="2.1.1 算术类型(arithmetic type) 【1】算术类型的分类 【2】算术类型的尺寸 【3】带&#x2F;无符号类型 【4】如何选择类型   2.1.2 类型转换 【1】六种类型转换的情况 【2】含有无符号类型的表达式   2.1.3 字面值常量(literal) 【1】整型、浮点型、字符、字符串、布尔、指针字面值 【2】转义序列 【3】指定字面值的类型">
+<meta name="keywords" content="Chapter02">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.1 基本内置类型">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;30&#x2F;CPP-Primer&#x2F;Notes&#x2F;2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B&#x2F;index.html">
+<meta property="og:site_name" content="Magic Conch Cpp">
+<meta property="og:description" content="2.1.1 算术类型(arithmetic type) 【1】算术类型的分类 【2】算术类型的尺寸 【3】带&#x2F;无符号类型 【4】如何选择类型   2.1.2 类型转换 【1】六种类型转换的情况 【2】含有无符号类型的表达式   2.1.3 字面值常量(literal) 【1】整型、浮点型、字符、字符串、布尔、指针字面值 【2】转义序列 【3】指定字面值的类型">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-03T08:06:32.629Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/30/CPP-Primer/Notes/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>2.1 基本内置类型 | Magic Conch Cpp</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Magic Conch Cpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Pineapple Castle</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/CPP-Primer/Notes/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2.1 基本内置类型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-30 14:33:51" itemprop="dateCreated datePublished" datetime="2019-12-30T14:33:51+08:00">2019-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-03 16:06:32" itemprop="dateModified" datetime="2020-01-03T16:06:32+08:00">2020-01-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer-5th-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">C++Primer(5th) Notes</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer-5th-Notes/The-Basics-of-C/" itemprop="url" rel="index">
+                    <span itemprop="name">The Basics of C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/30/CPP-Primer/Notes/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="2.1 基本内置类型" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/30/CPP-Primer/Notes/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/30/CPP-Primer/Notes/2.1%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="#2-1-1-算术类型-arithmetic-type">2.1.1 算术类型(arithmetic type)</a><ul>
+<li><a href="#【1】算术类型的分类">【1】算术类型的分类</a></li>
+<li><a href="#【2】算术类型的尺寸">【2】算术类型的尺寸</a></li>
+<li><a href="#【3】带无符号类型">【3】带/无符号类型</a></li>
+<li><a href="#【4】如何选择类型">【4】如何选择类型</a></li>
+</ul>
+</li>
+<li><a href="#2-1-2-类型转换">2.1.2 类型转换</a><ul>
+<li><a href="#【1】六种类型转换的情况">【1】六种类型转换的情况</a></li>
+<li><a href="#【2】含有无符号类型的表达式">【2】含有无符号类型的表达式</a></li>
+</ul>
+</li>
+<li><a href="#2-1-3-字面值常量-literal">2.1.3 字面值常量(literal)</a><ul>
+<li><a href="#【1】整型浮点型字符字符串布尔指针字面值">【1】整型、浮点型、字符、字符串、布尔、指针字面值</a></li>
+<li><a href="#【2】转义序列">【2】转义序列</a></li>
+<li><a href="#【3】指定字面值的类型">【3】指定字面值的类型</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="2-1-1-算术类型-arithmetic-type"><a href="#2-1-1-算术类型-arithmetic-type" class="headerlink" title="2-1-1 算术类型(arithmetic type)"></a>2-1-1 算术类型(arithmetic type)</h2><h3 id="【1】算术类型的分类"><a href="#【1】算术类型的分类" class="headerlink" title="【1】算术类型的分类"></a>【1】算术类型的分类</h3>
+$$
+\text{内置类型} \begin{cases}
+    \text{算术类型} \begin{cases}
+    \text{整型} \begin{cases}
+    \text{布尔值}: bool\\
+    \text{字符型}: char,\ wchar\_t,\ char16\_t,\ char32\_t\\
+    \text{整型数}: short,\ int,\ long,\ long\ long\\
+\end{cases}\\
+    \text{浮点型}: float,\ double,\ long\ double\\
+\end{cases}\\
+    \text{空类型}:void\\
+\end{cases}
+$$
+
+
+<h3 id="【2】算术类型的尺寸"><a href="#【2】算术类型的尺寸" class="headerlink" title="【2】算术类型的尺寸"></a>【2】算术类型的尺寸</h3><p>算术类型的尺寸在不同机器上有所差距，下表列出 C++ 标准规定的尺寸的最小值。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>最小尺寸</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bool</td>
+<td>布尔类型</td>
+<td>未定义</td>
+</tr>
+<tr>
+<td>char</td>
+<td>字符</td>
+<td>8位</td>
+</tr>
+<tr>
+<td>wchar_t</td>
+<td>宽字符</td>
+<td>16位</td>
+</tr>
+<tr>
+<td>char16_t</td>
+<td>Unicode字符</td>
+<td>16位</td>
+</tr>
+<tr>
+<td>char32_t</td>
+<td>Unicode字符</td>
+<td>32位</td>
+</tr>
+<tr>
+<td>short</td>
+<td>短整形</td>
+<td>16位</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整形</td>
+<td>16位</td>
+</tr>
+<tr>
+<td>long</td>
+<td>长整形</td>
+<td>32位</td>
+</tr>
+<tr>
+<td>long long(C++11)</td>
+<td>长整形</td>
+<td>64位</td>
+</tr>
+<tr>
+<td>float</td>
+<td>单精度浮点数</td>
+<td>6位有效数字</td>
+</tr>
+<tr>
+<td>double</td>
+<td>双精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+<tr>
+<td>long double</td>
+<td>扩展精度浮点数</td>
+<td>10位有效数字</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong></p>
+<ol>
+<li>一个 <code>char</code> 大小和一个机器字节一样。</li>
+<li>C++规定，一个 <code>int</code> 至少和一个 <code>short</code> 一样大，一个 <code>long</code> 至少和一个 <code>int</code> 一样大，一个 <code>long long</code> 至少和一个 <code>long</code> 一样大。</li>
+<li>通常，<code>float</code> 为32位， <code>double</code> 为64位， <code>long double</code> 为96位或128位。类型 <code>float</code> 和 <code>double</code> 分别有7和16个有效位。</li>
+</ol>
+<h3 id="【3】带-无符号类型"><a href="#【3】带-无符号类型" class="headerlink" title="【3】带/无符号类型"></a>【3】带/无符号类型</h3><ol>
+<li><code>int</code>, <code>short</code>, <code>long</code>, <code>long long</code> 都是带符号的，在他们前面加上 <code>unsigned</code> 就可以得到无符号类型。<br><strong>注意</strong>：类型 <code>unsigned int</code> 可以缩写为 <code>unsigned</code> 。</li>
+<li>字符型分为三种：<code>char</code>, <code>signed char</code>, <code>unsigned char</code>。因为类型 <code>char</code> 是无符号还是带符号的，对于不同编译器来说，是不同的。<br><strong>注意</strong>：如果你需要一个不大的整数进行运算（算术表达式），明确指定它是 <code>signed char</code> 或者 <code>unsigned char</code> 。</li>
+</ol>
+<h3 id="【4】如何选择类型"><a href="#【4】如何选择类型" class="headerlink" title="【4】如何选择类型"></a>【4】如何选择类型</h3><ol>
+<li>明确知道数值不可能为负时，选无符号类型。</li>
+<li>使用 <code>int</code> 进行整数运算。</li>
+<li>在算术表达式中，不要使用 <code>char</code> 或 <code>bool</code> 。如果你需要一个不大的整数进行运算（算术表达式），明确指定它是 <code>signed char</code> 或者 <code>unsigned char</code> 。</li>
+<li>执行浮点数运算选用 <code>double</code> 。因为 <code>float</code> 精度不够且两者计算代价相差无几。</li>
+</ol>
+<hr>
+<h2 id="2-1-2-类型转换"><a href="#2-1-2-类型转换" class="headerlink" title="2.1.2 类型转换"></a>2.1.2 类型转换</h2><h3 id="【1】六种类型转换的情况"><a href="#【1】六种类型转换的情况" class="headerlink" title="【1】六种类型转换的情况"></a>【1】六种类型转换的情况</h3><ol>
+<li><strong>非布尔-&gt;布尔</strong>：值为 0 则转换为 <code>false</code> ，否则为 <code>true</code> 。</li>
+<li><strong>布尔-&gt;非布尔</strong>：值为 <code>flase</code> 则转换为 0 ，值为 <code>true</code> 则为 1 。</li>
+<li><strong>浮点数-&gt;整数</strong>：去掉小数，只取整数部分。</li>
+<li><strong>整数-&gt;浮点数</strong>：小数部分记为 0 。若整数超过了浮点数的容量，精度可能会损失。</li>
+<li><strong>当赋给 <em>无符号类型</em> 一个超出它范围的数</strong>，结果是该数对 <em>无符号类型表示数值总数</em> 取模后的余数。例如：<code>unsigned char c = -1</code> ，实际结果是对256取模后的余数，即255。</li>
+<li><strong>当赋给 <em>带符号类型</em> 一个超出它范围的数</strong>，结果是<strong>未定义的</strong>。程序可能继续工作、可能崩溃，也可能产生垃圾数据。<br><strong>例如</strong>：用 <code>g++</code> 运行 <code>int b = INT_MAX + 1;</code> , 输出 <code>b = INT_MIN = -2147483648</code>。这意味着在某些编译器下，含有无法预知的行为的程序也能正确执行。</li>
+</ol>
+<h3 id="【2】含有无符号类型的表达式"><a href="#【2】含有无符号类型的表达式" class="headerlink" title="【2】含有无符号类型的表达式"></a>【2】含有无符号类型的表达式</h3><p>当一个表达式既有无符号数，又有 <code>int</code> 值时，那个 <code>int</code> 值就会转换成无符号数。<br>把负值转化成无符号数，相当于给一个无符号数赋一个负值，参考上述 <strong>5</strong>。</p>
+<p><strong>例1：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> u = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">-42</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; u + i &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<p>假设 <code>int</code> 为32位，输出 $2^{32}-42+10=4294967264$ 。</p>
+<p><strong>例2：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> u = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; u * i &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+<p>假设 <code>int</code> 为32位，输出 $(2^{32}-1) \times 1=4294967295$ 。</p>
+<hr>
+<h2 id="2-1-3-字面值常量-literal"><a href="#2-1-3-字面值常量-literal" class="headerlink" title="2.1.3 字面值常量(literal)"></a>2.1.3 字面值常量(literal)</h2><p>形如 -42 的值被称作 <strong>字面值常量</strong> 。</p>
+<h3 id="【1】整型、浮点型、字符、字符串、布尔、指针字面值"><a href="#【1】整型、浮点型、字符、字符串、布尔、指针字面值" class="headerlink" title="【1】整型、浮点型、字符、字符串、布尔、指针字面值"></a>【1】整型、浮点型、字符、字符串、布尔、指针字面值</h3><p>整型字面值可以写作十进制数、八进制数、十六进制数。默认情况下，十进制字面值是带符号数，八进制和十六进制字面值即可能是带符号，也可能是无符号的。</p>
+<p>十进制字面值是 <code>int</code>, <code>long</code>, <code>long long</code> 中，最小的那个，前提是能容纳下当前的值。<br>八进制和十六进制字面值是 <code>int</code>, <code>long</code>, <code>long long</code>, <code>unsigned int</code>, <code>unsigned long</code>, <code>unsigned long long</code> 中，最小的那个，前提是能容纳下当前的值。<br>若最大的数据类型都放不下，将产生错误。</p>
+<p><strong>注意：</strong> 类型 <code>short</code> 没有对应的字面值。</p>
+<p>默认的，浮点数字面值是一个 <code>double</code> 类型。浮点数字面值表现为一个小数或者科学计数法。<br><code>3.14159 ; 2.14159E0 ; 0. ; 0e0 ; .001</code> 。</p>
+<p>由单引号括起来的一个字符成为 <code>char</code> 型字面值，双引号括起来的零个或多个字符则是字符串字面值。</p>
+<p><code>true</code> 和 <code>false</code> 是布尔类型的字面值。</p>
+<p><code>nullptr</code> 是指针字面值。</p>
+<h3 id="【2】转义序列"><a href="#【2】转义序列" class="headerlink" title="【2】转义序列"></a>【2】转义序列</h3><ul>
+<li>不可打印字符：退格等控制字符</li>
+<li>特殊含义的字符：单双引号、问号、反斜线等</li>
+</ul>
+<p>C++规定的转义序列：<br><code>\n \t\a \v \b \&quot; \\ \? \&#39; \r \f</code></p>
+<p>泛华的转义序列，形式是 <code>\x</code> 后跟1个或多个十六进制数，或者 <code>\</code> 后跟着1个、2个、3个八进制数。<br>例如：<code>\7(响铃) \12(换行) \40(空格) \x4d(字符M)</code></p>
+<p>若反斜线 <code>\</code> 后跟的八进制数超过三个，只有前3个构成转义序列。<br>例如：<code>\1234</code>，表示八进制数 123 对应的字符和数字 4 。<br><code>\x</code> 则会用到后面跟的所有数，不过大多数机器 <code>char</code> 只有8位，<code>\x</code> 也不会跟着很多数，超过可能会报错。</p>
+<h3 id="【3】指定字面值的类型"><a href="#【3】指定字面值的类型" class="headerlink" title="【3】指定字面值的类型"></a>【3】指定字面值的类型</h3><p>字符和字符串字面值：</p>
+<table>
+<thead>
+<tr>
+<th>前缀</th>
+<th>含义</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>Unicode 16字符</td>
+<td>char16_t</td>
+</tr>
+<tr>
+<td>U</td>
+<td>Unicode 32字符</td>
+<td>char32_t</td>
+</tr>
+<tr>
+<td>L</td>
+<td>宽字符</td>
+<td>wchar_t</td>
+</tr>
+<tr>
+<td>u8</td>
+<td>UTF-8(仅用于字符串字面常量)</td>
+<td>char</td>
+</tr>
+</tbody></table>
+<p>整型字面值：</p>
+<table>
+<thead>
+<tr>
+<th>后缀</th>
+<th>最小匹配类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u 或 U</td>
+<td>unsigned</td>
+</tr>
+<tr>
+<td>l 或 L</td>
+<td>long</td>
+</tr>
+<tr>
+<td>ll 或 LL</td>
+<td>long long</td>
+</tr>
+</tbody></table>
+<p>浮点型字面值：</p>
+<table>
+<thead>
+<tr>
+<th>后缀</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>f 或 F</td>
+<td>float</td>
+</tr>
+<tr>
+<td>l 或 L</td>
+<td>long double</td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>对于一个整型字面值来说，我们指定的是最小匹配类型，依据当前值选择最小的尺寸。</li>
+<li>我们还能组合后缀使用，例如 <code>UL</code> 为后缀，将根据具体数值选取 <code>unsigned long</code> 还是 <code>unsigned long long</code>。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Chapter02/" rel="tag"># Chapter02</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/18/CPP-Primer/Exercise/vector%E8%B0%83%E7%94%A8%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。">
+      <i class="fa fa-chevron-left"></i> 习题13.13：理解各种操作中的拷贝、构造、析构函数，特别是容器操作中的调用。
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/31/Hexo/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/" rel="next" title="hexo-icarus主题下, 文章内部的目录问题">
+      hexo-icarus主题下, 文章内部的目录问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-1-算术类型-arithmetic-type"><span class="nav-text">2-1-1 算术类型(arithmetic type)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】算术类型的分类"><span class="nav-text">【1】算术类型的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】算术类型的尺寸"><span class="nav-text">【2】算术类型的尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【3】带-无符号类型"><span class="nav-text">【3】带/无符号类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【4】如何选择类型"><span class="nav-text">【4】如何选择类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-2-类型转换"><span class="nav-text">2.1.2 类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】六种类型转换的情况"><span class="nav-text">【1】六种类型转换的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】含有无符号类型的表达式"><span class="nav-text">【2】含有无符号类型的表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-3-字面值常量-literal"><span class="nav-text">2.1.3 字面值常量(literal)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】整型、浮点型、字符、字符串、布尔、指针字面值"><span class="nav-text">【1】整型、浮点型、字符、字符串、布尔、指针字面值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】转义序列"><span class="nav-text">【2】转义序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【3】指定字面值的类型"><span class="nav-text">【3】指定字面值的类型</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhangYang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ZhangYang</p>
+  <div class="site-description" itemprop="description">Cpper的小破站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page" rel="noopener" target="_blank">Liam</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/fnlingnzb-learner/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fnlingnzb-learner&#x2F;" rel="noopener" target="_blank">Boblim</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yuxtech.github.io/" title="https:&#x2F;&#x2F;yuxtech.github.io" rel="noopener" target="_blank">向禹</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mengso.com/" title="https:&#x2F;&#x2F;mengso.com" rel="noopener" target="_blank">萌搜</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangYang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
+      appKey: 'WP50t0qc1XHHrY4RoTTMzS6w',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

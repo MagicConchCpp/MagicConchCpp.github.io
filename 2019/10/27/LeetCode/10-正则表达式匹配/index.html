@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Category Difficulty Pass rate Tags Companies    algorithms Hard 25.22% string &#x2F; dynamic-programming &#x2F; backtracking airbnb &#x2F; facebook &#x2F; google &#x2F; twitter &#x2F; uber   1. 题目给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘">
+<meta name="keywords" content="string,dynamic-programming,backtracking">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10-正则表达式匹配">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;27&#x2F;LeetCode&#x2F;10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D&#x2F;index.html">
+<meta property="og:site_name" content="Magic Conch Cpp">
+<meta property="og:description" content="Category Difficulty Pass rate Tags Companies    algorithms Hard 25.22% string &#x2F; dynamic-programming &#x2F; backtracking airbnb &#x2F; facebook &#x2F; google &#x2F; twitter &#x2F; uber   1. 题目给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-06T03:06:25.722Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/10/27/LeetCode/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>10-正则表达式匹配 | Magic Conch Cpp</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Magic Conch Cpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Pineapple Castle</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/LeetCode/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10-正则表达式匹配
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-27 16:29:57" itemprop="dateCreated datePublished" datetime="2019-10-27T16:29:57+08:00">2019-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-06 11:06:25" itemprop="dateModified" datetime="2019-12-06T11:06:25+08:00">2019-12-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode-C/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode(C++)</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/10/27/LeetCode/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/" class="post-meta-item leancloud_visitors" data-flag-title="10-正则表达式匹配" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/27/LeetCode/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/27/LeetCode/10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <table>
+<thead>
+<tr>
+<th align="center">Category</th>
+<th align="center">Difficulty</th>
+<th align="center">Pass rate</th>
+<th align="center">Tags</th>
+<th align="center">Companies</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">algorithms</td>
+<td align="center">Hard</td>
+<td align="center">25.22%</td>
+<td align="center">string / dynamic-programming / backtracking</td>
+<td align="center">airbnb / facebook / google / twitter / uber</td>
+</tr>
+</tbody></table>
+<h2 id="1-题目"><a href="#1-题目" class="headerlink" title="1. 题目"></a>1. 题目</h2><p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘*’ 的正则表达式匹配。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'.'</span> 匹配任意单个字符</span><br><span class="line"><span class="string">'*'</span> 匹配零个或多个前面的那一个元素</span><br></pre></td></tr></table></figure>
+
+<p>所谓匹配，是要涵盖 <strong>整个</strong> 字符串 s的，而不是部分字符串。</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>s 可能为空，且只包含从 <code>a-z</code> 的小写字母。</li>
+<li>p 可能为空，且只包含从 <code>a-z</code> 的小写字母，以及字符 <code>.</code> 和 <code>*</code>。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">示例 <span class="number">1</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="string">"aa"</span></span><br><span class="line">p = <span class="string">"a"</span></span><br><span class="line">输出: <span class="literal">false</span></span><br><span class="line">解释: <span class="string">"a"</span> 无法匹配 <span class="string">"aa"</span> 整个字符串。</span><br><span class="line"></span><br><span class="line">示例 <span class="number">2</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="string">"aa"</span></span><br><span class="line">p = <span class="string">"a*"</span></span><br><span class="line">输出: <span class="literal">true</span></span><br><span class="line">解释: 因为 <span class="string">'*'</span> 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 <span class="string">'a'</span>。因此，字符串 <span class="string">"aa"</span> 可被视为 <span class="string">'a'</span> 重复了一次。</span><br><span class="line"></span><br><span class="line">示例 <span class="number">3</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="string">"ab"</span></span><br><span class="line">p = <span class="string">".*"</span></span><br><span class="line">输出: <span class="literal">true</span></span><br><span class="line">解释: <span class="string">".*"</span> 表示可匹配零个或多个（<span class="string">'*'</span>）任意字符（<span class="string">'.'</span>）。</span><br><span class="line"></span><br><span class="line">示例 <span class="number">4</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="string">"aab"</span></span><br><span class="line">p = <span class="string">"c*a*b"</span></span><br><span class="line">输出: <span class="literal">true</span></span><br><span class="line">解释: 因为 <span class="string">'*'</span> 表示零个或多个，这里 <span class="string">'c'</span> 为 <span class="number">0</span> 个, <span class="string">'a'</span> 被重复一次。因此可以匹配字符串 <span class="string">"aab"</span>。</span><br><span class="line"></span><br><span class="line">示例 <span class="number">5</span>:</span><br><span class="line">输入:</span><br><span class="line">s = <span class="string">"mississippi"</span></span><br><span class="line">p = <span class="string">"mis*is*p*."</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/regular-expression-matching" target="_blank" rel="noopener">https://leetcode-cn.com/problems/regular-expression-matching</a></p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一：递归法"><a href="#2-1-解法一：递归法" class="headerlink" title="2.1 解法一：递归法"></a>2.1 解法一：递归法</h3><blockquote>
+<p>参考：<a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/di-gui-dong-tai-gui-hua-by-joy-teng/" target="_blank" rel="noopener">Joy</a></p>
+</blockquote>
+<ol>
+<li><p>p为空。s为空，则返回true；s不为空，则返回false。</p>
+</li>
+<li><p>当p的第二个元素是 <code>*</code> 时，<strong>有两种情况，满足一种就可以（即 <code>||</code> ）</strong>：</p>
+<ol>
+<li><strong>剔除p中前两个元素，再来判断是否匹配。</strong><br> 例如：<code>s = &quot;aab&quot;</code>, <code>p = &quot;c*a*b&quot;</code>。其中 <code>c*</code> 可以是0个c，所以可以无视掉。<br> 直接判断<code>s = &quot;aab&quot;</code> 和 <code>p = &quot;a*b&quot;</code>是否匹配。  </li>
+<li><strong>当 <code>s[0] == p[0] || p[0] == &#39;.&#39;</code> 时，剔除s中第一个元素，再来判断是否匹配。</strong><br> 例如：<code>s = &quot;aab&quot;</code>, <code>p = &quot;a*b&quot;</code>。<code>a*</code>可以匹配0~多个，<code>s[0] = &#39;a&#39;</code>被匹配，可以删除。接下来比较<code>s = &quot;ab&quot;</code> 和 <code>p = &quot;a*b&quot;</code>是否匹配。</li>
+</ol>
+</li>
+<li><p><strong>如果第二个元素不是 <code>*</code>，那就只能是 <code>a-z</code> 或者 <code>&#39;.&#39;</code> 了。</strong><br>当第一个元素两两匹配时，我们就可以删除掉这俩元素了，因为没有 <code>*</code>的情况下，<code>a-z</code> 和 <code>&#39;.&#39;</code>只能匹配一次。<br>例如：<code>s = &quot;aab&quot;</code>, <code>p = &quot;.a*b&quot;</code>。因为 <code>p[1] = &#39;a&#39;</code>, <code>p[0] = &#39;.&#39;, s[0] = &#39;a&#39;</code>，两者匹配。所以剔除掉首元素，接下来判断<code>s = &quot;ab&quot;</code>, <code>p = &quot;a*b&quot;</code>是否匹配。</p>
+</li>
+</ol>
+<blockquote>
+<p>执行用时: 300 ms, 在所有 cpp 提交中击败了29.78%的用户<br>内存消耗: 15.5 MB, 在所有 cpp 提交中击败了14.56%的用户</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isMatch</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p.empty())</span><br><span class="line">            <span class="keyword">return</span> s.empty();</span><br><span class="line">        <span class="keyword">if</span> (p.size() &gt; <span class="number">1</span> &amp;&amp; p[<span class="number">1</span>] == <span class="string">'*'</span>)</span><br><span class="line">            <span class="keyword">return</span> isMatch(s, p.substr(<span class="number">2</span>)) || (!s.empty() &amp;&amp; (s[<span class="number">0</span>] == p[<span class="number">0</span>] || p[<span class="number">0</span>] == <span class="string">'.'</span>) &amp;&amp; isMatch(s.substr(<span class="number">1</span>), p));</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> !s.empty() &amp;&amp; (s[<span class="number">0</span>] == p[<span class="number">0</span>] || p[<span class="number">0</span>] == <span class="string">'.'</span>) &amp;&amp; isMatch(s.substr(<span class="number">1</span>), p.substr(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-解法二：动态规划"><a href="#2-2-解法二：动态规划" class="headerlink" title="2.2 解法二：动态规划"></a>2.2 解法二：动态规划</h3><blockquote>
+<p>参考：<a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/dong-tai-gui-hua-zen-yao-cong-0kai-shi-si-kao-da-b/" target="_blank" rel="noopener">乔碧萝殿下❤</a>，<a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/zheng-ze-biao-da-shi-pi-pei-dong-tai-gui-hua-by-jy/" target="_blank" rel="noopener">Krahets</a></p>
+</blockquote>
+<p><strong>dp数组的样子:</strong> <code>s=&quot;abb&quot;,p=&quot;ab*c*&quot;</code>，方便大家理解。<br>为什么加 <code>&#39;#&#39;</code> 见步骤5。<br><code>1</code> 表示 <code>true</code>，<code>0</code> 表示 <code>false</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta"># a b * c *</span></span><br><span class="line"># <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line">a <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">b <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">b <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>建立二维数组 <code>dp</code>，<code>dp[i][j]</code> 表示 <code>s</code> 的前 <code>i</code> 个元素和 <code>p</code> 的前 <code>j</code> 个元素是否匹配。</p>
+</li>
+<li><p>首先分析最简单的情况：<code>s[i] == p[j]</code>。此时若s的前<code>i-1</code>个元素和p的前<code>j-1</code>个元素相匹配，那么s的前<code>i</code>个元素和p的前<code>j</code>个元素也必相匹配。即此时的状态转移方程为: <code>dp[i][j] = dp[i - 1][j - 1]</code>。</p>
+</li>
+<li><p>第二种情况，当 <code>p[j] == &#39;.&#39;</code> 时，和2中情况相同，状态转移方程仍为：<code>dp[i][j] = dp[i - 1][j - 1]</code>。</p>
+</li>
+<li><p>第三种比较复杂的情况，当 <code>p[j] == &#39;*&#39;</code>时。此时我们必须要考虑 <code>&#39;*&#39;</code> 之前的元素，分为以下两种情况：  </p>
+<ol>
+<li><strong><code>s[i] != p[j - 1]</code>：<code>dp[i][j] = dp[i][j - 2]</code></strong>，此时表示 <code>*</code> 前面的字母根本和 <code>s[i]</code> 中字母不相同。<br>例如： <code>s = &quot;abb&quot;, p = &quot;ab*c*&quot;</code>，对于p中第二个 <code>*</code> 来说，其前面的字母<code>c</code>满足这种情况，<code>c*</code>相当于匹配了0次c，相当于直接剔除 <code>c*</code>，是否匹配取决于<code>s = &quot;abb&quot;, p = &quot;ab*&quot;</code>。</li>
+<li><strong><code>s[i] == p[j - 1] || p[j] == &#39;.&#39;</code></strong>，此时表示匹配上了，但是不知道匹配了几次。<ul>
+<li><strong>匹配多次： <code>dp[i][j] = dp[i-1][j]</code></strong><br>例如：<code>s = &quot;abbb&quot;, p = &quot;ab*&quot;</code>，此时代表匹配了<code>3</code>次<code>b</code>。<br>和<code>s = &quot;abb&quot;, p = &quot;ab*</code>的匹配状态相同，继而又和<code>s = &quot;ab&quot;, p = &quot;ab*</code>的匹配状态相同。</li>
+<li><strong>匹配一次：<code>dp[i][j] = dp[i][j - 1]</code></strong><br>例如：<code>s = &quot;ab&quot;, p = &quot;ab*&quot;</code>。若<code>s = &quot;ab&quot;, p = &quot;ab</code>匹配，那么它肯定也匹配。</li>
+<li><strong>匹配零次：<code>dp[i][j] = dp[i][j - 2]</code></strong><br>例如：<code>s = &quot;ab&quot;, p = &quot;abc*&quot;</code>，对于<code>c</code>来说匹配了0次，那么<code>c*</code>就没有什么意义，也就可以剔除掉<code>c*</code>。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>考虑边界值的问题。</strong><br>因为如果当 <code>i=0</code> 时，<code>dp[i][j] = dp[i - 1][j - 1]</code>就会数组越界。这里我们的处理办法是行和列各增加一个维度，即: <code>dp[m + 1][n + 1]</code>。<br>这时读者可能会有疑问，还有 <code>dp[j - 2]</code> 的情况呢，你这里只增加了 <code>1</code> ，<code>j = 0</code> 时仍然会数组越界啊？实际上我们观察步骤4，<code>dp[j - 2]</code>只出现在 <code>p[j] == &#39;*&#39;</code> 的情况下，而 <code>*</code> 不可能是 <code>p</code> 的首元素的。</p>
+</li>
+<li><p><strong>数组 <code>dp</code> 的初始化。</strong><br>我们只需要对<strong>第一列</strong>和<strong>第一行</strong>进行初始化即可，其他地方均赋值为 <code>false</code>。我们的行和列都比原来增加了1，我们可以假设在 <code>s</code> 和 <code>p</code> 前面都加了一个字符<code>&#39;#&#39;</code>。<br>例如 <code>s = &quot;#abb&quot;, p = &quot;#ab*c*&quot;</code>，那么dp的第一行就是代表 <code>s[0]</code> 和 <code>p</code> 的前 <code>j</code> 个元素是否匹配。此时 <code>dp[0][0] = true</code>，因为 <code>s[0] = p[0] = &#39;#&#39;</code>。  </p>
+<ol>
+<li><p><strong>第一行的初始化：</strong><br>因为我们的 <code>p</code> 始终和 <code>&#39;#&#39;</code>进行匹配判断，并且 <code>p[0] = &#39;#&#39;</code> ，那么后面只要出现了 <code>&#39;*&#39;</code>，那它肯定匹配了0次；单独出现 <code>a-z</code> 或者 <code>&#39;.&#39;</code> 肯定无法与 <code>s[0] = &#39;#&#39;</code> 匹配，因为 <code>p</code> 首元素就是 <code>#</code>。</p>
+</li>
+<li><p><strong>第一列的初始化：</strong><br>例如 <code>s = &quot;#abb&quot;, p = &quot;#ab*c*&quot;</code>，那么dp的第一行就是 <code>p[0]</code> 和 <code>s</code> 的前 <code>i</code> 个元素是否匹配。我们可以看出，只有 <code>p[0] = s[0] = &#39;#&#39;</code> 是匹配的，其他地方都不匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#&#39;</code> 匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#a&#39;</code> 不匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#ab&#39;</code> 也不匹配。<br><code>&#39;#&#39;</code> 和 <code>&#39;#abb&#39;</code> 也不匹配。</p>
+<p>下面举两个例子方便大家理解初始化规则，只需看第一列和第一行即可。<br><strong>初始化例子1：</strong><code>s = &quot;#abb&quot;, p = &quot;#ab*c*&quot;</code>时：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta"># a b * c *</span></span><br><span class="line"># <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line">a <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">b <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">b <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化例子2：</strong><code>s = &quot;#abb&quot;, p = &quot;#a*b*c*&quot;</code>时：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="meta"># a * b * c *</span></span><br><span class="line"># <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">a <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">b <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br><span class="line">b <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>执行用时: 4 ms, 在所有 cpp 提交中击败了98.13%的用户<br>内存消耗: 8.4 MB, 在所有 cpp 提交中击败了91.48%的用户</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isMatch</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = s.size();</span><br><span class="line">        <span class="keyword">int</span> n = p.size();</span><br><span class="line">        <span class="keyword">bool</span> dp[m + <span class="number">1</span>][n + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;i : dp)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;j : i)</span><br><span class="line">                j = <span class="literal">false</span>;</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> j = <span class="number">0</span>; j &lt; n; ++ j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p[j] == <span class="string">'*'</span>)</span><br><span class="line">                dp[<span class="number">0</span>][j + <span class="number">1</span>] = dp[<span class="number">0</span>][j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; m; ++ i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> j = <span class="number">0</span>; j &lt; n; ++ j) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s[i] == p[j] || p[j] == <span class="string">'.'</span>)</span><br><span class="line">                    dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i][j];</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (p[j] == <span class="string">'*'</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (s[i] != p[j - <span class="number">1</span>] &amp;&amp; p[j - <span class="number">1</span>] != <span class="string">'.'</span>)</span><br><span class="line">                        dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                         dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i][j + <span class="number">1</span>] || dp[i + <span class="number">1</span>][j] || dp[i + <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-解法三：有限状态自动机"><a href="#2-3-解法三：有限状态自动机" class="headerlink" title="2.3 解法三：有限状态自动机"></a>2.3 解法三：有限状态自动机</h3><p>没学过，日后再更。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/string/" rel="tag"># string</a>
+              <a href="/tags/dynamic-programming/" rel="tag"># dynamic-programming</a>
+              <a href="/tags/backtracking/" rel="tag"># backtracking</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/26/LeetCode/9-%E5%9B%9E%E6%96%87%E6%95%B0/" rel="prev" title="9-回文数">
+      <i class="fa fa-chevron-left"></i> 9-回文数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/28/LeetCode/11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" rel="next" title="11-盛最多水的容器">
+      11-盛最多水的容器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目"><span class="nav-text">1. 题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-解法"><span class="nav-text">2. 解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-解法一：递归法"><span class="nav-text">2.1 解法一：递归法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-解法二：动态规划"><span class="nav-text">2.2 解法二：动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-解法三：有限状态自动机"><span class="nav-text">2.3 解法三：有限状态自动机</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhangYang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ZhangYang</p>
+  <div class="site-description" itemprop="description">Cpper的小破站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page" rel="noopener" target="_blank">Liam</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/fnlingnzb-learner/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fnlingnzb-learner&#x2F;" rel="noopener" target="_blank">Boblim</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yuxtech.github.io/" title="https:&#x2F;&#x2F;yuxtech.github.io" rel="noopener" target="_blank">向禹</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mengso.com/" title="https:&#x2F;&#x2F;mengso.com" rel="noopener" target="_blank">萌搜</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangYang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
+      appKey: 'WP50t0qc1XHHrY4RoTTMzS6w',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
