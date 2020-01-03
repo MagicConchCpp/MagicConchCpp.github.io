@@ -264,12 +264,12 @@
             </span>
 
           
-            <span id="/2020/01/01/Hexo/h3-hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/" class="post-meta-item leancloud_visitors" data-flag-title="hexo博客新建菜单，并在该菜单内添加单篇/多篇文章" title="阅读次数">
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -663,7 +663,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       avatar: 'mm',
       meta: guest,
       pageSize: '10' || 10,
-      visitor: true,
+      visitor: false,
       lang: '' || 'zh-cn',
       path: location.pathname,
       recordIP: false,
