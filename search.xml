@@ -52,57 +52,6 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo博客新建菜单，并在该菜单内添加单篇/多篇文章</title>
-    <url>/2020/01/01/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<ul>
-<li><a href="#1-如何添加新的菜单">1 如何添加新的菜单</a></li>
-<li><a href="#2-更改菜单名">2 更改菜单名</a><ul>
-<li><a href="#2-1-更改左侧菜单名-schedule">2.1 更改左侧菜单名 schedule</a></li>
-<li><a href="#2-1-更改-schedule-页面内上方的文字">2.1 更改 schedule 页面内上方的文字</a></li>
-</ul>
-</li>
-<li><a href="#3-使菜单-schedule-里面只包含一篇文章">3 使菜单 schedule 里面只包含一篇文章。</a></li>
-<li><a href="#4-使菜单-schedule-里面包含多篇文章">4 使菜单 schedule 里面包含多篇文章。</a></li>
-</ul>
-<a id="more"></a>
-
-<h2 id="1-如何添加新的菜单"><a href="#1-如何添加新的菜单" class="headerlink" title="1 如何添加新的菜单"></a>1 如何添加新的菜单</h2><p>执行命令：<code>hexo new page schedule</code>, 这里的菜单名就是 <code>schedule</code>。</p>
-<p>这时候我们就会发现，网站上多了一个菜单。但是点击这个菜单，页面里只有 <strong>schedule</strong> 这几个大字。</p>
-<h2 id="2-更改菜单名"><a href="#2-更改菜单名" class="headerlink" title="2 更改菜单名"></a>2 更改菜单名</h2><h3 id="2-1-更改左侧菜单名-schedule"><a href="#2-1-更改左侧菜单名-schedule" class="headerlink" title="2.1 更改左侧菜单名 schedule"></a>2.1 更改左侧菜单名 schedule</h3><ol>
-<li>打开 <code>hexo/_config.yml</code> 文件，找到 <code>language:</code>，这行代码。例如我的语言是 <code>language: zh-CN</code> 。</li>
-<li>打开文件 <code>hexo/themes/next/language</code>（next是我的主题，打开你当前主题里的 <code>language</code> 文件夹）。那么我就打开 <code>language/zh-CN.yml</code>，与你的语言对应的文件。</li>
-<li>在 <code>Menu:</code> 下方添加一行 <code>schedule: 札记</code>，就修改成 <strong>札记</strong> 了。</li>
-</ol>
-<h3 id="2-1-更改-schedule-页面内上方的文字"><a href="#2-1-更改-schedule-页面内上方的文字" class="headerlink" title="2.1 更改 schedule 页面内上方的文字"></a>2.1 更改 schedule 页面内上方的文字</h3><ol>
-<li>打开 <code>hexo/source/schedule/index.md</code> ，修改成 <code>title: 札记</code>，写成你想要的名字即可。</li>
-</ol>
-<h2 id="3-使菜单-schedule-里面只包含一篇文章"><a href="#3-使菜单-schedule-里面只包含一篇文章" class="headerlink" title="3 使菜单 schedule 里面只包含一篇文章"></a>3 使菜单 schedule 里面只包含一篇文章</h2><p>具体效果就是，我们点击这个 <code>schedule</code> 就相当于打开了一篇文章，适合用来写日记。</p>
-<p><img src="/2020/01/01/hexo%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0/hexo-3_1.png" alt="1"></p>
-<ol>
-<li><p>打开 <code>hexo/source/schedule</code> 文件夹，里面只有一个 <code>index.md</code> 文件。我们在这个文件夹里新建文件 <code>notes.md</code> 。该文件，就是你想要展示的那篇文章。</p>
-</li>
-<li><p>打开 <code>hexo/themes/next/_config.yml</code> 文件，找到 <code>menu:</code>，添加一行 <code>schedule: /schedule/notes.html || calendar</code> 即可。<code>||</code> 前面的是文章的路径，后面是菜单的图标。图标可以更改，请百度 <code>Font Awesome</code> 。</p>
-</li>
-<li><p><code>notes.md</code> 开头的格式和以前一样，只是没有 <code>categories</code> 和 <code>tags</code> 选项。例如：</p>
- <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 札记</span><br><span class="line">date: <span class="number">2019</span><span class="number">-12</span><span class="number">-30</span> <span class="number">14</span>:<span class="number">33</span>:<span class="number">51</span></span><br><span class="line">toc: <span class="literal">true</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="4-使菜单-schedule-里面包含多篇文章"><a href="#4-使菜单-schedule-里面包含多篇文章" class="headerlink" title="4 使菜单 schedule 里面包含多篇文章"></a>4 使菜单 schedule 里面包含多篇文章</h2><p>这里用到的办法借用了 <code>categories</code> 的分类功能，其实就是将某个分类移到了左侧菜单上。</p>
-<ol>
-<li>我们在 <code>_post</code> 目录下有几篇文章想放到该菜单下，我们给这些文章分类为 <code>categories: -schedule</code> 。</li>
-<li>打开 <code>hexo/themes/next/_config.yml</code> 文件，找到 <code>menu:</code>，添加一行 <code>schedule: //categories/schedule/ || calendar</code> 即可。</li>
-<li>这时我们点击，该菜单，就会发现里面可以显示这几篇文章。但是点开目录菜单，发现多了一个分类 <code>schedule</code>，因为实际上这俩是一样的。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo-icarus主题下, 文章内部的目录问题</title>
     <url>/2019/12/31/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
@@ -1129,8 +1078,8 @@ $$
       </categories>
       <tags>
         <tag>array</tag>
-        <tag>hash-table</tag>
         <tag>two-pointers</tag>
+        <tag>hash-table</tag>
       </tags>
   </entry>
   <entry>
@@ -1427,8 +1376,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -1493,8 +1442,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -1657,8 +1606,8 @@ $$
       </categories>
       <tags>
         <tag>string</tag>
-        <tag>dynamic-programming</tag>
         <tag>backtracking</tag>
+        <tag>dynamic-programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1771,8 +1720,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -2281,9 +2230,9 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
+        <tag>two-pointers</tag>
         <tag>hash-table</tag>
         <tag>string</tag>
-        <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
