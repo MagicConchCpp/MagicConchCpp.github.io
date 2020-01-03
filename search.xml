@@ -1078,8 +1078,8 @@ $$
       </categories>
       <tags>
         <tag>array</tag>
-        <tag>two-pointers</tag>
         <tag>hash-table</tag>
+        <tag>two-pointers</tag>
       </tags>
   </entry>
   <entry>
@@ -1376,8 +1376,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>math</tag>
         <tag>string</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -1442,8 +1442,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>math</tag>
         <tag>string</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -1606,8 +1606,8 @@ $$
       </categories>
       <tags>
         <tag>string</tag>
-        <tag>backtracking</tag>
         <tag>dynamic-programming</tag>
+        <tag>backtracking</tag>
       </tags>
   </entry>
   <entry>
@@ -1720,8 +1720,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>math</tag>
         <tag>string</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -2230,8 +2230,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>two-pointers</tag>
         <tag>hash-table</tag>
+        <tag>two-pointers</tag>
         <tag>string</tag>
         <tag>sliding-window</tag>
       </tags>
