@@ -2445,7 +2445,7 @@ $$
   </entry>
   <entry>
     <title>2.2 变量</title>
-    <url>/2019/01/03/CPP-Primer/Notes/2.2%E5%8F%98%E9%87%8F/</url>
+    <url>/2019/01/03/2.2%E5%8F%98%E9%87%8F/</url>
     <content><![CDATA[<ul>
 <li><a href="#2-2-变量-variable">2.2 变量(variable)</a><ul>
 <li><a href="#2-2-1-变量定义">2.2.1 变量定义</a><ul>
@@ -2456,13 +2456,14 @@ $$
 </li>
 <li><a href="#2-2-2-变量声明和定义的关系">2.2.2 变量声明和定义的关系</a></li>
 <li><a href="#2-2-4-名字的作用域">2.2.4 名字的作用域</a><ul>
-<li><a href="#【1】嵌套的作用域">【1】嵌套的作用域</a></li>
+<li><a href="#【1】嵌套的作用域">【1】嵌套的作用域</a><a id="more"></a>
+<h2 id="2-2-变量-variable"><a href="#2-2-变量-variable" class="headerlink" title="2.2 变量(variable)"></a>2.2 变量(variable)</h2></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="2-2-变量-variable"><a href="#2-2-变量-variable" class="headerlink" title="2.2 变量(variable)"></a>2.2 变量(variable)</h2><h3 id="2-2-1-变量定义"><a href="#2-2-1-变量定义" class="headerlink" title="2.2.1 变量定义"></a>2.2.1 变量定义</h3><h4 id="【1】初始值"><a href="#【1】初始值" class="headerlink" title="【1】初始值"></a>【1】初始值</h4><p>对象被创建时获得了一个特定的值，就称该对象被<strong>初始化</strong>了。</p>
+<h3 id="2-2-1-变量定义"><a href="#2-2-1-变量定义" class="headerlink" title="2.2.1 变量定义"></a>2.2.1 变量定义</h3><h4 id="【1】初始值"><a href="#【1】初始值" class="headerlink" title="【1】初始值"></a>【1】初始值</h4><p>对象被创建时获得了一个特定的值，就称该对象被<strong>初始化</strong>了。</p>
 <p>我们经常用 <code>=</code> 进行初始化，注意，初始化并不是赋值。<br>初始化的含义是创建变量时赋予一个初始值，而赋值的含义是把对象的当前值擦除，用一个新值代替。</p>
 <h4 id="【2】列表初始化"><a href="#【2】列表初始化" class="headerlink" title="【2】列表初始化"></a>【2】列表初始化</h4><p>4种初始化形式：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>; # <span class="number">1</span></span><br><span class="line"><span class="keyword">int</span> a = &#123;<span class="number">0</span>&#125;; # <span class="number">2</span></span><br><span class="line"><span class="keyword">int</span> a&#123;<span class="number">0</span>&#125;; # <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="number">0</span>)</span></span>; # <span class="number">4</span></span><br></pre></td></tr></table></figure>
