@@ -2374,8 +2374,8 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>two-pointers</tag>
         <tag>string</tag>
+        <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
