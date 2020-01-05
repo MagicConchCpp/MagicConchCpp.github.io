@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2.3 复合类型</title>
+    <url>/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<ul>
+<li><a href="#2-3-复合类型">2.3 复合类型</a><ul>
+<li><a href="#2-3-1-引用-reference">2.3.1 引用(reference)</a></li>
+<li><a href="#2-3-2-指针-pointer">2.3.2 指针(pointer)</a><ul>
+<li><a href="#【1】空指针">【1】空指针</a></li>
+<li><a href="#【2】指针操作">【2】指针操作</a></li>
+<li><a href="#【3】void-指针">【3】void* 指针</a></li>
+</ul>
+</li>
+<li><a href="#2-3-复合类型的声明">2.3 复合类型的声明</a><ul>
+<li><a href="#【1】定义多个变量">【1】定义多个变量</a></li>
+<li><a href="#【2】指向指针的指针">【2】指向指针的指针</a></li>
+<li><a href="#【3】指向指针的引用">【3】指向指针的引用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-1-引用-reference"><a href="#2-3-1-引用-reference" class="headerlink" title="2.3.1 引用(reference)"></a>2.3.1 引用(reference)</h2><p><em>引用</em>为<em>对象</em>起了另外一个名字，引用类型 引用 另外一种类型。<br>形式为：<code>int &amp;refVal = ival;</code> ，<code>refVal</code> 是 <code>ival</code> 的引用。</p>
+<p>引用必须遵守一下三个规定：</p>
+<ol>
+<li>引用必须被初始化</li>
+<li>引用的初始值必须是一个对象</li>
+<li>引用类型和所绑定对象的类型必须相同。</li>
+</ol>
+<p>引用和它的初始值对象将一直绑定到一起，无法绑定到另一个对象上。<br>引用并非<strong>对象</strong>，它只是为一个对象起了另一个名字。就像每个人都有学名和乳名。<br>所以我们对引用进行一系列操作的同时，也会对<em>与之绑定的对象</em>进行相同的操作。</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal = ival;</span><br><span class="line">refVal = <span class="number">2</span>;  <span class="comment">// 此时ival也变为了2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-2-指针-pointer"><a href="#2-3-2-指针-pointer" class="headerlink" title="2.3.2 指针(pointer)"></a>2.3.2 指针(pointer)</h2><p>指针和引用的两个不同点：</p>
+<ol>
+<li>指针是个对象。</li>
+<li>指针无须在定义时赋值。</li>
+</ol>
+<p>指针的类型要和它所指的对象的类型严格匹配。</p>
+<!-- TODO:指针类型匹配的两种例外：P47 -->
+
+<h3 id="【1】空指针"><a href="#【1】空指针" class="headerlink" title="【1】空指针"></a>【1】空指针</h3><p>生成空指针的三种办法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<!-- TODO: C++11: nullptr -->
+<!-- TODO: 类型转换P143下 -->
+<p><code>nullptr</code> 是指针字面值 (<strong>C++11</strong>)，它可以转换成任意其他指针类型。</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>尽量使用 <code>nullptr</code></li>
+<li><code>int</code> 变量不能赋给指针，即使该变量为0。<br>例如：<code>int i = 0; int *pi = i;</code> , 这是错误的。</li>
+<li>建议初始化所有指针，暂不知道初始化对象是谁，可以先初始化为 <code>nullptr</code>。</li>
+</ol>
+<h3 id="【2】指针操作"><a href="#【2】指针操作" class="headerlink" title="【2】指针操作"></a>【2】指针操作</h3><ol>
+<li><p>赋值永远改变的是等号左侧的对象。</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i1 = <span class="number">0</span>, i2 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;i1;  <span class="comment">// p1暂时指向i1</span></span><br><span class="line">p1 = &amp;i2;  <span class="comment">// 改变了p1的值，i2没有变，p1指向i2。</span></span><br><span class="line">*p1 = <span class="number">10</span>;  <span class="comment">// 改变了i2的值变为10，p1没有变。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>任何非 <code>nullptr, 0, NULL</code> 的指针的条件值都为 <code>true</code>。</p>
+</li>
+<li><p><strong>类型相同</strong> 的合法指针可以进行条件比较。</p>
+<!-- TODO: 更多指针操作 P105-->
+
+</li>
+</ol>
+<h3 id="【3】void-指针"><a href="#【3】void-指针" class="headerlink" title="【3】void* 指针"></a>【3】void* 指针</h3><p><code>void*</code> 指针可以存放任意类型对象的地址。但是我们不能直接操作 <code>void*</code> 指针所指的对象，因为我们不知道它到底是什么类型。</p>
+<h2 id="2-3-复合类型的声明"><a href="#2-3-复合类型的声明" class="headerlink" title="2.3 复合类型的声明"></a>2.3 复合类型的声明</h2><h3 id="【1】定义多个变量"><a href="#【1】定义多个变量" class="headerlink" title="【1】定义多个变量"></a>【1】定义多个变量</h3><p><code>int* p1, p2</code> : p1是指针类型，p2是int</p>
+<h3 id="【2】指向指针的指针"><a href="#【2】指向指针的指针" class="headerlink" title="【2】指向指针的指针"></a>【2】指向指针的指针</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;ival;  <span class="comment">// p1指向 int型的整数</span></span><br><span class="line"><span class="keyword">int</span> **P2 = &amp;p1;  <span class="comment">// p2指向 int型的指针</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="【3】指向指针的引用"><a href="#【3】指向指针的引用" class="headerlink" title="【3】指向指针的引用"></a>【3】指向指针的引用</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i =<span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;</span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;  <span class="comment">// r是指针p的引用，r是p的别名</span></span><br><span class="line">r = &amp;i;  <span class="comment">// 令p指向i</span></span><br><span class="line">*r = <span class="number">0</span>;  <span class="comment">// 令i=0</span></span><br></pre></td></tr></table></figure>
+
+<p>如何理解 <code>int *&amp;r</code> 中 <code>r</code> 是什么类型？  </p>
+<ol>
+<li>首先看离 <code>r</code> 最近的声明符，即 <code>&amp;r</code>， 说明 <code>r</code> 是一个引用类型。</li>
+<li><code>r</code> 引用的什么类型，看剩余的。即 <code>int *</code>，说明 <code>r</code> 引用的是个<code>int</code> 型指针。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>C++Primer(5th) Notes</category>
+        <category>The Basics of C++</category>
+      </categories>
+      <tags>
+        <tag>Chapter02</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2.2 变量(variable)</title>
     <url>/2020/01/03/CPP-Primer/Notes/2.2%E5%8F%98%E9%87%8F/</url>
     <content><![CDATA[<ul>
@@ -2291,8 +2374,8 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>string</tag>
         <tag>two-pointers</tag>
+        <tag>string</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
@@ -2507,89 +2590,6 @@ $$
       </categories>
       <tags>
         <tag>LaTeX</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2.3 复合类型</title>
-    <url>/2019/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<ul>
-<li><a href="#2-3-复合类型">2.3 复合类型</a><ul>
-<li><a href="#2-3-1-引用-reference">2.3.1 引用(reference)</a></li>
-<li><a href="#2-3-2-指针-pointer">2.3.2 指针(pointer)</a><ul>
-<li><a href="#【1】空指针">【1】空指针</a></li>
-<li><a href="#【2】指针操作">【2】指针操作</a></li>
-<li><a href="#【3】void-指针">【3】void* 指针</a></li>
-</ul>
-</li>
-<li><a href="#2-3-复合类型的声明">2.3 复合类型的声明</a><ul>
-<li><a href="#【1】定义多个变量">【1】定义多个变量</a></li>
-<li><a href="#【2】指向指针的指针">【2】指向指针的指针</a></li>
-<li><a href="#【3】指向指针的引用">【3】指向指针的引用</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-3-1-引用-reference"><a href="#2-3-1-引用-reference" class="headerlink" title="2.3.1 引用(reference)"></a>2.3.1 引用(reference)</h2><p><em>引用</em>为<em>对象</em>起了另外一个名字，引用类型 引用 另外一种类型。<br>形式为：<code>int &amp;refVal = ival;</code> ，<code>refVal</code> 是 <code>ival</code> 的引用。</p>
-<p>引用必须遵守一下三个规定：</p>
-<ol>
-<li>引用必须被初始化</li>
-<li>引用的初始值必须是一个对象</li>
-<li>引用类型和所绑定对象的类型必须相同。</li>
-</ol>
-<p>引用和它的初始值对象将一直绑定到一起，无法绑定到另一个对象上。<br>引用并非<strong>对象</strong>，它只是为一个对象起了另一个名字。就像每个人都有学名和乳名。<br>所以我们对引用进行一系列操作的同时，也会对<em>与之绑定的对象</em>进行相同的操作。</p>
-<p>例如：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal = ival;</span><br><span class="line">refVal = <span class="number">2</span>;  <span class="comment">// 此时ival也变为了2</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-2-指针-pointer"><a href="#2-3-2-指针-pointer" class="headerlink" title="2.3.2 指针(pointer)"></a>2.3.2 指针(pointer)</h2><p>指针和引用的两个不同点：</p>
-<ol>
-<li>指针是个对象。</li>
-<li>指针无须在定义时赋值。</li>
-</ol>
-<p>指针的类型要和它所指的对象的类型严格匹配。</p>
-<!-- TODO:指针类型匹配的两种例外：P47 -->
-
-<h3 id="【1】空指针"><a href="#【1】空指针" class="headerlink" title="【1】空指针"></a>【1】空指针</h3><p>生成空指针的三种办法：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
-
-<!-- TODO: C++11: nullptr -->
-<!-- TODO: 类型转换P143下 -->
-<p><code>nullptr</code> 是指针字面值 (<strong>C++11</strong>)，它可以转换成任意其他指针类型。</p>
-<p><strong>注意</strong>：</p>
-<ol>
-<li>尽量使用 <code>nullptr</code></li>
-<li><code>int</code> 变量不能赋给指针，即使该变量为0。<br>例如：<code>int i = 0; int *pi = i;</code> , 这是错误的。</li>
-<li>建议初始化所有指针，暂不知道初始化对象是谁，可以先初始化为 <code>nullptr</code>。</li>
-</ol>
-<h3 id="【2】指针操作"><a href="#【2】指针操作" class="headerlink" title="【2】指针操作"></a>【2】指针操作</h3><ol>
-<li><p>赋值永远改变的是等号左侧的对象。</p>
- <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i1 = <span class="number">0</span>, i2 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;i1;  <span class="comment">// p1暂时指向i1</span></span><br><span class="line">p1 = &amp;i2;  <span class="comment">// 改变了p1的值，i2没有变，p1指向i2。</span></span><br><span class="line">*p1 = <span class="number">10</span>;  <span class="comment">// 改变了i2的值变为10，p1没有变。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>任何非 <code>nullptr, 0, NULL</code> 的指针的条件值都为 <code>true</code>。</p>
-</li>
-<li><p><strong>类型相同</strong> 的合法指针可以进行条件比较。</p>
-<!-- TODO: 更多指针操作 P105-->
-
-</li>
-</ol>
-<h3 id="【3】void-指针"><a href="#【3】void-指针" class="headerlink" title="【3】void* 指针"></a>【3】void* 指针</h3><p><code>void*</code> 指针可以存放任意类型对象的地址。但是我们不能直接操作 <code>void*</code> 指针所指的对象，因为我们不知道它到底是什么类型。</p>
-<h2 id="2-3-复合类型的声明"><a href="#2-3-复合类型的声明" class="headerlink" title="2.3 复合类型的声明"></a>2.3 复合类型的声明</h2><h3 id="【1】定义多个变量"><a href="#【1】定义多个变量" class="headerlink" title="【1】定义多个变量"></a>【1】定义多个变量</h3><p><code>int* p1, p2</code> : p1是指针类型，p2是int</p>
-<h3 id="【2】指向指针的指针"><a href="#【2】指向指针的指针" class="headerlink" title="【2】指向指针的指针"></a>【2】指向指针的指针</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;ival;  <span class="comment">// p1指向 int型的整数</span></span><br><span class="line"><span class="keyword">int</span> **P2 = &amp;p1;  <span class="comment">// p2指向 int型的指针</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="【3】指向指针的引用"><a href="#【3】指向指针的引用" class="headerlink" title="【3】指向指针的引用"></a>【3】指向指针的引用</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i =<span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;</span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;  <span class="comment">// r是指针p的引用，r是p的别名</span></span><br><span class="line">r = &amp;i;  <span class="comment">// 令p指向i</span></span><br><span class="line">*r = <span class="number">0</span>;  <span class="comment">// 令i=0</span></span><br></pre></td></tr></table></figure>
-
-<p>如何理解 <code>int *&amp;r</code> 中 <code>r</code> 是什么类型？  </p>
-<ol>
-<li>首先看离 <code>r</code> 最近的声明符，即 <code>&amp;r</code>， 说明 <code>r</code> 是一个引用类型。</li>
-<li><code>r</code> 引用的什么类型，看剩余的。即 <code>int *</code>，说明 <code>r</code> 引用的是个<code>int</code> 型指针。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>C++Primer(5th) Notes</category>
-        <category>The Basics of C++</category>
-      </categories>
-      <tags>
-        <tag>Chapter02</tag>
       </tags>
   </entry>
   <entry>
