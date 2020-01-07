@@ -221,6 +221,216 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/" class="post-title-link" itemprop="url">2.4 const限定符</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-05 21:04:56" itemprop="dateCreated datePublished" datetime="2020-01-05T21:04:56+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-07 20:57:26" itemprop="dateModified" datetime="2020-01-07T20:57:26+08:00">2020-01-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer-5th-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">C++Primer(5th) Notes</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer-5th-Notes/The-Basics-of-C/" itemprop="url" rel="index">
+                    <span itemprop="name">The Basics of C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="#2-4-1-const的引用-reference-to-const">2.4.1 const的引用(reference to const)</a><ul>
+<li><a href="#【1】初始化和对const的引用">【1】初始化和对const的引用</a></li>
+</ul>
+</li>
+<li><a href="#2-4-2-指针和const">2.4.2 指针和const</a><ul>
+<li><a href="#【1】指向常量的指针-pointer-to-const">【1】指向常量的指针(pointer to const)</a></li>
+<li><a href="#【3】const指针-const-pointer">【2】const指针(const pointer)</a></li>
+</ul>
+</li>
+<li><a href="#2-4-3-顶层const">2.4.3 顶层const</a><ul>
+<li><a href="#【1】顶层底层const的区别">【1】顶层/底层const的区别</a></li>
+</ul>
+</li>
+<li><a href="#2-4-4-constexpr和常量表达式">2.4.4 constexpr和常量表达式</a><ul>
+<li><a href="#【1】constexpr变量">【1】constexpr变量</a></li>
+<li><a href="#【2】字面值类型">【2】字面值类型</a></li>
+<li><a href="#【3】指针和constexpr">【3】指针和constexpr</a></li>
+</ul>
+</li>
+<li><a href="#关于引用的一些补充知识">关于引用的一些补充知识</a><ul>
+<li><a href="#【1】对常量的引用和普通引用的相同点-不同点">【1】对常量的引用和普通引用的相同点/不同点</a></li>
+<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><code>const</code> 对象创建后，值不能被改变。</li>
+<li><code>const</code> 对象必须被初始化。</li>
+</ol>
+<p><strong>这两条对以下所述的 <code>const</code> 类型都适合。</strong></p>
+<h3 id="const对象仅在文件内有效"><a href="#const对象仅在文件内有效" class="headerlink" title="const对象仅在文件内有效"></a>const对象仅在文件内有效</h3><ol>
+<li>如果在多个文件中出现了同名的 <code>const</code> 变量时，相当于在不同文件里分别定义了一个独立的变量。</li>
+<li>若我们希望在文件之间共享，只在一个文件里定义它，其他文件里声明它（<code>extern</code>）。</li>
+</ol>
+<h2 id="2-4-1-const的引用-reference-to-const"><a href="#2-4-1-const的引用-reference-to-const" class="headerlink" title="2.4.1 const的引用(reference to const)"></a>2.4.1 const的引用(reference to const)</h2><p>即：对常量的引用</p>
+<h3 id="【1】初始化和对const的引用"><a href="#【1】初始化和对const的引用" class="headerlink" title="【1】初始化和对const的引用"></a>【1】初始化和对const的引用</h3><ol>
+<li><p>引用类型必须和引用的对象类型不需要一致，只要能够转化成引用的类型即可。因此，常量引用可以绑定 常量/非常量对象、字面值、表达式。</p>
+</li>
+<li><p>非常量引用不能绑定一个常量对象。</p>
+</li>
+<li><p>对常量的引用 不能被用作 修改所指的对象。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r = i;</span><br><span class="line">r = <span class="number">1</span>;  <span class="comment">// 错误，r是常量引用</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="2-4-2-指针和const"><a href="#2-4-2-指针和const" class="headerlink" title="2.4.2 指针和const"></a>2.4.2 指针和const</h2><h3 id="【1】指向常量的指针-pointer-to-const"><a href="#【1】指向常量的指针-pointer-to-const" class="headerlink" title="【1】指向常量的指针(pointer to const)"></a>【1】指向常量的指针(pointer to const)</h3><p>性质和对 <code>const</code> 的引用几乎类似。</p>
+<ol>
+<li>指针类型必须和所指对象的类型一致。</li>
+<li>指向常量的指针可以绑定 常量/非常量对象。</li>
+<li>普通指针不能绑定一个常量对象。</li>
+<li>指向常量的指针 不能通过该指针 修改所指的对象的值。</li>
+</ol>
+<p>唯一的不同就是第2条：对常量的引用可以绑定字面值、表达式。指向常量的指针不能。</p>
+<p><strong>注意：</strong><br>我们不能通过 <code>*p</code> 来修改所指对象的值，但是我们可以修改 <code>p</code> 的值，此时 <code>p</code> 指向另一个对象。也就是说 <code>*p</code> 是一个不可修改的左值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p &lt;&lt; <span class="string">" "</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 0x61fe3c 1</span></span><br><span class="line"><span class="keyword">int</span> *q = &amp;j;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; q &lt;&lt; <span class="string">" "</span> &lt;&lt; *q &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 0x61fe38 2</span></span><br><span class="line">p = q;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p &lt;&lt; <span class="string">" "</span> &lt;&lt; *p &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 0x61fe38 2</span></span><br><span class="line">*p = <span class="number">3</span>;  <span class="comment">// 错误，*p是一个不可修改的左值</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="【2】const指针-const-pointer"><a href="#【2】const指针-const-pointer" class="headerlink" title="【2】const指针(const pointer)"></a>【2】const指针(const pointer)</h3><p>把 <code>*</code> 放在 <code>const</code> 前说明指针是个常量，即指针本身的值不变，而非指向的值不变。<br>我们可以通过 <code>*p</code> 来改变指向的对象的值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> p = &amp;i;</span><br><span class="line">p = j;  <span class="comment">// 错误，p的值不能改变，p中存放着i的地址</span></span><br><span class="line">*p = <span class="number">10</span>;  <span class="comment">// 正确，i的值变为10</span></span><br></pre></td></tr></table></figure>
+
+<p>性质和指向常量的指针相同。</p>
+<h2 id="2-4-3-顶层const"><a href="#2-4-3-顶层const" class="headerlink" title="2.4.3 顶层const"></a>2.4.3 顶层const</h2><p>顶层const(top-level const)：指针本身是个常量。<br>底层const(low-level const)：指针所指的对象是个常量。</p>
+<h3 id="【1】顶层-底层const的区别"><a href="#【1】顶层-底层const的区别" class="headerlink" title="【1】顶层/底层const的区别"></a>【1】顶层/底层const的区别</h3><ol>
+<li>顶层const适用于算术类型、类、指针。</li>
+<li>底层const适用于指针和引用。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> j = i;  <span class="comment">// 顶层，j是int型的对象</span></span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> q = &amp;i;  <span class="comment">// 顶层，表示指针本身是常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i;  <span class="comment">// 底层，表示指针所指对象是个常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r = i;  <span class="comment">// 底层，引用类型都是底层const</span></span><br></pre></td></tr></table></figure>
+
+<p>顶层/底层 <code>const</code> 赋值规则，书上说的太过复杂，其实就是前面几节 const的引用，指向常量的指针，常量指针一些性质。</p>
+<h2 id="2-4-4-constexpr和常量表达式"><a href="#2-4-4-constexpr和常量表达式" class="headerlink" title="2.4.4 constexpr和常量表达式"></a>2.4.4 constexpr和常量表达式</h2><p>常量表达式(const expression)：值不会改变，并且在编译过程中就能得到计算结果的表达式。字面值属于常量表达式。</p>
+<p>一个对象或者表达式是不是常量表达式由数据类型和初始值共同决定。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">20</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> b = a + <span class="number">1</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1</span>; <span class="comment">// no, 因为不是const int</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> d = get_size();  <span class="comment">//no, 我们到运行get_size()时才能确定d的值</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="【1】constexpr变量"><a href="#【1】constexpr变量" class="headerlink" title="【1】constexpr变量"></a>【1】constexpr变量</h3><!-- TODO: C++11: constexpr -->
+<p>我们很难区分一个变量到底是不是常量表达式，或者我们变量的初始值根本不是常量表达式。于是，<strong>C++11</strong> 允许将变量声明为 <code>constexpr</code> 由编译器验证变量是否是常量表达式。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> a = <span class="number">1</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> b = a + <span class="number">1</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> c = size();  <span class="comment">// 当size()是constexpr函数时正确。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="【2】字面值类型"><a href="#【2】字面值类型" class="headerlink" title="【2】字面值类型"></a>【2】字面值类型</h3><p>算术类型、指针和引用都属于字面值类型，自定义类、IO库、string类都不属于。</p>
+<p>指针能定义为 <code>constexpr</code>，但初始值必须为 <code>nullptr</code> 或 <code>0</code>，或者是某个固定地址的对象。函数体内的变量一般并非存在固定地址中，所以 <code>constexpr</code> 指针不能指向这样的对象，函数体之外的可以。当然函数体内的静态变量也可以。</p>
+<h3 id="【3】指针和constexpr"><a href="#【3】指针和constexpr" class="headerlink" title="【3】指针和constexpr"></a>【3】指针和constexpr</h3><p><code>constexpr</code> 只对指针本身有效，与其所指对象无关。<br>例如：<code>constexpr int *q = nullptr</code>，q是一个常量指针。</p>
+<p><code>constexpr</code> 指针既可以指向常量也可指向非常量。</p>
+<!-- TODO: VS: 对常量的引用 VS 普通引用 -->
+<h2 id="关于引用的一些补充知识"><a href="#关于引用的一些补充知识" class="headerlink" title="关于引用的一些补充知识"></a>关于引用的一些补充知识</h2><h3 id="【1】对常量的引用和普通引用的相同点-不同点"><a href="#【1】对常量的引用和普通引用的相同点-不同点" class="headerlink" title="【1】对常量的引用和普通引用的相同点/不同点"></a>【1】对常量的引用和普通引用的相同点/不同点</h3><p><strong>相同点</strong>：</p>
+<ol>
+<li>必须初始化。</li>
+</ol>
+<p><strong>不同点</strong>：</p>
+<ol>
+<li>对常量的引用不能被修改它的值。</li>
+<li>普通引用必须绑定到<strong>类型相同</strong>的对象上，对常量的引用可以绑定 常量/非常量对象、字面值、表达式，只要能够转化成对应的类型即可。</li>
+</ol>
+<h3 id="【2】有没有-int-amp-const-r-i"><a href="#【2】有没有-int-amp-const-r-i" class="headerlink" title="【2】有没有 int &amp;const r = i"></a>【2】有没有 <code>int &amp;const r = i</code></h3><p>指针有两种行为的 <code>const</code> ，引用有没有呢？  </p>
+<p>首先，我们明确一些概念。</p>
+<ol>
+<li><code>const int i = 0; const int &amp;r1 = i;</code>，像这样，我们把引用绑定到 <code>const</code> 对象上，这叫<strong>对常量的引用</strong>。当然我们也能绑定到非常量对象上，这个暂时不考虑。</li>
+<li><code>const int i = 0; int &amp;const r2 = i;</code>，这种情况的 <code>const</code> 限定的是我们不能更改 <code>r2</code> 的绑定对象。</li>
+</ol>
+<p>我们学习引用时就知道，<strong>不允许改变引用所绑定的对象</strong>。这其实就说明：引用本身就是 <code>const</code> 的。所以 <code>int &amp;const r2 = i;</code> 这条语句本质上就是 <code>int &amp;r2 = i;</code> ，是冗余的，所以C++没有这种语法。</p>
+<blockquote>
+<p><a href="https://www.embedded.com/references-and-const/" target="_blank" rel="noopener">References and const</a><br><a href="https://www.quora.com/What-are-the-differences-between-int-const-int-const-const-int-and-const-int-in-C" target="_blank" rel="noopener">Quora</a><br><a href="https://blog.csdn.net/xiaoyi39/article/details/51273795" target="_blank" rel="noopener">C++中的引用与const</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -252,7 +462,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-05 17:20:09" itemprop="dateModified" datetime="2020-01-05T17:20:09+08:00">2020-01-05</time>
+                <time title="修改时间：2020-01-07 11:29:58" itemprop="dateModified" datetime="2020-01-07T11:29:58+08:00">2020-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,7 +546,7 @@
 <li>引用的初始值必须是一个对象</li>
 <li>引用类型和所绑定对象的类型必须相同。</li>
 </ol>
-<p>引用和它的初始值对象将一直绑定到一起，无法绑定到另一个对象上。<br>引用并非<strong>对象</strong>，它只是为一个对象起了另一个名字。就像每个人都有学名和乳名。<br>所以我们对引用进行一系列操作的同时，也会对<em>与之绑定的对象</em>进行相同的操作。</p>
+<p>引用和它的初始值对象将一直绑定到一起，无法绑定到另一个对象上。<br>引用并非<strong>对象</strong>，它只是为一个对象起了另一个名字。就像每个人都有学名和乳名。<br>所以我们对引用进行一系列操作的同时，也会对<em>与之绑定的对象</em>进行相同的操作。<br>由 引用并非<strong>对象</strong>，可知不存在 <strong>对引用的引用</strong>。</p>
 <p>例如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal = ival;</span><br><span class="line">refVal = <span class="number">2</span>;  <span class="comment">// 此时ival也变为了2</span></span><br></pre></td></tr></table></figure>
 
@@ -768,7 +978,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-03 16:46:57" itemprop="dateModified" datetime="2020-01-03T16:46:57+08:00">2020-01-03</time>
+                <time title="修改时间：2020-01-06 11:45:57" itemprop="dateModified" datetime="2020-01-06T11:45:57+08:00">2020-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1361,111 +1571,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="ZhangYang">
-      <meta itemprop="description" content="Cpper的小破站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Magic Conch Cpp">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/" class="post-title-link" itemprop="url">hexo博客内图片不能正常显示，但本地文件可以显示</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-11 17:00:10 / 修改时间：20:00:42" itemprop="dateCreated datePublished" datetime="2019-12-11T17:00:10+08:00">2019-12-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-1-问题描述"><a href="#1-1-问题描述" class="headerlink" title="1.1 问题描述"></a>1.1 问题描述</h2><p>markdown文件中，插入图片的方式为 <code>![](文件路径)</code> ，此时markdown文件可以正常显示图片。<br>但是一上传到博客上，便不能正常显示。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1538,7 +1643,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1610,12 +1715,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">88k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:17</span>
+    <span title="站点阅读时长">1:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
