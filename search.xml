@@ -25,7 +25,7 @@
 </li>
 <li><a href="#关于引用的一些补充知识">关于引用的一些补充知识</a><ul>
 <li><a href="#【1】对常量的引用和普通引用的相同点-不同点">【1】对常量的引用和普通引用的相同点/不同点</a></li>
-<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a></li>
+<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a><a id="more"></a></li>
 </ul>
 </li>
 </ul>
@@ -128,13 +128,14 @@
 <li><a href="#2-3-复合类型的声明">2.3 复合类型的声明</a><ul>
 <li><a href="#【1】定义多个变量">【1】定义多个变量</a></li>
 <li><a href="#【2】指向指针的指针">【2】指向指针的指针</a></li>
-<li><a href="#【3】指向指针的引用">【3】指向指针的引用</a></li>
+<li><a href="#【3】指向指针的引用">【3】指向指针的引用</a><a id="more"></a>
+<h2 id="2-3-1-引用-reference"><a href="#2-3-1-引用-reference" class="headerlink" title="2.3.1 引用(reference)"></a>2.3.1 引用(reference)</h2></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="2-3-1-引用-reference"><a href="#2-3-1-引用-reference" class="headerlink" title="2.3.1 引用(reference)"></a>2.3.1 引用(reference)</h2><p><em>引用</em>为<em>对象</em>起了另外一个名字，引用类型 引用 另外一种类型。<br>形式为：<code>int &amp;refVal = ival;</code> ，<code>refVal</code> 是 <code>ival</code> 的引用。</p>
+<p><em>引用</em>为<em>对象</em>起了另外一个名字，引用类型 引用 另外一种类型。<br>形式为：<code>int &amp;refVal = ival;</code> ，<code>refVal</code> 是 <code>ival</code> 的引用。</p>
 <p>引用必须遵守一下三个规定：</p>
 <ol>
 <li>引用必须被初始化</li>
