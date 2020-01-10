@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="6.2 参数传递 6.2.1 传值参数 【1】指针形参   6.2.2 传引用参数 6.2.3 const形参和实参 【1】尽量使用常量引用   6.2.4 数组形参 【1】保证数组长度的三种技术 【2】数组引用形参 【3】传递多维数组   6.2.5 main:处理命令行选项 6.2.5 含有可变形参的函数 【1】initializer_list形参 【2】省略符形参">
+<meta name="keywords" content="Chapter06">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.2 参数传递">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;09&#x2F;CPP-Primer&#x2F;Notes&#x2F;6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92&#x2F;index.html">
+<meta property="og:site_name" content="Magic Conch Cpp">
+<meta property="og:description" content="6.2 参数传递 6.2.1 传值参数 【1】指针形参   6.2.2 传引用参数 6.2.3 const形参和实参 【1】尽量使用常量引用   6.2.4 数组形参 【1】保证数组长度的三种技术 【2】数组引用形参 【3】传递多维数组   6.2.5 main:处理命令行选项 6.2.5 含有可变形参的函数 【1】initializer_list形参 【2】省略符形参">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-10T04:15:14.580Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/01/09/CPP-Primer/Notes/6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>6.2 参数传递 | Magic Conch Cpp</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Magic Conch Cpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Pineapple Castle</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/09/CPP-Primer/Notes/6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          6.2 参数传递
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-09 17:23:04" itemprop="dateCreated datePublished" datetime="2020-01-09T17:23:04+08:00">2020-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-10 12:15:14" itemprop="dateModified" datetime="2020-01-10T12:15:14+08:00">2020-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer-5th-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">C++Primer(5th) Notes</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-Primer-5th-Notes/The-Basics-of-C/" itemprop="url" rel="index">
+                    <span itemprop="name">The Basics of C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/01/09/CPP-Primer/Notes/6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/09/CPP-Primer/Notes/6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="#6-2-参数传递">6.2 参数传递</a><ul>
+<li><a href="#6-2-1-传值参数">6.2.1 传值参数</a><ul>
+<li><a href="#【1】指针形参">【1】指针形参</a></li>
+</ul>
+</li>
+<li><a href="#6-2-2-传引用参数">6.2.2 传引用参数</a></li>
+<li><a href="#6-2-3-const形参和实参">6.2.3 const形参和实参</a><ul>
+<li><a href="#【1】尽量使用常量引用">【1】尽量使用常量引用</a></li>
+</ul>
+</li>
+<li><a href="#6-2-4-数组形参">6.2.4 数组形参</a><ul>
+<li><a href="#【1】保证数组长度的三种技术">【1】保证数组长度的三种技术</a></li>
+<li><a href="#【2】数组引用形参">【2】数组引用形参</a></li>
+<li><a href="#【3】传递多维数组">【3】传递多维数组</a></li>
+</ul>
+</li>
+<li><a href="#6-2-5-main-处理命令行选项">6.2.5 main:处理命令行选项</a></li>
+<li><a href="#6-2-5-含有可变形参的函数">6.2.5 含有可变形参的函数</a><ul>
+<li><a href="#【1】initializer-list形参">【1】initializer_list形参</a></li>
+<li><a href="#【2】省略符形参">【2】省略符形参</a><a id="more"></a>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-2-参数传递"><a href="#6-2-参数传递" class="headerlink" title="6.2 参数传递"></a>6.2 参数传递</h1><p>如果形参是引用类型，它将绑定到对应的实参上；否则，将实参的值拷贝后赋给形参。</p>
+<h2 id="6-2-1-传值参数"><a href="#6-2-1-传值参数" class="headerlink" title="6.2.1 传值参数"></a>6.2.1 传值参数</h2><p>函数对形参做的所有操作都不会影响实参。</p>
+<h3 id="【1】指针形参"><a href="#【1】指针形参" class="headerlink" title="【1】指针形参"></a>【1】指针形参</h3><p>执行指针拷贝操作时，拷贝的是指针的值；拷贝之后，两个指针是不同的指针。我们可以通过指针修改它所指对象的值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">(<span class="keyword">int</span> *p)</span> </span>&#123;</span><br><span class="line">    *p = <span class="number">0</span>;</span><br><span class="line">    p = <span class="number">0</span>;  <span class="comment">// p是q的拷贝，并未改变q的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *q = &amp;i;</span><br><span class="line">reset(q);  <span class="comment">// *q = i = 1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Best Practices</strong>：<br>C的程序员常常使用指针类型的形参，在C++中建议使用引用类型。</p>
+<h2 id="6-2-2-传引用参数"><a href="#6-2-2-传引用参数" class="headerlink" title="6.2.2 传引用参数"></a>6.2.2 传引用参数</h2><p>对引用的操作实际上就是对所引对象上的操作。</p>
+<p>拷贝大的类类型或者容器对象比较低效，甚至有的类类型（IO类型）不支持拷贝操作，这时只能用引用。当无需修改引用的值是，使用常量引用。</p>
+<h2 id="6-2-3-const形参和实参"><a href="#6-2-3-const形参和实参" class="headerlink" title="6.2.3 const形参和实参"></a>6.2.3 const形参和实参</h2><p>用实参初始化形参时，会忽略掉形参的顶层 <code>const</code> 。也就是形参有顶层 <code>const</code> 时，传给它常量对象或者非常量对象都可以。</p>
+<p>形参初始化和变量初始化方式一样，记住通用的初始化规则即可。例如：我们可以使用非常量初始化一个底层 <code>const</code> 对象，反过来不行；普通引用必须引用相同类型的对象。</p>
+<h3 id="【1】尽量使用常量引用"><a href="#【1】尽量使用常量引用" class="headerlink" title="【1】尽量使用常量引用"></a>【1】尽量使用常量引用</h3><ol>
+<li>把函数参数定义为普通引用会给人一种误导，认为该参数可以修改。</li>
+<li>使用非常量引用限制了实参类型，例如不能把 <code>const</code> 对象、字面值或者需要类型转换的对象传递给非常量引用形参。</li>
+</ol>
+<h2 id="6-2-4-数组形参"><a href="#6-2-4-数组形参" class="headerlink" title="6.2.4 数组形参"></a>6.2.4 数组形参</h2><p>不允许直接拷贝数组，使用数组时通常会（隐式的）转换为指针。所以我们无法以值传递的方式使用数组参数，当我们传递给函数一个数组时，其实是传递的数组首地址。</p>
+<p>三种方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>[<span class="number">10</span>])</span></span>;  <span class="comment">// 这里的维度10只是我们希望是10，实际可以传递任意维度的数组。</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们不需要修改数组元素时，形参应该是指向 <code>const</code> 的指针。</p>
+<h3 id="【1】保证数组长度的三种技术"><a href="#【1】保证数组长度的三种技术" class="headerlink" title="【1】保证数组长度的三种技术"></a>【1】保证数组长度的三种技术</h3><ol>
+<li><p><strong>使用标记指定数组长度</strong>：常用于C风格字符串，字符数组以 <code>\0</code> 结束。</p>
+</li>
+<li><p><strong>使用标准库规范</strong>：传递数组的首元素和尾后元素的指针。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* beg, <span class="keyword">const</span> <span class="keyword">int</span>* end)</span></span>;  <span class="comment">// 函数定义</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">print(begin(a), end(a));  <span class="comment">// 如何调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式传递数组的长度：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> ia[], <span class="keyword">size_t</span> sz)</span></span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">print(a, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="【2】数组引用形参"><a href="#【2】数组引用形参" class="headerlink" title="【2】数组引用形参"></a>【2】数组引用形参</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> (&amp;arr)[<span class="number">10</span>])</span></span>;</span><br><span class="line"><span class="keyword">int</span> j[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> k[<span class="number">10</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">0</span>&#125;;</span><br><span class="line">print(j);  <span class="comment">// 错误，维度必须为10</span></span><br><span class="line">print(k);  <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
+
+<p>与指针数组不同的是，<strong>这里的维度10指定了我们只能向函数传递大小为10的数组。</strong><br>在后面，我们会介绍如何编写一个函数，可以给引用形参传递任意大小的数组。</p>
+<!-- TODO: 引用形参传递任意大小的数组P578 -->
+
+<p>注意区分：</p>
+<ol>
+<li><code>f(int &amp;arr[10])</code>，arr是引用的数组，不存在引用的数组，这是错误的。</li>
+<li><code>f(int (&amp;arr)[10])</code>，arr是数组的引用，该数组包含10个整型。</li>
+</ol>
+<h3 id="【3】传递多维数组"><a href="#【3】传递多维数组" class="headerlink" title="【3】传递多维数组"></a>【3】传递多维数组</h3><p>两种形参的形式，注意 <code>rowSize</code> 是行数，<code>3</code> 就是列数。<code>m</code> 实际上是指向<strong>含有3个整数的数组</strong>的指针。</p>
+<ol>
+<li><code>void print(int (*m)[3], int rowSize);</code></li>
+<li><code>void print(int m[][3], int rowSize);</code></li>
+</ol>
+<p>多维数组真正传递的是数组首元素的指针，例如：<code>int a[2][3]</code> ，调用形式：<code>print(a, 2)</code>。</p>
+<h2 id="6-2-5-main-处理命令行选项"><a href="#6-2-5-main-处理命令行选项" class="headerlink" title="6.2.5 main:处理命令行选项"></a>6.2.5 main:处理命令行选项</h2><p>两种形参的形式：</p>
+<ol>
+<li><code>int main(int argc, char *argv[]) {...}</code></li>
+<li><code>int main(int argc, char **argv) {...}</code></li>
+</ol>
+<p><code>argc</code> 代表 <code>argv</code> 的大小，<code>argv</code> 中是我们命令行的字符串数组。</p>
+<p>例如我们在命令行输入 <code>./a.out src.txt dest.txt</code>。<br>那么 <code>argc = 3</code>，<code>argv[0] = &quot;./a.out&quot;</code>，<code>argv[1] = &quot;src.txt&quot;</code>，<code>argv[2] = &quot;dest.txt&quot;</code>。</p>
+<h2 id="6-2-5-含有可变形参的函数"><a href="#6-2-5-含有可变形参的函数" class="headerlink" title="6.2.5 含有可变形参的函数"></a>6.2.5 含有可变形参的函数</h2><h3 id="【1】initializer-list形参"><a href="#【1】initializer-list形参" class="headerlink" title="【1】initializer_list形参"></a>【1】initializer_list形参</h3><p>如果函数的实参数量未知并且实参类型都相同，可以使用 <code>initializer_list</code> 类型的形参。<br>它是一种标准库模板类型，定义于同名的头文件内。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>initializer_list&lt;T&gt; lst;</code></td>
+<td>执行默认初始化；T类型的空列表</td>
+</tr>
+<tr>
+<td><code>initializer_list&lt;T&gt; lst{a, b, c...}</code></td>
+<td><code>lst</code> 中元素是初始值的<strong>副本</strong>(拷贝)，且为 <strong><code>const</code></strong> ；<code>lst</code> 的大小就是初始值的数量</td>
+</tr>
+<tr>
+<td><code>lst2(lst)</code> / <code>lst2 = lst</code></td>
+<td>拷贝/赋值一个该对象，不会拷贝列表中的元素；拷贝后，<strong>二者共享元素</strong></td>
+</tr>
+<tr>
+<td><code>lst.size()</code></td>
+<td>元素数量</td>
+</tr>
+<tr>
+<td><code>lst.begin()</code> / <code>lst.end()</code></td>
+<td><code>lst</code> 首元素指针/尾后元素指针</td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>： <code>initializer_list</code> 中元素始终为常量。</p>
+<p>使用举例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : lst) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    print(lst);</span><br><span class="line">    print(&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);  <span class="comment">// 直接传递大括号列表也是可行的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>含有 <code>initializer_list</code> 形参的函数也可以拥有其他形参，其他形参的位置任意。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst, <span class="built_in">string</span> s2)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : lst) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="built_in">string</span> s = <span class="string">"abc"</span>;</span><br><span class="line">    print(s, lst, s);</span><br><span class="line">    print(s, &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;, s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="【2】省略符形参"><a href="#【2】省略符形参" class="headerlink" title="【2】省略符形参"></a>【2】省略符形参</h3><p>是为了便于C++程序访问特殊的C代码设置的，这些代码使用了 <code>varargs</code> 的C标准库功能。</p>
+<p><strong>注意</strong>：大多数类类型传递给省略符形参时都无法正确拷贝。</p>
+<p>省略符形参只能出现在形参列表的 <strong>最后</strong> 一个位置。</p>
+<ol>
+<li><code>void print(parm_list, ...);</code></li>
+<li><code>void print(...);</code></li>
+</ol>
+<p>略写，不常使用。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Chapter06/" rel="tag"># Chapter06</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/08/CPP-Primer/Notes/6.1%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80/" rel="prev" title="6.1 函数基础">
+      <i class="fa fa-chevron-left"></i> 6.1 函数基础
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#6-2-参数传递"><span class="nav-text">6.2 参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-1-传值参数"><span class="nav-text">6.2.1 传值参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】指针形参"><span class="nav-text">【1】指针形参</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-2-传引用参数"><span class="nav-text">6.2.2 传引用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-3-const形参和实参"><span class="nav-text">6.2.3 const形参和实参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】尽量使用常量引用"><span class="nav-text">【1】尽量使用常量引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-4-数组形参"><span class="nav-text">6.2.4 数组形参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】保证数组长度的三种技术"><span class="nav-text">【1】保证数组长度的三种技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】数组引用形参"><span class="nav-text">【2】数组引用形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【3】传递多维数组"><span class="nav-text">【3】传递多维数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-5-main-处理命令行选项"><span class="nav-text">6.2.5 main:处理命令行选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-5-含有可变形参的函数"><span class="nav-text">6.2.5 含有可变形参的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】initializer-list形参"><span class="nav-text">【1】initializer_list形参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】省略符形参"><span class="nav-text">【2】省略符形参</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhangYang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ZhangYang</p>
+  <div class="site-description" itemprop="description">Cpper的小破站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page" rel="noopener" target="_blank">Liam</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/fnlingnzb-learner/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fnlingnzb-learner&#x2F;" rel="noopener" target="_blank">Boblim</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yuxtech.github.io/" title="https:&#x2F;&#x2F;yuxtech.github.io" rel="noopener" target="_blank">向禹</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mengso.com/" title="https:&#x2F;&#x2F;mengso.com" rel="noopener" target="_blank">萌搜</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangYang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">92k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:23</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
+      appKey: 'WP50t0qc1XHHrY4RoTTMzS6w',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="2.4.1 const的引用(reference to const) 【1】初始化和对const的引用   2.4.2 指针和const 【1】指向常量的指针(pointer to const) 【2】const指针(const pointer)   2.4.3 顶层const 【1】顶层&#x2F;底层const的区别   2.4.4 constexpr和常量表达式 【1】constexpr变量 【2】">
+  <meta name="description" content="2.4 const限定符 2.4.1 const的引用(reference to const) 【1】初始化和对const的引用   2.4.2 指针和const 【1】指向常量的指针(pointer to const) 【2】const指针(const pointer)   2.4.3 顶层const 【1】顶层&#x2F;底层const的区别   2.4.4 constexpr和常量表达式 【1】co">
 <meta name="keywords" content="Chapter02">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.4 const限定符">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;05&#x2F;CPP-Primer&#x2F;Notes&#x2F;2.4const%E9%99%90%E5%AE%9A%E7%AC%A6&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
-<meta property="og:description" content="2.4.1 const的引用(reference to const) 【1】初始化和对const的引用   2.4.2 指针和const 【1】指向常量的指针(pointer to const) 【2】const指针(const pointer)   2.4.3 顶层const 【1】顶层&#x2F;底层const的区别   2.4.4 constexpr和常量表达式 【1】constexpr变量 【2】">
+<meta property="og:description" content="2.4 const限定符 2.4.1 const的引用(reference to const) 【1】初始化和对const的引用   2.4.2 指针和const 【1】指向常量的指针(pointer to const) 【2】const指针(const pointer)   2.4.3 顶层const 【1】顶层&#x2F;底层const的区别   2.4.4 constexpr和常量表达式 【1】co">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-07T13:06:10.485Z">
+<meta property="og:updated_time" content="2020-01-10T04:17:46.153Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/">
@@ -253,7 +253,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 21:06:10" itemprop="dateModified" datetime="2020-01-07T21:06:10+08:00">2020-01-07</time>
+                <time title="修改时间：2020-01-10 12:17:46" itemprop="dateModified" datetime="2020-01-10T12:17:46+08:00">2020-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,14 +300,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -320,6 +320,7 @@
 
       
         <ul>
+<li><a href="#24-const限定符">2.4 const限定符</a><ul>
 <li><a href="#2-4-1-const的引用-reference-to-const">2.4.1 const的引用(reference to const)</a><ul>
 <li><a href="#【1】初始化和对const的引用">【1】初始化和对const的引用</a></li>
 </ul>
@@ -339,13 +340,17 @@
 <li><a href="#【3】指针和constexpr">【3】指针和constexpr</a></li>
 </ul>
 </li>
-<li><a href="#关于引用的一些补充知识">关于引用的一些补充知识</a><ul>
+<li><a href="#2-4-5关于引用的一些补充知识">2.4.5 关于引用的一些补充知识</a><ul>
 <li><a href="#【1】对常量的引用和普通引用的相同点-不同点">【1】对常量的引用和普通引用的相同点/不同点</a></li>
-<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a><a id="more"></a></li>
+<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a><a id="more"></a>
+
+</li>
 </ul>
 </li>
 </ul>
-<ol>
+</li>
+</ul>
+<h1 id="2-4-const限定符"><a href="#2-4-const限定符" class="headerlink" title="2.4 const限定符"></a>2.4 const限定符</h1><ol>
 <li><code>const</code> 对象创建后，值不能被改变。</li>
 <li><code>const</code> 对象必须被初始化。</li>
 </ol>
@@ -388,6 +393,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> j = i;  <span class="comment">// 顶层，j是int型的对象</span></span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> q = &amp;i;  <span class="comment">// 顶层，表示指针本身是常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i;  <span class="comment">// 底层，表示指针所指对象是个常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r = i;  <span class="comment">// 底层，引用类型都是底层const</span></span><br></pre></td></tr></table></figure>
 
 <p>顶层/底层 <code>const</code> 赋值规则，书上说的太过复杂，其实就是前面几节 const的引用，指向常量的指针，常量指针一些性质。</p>
+<p>比较通用的规则：<br><strong>我们可以使用非常量初始化一个底层 <code>const</code> 对象，反过来不行。</strong></p>
 <h2 id="2-4-4-constexpr和常量表达式"><a href="#2-4-4-constexpr和常量表达式" class="headerlink" title="2.4.4 constexpr和常量表达式"></a>2.4.4 constexpr和常量表达式</h2><p>常量表达式(const expression)：值不会改变，并且在编译过程中就能得到计算结果的表达式。字面值属于常量表达式。</p>
 <p>一个对象或者表达式是不是常量表达式由数据类型和初始值共同决定。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">20</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> b = a + <span class="number">1</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1</span>; <span class="comment">// no, 因为不是const int</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> d = get_size();  <span class="comment">//no, 我们到运行get_size()时才能确定d的值</span></span><br></pre></td></tr></table></figure>
@@ -401,7 +407,7 @@
 <h3 id="【3】指针和constexpr"><a href="#【3】指针和constexpr" class="headerlink" title="【3】指针和constexpr"></a>【3】指针和constexpr</h3><p><code>constexpr</code> 只对指针本身有效，与其所指对象无关。<br>例如：<code>constexpr int *q = nullptr</code>，q是一个常量指针。</p>
 <p><code>constexpr</code> 指针既可以指向常量也可指向非常量。</p>
 <!-- TODO: VS: 对常量的引用 VS 普通引用 -->
-<h2 id="关于引用的一些补充知识"><a href="#关于引用的一些补充知识" class="headerlink" title="关于引用的一些补充知识"></a>关于引用的一些补充知识</h2><h3 id="【1】对常量的引用和普通引用的相同点-不同点"><a href="#【1】对常量的引用和普通引用的相同点-不同点" class="headerlink" title="【1】对常量的引用和普通引用的相同点/不同点"></a>【1】对常量的引用和普通引用的相同点/不同点</h3><p><strong>相同点</strong>：</p>
+<h2 id="2-4-5-关于引用的一些补充知识"><a href="#2-4-5-关于引用的一些补充知识" class="headerlink" title="2.4.5 关于引用的一些补充知识"></a>2.4.5 关于引用的一些补充知识</h2><h3 id="【1】对常量的引用和普通引用的相同点-不同点"><a href="#【1】对常量的引用和普通引用的相同点-不同点" class="headerlink" title="【1】对常量的引用和普通引用的相同点/不同点"></a>【1】对常量的引用和普通引用的相同点/不同点</h3><p><strong>相同点</strong>：</p>
 <ol>
 <li>必须初始化。</li>
 </ol>
@@ -441,7 +447,10 @@
     <a href="/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/" rel="prev" title="2.3 复合类型">
       <i class="fa fa-chevron-left"></i> 2.3 复合类型
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/08/CPP-Primer/Notes/6.1%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80/" rel="next" title="6.1 函数基础">
+      6.1 函数基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -502,7 +511,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const对象仅在文件内有效"><span class="nav-text">const对象仅在文件内有效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-1-const的引用-reference-to-const"><span class="nav-text">2.4.1 const的引用(reference to const)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】初始化和对const的引用"><span class="nav-text">【1】初始化和对const的引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-2-指针和const"><span class="nav-text">2.4.2 指针和const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】指向常量的指针-pointer-to-const"><span class="nav-text">【1】指向常量的指针(pointer to const)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】const指针-const-pointer"><span class="nav-text">【2】const指针(const pointer)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-3-顶层const"><span class="nav-text">2.4.3 顶层const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】顶层-底层const的区别"><span class="nav-text">【1】顶层/底层const的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-4-constexpr和常量表达式"><span class="nav-text">2.4.4 constexpr和常量表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】constexpr变量"><span class="nav-text">【1】constexpr变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】字面值类型"><span class="nav-text">【2】字面值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【3】指针和constexpr"><span class="nav-text">【3】指针和constexpr</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于引用的一些补充知识"><span class="nav-text">关于引用的一些补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】对常量的引用和普通引用的相同点-不同点"><span class="nav-text">【1】对常量的引用和普通引用的相同点/不同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】有没有-int-amp-const-r-i"><span class="nav-text">【2】有没有 int &amp;const r = i</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-4-const限定符"><span class="nav-text">2.4 const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#const对象仅在文件内有效"><span class="nav-text">const对象仅在文件内有效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-1-const的引用-reference-to-const"><span class="nav-text">2.4.1 const的引用(reference to const)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】初始化和对const的引用"><span class="nav-text">【1】初始化和对const的引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-2-指针和const"><span class="nav-text">2.4.2 指针和const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】指向常量的指针-pointer-to-const"><span class="nav-text">【1】指向常量的指针(pointer to const)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】const指针-const-pointer"><span class="nav-text">【2】const指针(const pointer)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-3-顶层const"><span class="nav-text">2.4.3 顶层const</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】顶层-底层const的区别"><span class="nav-text">【1】顶层/底层const的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-4-constexpr和常量表达式"><span class="nav-text">2.4.4 constexpr和常量表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】constexpr变量"><span class="nav-text">【1】constexpr变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】字面值类型"><span class="nav-text">【2】字面值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【3】指针和constexpr"><span class="nav-text">【3】指针和constexpr</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-5-关于引用的一些补充知识"><span class="nav-text">2.4.5 关于引用的一些补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#【1】对常量的引用和普通引用的相同点-不同点"><span class="nav-text">【1】对常量的引用和普通引用的相同点/不同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【2】有没有-int-amp-const-r-i"><span class="nav-text">【2】有没有 int &amp;const r = i</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -518,20 +527,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -590,12 +599,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">88k</span>
+    <span title="站点总字数">92k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:20</span>
+    <span title="站点阅读时长">1:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>

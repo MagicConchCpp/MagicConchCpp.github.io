@@ -1,9 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>6.2 参数传递</title>
+    <url>/2020/01/09/CPP-Primer/Notes/6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</url>
+    <content><![CDATA[<ul>
+<li><a href="#6-2-参数传递">6.2 参数传递</a><ul>
+<li><a href="#6-2-1-传值参数">6.2.1 传值参数</a><ul>
+<li><a href="#【1】指针形参">【1】指针形参</a></li>
+</ul>
+</li>
+<li><a href="#6-2-2-传引用参数">6.2.2 传引用参数</a></li>
+<li><a href="#6-2-3-const形参和实参">6.2.3 const形参和实参</a><ul>
+<li><a href="#【1】尽量使用常量引用">【1】尽量使用常量引用</a></li>
+</ul>
+</li>
+<li><a href="#6-2-4-数组形参">6.2.4 数组形参</a><ul>
+<li><a href="#【1】保证数组长度的三种技术">【1】保证数组长度的三种技术</a></li>
+<li><a href="#【2】数组引用形参">【2】数组引用形参</a></li>
+<li><a href="#【3】传递多维数组">【3】传递多维数组</a></li>
+</ul>
+</li>
+<li><a href="#6-2-5-main-处理命令行选项">6.2.5 main:处理命令行选项</a></li>
+<li><a href="#6-2-5-含有可变形参的函数">6.2.5 含有可变形参的函数</a><ul>
+<li><a href="#【1】initializer-list形参">【1】initializer_list形参</a></li>
+<li><a href="#【2】省略符形参">【2】省略符形参</a><a id="more"></a>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-2-参数传递"><a href="#6-2-参数传递" class="headerlink" title="6.2 参数传递"></a>6.2 参数传递</h1><p>如果形参是引用类型，它将绑定到对应的实参上；否则，将实参的值拷贝后赋给形参。</p>
+<h2 id="6-2-1-传值参数"><a href="#6-2-1-传值参数" class="headerlink" title="6.2.1 传值参数"></a>6.2.1 传值参数</h2><p>函数对形参做的所有操作都不会影响实参。</p>
+<h3 id="【1】指针形参"><a href="#【1】指针形参" class="headerlink" title="【1】指针形参"></a>【1】指针形参</h3><p>执行指针拷贝操作时，拷贝的是指针的值；拷贝之后，两个指针是不同的指针。我们可以通过指针修改它所指对象的值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reset</span><span class="params">(<span class="keyword">int</span> *p)</span> </span>&#123;</span><br><span class="line">    *p = <span class="number">0</span>;</span><br><span class="line">    p = <span class="number">0</span>;  <span class="comment">// p是q的拷贝，并未改变q的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *q = &amp;i;</span><br><span class="line">reset(q);  <span class="comment">// *q = i = 1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Best Practices</strong>：<br>C的程序员常常使用指针类型的形参，在C++中建议使用引用类型。</p>
+<h2 id="6-2-2-传引用参数"><a href="#6-2-2-传引用参数" class="headerlink" title="6.2.2 传引用参数"></a>6.2.2 传引用参数</h2><p>对引用的操作实际上就是对所引对象上的操作。</p>
+<p>拷贝大的类类型或者容器对象比较低效，甚至有的类类型（IO类型）不支持拷贝操作，这时只能用引用。当无需修改引用的值是，使用常量引用。</p>
+<h2 id="6-2-3-const形参和实参"><a href="#6-2-3-const形参和实参" class="headerlink" title="6.2.3 const形参和实参"></a>6.2.3 const形参和实参</h2><p>用实参初始化形参时，会忽略掉形参的顶层 <code>const</code> 。也就是形参有顶层 <code>const</code> 时，传给它常量对象或者非常量对象都可以。</p>
+<p>形参初始化和变量初始化方式一样，记住通用的初始化规则即可。例如：我们可以使用非常量初始化一个底层 <code>const</code> 对象，反过来不行；普通引用必须引用相同类型的对象。</p>
+<h3 id="【1】尽量使用常量引用"><a href="#【1】尽量使用常量引用" class="headerlink" title="【1】尽量使用常量引用"></a>【1】尽量使用常量引用</h3><ol>
+<li>把函数参数定义为普通引用会给人一种误导，认为该参数可以修改。</li>
+<li>使用非常量引用限制了实参类型，例如不能把 <code>const</code> 对象、字面值或者需要类型转换的对象传递给非常量引用形参。</li>
+</ol>
+<h2 id="6-2-4-数组形参"><a href="#6-2-4-数组形参" class="headerlink" title="6.2.4 数组形参"></a>6.2.4 数组形参</h2><p>不允许直接拷贝数组，使用数组时通常会（隐式的）转换为指针。所以我们无法以值传递的方式使用数组参数，当我们传递给函数一个数组时，其实是传递的数组首地址。</p>
+<p>三种方式：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>[<span class="number">10</span>])</span></span>;  <span class="comment">// 这里的维度10只是我们希望是10，实际可以传递任意维度的数组。</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们不需要修改数组元素时，形参应该是指向 <code>const</code> 的指针。</p>
+<h3 id="【1】保证数组长度的三种技术"><a href="#【1】保证数组长度的三种技术" class="headerlink" title="【1】保证数组长度的三种技术"></a>【1】保证数组长度的三种技术</h3><ol>
+<li><p><strong>使用标记指定数组长度</strong>：常用于C风格字符串，字符数组以 <code>\0</code> 结束。</p>
+</li>
+<li><p><strong>使用标准库规范</strong>：传递数组的首元素和尾后元素的指针。</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>* beg, <span class="keyword">const</span> <span class="keyword">int</span>* end)</span></span>;  <span class="comment">// 函数定义</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">print(begin(a), end(a));  <span class="comment">// 如何调用</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显式传递数组的长度：</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> ia[], <span class="keyword">size_t</span> sz)</span></span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">print(a, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="【2】数组引用形参"><a href="#【2】数组引用形参" class="headerlink" title="【2】数组引用形参"></a>【2】数组引用形参</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> (&amp;arr)[<span class="number">10</span>])</span></span>;</span><br><span class="line"><span class="keyword">int</span> j[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> k[<span class="number">10</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">0</span>&#125;;</span><br><span class="line">print(j);  <span class="comment">// 错误，维度必须为10</span></span><br><span class="line">print(k);  <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
+
+<p>与指针数组不同的是，<strong>这里的维度10指定了我们只能向函数传递大小为10的数组。</strong><br>在后面，我们会介绍如何编写一个函数，可以给引用形参传递任意大小的数组。</p>
+<!-- TODO: 引用形参传递任意大小的数组P578 -->
+
+<p>注意区分：</p>
+<ol>
+<li><code>f(int &amp;arr[10])</code>，arr是引用的数组，不存在引用的数组，这是错误的。</li>
+<li><code>f(int (&amp;arr)[10])</code>，arr是数组的引用，该数组包含10个整型。</li>
+</ol>
+<h3 id="【3】传递多维数组"><a href="#【3】传递多维数组" class="headerlink" title="【3】传递多维数组"></a>【3】传递多维数组</h3><p>两种形参的形式，注意 <code>rowSize</code> 是行数，<code>3</code> 就是列数。<code>m</code> 实际上是指向<strong>含有3个整数的数组</strong>的指针。</p>
+<ol>
+<li><code>void print(int (*m)[3], int rowSize);</code></li>
+<li><code>void print(int m[][3], int rowSize);</code></li>
+</ol>
+<p>多维数组真正传递的是数组首元素的指针，例如：<code>int a[2][3]</code> ，调用形式：<code>print(a, 2)</code>。</p>
+<h2 id="6-2-5-main-处理命令行选项"><a href="#6-2-5-main-处理命令行选项" class="headerlink" title="6.2.5 main:处理命令行选项"></a>6.2.5 main:处理命令行选项</h2><p>两种形参的形式：</p>
+<ol>
+<li><code>int main(int argc, char *argv[]) {...}</code></li>
+<li><code>int main(int argc, char **argv) {...}</code></li>
+</ol>
+<p><code>argc</code> 代表 <code>argv</code> 的大小，<code>argv</code> 中是我们命令行的字符串数组。</p>
+<p>例如我们在命令行输入 <code>./a.out src.txt dest.txt</code>。<br>那么 <code>argc = 3</code>，<code>argv[0] = &quot;./a.out&quot;</code>，<code>argv[1] = &quot;src.txt&quot;</code>，<code>argv[2] = &quot;dest.txt&quot;</code>。</p>
+<h2 id="6-2-5-含有可变形参的函数"><a href="#6-2-5-含有可变形参的函数" class="headerlink" title="6.2.5 含有可变形参的函数"></a>6.2.5 含有可变形参的函数</h2><h3 id="【1】initializer-list形参"><a href="#【1】initializer-list形参" class="headerlink" title="【1】initializer_list形参"></a>【1】initializer_list形参</h3><p>如果函数的实参数量未知并且实参类型都相同，可以使用 <code>initializer_list</code> 类型的形参。<br>它是一种标准库模板类型，定义于同名的头文件内。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>initializer_list&lt;T&gt; lst;</code></td>
+<td>执行默认初始化；T类型的空列表</td>
+</tr>
+<tr>
+<td><code>initializer_list&lt;T&gt; lst{a, b, c...}</code></td>
+<td><code>lst</code> 中元素是初始值的<strong>副本</strong>(拷贝)，且为 <strong><code>const</code></strong> ；<code>lst</code> 的大小就是初始值的数量</td>
+</tr>
+<tr>
+<td><code>lst2(lst)</code> / <code>lst2 = lst</code></td>
+<td>拷贝/赋值一个该对象，不会拷贝列表中的元素；拷贝后，<strong>二者共享元素</strong></td>
+</tr>
+<tr>
+<td><code>lst.size()</code></td>
+<td>元素数量</td>
+</tr>
+<tr>
+<td><code>lst.begin()</code> / <code>lst.end()</code></td>
+<td><code>lst</code> 首元素指针/尾后元素指针</td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>： <code>initializer_list</code> 中元素始终为常量。</p>
+<p>使用举例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : lst) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    print(lst);</span><br><span class="line">    print(&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);  <span class="comment">// 直接传递大括号列表也是可行的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>含有 <code>initializer_list</code> 形参的函数也可以拥有其他形参，其他形参的位置任意。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst, <span class="built_in">string</span> s2)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : lst) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; lst&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="built_in">string</span> s = <span class="string">"abc"</span>;</span><br><span class="line">    print(s, lst, s);</span><br><span class="line">    print(s, &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;, s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="【2】省略符形参"><a href="#【2】省略符形参" class="headerlink" title="【2】省略符形参"></a>【2】省略符形参</h3><p>是为了便于C++程序访问特殊的C代码设置的，这些代码使用了 <code>varargs</code> 的C标准库功能。</p>
+<p><strong>注意</strong>：大多数类类型传递给省略符形参时都无法正确拷贝。</p>
+<p>省略符形参只能出现在形参列表的 <strong>最后</strong> 一个位置。</p>
+<ol>
+<li><code>void print(parm_list, ...);</code></li>
+<li><code>void print(...);</code></li>
+</ol>
+<p>略写，不常使用。</p>
+]]></content>
+      <categories>
+        <category>C++Primer(5th) Notes</category>
+        <category>The Basics of C++</category>
+      </categories>
+      <tags>
+        <tag>Chapter06</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>6.1 函数基础</title>
+    <url>/2020/01/08/CPP-Primer/Notes/6.1%E5%87%BD%E6%95%B0%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<ul>
+<li><a href="#6-1-函数基础">6.1 函数基础</a><ul>
+<li><a href="#6-1-1-局部对象">6.1.1 局部对象</a></li>
+<li><a href="#6-1-2-函数声明">6.1.2 函数声明</a><a id="more"></a>
+
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-1-函数基础"><a href="#6-1-函数基础" class="headerlink" title="6.1 函数基础"></a>6.1 函数基础</h1><p>执行函数的第一步是(隐式的)定义并初始化它的形参（局部变量）。</p>
+<p>空形参列表有两种方式：</p>
+<ol>
+<li><code>void f()</code></li>
+<li><code>void f(void)</code></li>
+</ol>
+<p>函数的返回类型：</p>
+<ol>
+<li>返回类型 <code>void</code>，表示函数不返回任何值。</li>
+<li>返回类型不能是 数组类型或函数类型，但可以是 指针或引用。</li>
+</ol>
+<h2 id="6-1-1-局部对象"><a href="#6-1-1-局部对象" class="headerlink" title="6.1.1 局部对象"></a>6.1.1 局部对象</h2><p>形参和函数体内定义的变量都是局部变量，局部变量还会隐藏外层作用域的同名变量。</p>
+<ol>
+<li>自动对象(普通局部变量)：变量定义时创建该对象，函数结束时销毁它。例如形参。</li>
+<li>局部静态对象：令局部变量的生命周期贯穿函数调用和之后的时间。它在第一次经过对象定义语句时初始化，直到程序终止才被销毁。</li>
+</ol>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>局部静态变量只被初始化一次，即使又一次执行了定义和初始化语句。</li>
+<li>局部静态变量如果没有显式初始值，<strong>内置类型初始化为0</strong>。</li>
+</ol>
+<h2 id="6-1-2-函数声明"><a href="#6-1-2-函数声明" class="headerlink" title="6.1.2 函数声明"></a>6.1.2 函数声明</h2><ol>
+<li>函数名字必须在使用前声明。</li>
+<li>函数只能定义一次，可以声明多次。</li>
+<li>函数声明也称作函数原型。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>C++Primer(5th) Notes</category>
+        <category>The Basics of C++</category>
+      </categories>
+      <tags>
+        <tag>Chapter06</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2.4 const限定符</title>
     <url>/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/</url>
     <content><![CDATA[<ul>
+<li><a href="#24-const限定符">2.4 const限定符</a><ul>
 <li><a href="#2-4-1-const的引用-reference-to-const">2.4.1 const的引用(reference to const)</a><ul>
 <li><a href="#【1】初始化和对const的引用">【1】初始化和对const的引用</a></li>
 </ul>
@@ -23,13 +208,17 @@
 <li><a href="#【3】指针和constexpr">【3】指针和constexpr</a></li>
 </ul>
 </li>
-<li><a href="#关于引用的一些补充知识">关于引用的一些补充知识</a><ul>
+<li><a href="#2-4-5关于引用的一些补充知识">2.4.5 关于引用的一些补充知识</a><ul>
 <li><a href="#【1】对常量的引用和普通引用的相同点-不同点">【1】对常量的引用和普通引用的相同点/不同点</a></li>
-<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a><a id="more"></a></li>
+<li><a href="#【2】有没有-int-amp-const-r-i">【2】有没有 int &amp;const r = i</a><a id="more"></a>
+
+</li>
 </ul>
 </li>
 </ul>
-<ol>
+</li>
+</ul>
+<h1 id="2-4-const限定符"><a href="#2-4-const限定符" class="headerlink" title="2.4 const限定符"></a>2.4 const限定符</h1><ol>
 <li><code>const</code> 对象创建后，值不能被改变。</li>
 <li><code>const</code> 对象必须被初始化。</li>
 </ol>
@@ -72,6 +261,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> j = i;  <span class="comment">// 顶层，j是int型的对象</span></span><br><span class="line"><span class="keyword">int</span> *<span class="keyword">const</span> q = &amp;i;  <span class="comment">// 顶层，表示指针本身是常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = &amp;i;  <span class="comment">// 底层，表示指针所指对象是个常量</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r = i;  <span class="comment">// 底层，引用类型都是底层const</span></span><br></pre></td></tr></table></figure>
 
 <p>顶层/底层 <code>const</code> 赋值规则，书上说的太过复杂，其实就是前面几节 const的引用，指向常量的指针，常量指针一些性质。</p>
+<p>比较通用的规则：<br><strong>我们可以使用非常量初始化一个底层 <code>const</code> 对象，反过来不行。</strong></p>
 <h2 id="2-4-4-constexpr和常量表达式"><a href="#2-4-4-constexpr和常量表达式" class="headerlink" title="2.4.4 constexpr和常量表达式"></a>2.4.4 constexpr和常量表达式</h2><p>常量表达式(const expression)：值不会改变，并且在编译过程中就能得到计算结果的表达式。字面值属于常量表达式。</p>
 <p>一个对象或者表达式是不是常量表达式由数据类型和初始值共同决定。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">20</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> b = a + <span class="number">1</span>;  <span class="comment">// yes</span></span><br><span class="line"><span class="keyword">int</span> c = <span class="number">1</span>; <span class="comment">// no, 因为不是const int</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> d = get_size();  <span class="comment">//no, 我们到运行get_size()时才能确定d的值</span></span><br></pre></td></tr></table></figure>
@@ -85,7 +275,7 @@
 <h3 id="【3】指针和constexpr"><a href="#【3】指针和constexpr" class="headerlink" title="【3】指针和constexpr"></a>【3】指针和constexpr</h3><p><code>constexpr</code> 只对指针本身有效，与其所指对象无关。<br>例如：<code>constexpr int *q = nullptr</code>，q是一个常量指针。</p>
 <p><code>constexpr</code> 指针既可以指向常量也可指向非常量。</p>
 <!-- TODO: VS: 对常量的引用 VS 普通引用 -->
-<h2 id="关于引用的一些补充知识"><a href="#关于引用的一些补充知识" class="headerlink" title="关于引用的一些补充知识"></a>关于引用的一些补充知识</h2><h3 id="【1】对常量的引用和普通引用的相同点-不同点"><a href="#【1】对常量的引用和普通引用的相同点-不同点" class="headerlink" title="【1】对常量的引用和普通引用的相同点/不同点"></a>【1】对常量的引用和普通引用的相同点/不同点</h3><p><strong>相同点</strong>：</p>
+<h2 id="2-4-5-关于引用的一些补充知识"><a href="#2-4-5-关于引用的一些补充知识" class="headerlink" title="2.4.5 关于引用的一些补充知识"></a>2.4.5 关于引用的一些补充知识</h2><h3 id="【1】对常量的引用和普通引用的相同点-不同点"><a href="#【1】对常量的引用和普通引用的相同点-不同点" class="headerlink" title="【1】对常量的引用和普通引用的相同点/不同点"></a>【1】对常量的引用和普通引用的相同点/不同点</h3><p><strong>相同点</strong>：</p>
 <ol>
 <li>必须初始化。</li>
 </ol>
@@ -117,7 +307,6 @@
     <title>2.3 复合类型</title>
     <url>/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<ul>
-<li><a href="#2-3-复合类型">2.3 复合类型</a><ul>
 <li><a href="#2-3-1-引用-reference">2.3.1 引用(reference)</a></li>
 <li><a href="#2-3-2-指针-pointer">2.3.2 指针(pointer)</a><ul>
 <li><a href="#【1】空指针">【1】空指针</a></li>
@@ -129,13 +318,12 @@
 <li><a href="#【1】定义多个变量">【1】定义多个变量</a></li>
 <li><a href="#【2】指向指针的指针">【2】指向指针的指针</a></li>
 <li><a href="#【3】指向指针的引用">【3】指向指针的引用</a><a id="more"></a>
-<h2 id="2-3-1-引用-reference"><a href="#2-3-1-引用-reference" class="headerlink" title="2.3.1 引用(reference)"></a>2.3.1 引用(reference)</h2></li>
-</ul>
+
 </li>
 </ul>
 </li>
 </ul>
-<p><em>引用</em>为<em>对象</em>起了另外一个名字，引用类型 引用 另外一种类型。<br>形式为：<code>int &amp;refVal = ival;</code> ，<code>refVal</code> 是 <code>ival</code> 的引用。</p>
+<h1 id="2-3-复合类型"><a href="#2-3-复合类型" class="headerlink" title="2.3 复合类型"></a>2.3 复合类型</h1><h2 id="2-3-1-引用-reference"><a href="#2-3-1-引用-reference" class="headerlink" title="2.3.1 引用(reference)"></a>2.3.1 引用(reference)</h2><p><em>引用</em>为<em>对象</em>起了另外一个名字，引用类型 引用 另外一种类型。<br>形式为：<code>int &amp;refVal = ival;</code> ，<code>refVal</code> 是 <code>ival</code> 的引用。</p>
 <p>引用必须遵守一下三个规定：</p>
 <ol>
 <li>引用必须被初始化</li>
@@ -215,7 +403,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-2-1-变量定义"><a href="#2-2-1-变量定义" class="headerlink" title="2.2.1 变量定义"></a>2.2.1 变量定义</h2><h3 id="【1】初始值"><a href="#【1】初始值" class="headerlink" title="【1】初始值"></a>【1】初始值</h3><p>对象被创建时获得了一个特定的值，就称该对象被<strong>初始化</strong>了。</p>
+<h1 id="2-2-变量-variable"><a href="#2-2-变量-variable" class="headerlink" title="2.2 变量(variable)"></a>2.2 变量(variable)</h1><h2 id="2-2-1-变量定义"><a href="#2-2-1-变量定义" class="headerlink" title="2.2.1 变量定义"></a>2.2.1 变量定义</h2><h3 id="【1】初始值"><a href="#【1】初始值" class="headerlink" title="【1】初始值"></a>【1】初始值</h3><p>对象被创建时获得了一个特定的值，就称该对象被<strong>初始化</strong>了。</p>
 <p>我们经常用 <code>=</code> 进行初始化，注意，初始化并不是赋值。<br>初始化的含义是创建变量时赋予一个初始值，而赋值的含义是把对象的当前值擦除，用一个新值代替。</p>
 <h3 id="【2】列表初始化"><a href="#【2】列表初始化" class="headerlink" title="【2】列表初始化"></a>【2】列表初始化</h3><p>4种初始化形式：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>; # <span class="number">1</span></span><br><span class="line"><span class="keyword">int</span> a = &#123;<span class="number">0</span>&#125;; # <span class="number">2</span></span><br><span class="line"><span class="keyword">int</span> a&#123;<span class="number">0</span>&#125;; # <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">a</span><span class="params">(<span class="number">0</span>)</span></span>; # <span class="number">4</span></span><br></pre></td></tr></table></figure>
@@ -348,7 +536,7 @@
 </ul>
 <a id="more"></a>
 
-<h2 id="2-1-1-算术类型-arithmetic-type"><a href="#2-1-1-算术类型-arithmetic-type" class="headerlink" title="2-1-1 算术类型(arithmetic type)"></a>2-1-1 算术类型(arithmetic type)</h2><p>基本内置类型包括 <strong>算术类型</strong> 和 <strong>空类型</strong> 。</p>
+<h1 id="2-1-基本内置类型"><a href="#2-1-基本内置类型" class="headerlink" title="2.1 基本内置类型"></a>2.1 基本内置类型</h1><h2 id="2-1-1-算术类型-arithmetic-type"><a href="#2-1-1-算术类型-arithmetic-type" class="headerlink" title="2.1.1 算术类型(arithmetic type)"></a>2.1.1 算术类型(arithmetic type)</h2><p>基本内置类型包括 <strong>算术类型</strong> 和 <strong>空类型</strong> 。</p>
 <h3 id="【1】算术类型的分类"><a href="#【1】算术类型的分类" class="headerlink" title="【1】算术类型的分类"></a>【1】算术类型的分类</h3>
 $$
 \text{内置类型} \begin{cases}
@@ -2707,6 +2895,37 @@ $$
       </categories>
       <tags>
         <tag>LaTeX</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>int main (int argc, char *argv[])中argc和argv的使用。</title>
+    <url>/2018/12/22/other/int%20main%20(int%20argc,%20char%20argv%5B%5D)/</url>
+    <content><![CDATA[<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*test.c*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">/* argc是命令行输入的参数的个数，argv数组存储每个参数的内容。*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"参数应该为两个\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"第一个参数：%s\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"第二个参数：%s\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="首先我们先编译该文件，gcc-o-test-test-c，得到test文件。"><a href="#首先我们先编译该文件，gcc-o-test-test-c，得到test文件。" class="headerlink" title="首先我们先编译该文件，gcc -o test test.c，得到test文件。"></a>首先我们先编译该文件，gcc -o test test.c，得到test文件。</h4><p>（如果执行gcc test.c，是得到a.out）</p>
+<ul>
+<li><p><strong>如果我们在终端执行：./test</strong></p>
+<p>则会报错：<br><em>参数应该为两个</em></p>
+</li>
+<li><p><strong>如果我们在终端执行：./test Pineapple</strong></p>
+<p>输出：  </p>
+<pre><code>*第一个参数：./test*  
+*第二个参数：Pineapple*</code></pre></li>
+<li><p><strong>如果我们需要输入的第二参数是Pineapple Catle，在终端执行：./test Pineapple Catle</strong></p>
+<p>则会报错：<br><em>参数应该为两个</em></p>
+<p>因为程序会以空格键区分各个参数。</p>
+</li>
+<li><p><strong>解决空格的问题，加上引号即可。在终端执行：./test “Pineapple Catle”</strong></p>
+<p>输出：<br>  <em>第一个参数：./test</em><br>  <em>第二个参数：Pineapple Castle</em></p>
+</li>
+</ul>
+<p><img src="/2018/12/22/other/int%20main%20(int%20argc,%20char%20argv[])/argv1.png" alt="argv1"></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
