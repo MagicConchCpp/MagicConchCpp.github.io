@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>6.3 返回类型和return语句</title>
+    <url>/2020/01/11/CPP-Primer/Notes/6.3%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%92%8Creturn%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[<ul>
+<li><a href="#6-3-返回类型和return语句">6.3 返回类型和return语句</a><ul>
+<li><a href="#6-3-1-无返回值函数">6.3.1 无返回值函数</a></li>
+<li><a href="#6-3-2-有返回值函数">6.3.2 有返回值函数</a><ul>
+<li><a href="#【1】值是如何被返回的">【1】值是如何被返回的</a></li>
+<li><a href="#【2】不要返回局部对象的引用或指针">【2】不要返回局部对象的引用或指针</a></li>
+<li><a href="#【3】返回类类型的函数和调用运算符">【3】返回类类型的函数和调用运算符</a></li>
+<li><a href="#【4】引用返回左值">【4】引用返回左值</a></li>
+<li><a href="#【5】列表初始化返回值">【5】列表初始化返回值</a></li>
+<li><a href="#【6】主函数main的返回值">【6】主函数main的返回值</a></li>
+<li><a href="#【7】递归">【7】递归</a></li>
+</ul>
+</li>
+<li><a href="#6-3-3-返回数组指针">6.3.3 返回数组指针</a><ul>
+<li><a href="#【1】使用类型别名">【1】使用类型别名</a></li>
+<li><a href="#【2】不使用类型别名">【2】不使用类型别名</a></li>
+<li><a href="#【3】使用尾置返回类型">【3】使用尾置返回类型</a></li>
+<li><a href="#【4】使用decltype">【4】使用decltype</a><a id="more"></a>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-3-返回类型和return语句"><a href="#6-3-返回类型和return语句" class="headerlink" title="6.3 返回类型和return语句"></a>6.3 返回类型和return语句</h1><p><code>return</code> 语句终止当期函数，并返回到调用处。有两种形式：</p>
+<ol>
+<li><code>return;</code></li>
+<li><code>return expression;</code></li>
+</ol>
+<h2 id="6-3-1-无返回值函数"><a href="#6-3-1-无返回值函数" class="headerlink" title="6.3.1 无返回值函数"></a>6.3.1 无返回值函数</h2><ol>
+<li>无返回值的 <code>return</code> 语句只能出现在返回 <code>void</code> 类型的函数里。当然不必非要有 <code>return</code> 语句，若没有，会隐式的执行 <code>return</code>。</li>
+<li>返回 <code>void</code> 类型的函数，也可以返回 另一个返回 <code>void</code> 的函数。</li>
+</ol>
+<h2 id="6-3-2-有返回值函数"><a href="#6-3-2-有返回值函数" class="headerlink" title="6.3.2 有返回值函数"></a>6.3.2 有返回值函数</h2><p><code>return</code> 返回类型必须和函数返回类型相同，或者能隐式转换。</p>
+<p><strong>注意</strong>：在一个循环里，若含有 <code>return</code> 语句，那么循环外面也应该有一条 <code>return</code> 语句。 因为我们可能没有返回任何值（没有进入循环体内的return语句），函数就结束了。我们一般在函数的最后都会保留一个 <code>return</code> 语句。</p>
+<h3 id="【1】值是如何被返回的"><a href="#【1】值是如何被返回的" class="headerlink" title="【1】值是如何被返回的"></a>【1】值是如何被返回的</h3><p>对于引用类型来说，不会真正的拷贝对象，只是一个别名。<br>对于其他类型，会拷贝出一个临时量。</p>
+<h3 id="【2】不要返回局部对象的引用或指针"><a href="#【2】不要返回局部对象的引用或指针" class="headerlink" title="【2】不要返回局部对象的引用或指针"></a>【2】不要返回局部对象的引用或指针</h3><p>函数结束后，所占的空间也会被释放掉。我们引用的（或指针所指的）局部变量对象不复存在。<br>例如：非引用类型的形参，函数体内定义的变量都是局部变量。</p>
+<h3 id="【3】返回类类型的函数和调用运算符"><a href="#【3】返回类类型的函数和调用运算符" class="headerlink" title="【3】返回类类型的函数和调用运算符"></a>【3】返回类类型的函数和调用运算符</h3><p>调用运算符 <code>()</code> 的优先级和点运算符 <code>.</code> 和箭头运算符 <code>-&gt;</code> 相同，满足左结合律。若函数返回指针、引用或类的对象，我们能使用函数结果访问结果对象的成员。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span>&amp; <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s1, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s2)</span></span>;</span><br><span class="line"><span class="keyword">auto</span> sz = f(s1, s2).size();</span><br></pre></td></tr></table></figure>
+
+<h3 id="【4】引用返回左值"><a href="#【4】引用返回左值" class="headerlink" title="【4】引用返回左值"></a>【4】引用返回左值</h3><p>返回引用的函数得到左值，其他的得到右值。我们能为返回类型是 非常量引用 的函数的结果赋值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span>&amp; <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s1, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s2)</span></span>;</span><br><span class="line">f(s1, s2) = <span class="string">"123"</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="【5】列表初始化返回值"><a href="#【5】列表初始化返回值" class="headerlink" title="【5】列表初始化返回值"></a>【5】列表初始化返回值</h3><!-- TODO: C++11: 返回花括号列表 -->
+<p>C++11规定：函数可以返回花括号包围的值得列表。</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f() &#123;</span><br><span class="line">    <span class="keyword">if</span> (...)</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;  <span class="comment">// 返回空的vector</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;  <span class="comment">// 返回列表初始化的vector</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若函数返回<em>内置类型</em>，花括号列表里只能包含一个值，且该值的所占空间不能大于返回类型。</p>
+<h3 id="【6】主函数main的返回值"><a href="#【6】主函数main的返回值" class="headerlink" title="【6】主函数main的返回值"></a>【6】主函数main的返回值</h3><p>我们允许 <code>main</code> 函数没有 <code>return</code> 语句，编译器会隐式的插入一条 <code>return 0</code> 语句。</p>
+<p><code>main</code> 函数返回值是一个状态指示器，返回 <code>0</code> 表示成功，其他值表示失败，其他值的具体含义由机器决定。为了使返回值与机器无关，在 <code>cstdlib</code> 头文件引入了两个预处理变量，分别表示成功失败。<br><code>return EXIT_SUCCESS;</code> 和 <code>return EXIT_FAILURE;</code> 。</p>
+<h3 id="【7】递归"><a href="#【7】递归" class="headerlink" title="【7】递归"></a>【7】递归</h3><p>如果函数调用了它自身，那么他就是递归函数。我们必须有个终止条件，否则函数永远递归下去，直到 <strong>程序栈空间</strong> 耗尽。</p>
+<p><code>main</code> 函数不能调用它自己。</p>
+<h2 id="6-3-3-返回数组指针"><a href="#6-3-3-返回数组指针" class="headerlink" title="6.3.3 返回数组指针"></a>6.3.3 返回数组指针</h2><h3 id="【1】使用类型别名"><a href="#【1】使用类型别名" class="headerlink" title="【1】使用类型别名"></a>【1】使用类型别名</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> arrT[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">using</span> arrT = <span class="keyword">int</span>[<span class="number">10</span>];  <span class="comment">// 两条语句等价</span></span><br><span class="line"><span class="function">arrT* <span class="title">func</span><span class="params">(<span class="keyword">int</span> i)</span></span>;  <span class="comment">// 返回含有十个整数的数组的指针</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="【2】不使用类型别名"><a href="#【2】不使用类型别名" class="headerlink" title="【2】不使用类型别名"></a>【2】不使用类型别名</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> *p1[<span class="number">10</span>];  <span class="comment">// 含有十个指针的数组</span></span><br><span class="line"><span class="keyword">int</span> (*p2)[<span class="number">10</span>] = &amp;arr;  <span class="comment">// 指向数组的指针，该数组有10个整数</span></span><br></pre></td></tr></table></figure>
+
+<p>如上，返回数组指针应该像 <code>p2</code> 一样：<br><code>Type (*function(parameter_list))[dimension]</code></p>
+<p>例如：<code>int (*func)(int i)[10]</code>，该函数接收一个 <code>int</code> 型的整数，返回一个指针，该指针指向含有10个整数的数组。</p>
+<h3 id="【3】使用尾置返回类型"><a href="#【3】使用尾置返回类型" class="headerlink" title="【3】使用尾置返回类型"></a>【3】使用尾置返回类型</h3><!-- TODO: C++11: 尾置返回类型 -->
+
+<p>C++11 新标准规定，任何函数都能使用 <strong>尾置返回</strong> ，这种对于复杂的返回类型比较有效。在形参列表后加上 <code>-&gt;</code> ，后面跟尾置返回类型；在函数最开头，本该写返回类型的地方使用 <code>auto</code> 。</p>
+<p>例如：<code>auto func(int i) -&gt; int(*)[10];</code> ，func接收一个 <code>int</code> 型实参，返回一个指针，该指针指向含有10个整数的数组。</p>
+<h3 id="【4】使用decltype"><a href="#【4】使用decltype" class="headerlink" title="【4】使用decltype"></a>【4】使用decltype</h3><p>若我们知道返回的指针指向哪个数组，可以用 <code>decltype</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">decltype</span>(arr) *func(<span class="keyword">int</span> i);</span><br></pre></td></tr></table></figure>
+
+<p>func接收一个 <code>int</code> 型实参，返回一个指针，该指针指向含有10个整数的数组。</p>
+<p><strong>注意</strong>：<code>decltype</code> 的结果是个数组，还要再加一个 <code>*</code> 表明是个指针</p>
+]]></content>
+      <categories>
+        <category>C++Primer(5th) Notes</category>
+        <category>The Basics of C++</category>
+      </categories>
+      <tags>
+        <tag>Chapter06</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6.2 参数传递</title>
     <url>/2020/01/09/CPP-Primer/Notes/6.2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</url>
     <content><![CDATA[<ul>
@@ -2678,8 +2759,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>hash-table</tag>
         <tag>string</tag>
+        <tag>hash-table</tag>
         <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
