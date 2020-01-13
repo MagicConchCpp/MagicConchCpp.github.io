@@ -48,7 +48,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span>&amp; <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s1, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s2)</span></span>;</span><br><span class="line">f(s1, s2) = <span class="string">"123"</span>;</span><br></pre></td></tr></table></figure>
 
 <h3 id="【5】列表初始化返回值"><a href="#【5】列表初始化返回值" class="headerlink" title="【5】列表初始化返回值"></a>【5】列表初始化返回值</h3><!-- TODO: C++11: 返回花括号列表 -->
-<p>C++11规定：函数可以返回花括号包围的值得列表。</p>
+<p>C++11规定：函数可以返回花括号包围的值的列表。</p>
 <p>例如：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; f() &#123;</span><br><span class="line">    <span class="keyword">if</span> (...)</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;  <span class="comment">// 返回空的vector</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;  <span class="comment">// 返回列表初始化的vector</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
