@@ -2792,8 +2792,8 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>two-pointers</tag>
         <tag>string</tag>
+        <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
@@ -3020,8 +3020,8 @@ $$
 <ol>
 <li>如果我们在终端输入：<code>./test</code>。错误，输出为：<strong>参数应该为两个</strong></li>
 <li>如果我们在终端输入：<code>./test Pineapple</code>。<br>正确，输出为：<br> <strong>第一个参数：./test</strong><br> <strong>第二个参数：Pineapple</strong></li>
-<li>如果我们需要输入的第二参数是 <code>Pineapple Catle</code>，在终端输入：<code>./test Pineapple Catle</code>。错误，输出为：<strong>参数应该为两个</strong><br>因为程序会以空格键区分各个参数。</li>
-<li>解决空格的问题，加上引号即可。在终端执行：<code>./test &quot;Pineapple Catle&quot;</code>。正确，输出为：<br> <strong>第一个参数：./test</strong><br> <strong>第二个参数：Pineapple Castle</strong></li>
+<li>如果我们需要输入的第二参数是 <code>Pineapple Castle</code>，在终端输入：<code>./test Pineapple Castle</code>。错误，输出为：<strong>参数应该为两个</strong><br>因为程序会以空格键区分各个参数。</li>
+<li>解决空格的问题，加上引号即可。在终端执行：<code>./test &quot;Pineapple Castle&quot;</code>。正确，输出为：<br> <strong>第一个参数：./test</strong><br> <strong>第二个参数：Pineapple Castle</strong></li>
 </ol>
 <p><img src="/2018/12/22/CPP/summary/main%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/argv1.png" alt="argv1"></p>
 ]]></content>
