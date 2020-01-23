@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Invalid address specified to RtlValidateHeap</title>
+    <url>/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/</url>
+    <content><![CDATA[<h1 id="Invalid-address-specified-to-RtlValidateHeap"><a href="#Invalid-address-specified-to-RtlValidateHeap" class="headerlink" title="Invalid address specified to RtlValidateHeap"></a>Invalid address specified to RtlValidateHeap</h1><h2 id="1-问题概述"><a href="#1-问题概述" class="headerlink" title="1. 问题概述"></a>1. 问题概述</h2><p>报错如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">HEAP[<span class="keyword">String</span>.exe]: <span class="function">Invalid address specified to <span class="title">RtlValidateHeap</span><span class="params">( <span class="number">02730000</span>, <span class="number">0274</span>ED98 )</span></span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>监视窗口各变量的值：</p>
+<p><img src="/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/1-1.png" alt="1-1"></p>
+<p>异常位置发生在 <code>v.push_back(std::move(s2));</code> ，该语句进入了 <code>free()</code> 函数， 异常最后在函数 <code>free()</code> 的最后。<code>free()</code> 是我自定义的 <code>String</code> 类的析构函数内容，释放 <code>allocator</code> 分配的内存。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">String</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 省略一部分代码。。。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 正确的代码</span></span><br><span class="line">    String(String&amp;&amp; s) <span class="keyword">noexcept</span> : sz(s.sz), p(s.p) &#123;</span><br><span class="line">        s.p = <span class="number">0</span>;</span><br><span class="line">        s.sz = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"move constructor"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 错误的代码</span></span><br><span class="line">    <span class="comment">// String(String&amp;&amp; s) noexcept : sz(s.sz), p(s.p) &#123;</span></span><br><span class="line">    <span class="comment">//     s.free();</span></span><br><span class="line">    <span class="comment">//     std::cout &lt;&lt; "move constructor" &lt;&lt; std::endl;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    String&amp; <span class="keyword">operator</span>=(String&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    ~String() &#123; <span class="built_in">free</span>(); &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; alloc;</span><br><span class="line">    <span class="keyword">char</span> *p;</span><br><span class="line">    <span class="keyword">size_t</span> sz;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> String::<span class="built_in">free</span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (p) &#123;</span><br><span class="line">        <span class="built_in">std</span>::for_each(begin(), end(),</span><br><span class="line">        [](<span class="keyword">const</span> <span class="keyword">char</span>&amp; ptr) &#123; alloc.destroy(&amp;ptr); &#125;);</span><br><span class="line">        <span class="comment">// for (auto ptr = end(); ptr != begin();)</span></span><br><span class="line">        <span class="comment">//     alloc.destroy(--ptr);</span></span><br><span class="line">        alloc.deallocate(p, sz);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 主函数 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String s1("one"), s2("two");</span><br><span class="line">    String s3 = s1;</span><br><span class="line">    s3 = s2;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"create an empty vector"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;String&gt; v;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"----v.reserve(5)----"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    v.reserve(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"----v.push_back(s1);----"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    v.push_back(s1);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"----v.push_back(std::move(s2));----"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    v.push_back(<span class="built_in">std</span>::move(s2));  <span class="comment">/* 异常位置 */</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"----v.push_back(String(\"three\"));----"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    v.push_back(String(<span class="string">"three"</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"----v.push_back(\"four\");----"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    v.push_back(<span class="string">"four"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-解决思路"><a href="#2-解决思路" class="headerlink" title="2. 解决思路"></a>2. 解决思路</h2><p>这其实是一段测试 <strong>移动构造函数</strong> 的代码，错误信息的字面意思就是 <strong>为RtlValidateHeap指定的地址无效</strong>。</p>
+<ol>
+<li>看监视窗口的变量值，<code>p</code> 字符串中的字符无效，初步认为是指针释放的错误。</li>
+<li><code>free()</code> 函数最后一句 <code>alloc.deallocate(p, sz)</code> 正是释放内存，那么原因基本就确定下来了。</li>
+<li><code>std::move(s2)</code> 会调用移动构造函数，那么可能是移动构造函数出现了问题。</li>
+<li>之前写的错误的代码，我是想直接将右侧对象给释放掉。但是这么做是不对的，C++要求<strong>移后源</strong>必须处于可析构状态，那么我这么做就会导致它释放了两次，从而产生错误。</li>
+</ol>
+<h2 id="3-解决办法"><a href="#3-解决办法" class="headerlink" title="3. 解决办法"></a>3. 解决办法</h2><p>正确的做法是将右侧对象的指针置为 <code>nullptr</code>，其他内置类型置为初始值即可。</p>
+<p>最后的输出结果如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*p constructor</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*p constructor</span><br><span class="line">copy constructor</span><br><span class="line">copy assignment</span><br><span class="line">create an empty <span class="built_in">vector</span></span><br><span class="line">----v.reserve(<span class="number">5</span>)----</span><br><span class="line">----v.push_back(s1);----</span><br><span class="line">copy constructor</span><br><span class="line">----v.push_back(<span class="built_in">std</span>::move(s2));----</span><br><span class="line">move constructor</span><br><span class="line">----v.push_back(String(<span class="string">"three"</span>));----</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*p constructor</span><br><span class="line">move constructor</span><br><span class="line">----v.push_back(<span class="string">"four"</span>);----</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>*p constructor</span><br><span class="line">move constructor</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>Debug Problems</category>
+      </categories>
+      <tags>
+        <tag>Debug</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6.3 返回类型和return语句</title>
     <url>/2020/01/11/CPP-Primer/Notes/6.3%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%92%8Creturn%E8%AF%AD%E5%8F%A5/</url>
     <content><![CDATA[<ul>
@@ -1905,8 +1937,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -1971,8 +2003,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -2249,8 +2281,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -2760,8 +2792,8 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>string</tag>
         <tag>two-pointers</tag>
+        <tag>string</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
@@ -2980,27 +3012,18 @@ $$
   </entry>
   <entry>
     <title>int main (int argc, char *argv[])中argc和argv的使用。</title>
-    <url>/2018/12/22/other/int%20main%20(int%20argc,%20char%20argv%5B%5D)/</url>
+    <url>/2018/12/22/CPP/summary/int%20main%20(int%20argc,%20char%20argv%5B%5D)/</url>
     <content><![CDATA[<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*test.c*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">/* argc是命令行输入的参数的个数，argv数组存储每个参数的内容。*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"参数应该为两个\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"第一个参数：%s\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"第二个参数：%s\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="首先我们先编译该文件，gcc-o-test-test-c，得到test文件。"><a href="#首先我们先编译该文件，gcc-o-test-test-c，得到test文件。" class="headerlink" title="首先我们先编译该文件，gcc -o test test.c，得到test文件。"></a>首先我们先编译该文件，gcc -o test test.c，得到test文件。</h4><p>（如果执行gcc test.c，是得到a.out）</p>
-<ul>
-<li><p><strong>如果我们在终端执行：./test</strong></p>
-<p>则会报错：<br><em>参数应该为两个</em></p>
-</li>
-<li><p><strong>如果我们在终端执行：./test Pineapple</strong></p>
-<p>输出：  </p>
-<pre><code>*第一个参数：./test*  
-*第二个参数：Pineapple*</code></pre></li>
-<li><p><strong>如果我们需要输入的第二参数是Pineapple Catle，在终端执行：./test Pineapple Catle</strong></p>
-<p>则会报错：<br><em>参数应该为两个</em></p>
-<p>因为程序会以空格键区分各个参数。</p>
-</li>
-<li><p><strong>解决空格的问题，加上引号即可。在终端执行：./test “Pineapple Catle”</strong></p>
-<p>输出：<br>  <em>第一个参数：./test</em><br>  <em>第二个参数：Pineapple Castle</em></p>
-</li>
-</ul>
-<p><img src="/2018/12/22/other/int%20main%20(int%20argc,%20char%20argv[])/argv1.png" alt="argv1"></p>
+<p>首先我们先编译该文件，<code>gcc -o test test.c</code>，得到 <code>test</code> 文件。</p>
+<p>（如果执行 <code>gcc test.c</code> ，得到的是 <code>a.out</code> ）</p>
+<ol>
+<li>如果我们在终端输入：<code>./test</code>。错误，输出为：<strong>参数应该为两个</strong></li>
+<li>如果我们在终端输入：<code>./test Pineapple</code>。<br>正确，输出为：<br> <strong>第一个参数：./test</strong><br> <strong>第二个参数：Pineapple</strong></li>
+<li>如果我们需要输入的第二参数是 <code>Pineapple Catle</code>，在终端输入：<code>./test Pineapple Catle</code>。错误，输出为：<strong>参数应该为两个</strong><br>因为程序会以空格键区分各个参数。</li>
+<li>解决空格的问题，加上引号即可。在终端执行：<code>./test &quot;Pineapple Catle&quot;</code>。正确，输出为：<br> <strong>第一个参数：./test</strong><br> <strong>第二个参数：Pineapple Castle</strong></li>
+</ol>
+<p><img src="/_posts/CPP/summary/int&#32;main&#32;(int&#32;argc,&#32;char&#32;argv%5B%5D)/argv1.png" alt="argv1"></p>
 ]]></content>
       <categories>
         <category>C++</category>
