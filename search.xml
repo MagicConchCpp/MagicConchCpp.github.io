@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>6.4 函数重载</title>
+    <url>/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/</url>
+    <content><![CDATA[<ul>
+<li><a href="#6-4-函数重载">6.4 函数重载</a><ul>
+<li><a href="#【1】重载和-const-形参">【1】重载和 <code>const</code> 形参</a></li>
+<li><a href="#【2】const-cast-和重载">【2】<code>const_cast</code> 和重载</a></li>
+<li><a href="#【3】重载与作用域">【3】重载与作用域</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="6-4-函数重载"><a href="#6-4-函数重载" class="headerlink" title="6.4 函数重载"></a>6.4 函数重载</h1><p>重载函数：函数名字相同但形参列表不同，与返回类型无关。</p>
+<h2 id="【1】重载和-const-形参"><a href="#【1】重载和-const-形参" class="headerlink" title="【1】重载和 const 形参"></a>【1】重载和 <code>const</code> 形参</h2><p>一个拥有顶层 <code>const</code> 的形参无法与另一个没有顶层 <code>const</code> 的形参区分开来。<br>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重复声明 f1</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="comment">// 重复声明 f2</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>* <span class="keyword">const</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>底层 <code>const</code> 可以区分开。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>*)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="【2】const-cast-和重载"><a href="#【2】const-cast-和重载" class="headerlink" title="【2】const_cast 和重载"></a>【2】<code>const_cast</code> 和重载</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span>&amp; <span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s1, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s1.size() &lt;= s2.size() ? s1 : s2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这个函数的形参和返回类型都是 <code>const string</code> 的，当我们传入非常量的 <code>string</code> 对象时，得到的是一个常量字符串 <code>const string</code> 。</p>
+<p>我们需要一个函数，使它接收非常量时，返回的也是非常量。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span>&amp; <span class="title">shorterString</span><span class="params">(<span class="built_in">string</span>&amp; s1, <span class="built_in">string</span>&amp; s2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> &amp;r = shorterString(<span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> <span class="built_in">string</span>&amp;&gt;(s1),</span><br><span class="line">                            <span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> stirng&amp;&gt;(s2));</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<span class="built_in">string</span>&amp;&gt;(r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="【3】重载与作用域"><a href="#【3】重载与作用域" class="headerlink" title="【3】重载与作用域"></a>【3】重载与作用域</h2><p>如果我们在内层作用域声明一个函数，它将隐藏外层作用域中声明的同名实体。</p>
+]]></content>
+      <categories>
+        <category>C++Primer(5th) Notes</category>
+        <category>The Basics of C++</category>
+      </categories>
+      <tags>
+        <tag>Chapter06</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Invalid address specified to RtlValidateHeap</title>
     <url>/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/</url>
     <content><![CDATA[<h1 id="Invalid-address-specified-to-RtlValidateHeap"><a href="#Invalid-address-specified-to-RtlValidateHeap" class="headerlink" title="Invalid address specified to RtlValidateHeap"></a>Invalid address specified to RtlValidateHeap</h1><h2 id="1-问题概述"><a href="#1-问题概述" class="headerlink" title="1. 问题概述"></a>1. 问题概述</h2><p>报错如下：</p>
@@ -103,7 +137,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">10</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">decltype</span>(arr) *func(<span class="keyword">int</span> i);</span><br></pre></td></tr></table></figure>
 
 <p>func接收一个 <code>int</code> 型实参，返回一个指针，该指针指向含有10个整数的数组。</p>
-<p><strong>注意</strong>：<code>decltype</code> 的结果是个数组，还要再加一个 <code>*</code> 表明是个指针</p>
+<p><strong>注意</strong>：<code>decltype(arr)</code> 的结果是个数组，还要再加一个 <code>*</code> 表明是个指针</p>
 ]]></content>
       <categories>
         <category>C++Primer(5th) Notes</category>
