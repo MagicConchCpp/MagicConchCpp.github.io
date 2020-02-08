@@ -5,7 +5,7 @@
     <url>/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/</url>
     <content><![CDATA[<ul>
 <li><a href="#条款02-尽量以constenuminline替换define">条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></a><ul>
-<li><a href="#1-define-定义的名称无法追踪不利于调试">1. <code>#define</code> 定义的名称无法追踪，不利于调试</a></li>
+<li><a href="#1-define-定义的名称无法追踪，不利于调试">1. <code>#define</code> 定义的名称无法追踪，不利于调试</a></li>
 <li><a href="#2-用常量替换-define-的两种特殊情况">2. 用常量替换 <code>#define</code> 的两种特殊情况</a><ul>
 <li><a href="#2-1-定义指针常量">2.1 定义指针常量</a></li>
 <li><a href="#2-2-类内常量成员">2.2 类内常量成员</a></li>
@@ -2048,8 +2048,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>math</tag>
         <tag>string</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -2114,8 +2114,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>math</tag>
         <tag>string</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -2392,8 +2392,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>math</tag>
         <tag>string</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -2903,8 +2903,8 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>two-pointers</tag>
         <tag>string</tag>
+        <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>
