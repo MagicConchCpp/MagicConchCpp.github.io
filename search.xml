@@ -1,17 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>条款02-尽量以const,enum,inline替换#define</title>
+    <url>/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款02-尽量以constenuminline替换define">条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></a><ul>
+<li><a href="#1-define-定义的名称无法追踪不利于调试">1. <code>#define</code> 定义的名称无法追踪，不利于调试</a></li>
+<li><a href="#2-用常量替换-define-的两种特殊情况">2. 用常量替换 <code>#define</code> 的两种特殊情况</a><ul>
+<li><a href="#2-1-定义指针常量">2.1 定义指针常量</a></li>
+<li><a href="#2-2-类内常量成员">2.2 类内常量成员</a></li>
+<li><a href="#2-3-特殊情况">2.3 特殊情况</a></li>
+</ul>
+</li>
+<li><a href="#3-用-inline-函数替代类函数的宏-function-like-marco">3. 用 <code>inline</code> 函数替代类函数的宏 (function-like marco)</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="条款02-尽量以-const-enum-inline-替换-define"><a href="#条款02-尽量以-const-enum-inline-替换-define" class="headerlink" title="条款02-尽量以 const, enum , inline 替换 #define"></a>条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></h1><h2 id="1-define-定义的名称无法追踪，不利于调试"><a href="#1-define-定义的名称无法追踪，不利于调试" class="headerlink" title="1. #define 定义的名称无法追踪，不利于调试"></a>1. <code>#define</code> 定义的名称无法追踪，不利于调试</h2><p>当我们使用预处理指令 <code>#define RATIO = 1.653</code> 时，<code>RATIO</code> 这个名称并 <strong>没有被编译器所知道</strong>。这意味着，我们在调试中无法追踪到这个名称。</p>
+<ol>
+<li><p>调试过程中，我们无法在 变量监视 窗口查看到 <code>RATIO</code> 的值。当然这并不是主要问题，因为 <code>RATIO</code>是不变的，我们无需监视它。主要是为了说明，编译器没有将这个名称存入到调试器的记号表（symbol table）中。</p>
+<p> <img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-01.png" alt="1"></p>
+</li>
+<li><p>当使用宏出现编译错误时，我们无法知道是不是宏出现了问题。<br>例如：</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANIMAL_NAME dog_name</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> name = <span class="string">"Ben"</span>;</span><br><span class="line">    <span class="comment">// string dog_name;</span></span><br><span class="line">    ANIMAL_NAME = name;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 如果我们没有定义 <code>dog_name</code> 这个变量，那么我们的 <code>ANIMAL_NAME = name;</code> 语句就会出错，因为这句话宏替换为 <code>dog_name = name;</code>。<br> 此时编译器报错：</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="number">6</span>:<span class="number">2</span>: error C2065: “dog_name”: 未声明的标识符</span><br></pre></td></tr></table></figure>
+
+<p> 我们回到第6行找错时会疑惑，<code>dog_name</code> 是什么东西？</p>
+<p> 当然，现代编译器越来越智能化，例如我使用 <code>Clang</code> 编译时，它会告诉我们出错的宏名称。</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">6:2: error: use of undeclared identifier 'dog_name'</span><br><span class="line">         ANIMAL_NAME = name;</span><br><span class="line">         ^</span><br><span class="line">1:21: note: expanded from macro 'ANIMAL_NAME'</span><br><span class="line">          <span class="meta">#<span class="meta-keyword">define</span> ANIMAL_NAME dog_name</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>解决的方法是用一个常量替换掉宏：</strong><code>const double Ratio = 1.653;</code><br>这在VS中，也会建议这么做：</p>
+<p><img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-02.png" alt="2"><br><img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-03.png" alt="3"></p>
+<h2 id="2-用常量替换-define-的两种特殊情况"><a href="#2-用常量替换-define-的两种特殊情况" class="headerlink" title="2. 用常量替换 #define 的两种特殊情况"></a>2. 用常量替换 <code>#define</code> 的两种特殊情况</h2><h3 id="2-1-定义指针常量"><a href="#2-1-定义指针常量" class="headerlink" title="2.1 定义指针常量"></a>2.1 定义指针常量</h3><p>有必要将指针定义为 常量指针（指针本身为常量），并且还要所指对象也是常量，即 <code>const char* const musicName = &quot;So Cold&quot;</code>。</p>
+<p>当然我们更推荐使用 <code>string</code> 。<code>const std::string musicName(&quot;So Cold&quot;);</code></p>
+<h3 id="2-2-类内常量成员"><a href="#2-2-类内常量成员" class="headerlink" title="2.2 类内常量成员"></a>2.2 类内常量成员</h3><p>为了将常量的定义域限制在类内，我们必须使它成为类的一个成员。</p>
+<p><code>#define</code> 并不重视作用域，一旦宏被定义，那么在该语句之后都有效（除非被 <code>#undef</code>）。</p>
+<p>为了确保该常量只有一份实体，必须使它成为一个 <code>static</code> 成员。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> Num = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> score[Num];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下，类的静态成员不应该在类内初始化。但是 <code>const</code> 整型类型 我们可以在类内初始化它，并且不需要在类外提供额外的定义式。<br>若编译器要求提供定义式，我们需要提供定义式 <code>const int A::Num;</code> 放入实现文件而非头文件。<br>此处我们不需要再赋初值，因为我们在类内已经设置了。</p>
+<p>当然有些旧编译器不允许这么做，或者只对整数才能进行。我们可以将初值放到类外定义式中。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">double</span> ratio;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> B::ratio = <span class="number">0.5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Best Practice:</strong> 即使在常量静态数据成员在类内初始化了，在类的外部再定义一下该成员。</p>
+<h3 id="2-3-特殊情况"><a href="#2-3-特殊情况" class="headerlink" title="2.3 特殊情况"></a>2.3 特殊情况</h3><p>还有一种特殊情况就是，不允许对类内常量静态数据成员，在类内进行初始化，但是我们又必须在编译期间知道该成员的值。这时我们可以使用枚举类型充当 <code>int</code>使用。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; Num = <span class="number">5</span>; &#125;</span><br><span class="line">    <span class="keyword">int</span> score[Num];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>C++11 的 <code>constexpr</code> 已经支持在编译期间确定某个数据是常量了。</p>
+<h2 id="3-用-inline-函数替代类函数的宏-function-like-marco"><a href="#3-用-inline-函数替代类函数的宏-function-like-marco" class="headerlink" title="3. 用 inline 函数替代类函数的宏 (function-like marco)"></a>3. 用 <code>inline</code> 函数替代类函数的宏 (function-like marco)</h2><p>前面所述的宏都是 类对象的宏 (<em>object-like marco</em>)。下面这段代码是类函数的宏：</p>
+<p>我们必须为函数内容整体加上小括号，还要为所有实参加上小括号，因为要考虑运算符优先级的问题。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a, b) (a) &gt; (b) ? (a) : (b)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MULTIPLY(a, b) (a * b)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM 2+2</span></span><br><span class="line">MAX(m, n) * <span class="number">5</span>;  <span class="comment">// 实际是 (a) &gt; (b) ? (a) : (b) * 5，乘号优先级高。</span></span><br><span class="line">MULTIPLY(NUM, NUM); <span class="comment">// 实际是 (2 + 2 * 2 + 2) = 8;</span></span><br></pre></td></tr></table></figure>
+
+<p>纵使我们加上了所有括号，还有很麻烦的事情。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CALL_MAX(a, b) f((a) &gt; (b) ? (a) : (b))</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b =<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line">CALL_MAX(++a, b);   <span class="comment">// ++a &gt; b，调用f(++a); a 共自增两次</span></span><br><span class="line">CALL_MAX(++a, b + <span class="number">10</span>); <span class="comment">// ++a &lt; b + 10, 调用f(b + 10), a 自增一次</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以同 <code>template inline</code> 函数替代类函数的宏：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">max</span><span class="params">(<span class="keyword">const</span> T&amp; a, <span class="keyword">const</span> T&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>对于单纯常量，最好以 <code>const</code> 对象或者 <code>enum</code> 替换 <code>#define</code> 。</li>
+<li>对于类函数的宏 (function-like marco)，最好用 <code>inline</code> 函数替换 <code>#define</code> 。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>6.4 函数重载</title>
     <url>/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/</url>
     <content><![CDATA[<ul>
 <li><a href="#6-4-函数重载">6.4 函数重载</a><ul>
 <li><a href="#【1】重载和-const-形参">【1】重载和 <code>const</code> 形参</a></li>
 <li><a href="#【2】const-cast-和重载">【2】<code>const_cast</code> 和重载</a></li>
-<li><a href="#【3】重载与作用域">【3】重载与作用域</a></li>
+<li><a href="#【3】重载与作用域">【3】重载与作用域</a><a id="more"></a>
+<h1 id="6-4-函数重载"><a href="#6-4-函数重载" class="headerlink" title="6.4 函数重载"></a>6.4 函数重载</h1></li>
 </ul>
 </li>
 </ul>
-<h1 id="6-4-函数重载"><a href="#6-4-函数重载" class="headerlink" title="6.4 函数重载"></a>6.4 函数重载</h1><p>重载函数：函数名字相同但形参列表不同，与返回类型无关。</p>
+<p>重载函数：函数名字相同但形参列表不同，与返回类型无关。</p>
 <h2 id="【1】重载和-const-形参"><a href="#【1】重载和-const-形参" class="headerlink" title="【1】重载和 const 形参"></a>【1】重载和 <code>const</code> 形参</h2><p>一个拥有顶层 <code>const</code> 的形参无法与另一个没有顶层 <code>const</code> 的形参区分开来。<br>例如：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 重复声明 f1</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="comment">// 重复声明 f2</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>* <span class="keyword">const</span>)</span></span>;</span><br></pre></td></tr></table></figure>
 
@@ -1971,8 +2048,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -2037,8 +2114,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -2315,8 +2392,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>string</tag>
         <tag>math</tag>
+        <tag>string</tag>
       </tags>
   </entry>
   <entry>
@@ -2826,8 +2903,8 @@ $$
       </categories>
       <tags>
         <tag>hash-table</tag>
-        <tag>string</tag>
         <tag>two-pointers</tag>
+        <tag>string</tag>
         <tag>sliding-window</tag>
       </tags>
   </entry>

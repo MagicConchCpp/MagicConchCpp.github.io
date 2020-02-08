@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="条款02-尽量以 const, enum , inline 替换 #define 1. #define 定义的名称无法追踪，不利于调试 2. 用常量替换 #define 的两种特殊情况 2.1 定义指针常量 2.2 类内常量成员 2.3 特殊情况   3. 用 inline 函数替代类函数的宏 (function-like marco) 总结">
+<meta name="keywords" content="Effective C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="条款02-尽量以const,enum,inline替换#define">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;index.html">
+<meta property="og:site_name" content="Magic Conch Cpp">
+<meta property="og:description" content="条款02-尽量以 const, enum , inline 替换 #define 1. #define 定义的名称无法追踪，不利于调试 2. 用常量替换 #define 的两种特殊情况 2.1 定义指针常量 2.2 类内常量成员 2.3 特殊情况   3. 用 inline 函数替代类函数的宏 (function-like marco) 总结">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-01.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-02.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-03.png">
+<meta property="og:updated_time" content="2020-02-08T05:14:53.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-01.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>条款02-尽量以const,enum,inline替换#define | Magic Conch Cpp</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Magic Conch Cpp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Pineapple Castle</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          条款02-尽量以const,enum,inline替换#define
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-06 13:21:16" itemprop="dateCreated datePublished" datetime="2020-02-06T13:21:16+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-08 13:14:53" itemprop="dateModified" datetime="2020-02-08T13:14:53+08:00">2020-02-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Effective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Effective C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="#条款02-尽量以constenuminline替换define">条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></a><ul>
+<li><a href="#1-define-定义的名称无法追踪不利于调试">1. <code>#define</code> 定义的名称无法追踪，不利于调试</a></li>
+<li><a href="#2-用常量替换-define-的两种特殊情况">2. 用常量替换 <code>#define</code> 的两种特殊情况</a><ul>
+<li><a href="#2-1-定义指针常量">2.1 定义指针常量</a></li>
+<li><a href="#2-2-类内常量成员">2.2 类内常量成员</a></li>
+<li><a href="#2-3-特殊情况">2.3 特殊情况</a></li>
+</ul>
+</li>
+<li><a href="#3-用-inline-函数替代类函数的宏-function-like-marco">3. 用 <code>inline</code> 函数替代类函数的宏 (function-like marco)</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="条款02-尽量以-const-enum-inline-替换-define"><a href="#条款02-尽量以-const-enum-inline-替换-define" class="headerlink" title="条款02-尽量以 const, enum , inline 替换 #define"></a>条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></h1><h2 id="1-define-定义的名称无法追踪，不利于调试"><a href="#1-define-定义的名称无法追踪，不利于调试" class="headerlink" title="1. #define 定义的名称无法追踪，不利于调试"></a>1. <code>#define</code> 定义的名称无法追踪，不利于调试</h2><p>当我们使用预处理指令 <code>#define RATIO = 1.653</code> 时，<code>RATIO</code> 这个名称并 <strong>没有被编译器所知道</strong>。这意味着，我们在调试中无法追踪到这个名称。</p>
+<ol>
+<li><p>调试过程中，我们无法在 变量监视 窗口查看到 <code>RATIO</code> 的值。当然这并不是主要问题，因为 <code>RATIO</code>是不变的，我们无需监视它。主要是为了说明，编译器没有将这个名称存入到调试器的记号表（symbol table）中。</p>
+<p> <img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-01.png" alt="1"></p>
+</li>
+<li><p>当使用宏出现编译错误时，我们无法知道是不是宏出现了问题。<br>例如：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANIMAL_NAME dog_name</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> name = <span class="string">"Ben"</span>;</span><br><span class="line">    <span class="comment">// string dog_name;</span></span><br><span class="line">    ANIMAL_NAME = name;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 如果我们没有定义 <code>dog_name</code> 这个变量，那么我们的 <code>ANIMAL_NAME = name;</code> 语句就会出错，因为这句话宏替换为 <code>dog_name = name;</code>。<br> 此时编译器报错：</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span>:<span class="number">2</span>: error C2065: “dog_name”: 未声明的标识符</span><br></pre></td></tr></table></figure>
+
+<p> 我们回到第6行找错时会疑惑，<code>dog_name</code> 是什么东西？</p>
+<p> 当然，现代编译器越来越智能化，例如我使用 <code>Clang</code> 编译时，它会告诉我们出错的宏名称。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">6:2: error: use of undeclared identifier 'dog_name'</span><br><span class="line">         ANIMAL_NAME = name;</span><br><span class="line">         ^</span><br><span class="line">1:21: note: expanded from macro 'ANIMAL_NAME'</span><br><span class="line">          <span class="meta">#<span class="meta-keyword">define</span> ANIMAL_NAME dog_name</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>解决的方法是用一个常量替换掉宏：</strong><code>const double Ratio = 1.653;</code><br>这在VS中，也会建议这么做：</p>
+<p><img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-02.png" alt="2"><br><img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-03.png" alt="3"></p>
+<h2 id="2-用常量替换-define-的两种特殊情况"><a href="#2-用常量替换-define-的两种特殊情况" class="headerlink" title="2. 用常量替换 #define 的两种特殊情况"></a>2. 用常量替换 <code>#define</code> 的两种特殊情况</h2><h3 id="2-1-定义指针常量"><a href="#2-1-定义指针常量" class="headerlink" title="2.1 定义指针常量"></a>2.1 定义指针常量</h3><p>有必要将指针定义为 常量指针（指针本身为常量），并且还要所指对象也是常量，即 <code>const char* const musicName = &quot;So Cold&quot;</code>。</p>
+<p>当然我们更推荐使用 <code>string</code> 。<code>const std::string musicName(&quot;So Cold&quot;);</code></p>
+<h3 id="2-2-类内常量成员"><a href="#2-2-类内常量成员" class="headerlink" title="2.2 类内常量成员"></a>2.2 类内常量成员</h3><p>为了将常量的定义域限制在类内，我们必须使它成为类的一个成员。</p>
+<p><code>#define</code> 并不重视作用域，一旦宏被定义，那么在该语句之后都有效（除非被 <code>#undef</code>）。</p>
+<p>为了确保该常量只有一份实体，必须使它成为一个 <code>static</code> 成员。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> Num = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> score[Num];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下，类的静态成员不应该在类内初始化。但是 <code>const</code> 整型类型 我们可以在类内初始化它，并且不需要在类外提供额外的定义式。<br>若编译器要求提供定义式，我们需要提供定义式 <code>const int A::Num;</code> 放入实现文件而非头文件。<br>此处我们不需要再赋初值，因为我们在类内已经设置了。</p>
+<p>当然有些旧编译器不允许这么做，或者只对整数才能进行。我们可以将初值放到类外定义式中。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">double</span> ratio;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> B::ratio = <span class="number">0.5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Best Practice:</strong> 即使在常量静态数据成员在类内初始化了，在类的外部再定义一下该成员。</p>
+<h3 id="2-3-特殊情况"><a href="#2-3-特殊情况" class="headerlink" title="2.3 特殊情况"></a>2.3 特殊情况</h3><p>还有一种特殊情况就是，不允许对类内常量静态数据成员，在类内进行初始化，但是我们又必须在编译期间知道该成员的值。这时我们可以使用枚举类型充当 <code>int</code>使用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="keyword">enum</span> &#123; Num = <span class="number">5</span>; &#125;</span><br><span class="line">    <span class="keyword">int</span> score[Num];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>C++11 的 <code>constexpr</code> 已经支持在编译期间确定某个数据是常量了。</p>
+<h2 id="3-用-inline-函数替代类函数的宏-function-like-marco"><a href="#3-用-inline-函数替代类函数的宏-function-like-marco" class="headerlink" title="3. 用 inline 函数替代类函数的宏 (function-like marco)"></a>3. 用 <code>inline</code> 函数替代类函数的宏 (function-like marco)</h2><p>前面所述的宏都是 类对象的宏 (<em>object-like marco</em>)。下面这段代码是类函数的宏：</p>
+<p>我们必须为函数内容整体加上小括号，还要为所有实参加上小括号，因为要考虑运算符优先级的问题。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a, b) (a) &gt; (b) ? (a) : (b)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MULTIPLY(a, b) (a * b)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM 2+2</span></span><br><span class="line">MAX(m, n) * <span class="number">5</span>;  <span class="comment">// 实际是 (a) &gt; (b) ? (a) : (b) * 5，乘号优先级高。</span></span><br><span class="line">MULTIPLY(NUM, NUM); <span class="comment">// 实际是 (2 + 2 * 2 + 2) = 8;</span></span><br></pre></td></tr></table></figure>
+
+<p>纵使我们加上了所有括号，还有很麻烦的事情。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CALL_MAX(a, b) f((a) &gt; (b) ? (a) : (b))</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>, b =<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line">CALL_MAX(++a, b);   <span class="comment">// ++a &gt; b，调用f(++a); a 共自增两次</span></span><br><span class="line">CALL_MAX(++a, b + <span class="number">10</span>); <span class="comment">// ++a &lt; b + 10, 调用f(b + 10), a 自增一次</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以同 <code>template inline</code> 函数替代类函数的宏：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">max</span><span class="params">(<span class="keyword">const</span> T&amp; a, <span class="keyword">const</span> T&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>对于单纯常量，最好以 <code>const</code> 对象或者 <code>enum</code> 替换 <code>#define</code> 。</li>
+<li>对于类函数的宏 (function-like marco)，最好用 <code>inline</code> 函数替换 <code>#define</code> 。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Effective-C/" rel="tag"># Effective C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/" rel="prev" title="6.4 函数重载">
+      <i class="fa fa-chevron-left"></i> 6.4 函数重载
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#条款02-尽量以-const-enum-inline-替换-define"><span class="nav-text">条款02-尽量以 const, enum , inline 替换 #define</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-define-定义的名称无法追踪，不利于调试"><span class="nav-text">1. #define 定义的名称无法追踪，不利于调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-用常量替换-define-的两种特殊情况"><span class="nav-text">2. 用常量替换 #define 的两种特殊情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-定义指针常量"><span class="nav-text">2.1 定义指针常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-类内常量成员"><span class="nav-text">2.2 类内常量成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-特殊情况"><span class="nav-text">2.3 特殊情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-用-inline-函数替代类函数的宏-function-like-marco"><span class="nav-text">3. 用 inline 函数替代类函数的宏 (function-like marco)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZhangYang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ZhangYang</p>
+  <div class="site-description" itemprop="description">Cpper的小破站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https:&#x2F;&#x2F;liam.page" rel="noopener" target="_blank">Liam</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/fnlingnzb-learner/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;fnlingnzb-learner&#x2F;" rel="noopener" target="_blank">Boblim</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://yuxtech.github.io/" title="https:&#x2F;&#x2F;yuxtech.github.io" rel="noopener" target="_blank">向禹</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mengso.com/" title="https:&#x2F;&#x2F;mengso.com" rel="noopener" target="_blank">萌搜</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangYang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">99k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:30</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fK5vlDyCoV1ntypuEj9FHKHG-gzGzoHsz',
+      appKey: 'WP50t0qc1XHHrY4RoTTMzS6w',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

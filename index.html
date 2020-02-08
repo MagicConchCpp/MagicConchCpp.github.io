@@ -221,6 +221,130 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" class="post-title-link" itemprop="url">条款02-尽量以const,enum,inline替换#define</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-06 13:21:16" itemprop="dateCreated datePublished" datetime="2020-02-06T13:21:16+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-08 13:14:53" itemprop="dateModified" datetime="2020-02-08T13:14:53+08:00">2020-02-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Effective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Effective C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="#条款02-尽量以constenuminline替换define">条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></a><ul>
+<li><a href="#1-define-定义的名称无法追踪不利于调试">1. <code>#define</code> 定义的名称无法追踪，不利于调试</a></li>
+<li><a href="#2-用常量替换-define-的两种特殊情况">2. 用常量替换 <code>#define</code> 的两种特殊情况</a><ul>
+<li><a href="#2-1-定义指针常量">2.1 定义指针常量</a></li>
+<li><a href="#2-2-类内常量成员">2.2 类内常量成员</a></li>
+<li><a href="#2-3-特殊情况">2.3 特殊情况</a></li>
+</ul>
+</li>
+<li><a href="#3-用-inline-函数替代类函数的宏-function-like-marco">3. 用 <code>inline</code> 函数替代类函数的宏 (function-like marco)</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -252,7 +376,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-02 09:57:16" itemprop="dateModified" datetime="2020-02-02T09:57:16+08:00">2020-02-02</time>
+                <time title="修改时间：2020-02-04 19:28:34" itemprop="dateModified" datetime="2020-02-04T19:28:34+08:00">2020-02-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,25 +439,15 @@
 <li><a href="#6-4-函数重载">6.4 函数重载</a><ul>
 <li><a href="#【1】重载和-const-形参">【1】重载和 <code>const</code> 形参</a></li>
 <li><a href="#【2】const-cast-和重载">【2】<code>const_cast</code> 和重载</a></li>
-<li><a href="#【3】重载与作用域">【3】重载与作用域</a></li>
-</ul>
-</li>
-</ul>
-<h1 id="6-4-函数重载"><a href="#6-4-函数重载" class="headerlink" title="6.4 函数重载"></a>6.4 函数重载</h1><p>重载函数：函数名字相同但形参列表不同，与返回类型无关。</p>
-<h2 id="【1】重载和-const-形参"><a href="#【1】重载和-const-形参" class="headerlink" title="【1】重载和 const 形参"></a>【1】重载和 <code>const</code> 形参</h2><p>一个拥有顶层 <code>const</code> 的形参无法与另一个没有顶层 <code>const</code> 的形参区分开来。<br>例如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 重复声明 f1</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="comment">// 重复声明 f2</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>* <span class="keyword">const</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>底层 <code>const</code> 可以区分开。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">int</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f2</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>*)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="【2】const-cast-和重载"><a href="#【2】const-cast-和重载" class="headerlink" title="【2】const_cast 和重载"></a>【2】<code>const_cast</code> 和重载</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span>&amp; <span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s1, <span class="keyword">const</span> <span class="built_in">string</span>&amp; s2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s1.size() &lt;= s2.size() ? s1 : s2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面这个函数的形参和返回类型都是 <code>const string</code> 的，当我们传入非常量的 <code>string</code> 对象时，得到的是一个常量字符串 <code>const string</code> 。</p>
-<p>我们需要一个函数，使它接收非常量时，返回的也是非常量。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span>&amp; <span class="title">shorterString</span><span class="params">(<span class="built_in">string</span>&amp; s1, <span class="built_in">string</span>&amp; s2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> &amp;r = shorterString(<span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> <span class="built_in">string</span>&amp;&gt;(s1),</span><br><span class="line">                            <span class="keyword">const_cast</span>&lt;<span class="keyword">const</span> stirng&amp;&gt;(s2));</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<span class="built_in">string</span>&amp;&gt;(r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="【3】重载与作用域"><a href="#【3】重载与作用域" class="headerlink" title="【3】重载与作用域"></a>【3】重载与作用域</h2><p>如果我们在内层作用域声明一个函数，它将隐藏外层作用域中声明的同名实体。</p>
-
+<li><a href="#【3】重载与作用域">【3】重载与作用域</a></li></ul></li></ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1359,102 +1473,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/31/Hexo/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="ZhangYang">
-      <meta itemprop="description" content="Cpper的小破站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Magic Conch Cpp">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/31/Hexo/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">hexo-icarus主题下, 文章内部的目录问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-31 21:39:10" itemprop="dateCreated datePublished" datetime="2019-12-31T21:39:10+08:00">2019-12-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-03 16:14:01" itemprop="dateModified" datetime="2020-01-03T16:14:01+08:00">2020-01-03</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/12/31/Hexo/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/31/Hexo/h4-hexo-icarus%E4%B8%BB%E9%A2%98%E4%B8%8B%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>115</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
-<li>首先icarus主题，本身就支持目录功能，只要在md文件首部加上 <code>toc: true</code> ，就可以在文章左侧生成目录，且可以正常跳转。</li>
-<li>在我们浏览网站首页时，每一个文章只会显示一部分的内容，并且有一个 <strong>read more</strong> 按钮，供我们阅读全文。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1527,20 +1545,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1599,12 +1617,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">99k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:28</span>
+    <span title="站点阅读时长">1:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
