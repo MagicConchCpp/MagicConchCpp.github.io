@@ -54,7 +54,7 @@
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数 1.1 rand() % n 的弊端 1.2 一些解决办法">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-14T03:07:19.049Z">
+<meta property="og:updated_time" content="2020-02-14T04:19:38.740Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/">
@@ -253,7 +253,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-14 11:07:19" itemprop="dateModified" datetime="2020-02-14T11:07:19+08:00">2020-02-14</time>
+                <time title="修改时间：2020-02-14 12:19:38" itemprop="dateModified" datetime="2020-02-14T12:19:38+08:00">2020-02-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,22 +328,7 @@
 </ul>
 <a id="more"></a>
 
-<h1 id="1-为什么不推荐使用-rand-n-来生成一定范围的随机数"><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数" class="headerlink" title="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数"></a>1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</h1><details>
-  <summary>Copyright 1999-2018.</summary>
-    <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eqweqw</span><br></pre></td></tr></table></figure>
-</details>
-
-<div class="spoiler collapsed">
-    <div class="spoiler-title">
-        查看答案
-    </div>
-    <div class="spoiler-content">
-        <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eqweqw</span><br></pre></td></tr></table></figure>
-    </div>
-</div>
-
-
-<p>最初遇到这个问题是在学习随机数的时候，在 cppreference 上，有这么一段代码，它的写法让我眼前一亮。</p>
+<h1 id="1-为什么不推荐使用-rand-n-来生成一定范围的随机数"><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数" class="headerlink" title="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数"></a>1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</h1><p>最初遇到这个问题是在学习随机数的时候，在 cppreference 上，有这么一段代码，它的写法让我眼前一亮。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 扔 6 面色子 20 次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n != <span class="number">20</span>; ++n) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">while</span>(x &gt; <span class="number">6</span>)</span><br><span class="line">            x = <span class="number">1</span> + rand() / ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>); <span class="comment">// 注意： 1 + rand() % 6 有偏差！</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>StackOverflow上也有个类似的问题。<a href="https://stackoverflow.com/questions/49878942/why-is-rand6-biased" target="_blank" rel="noopener">Why is <code>rand() % 6</code> biased?</a></p>
@@ -459,7 +444,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -531,12 +516,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">104k</span>
+    <span title="站点总字数">105k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:34</span>
+    <span title="站点阅读时长">1:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
