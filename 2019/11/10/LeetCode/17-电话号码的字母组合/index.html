@@ -394,7 +394,7 @@
 <p><strong>代码二：</strong> <code>path</code> 非引用传值。</p>
 <p>虽然我们知道，在传递字符串时，最好使用引用传值。但是我们的目的是在一次递归里不修改 <code>path</code> 的值(否则我们就要像代码1一样，还要删除 <code>path</code> 的尾元素)，所以我们不使用引用传值。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; letterCombinations(<span class="built_in">string</span> digits) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;res;</span><br><span class="line">        <span class="keyword">if</span>(digits.empty()) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;letter(&#123;<span class="string">""</span>, <span class="string">""</span>, <span class="string">"abc"</span>, <span class="string">"def"</span>, <span class="string">"ghi"</span>, <span class="string">"jkl"</span>, <span class="string">"mno"</span>, <span class="string">"pqrs"</span>, <span class="string">"tuv"</span>, <span class="string">"wxyz"</span>&#125;);</span><br><span class="line">        <span class="built_in">string</span> path = <span class="string">""</span>;</span><br><span class="line">        DFS(digits, <span class="number">0</span>, path, res, letter);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="built_in">string</span> digits, <span class="keyword">int</span> pos, <span class="built_in">string</span> path, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; letter)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pos == digits.size())&#123;</span><br><span class="line">            res.push_back(path);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c: letter[digits[pos] - <span class="string">'0'</span>])&#123;</span><br><span class="line">            DFS(digits, pos + <span class="number">1</span>, path + c, res, letter);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -496,20 +496,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -568,12 +568,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">99k</span>
+    <span title="站点总字数">104k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:30</span>
+    <span title="站点阅读时长">1:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>

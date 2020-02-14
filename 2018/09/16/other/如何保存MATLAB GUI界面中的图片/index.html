@@ -321,7 +321,7 @@
 <p>新建一个按钮，按钮的代码如下。</p>
 <p>其中第二行的 <code>new_axes=copyobj(handles.axes1,new_f_handle)</code> 的 <code>handles.axes1</code> 意思是保存的是axes1中的图，以此类推。</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pushbutton19_Callback</span><span class="params">(hObject, eventdata, handles)</span></span></span><br><span class="line"><span class="comment">% hObject    handle to pushbutton19 (see GCBO)</span></span><br><span class="line"><span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span></span><br><span class="line"><span class="comment">% handles    structure with handles and user data (see GUIDATA)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 以下内容拷贝到按钮函数下。</span></span><br><span class="line">    new_f_handle=<span class="built_in">figure</span>(<span class="string">'visible'</span>,<span class="string">'off'</span>); <span class="comment">%新建一个不可见的figure</span></span><br><span class="line">    new_axes=copyobj(handles.axes1,new_f_handle); <span class="comment">%axes1是GUI界面内要保存图线的Tag，将其copy到不可见的figure中</span></span><br><span class="line">    set(new_axes,<span class="string">'Units'</span>,<span class="string">'normalized'</span>,<span class="string">'Position'</span>,[<span class="number">0.1</span> <span class="number">0.1</span> <span class="number">0.8</span> <span class="number">0.8</span>]);<span class="comment">%将图线缩放</span></span><br><span class="line">    [filename pathname fileindex]=uiputfile(&#123;<span class="string">'*.png'</span>;<span class="string">'*.bmp'</span>;<span class="string">'*.jpg'</span>;<span class="string">'*.eps'</span>;&#125;,<span class="string">'图片保存为'</span>);</span><br><span class="line">    <span class="keyword">if</span>  filename~=<span class="number">0</span><span class="comment">%未点“取消”按钮或未关闭</span></span><br><span class="line">        file=strcat(pathname,filename);</span><br><span class="line">        <span class="keyword">switch</span> fileindex <span class="comment">%根据不同的选择保存为不同的类型</span></span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span></span><br><span class="line">                print(new_f_handle,<span class="string">'-dpng'</span>,file);<span class="comment">% print(new_f_handle,'-dpng',filename);效果一样，将图像打印到指定文件中</span></span><br><span class="line">                fprintf(<span class="string">'&gt;&gt;已保存到：%s\n'</span>,file);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span></span><br><span class="line">                print(new_f_handle,<span class="string">'-dbmp'</span>,file);</span><br><span class="line">                fprintf(<span class="string">'&gt;&gt;已保存到：%s\n'</span>,file);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span></span><br><span class="line">                print(new_f_handle,<span class="string">'-djpg'</span>,file);</span><br><span class="line">                fprintf(<span class="string">'&gt;&gt;已保存到：%s\n'</span>,file);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span></span><br><span class="line">                print(new_f_handle,<span class="string">'-depsc'</span>,file);</span><br><span class="line">                fprintf(<span class="string">'&gt;&gt;已保存到：%s\n'</span>,file);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        msgbox(<span class="string">'          图线已成功保存！'</span>,<span class="string">'完成！'</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -418,20 +418,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -490,12 +490,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">99k</span>
+    <span title="站点总字数">104k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:30</span>
+    <span title="站点阅读时长">1:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
