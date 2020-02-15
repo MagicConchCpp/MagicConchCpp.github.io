@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CppQuiz：Question-42，Difficulty-normal</title>
+    <url>/2020/02/14/CppQuiz/Question42-2-%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
+    <content><![CDATA[<h2 id="1-Question-42，Difficulty-normal"><a href="#1-Question-42，Difficulty-normal" class="headerlink" title="1. Question-42，Difficulty-normal"></a>1. Question-42，Difficulty-normal</h2><blockquote>
+<p><a href="http://cppquiz.org/quiz/question/42" target="_blank" rel="noopener">cppquiz: question#42</a></p>
+</blockquote>
+<p>根据C ++ 17标准，该程序的输出是什么？</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    A() &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">int</span>) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>; &#125;</span><br><span class="line">    A(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    A a1;</span><br><span class="line">    A a2&#123;&#125;;</span><br><span class="line">    A a3&#123; <span class="number">1</span> &#125;;</span><br><span class="line">    A a4&#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        答案
+    </div>
+    <div class="spoiler-content">
+        <p><strong>1133</strong></p>
+
+    </div>
+</div>
+
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        解析
+    </div>
+    <div class="spoiler-content">
+        <ol>
+<li><p><code>A a1;</code> 毫无疑问，默认初始化，调用无参构造函数即默认构造函数。</p>
+</li>
+<li><p><code>A a2{};</code> 有点困难。我们会认为它是一个列表初始化，调用 <code>A(std::initializer_list&lt;int&gt;)</code>，以一个空列表传入这个构造函数。但我们必须要知道 <a href="https://zh.cppreference.com/w/cpp/language/list_initialization" target="_blank" rel="noopener"><strong>列表初始化</strong></a> 有一条规则：若花括号初始化列表无任何元素，则执行 <a href="https://zh.cppreference.com/w/cpp/language/value_initialization" target="_blank" rel="noopener"><strong>值初始化</strong></a>。对于值初始化（<code>T object{}</code>）来说，若 <code>T</code> 是有至少一个用户提供的任意种类的构造函数的类类型，则调用默认构造函数。我们的类 <code>A</code> 有一个默认构造函数，所以输出是 <code>&quot;1&quot;</code>。</p>
+</li>
+<li><p><code>A a3{1};</code> 对于这个我们可能会在答案 <code>&quot;2&quot;</code> 和 <code>&quot;3&quot;</code> 纠结一小会。<br>但它其实遵守这样的规则（重载决议）：对于非聚合类来说，  </p>
+<ol>
+<li><p>首先的候选函数是，初始化器列表的构造函数（<code>initializer_list</code>）。</p>
+</li>
+<li><p>若我们没有这样的构造函数，那么就会考虑其他构造函数，并且参数列表就是初始化器列表中的元素。<br>本例中它就会变为 <code>A a3(1)</code>，调用 <code>A(int)</code> 构造函数。</p>
+<p><strong>但是</strong>我们有一个<code>initializer_list</code>的构造函数，所以输出 <code>&quot;3&quot;</code> 。</p>
+</li>
+</ol>
+</li>
+<li><p><code>A a4{1, 2};</code> 毫无疑问，调用 <code>A(std::initializer_list&lt;int&gt;)</code> ，输出 <code>&quot;3&quot;</code> 。</p>
+</li>
+</ol>
+
+    </div>
+</div>
+
+<h2 id="2-题目变体"><a href="#2-题目变体" class="headerlink" title="2. 题目变体"></a>2. 题目变体</h2><p>我们注释掉了两行，分别是默认构造函数，同时注释掉 <code>A a1</code>（否则会报错）。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="comment">// A() &#123; std::cout &lt;&lt; "1"; &#125;</span></span><br><span class="line">    A(<span class="keyword">int</span>) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>; &#125;</span><br><span class="line">    A(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">2</span>)) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="comment">// A a1;</span></span><br><span class="line">    A a2&#123;&#125;;</span><br><span class="line">    A a3&#123; <span class="number">1</span> &#125;;</span><br><span class="line">    A a4&#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>为什么 <code>A a1</code> 执行出错？</p>
+ <div class="spoiler collapsed">
+    <div class="spoiler-title">
+        答案/解析
+    </div>
+    <div class="spoiler-content">
+        <p>因为此时没有了 <strong>默认构造函数</strong>，编译器也不会生成 <strong>合成的默认构造函数</strong>。</p>
+<p><strong>规则：</strong> 只有我们没有定义其他任何构造函数，编译器才会为我们生成 合成的默认构造函数。(C++ Primer 5th P236)</p>
+
+    </div>
+</div>
+</li>
+<li><p>程序这次输出什么？</p>
+ <div class="spoiler collapsed">
+    <div class="spoiler-title">
+        答案/解析
+    </div>
+    <div class="spoiler-content">
+        <p><strong>333</strong>  </p>
+<p>似乎有点奇怪。对于 <code>A a2{};</code> 我们还需记住另一条规则：<br>若花括号初始化列表无任何元素，且 T 是没有默认构造函数但带有接受 <code>initializer_list</code> 的构造函数的类类型，则进行列表初始化。ok，这时我们才会把它认为是一个空列表传给 <code>initializer_list</code> 的构造函数。</p>
+
+    </div>
+</div>
+</li>
+</ol>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CppQuiz</category>
+      </categories>
+      <tags>
+        <tag>initial</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo博客如何折叠(显示/隐藏)部分文字</title>
     <url>/2020/02/14/Hexo/h6-%E6%8A%98%E5%8F%A0%E6%96%87%E5%AD%97/</url>
     <content><![CDATA[<ul>
