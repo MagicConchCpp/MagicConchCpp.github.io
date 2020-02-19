@@ -3,10 +3,143 @@
   <entry>
     <title>KMP 算法详解</title>
     <url>/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<p><strong>KMP</strong> 是一种字符串匹配算法，即我们要在源字符串 <code>src</code> 中寻找目标字符串 <code>dst</code>。</p>
-<h2 id="KMP算法的引出"><a href="#KMP算法的引出" class="headerlink" title="KMP算法的引出"></a>KMP算法的引出</h2><h3 id="暴力算法的方法及弊端"><a href="#暴力算法的方法及弊端" class="headerlink" title="暴力算法的方法及弊端"></a>暴力算法的方法及弊端</h3><p>我们有两个字符串，源字符串 <code>src = &quot;abcabcaba&quot;</code>，目标字符串 <code>dst = &quot;abcaba&quot;</code>，我们要在 <code>src</code> 中寻找 <code>dst</code>，并输出 <code>src</code> 中 <strong>所有匹配到的字符串</strong> 的第一个字符的位置，该例子就是 <code>3</code>。</p>
-<iframe src="https://myslide.cn/player/22247" width="562.5" height="386" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    <content><![CDATA[<ul>
+<li><a href="#1-暴力算法及其弊端">1. 暴力算法及其弊端</a></li>
+<li><a href="#2-最长的相同前后缀">2. 最长的相同前后缀</a><ul>
+<li><a href="#2-1-最长的相同前后缀在kmp中发挥的作用">2.1 最长的相同前后缀在KMP中发挥的作用</a></li>
+<li><a href="#2-2-最长的相同前后缀的定义和求法">2.2 最长的相同前后缀的定义和求法</a></li>
+<li><a href="#2-3-最长的相同前后缀的算法">2.3 最长的相同前后缀的算法</a></li>
+</ul>
+</li>
+<li><a href="#3-kmp完整代码">3. KMP完整代码</a></li>
+</ul>
+<p><strong>KMP</strong> 是一种字符串匹配算法，即我们要在源字符串 <code>src</code> 中寻找目标字符串 <code>dst</code>。</p>
+<a id="more"></a>
+
+<h2 id="1-暴力算法及其弊端"><a href="#1-暴力算法及其弊端" class="headerlink" title="1. 暴力算法及其弊端"></a>1. 暴力算法及其弊端</h2><p>我们有两个字符串，源字符串 <code>src = &quot;abcabcaba&quot;</code>，目标字符串 <code>dst = &quot;abcaba&quot;</code>，我们要在 <code>src</code> 中寻找 <code>dst</code>，并输出 <code>src</code> 中 <strong>所有匹配到的字符串</strong> 的第一个字符的位置，该例子就是 <code>3</code>。</p>
+<p>下面的幻灯片(1)带你理解暴力算法和KMP的区别。</p>
+<iframe src="https://myslide.cn/player/22247" width="788" height="480" frameborder="1" marginwidth="0" marginheight="0" scrolling="no" style="margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe>
+
+<p>暴力算法代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">strStr</span><span class="params">(<span class="built_in">string</span> src, <span class="built_in">string</span> dst)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = dst.size();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = src.size();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (j; j &lt; m; ++ j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (src[i + j] != dst[j])</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j == m)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        i ++;</span><br><span class="line">    &#125; <span class="keyword">while</span> (i &lt; n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-最长的相同前后缀"><a href="#2-最长的相同前后缀" class="headerlink" title="2. 最长的相同前后缀"></a>2. 最长的相同前后缀</h2><h3 id="2-1-最长的相同前后缀在KMP中发挥的作用"><a href="#2-1-最长的相同前后缀在KMP中发挥的作用" class="headerlink" title="2.1 最长的相同前后缀在KMP中发挥的作用"></a>2.1 最长的相同前后缀在KMP中发挥的作用</h3><p>我们在幻灯片(1) 中讲到（下图），因为当前比较位置（蓝色箭头）之前的 <code>dst[0] ~ dst[4]</code> 的前缀（<code>dst[0~1] = &quot;ab&quot;</code>）和后缀（<code>dst[3~4] = &quot;ab&quot;</code>）相同，并且显然 <code>dst[3~4] = src[3~4] = &quot;ab&quot;</code> ，因此必有<code>dst[0~1] = src[3~4]</code> ，我们才可以直接略过这部分的比较。</p>
+<img src="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-1.png" height="480" width="700">
+
+<p>这里的主要功劳是 <code>dst</code> 前5个字符（比较位置之前） 的 <strong>最长的相同前后缀</strong>，他帮助我们省去了不必要的操作。</p>
+<h3 id="2-2-最长的相同前后缀的定义和求法"><a href="#2-2-最长的相同前后缀的定义和求法" class="headerlink" title="2.2 最长的相同前后缀的定义和求法"></a>2.2 最长的相同前后缀的定义和求法</h3><p>我们继续以 <code>dst = &quot;abcaba&quot;</code> 为例，它的最长前后缀数组（简称为 <strong>匹配数组</strong>）为 <code>F = {0, 0, 0, 1, 2, 1}</code>， <code>F</code> 也可表示字符串的<strong>对称程度</strong>。<br><code>F[i]</code> （i从0开始） 表示 <code>dst[0] ~ dst[i]</code> 组成的字符串 的最长相同前后缀。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">dst = a b c a b a</span><br><span class="line">  F = <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>前缀集合 <code>pre</code> ：除最后一个字符外，前面所有 不同长度字符串 的集合。<br>后缀集合 <code>suf</code> ：除第一个字符外，后面所有 不同长度字符串 的集合。<br>例如 <code>&quot;abc&quot;</code> ，前缀集合 <code>pre = {&quot;a&quot;, &quot;ab&quot;}</code>，后缀集合 <code>suf = {&quot;c&quot;, &quot;bc&quot;}</code>。<br>而 单个字符的字符串 <code>&quot;a&quot;</code> 无前后缀。</p>
+<p>下面一步步求 <code>dst = &quot;abcaba&quot;</code> 的匹配数组 <code>F</code>。</p>
+<!--
+1. `"a"`：没有前缀也没有后缀。`F[0] = 0`。
+2. `"ab"`：前缀集合 `pre = {"a"}`，后缀集合 `suf = {"c"}`。对应都不相等，`F[1] = 0`。
+3. `"abc"`：前缀集合 `pre = {"a", "ab"}`，后缀集合 `suf = {"c", "bc"}`。对应都不相等，`F[2] = 0`。
+4. `"abca"` 前缀集合 `pre = {"a", "ab", "abc"}`，后缀集合 `suf = {"a", "ca", "bca"}`。有 `pre[0] = suf[0]`，所以 `F[3] = 2`。
+5. `"abcab"`：前缀集合 `pre = {"a", "ab", "abc", "abca"}`，后缀集合 `suf = {"b", "ab", "cab", "bcab"}`。有 `pre[1] = suf[1]`，所以 `F[4] = 2`。
+6. `"abcaba"`：前缀集合 `pre = {"a", "ab", "abc", "abca", "abcab"}`，后缀集合 `suf = {"a", "ba", "aba", "caba", "bcaba"}`。有 `pre[0] = suf[0]`，所以 `F[5] = 1`。
+-->
+<style>
+table th:first-of-type {
+    width: ;
+}
+table th:nth-of-type(2) {
+    width: 10%;
+}
+table th:nth-of-type(3) {
+    width: ;
+}
+table th:nth-of-type(4) {
+    width: ;
+}
+table th:nth-of-type(5) {
+    width: 17%;
+}
+table th:nth-of-type(6) {
+    width: 10%;
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th><code>i</code></th>
+<th>字符串</th>
+<th>前缀集合</th>
+<th>后缀集合</th>
+<th>是否相等</th>
+<th><code>F</code>数组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td><code>&quot;a&quot;</code></td>
+<td><code>pre = {}</code></td>
+<td><code>suf = {}</code></td>
+<td>否</td>
+<td><code>F[1] = 0</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>&quot;ab&quot;</code></td>
+<td><code>pre = {&quot;a&quot;}</code></td>
+<td><code>suf = {&quot;c&quot;}</code></td>
+<td>否</td>
+<td><code>F[1] = 0</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>&quot;abc&quot;</code></td>
+<td><code>pre = {&quot;a&quot;, &quot;ab&quot;}</code></td>
+<td><code>suf = {&quot;c&quot;, &quot;bc&quot;}</code></td>
+<td>否</td>
+<td><code>F[2] = 0</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>&quot;abca&quot;</code></td>
+<td><code>pre = {&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;}</code></td>
+<td><code>suf = {&quot;a&quot;, &quot;ca&quot;, &quot;bca&quot;}</code></td>
+<td><code>pre[0] = suf[0]</code></td>
+<td><code>F[3] = 0</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>&quot;abcab&quot;</code></td>
+<td><code>pre = {&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;, &quot;abca&quot;}</code></td>
+<td><code>suf = {&quot;b&quot;, &quot;ab&quot;, &quot;cab&quot;, &quot;bcab&quot;}</code></td>
+<td><code>pre[1] = suf[1]</code></td>
+<td><code>F[4] = 2</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>&quot;abcaba&quot;</code></td>
+<td><code>pre = {&quot;a&quot;, &quot;ab&quot;, &quot;abc&quot;, &quot;abca&quot;, &quot;abcab&quot;}</code></td>
+<td><code>suf = {&quot;a&quot;, &quot;ba&quot;, &quot;aba&quot;, &quot;caba&quot;, &quot;bcaba&quot;}</code></td>
+<td><code>pre[0] = suf[0]</code></td>
+<td><code>F[5] = 1</code></td>
+</tr>
+</tbody></table>
+<h3 id="2-3-最长的相同前后缀的算法"><a href="#2-3-最长的相同前后缀的算法" class="headerlink" title="2.3 最长的相同前后缀的算法"></a>2.3 最长的相同前后缀的算法</h3><p>上一小节我们讲了如何求出 匹配数组 <code>F</code>，我们使用的是直接观察法，但是代码中这么暴力的枚举是很浪费的。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">dst = a b c a b a</span><br><span class="line">  F = <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>首先，我们可以确定所有字符串的 <code>F[0] = 0</code>。</li>
+<li>当第 <code>i</code> 个字符的前一个字符的 <code>F[i - 1] = 0</code>，那么我们直接比较 <code>dst[i]</code> 和 <code>dst[0]</code> 即可，因为这时它要么匹配一个字符，要么一个字符也不匹配（即 <code>F[i] = 1 or 0</code>）。例如我们求 <code>abcaba</code> 的 <code>c: F[2] = ?</code>，很明显，前面的 <code>b : F[1] = 0</code>，只需判断 <code>c</code> 和开头的字符是否相同即可。</li>
+<li>当第 <code>i</code> 个字符的前一个字符的 <code>F[i - 1] = j, j != 0</code> 时，这说明前面的字符匹配了 <code>j</code> 个字符，我们判断 <code>dst[i]</code>  和 第 <code>j + 1</code> 个字符（即：<code>dst[j]</code>）是否相等即可。</li>
+<li>继续 <strong>3</strong> 中情况，如果 <code>dst[i] == dst[j]</code> ，那么 <code>F[i] = F[i - 1] + 1</code>。例如 我们求 <code>abcaba</code> 的 第二个<code>b: F[4] = ?</code>，前一个字符 <code>a: F[3] = 1</code>，说明 <code>dst[4]</code> 可以继承 <code>dst[3]</code> 的<strong>对称性</strong>。</li>
+<li>继续 <strong>3</strong> 中情况，如果 <code>dst[i] != dst[j]</code>，那么 <code>F[i]</code> 就一定为 <code>0</code> 了吗？不一定。因为还可能存在 <strong>子对称</strong>。</li>
+</ol>
+<p>我们详细讲解 <strong>5</strong> 中的 子对称。</p>
+<p><strong>子对称</strong> 指当前字符和前面第一个 <code>F</code> 值不为 <code>0</code> 的字符 之间的所有字符，组成的字符串，是否有对称性。</p>
+<img src="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-2.png" height="350" width="700">
+<img src="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-3.png" height="350" width="700">
+
+<p>求 <code>F</code> 的实现代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> dst = <span class="string">"agctagcagctagct"</span>;</span><br><span class="line">    <span class="comment">// string dst = "abaabbabaab";</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(dst.size());</span><br><span class="line">    v[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; dst.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = v[i - <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 寻找子对称串</span></span><br><span class="line">        <span class="keyword">while</span> (dst[i] != dst[j] &amp;&amp; j != <span class="number">0</span>)</span><br><span class="line">            j = v[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (dst[j] == dst[i])</span><br><span class="line">            v[i] = j + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            v[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// for (auto elem : v)</span></span><br><span class="line">    <span class="comment">//     cout &lt;&lt; elem &lt;&lt; " ";</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-KMP完整代码"><a href="#3-KMP完整代码" class="headerlink" title="3. KMP完整代码"></a>3. KMP完整代码</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> dst = <span class="string">"abaabbabaab"</span>;</span><br><span class="line">    <span class="built_in">string</span> src = <span class="string">"abaabaabbabaaabaabbabaabaabbabaab"</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(dst.size());</span><br><span class="line">    v[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; dst.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = v[i - <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 寻找子对称串</span></span><br><span class="line">        <span class="keyword">while</span> (dst[i] != dst[j] &amp;&amp; j != <span class="number">0</span>)</span><br><span class="line">            j = v[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (dst[j] == dst[i])</span><br><span class="line">            v[i] = j + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            v[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// for (auto elem : v)</span></span><br><span class="line">    <span class="comment">//     cout &lt;&lt; elem &lt;&lt; " ";</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; src.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dst[i] != src[j])  &#123;</span><br><span class="line">            <span class="comment">// dst第一个字符无法匹配，直接匹配下一个。考虑数组越界。</span></span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                ++j;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                i = v[i - <span class="number">1</span>];  <span class="comment">// 直接略过dst中对称的部分</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == dst.size() - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 找到之后打印位置，继续寻找下一个</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; j - i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">                i = v[i - <span class="number">1</span>];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 没有匹配完成，继续匹配下一位</span></span><br><span class="line">                ++i;</span><br><span class="line">                ++j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>Algorithm</category>
       </categories>
