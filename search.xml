@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>条款03-尽可能使用const</title>
+    <url>/2020/03/05/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE03-%E5%B0%BD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8const/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款03-尽可能使用-const">条款03-尽可能使用 <code>const</code></a><ul>
+<li><a href="#1-复习-const-的用法">1. 复习 <code>const</code> 的用法</a></li>
+<li><a href="#2-函数返回常量可以减少错误">2. 函数返回常量可以减少错误</a></li>
+<li><a href="#3-const-成员函数">3. <code>const</code> 成员函数</a></li>
+<li><a href="#4-两个流行概念-bitwise-constness-、logical-constness">4. 两个流行概念 bitwise constness 、logical constness</a><ul>
+<li><a href="#4-1-bitwise-constness">4.1 bitwise constness</a></li>
+<li><a href="#4-2-logical-constness">4.2 logical constness</a></li>
+</ul>
+</li>
+<li><a href="#5-在-const-和-non-const-成员函数中避免重复">5. 在 <code>const</code> 和 <code>non-const</code> 成员函数中避免重复</a></li>
+<li><a href="#6-总结">6. 总结</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="条款03-尽可能使用-const"><a href="#条款03-尽可能使用-const" class="headerlink" title="条款03-尽可能使用 const"></a>条款03-尽可能使用 <code>const</code></h1><h2 id="1-复习-const-的用法"><a href="#1-复习-const-的用法" class="headerlink" title="1. 复习 const 的用法"></a>1. 复习 <code>const</code> 的用法</h2><p>可以通过这篇文章先复习一下 <code>const</code> 的使用： <a href="https://blog.csdn.net/qq_36408085/article/details/104080087" target="_blank" rel="noopener">顶层/底层const</a>   or <a href="https://www.faker.top/2020/01/05/CPP-Primer/Notes/2.4const限定符/" target="_blank" rel="noopener">顶层/底层const</a></p>
+<p>简单介绍一下 <code>const</code> 的使用：</p>
+<ul>
+<li>顶层 <code>const</code>，表示指针本身是常量</li>
+<li>底层 <code>const</code>，表示指针所指对象是个常量</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> s[] = <span class="string">"hello"</span>;</span><br><span class="line"><span class="keyword">char</span>* p1 = s;  <span class="comment">// 非底层，非顶层</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* p2 = s;  <span class="comment">// 底层，和 char const * p2 = s;相同，仅写法不同</span></span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p3 = s;  <span class="comment">// 顶层</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p4 = s;  <span class="comment">// 底层，顶层</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; j = i;  <span class="comment">// 顶层</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> k = i;  <span class="comment">// 顶层</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-函数返回常量可以减少错误"><a href="#2-函数返回常量可以减少错误" class="headerlink" title="2. 函数返回常量可以减少错误"></a>2. 函数返回常量可以减少错误</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span> &#123;</span>... ...&#125;;</span><br><span class="line"><span class="keyword">const</span> Rational <span class="keyword">operator</span>* (<span class="keyword">const</span> Rational&amp; lhs, <span class="keyword">const</span> Rational&amp; rhs);</span><br></pre></td></tr></table></figure>
+
+<p>这里重载 <code>*</code> 函数，返回的是一个 <code>const</code>。</p>
+<p>如果我们返回的不是 <code>const</code>，那么下面代码就会产生很难排查的问题，因为编译器认为它是对的。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Rational a, b ,c;</span><br><span class="line">    <span class="keyword">if</span> ((a * b) = c) &#123;</span><br><span class="line">        ... ...;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>(a * b) = c</code> ，你可能疑惑为什么有人会在 <code>a * b</code> 的结果上赋值，或许这个人只是想比较是否相等，而少写了个 <code>=</code> 。但是编译器认为这就是个赋值操作（赋值操作也可以转为 <code>bool</code> 类型），没有任何语法问题。</p>
+<p>我们的代码就会遇到问题，因为无论怎么样 <code>(a * b) = c</code> 都是 <strong>真</strong> ，我们会浪费时间来排查这种逻辑错误。</p>
+<p>如果返回的是 <code>const</code> ，那么这个赋值操作就是不允许的，编译器就会报错。</p>
+<h2 id="3-const-成员函数"><a href="#3-const-成员函数" class="headerlink" title="3. const 成员函数"></a>3. <code>const</code> 成员函数</h2><p><code>const</code> 成员函数内 不能修改类的成员，它有两个优点：</p>
+<ol>
+<li>该函数可以操作 <code>const</code> 对象。</li>
+<li>使得类的接口容易理解。知道哪个函数能改动对象内容，哪个函数不能。</li>
+</ol>
+<h2 id="4-两个流行概念-bitwise-constness-、logical-constness"><a href="#4-两个流行概念-bitwise-constness-、logical-constness" class="headerlink" title="4. 两个流行概念 bitwise constness 、logical constness"></a>4. 两个流行概念 bitwise constness 、logical constness</h2><h3 id="4-1-bitwise-constness"><a href="#4-1-bitwise-constness" class="headerlink" title="4.1 bitwise constness"></a>4.1 bitwise constness</h3><p><strong>bitwise constness</strong> 阵营的人认为，成员函数只有在不改变对象的任何成员变量（<code>static</code> 除外）时，才是 <code>const</code> 的，也就是说它不更改对象内的任何一个 <code>bit</code> 。编译器采取的标准就是这个。</p>
+<p>然而，一些成员函数虽然不完全具备 <code>const</code> 的性质，却能通过 <strong>bitwise</strong> 测试。具体来说，一个更改了 <strong>指针所指物</strong> 的成员函数虽然不算是 <code>const</code>，但如果只有指针（而非其所指物）属于对象，那么此函数为 <strong>bitwise constness</strong> 。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTextBlock</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[] (<span class="built_in">std</span>::<span class="keyword">size_t</span> position) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> pText[position];</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span>* pText;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的 <code>operator[]</code> 声明为 <code>const</code> 的，这确实是 <strong>bitwise constness</strong> 的，但是返回的确实一个内部值，我们可以通过这个返回值来修改我们的对象。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> CTextBlock <span class="title">cctb</span><span class="params">(<span class="string">"hello"</span>)</span></span>;</span><br><span class="line"><span class="keyword">char</span>* pc = &amp;cctb[<span class="number">0</span>];</span><br><span class="line">*pc = <span class="string">'j'</span>;  <span class="comment">// 此时变为 "jello"</span></span><br><span class="line">cctb[<span class="number">1</span>] = <span class="string">'k'</span>;  <span class="comment">// 此时变为 "jkllo"</span></span><br></pre></td></tr></table></figure>
+
+<p>我们创建了一个常量对象，而且只调用了 <code>const</code> 成员函数，但是我们最终还是改变了它的值。</p>
+<p><strong>注：</strong> 如果我们确实需要保护一个 <strong>指针成员所指物</strong>，使其不会被改变。我们可以将该指针封装到一个模板中，具体做法参考：<a href="https://stackoverflow.com/questions/19210543/in-c-if-a-member-pointer-point-to-some-data-how-to-protect-that-data-from-be" target="_blank" rel="noopener">在c++中，如果成员指针指向某些数据，如何保护该数据不被修改？</a></p>
+<h3 id="4-2-logical-constness"><a href="#4-2-logical-constness" class="headerlink" title="4.2 logical constness"></a>4.2 logical constness</h3><p>由此，我们引出了另一个概念 <strong>logical constness</strong> ：一个 <code>const</code> 成员函数可以修改它所处理的对象内的某些 <code>bits</code> ，但只有当客户端侦测不出的情况下才可以。如下例所示，我们可以在 <code>const</code> 成员函数里修改一些 <strong>私有成员变量</strong>，这些变量对于用户来说是看不见的，所以他们不会知道 也不必知道这些变化。<br>我们使用 <code>mutable</code> 关键字修饰的变量，即使在 <code>const</code> 成员函数内也可以被修改。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTextBlock</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...;</span><br><span class="line">    <span class="built_in">std</span>::<span class="keyword">size_t</span> length() <span class="keyword">const</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span>* pText;</span><br><span class="line">    <span class="keyword">mutable</span> <span class="built_in">std</span>::<span class="keyword">size_t</span> textLength;</span><br><span class="line">    <span class="keyword">mutable</span> <span class="keyword">bool</span> lengthIsValid;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="keyword">size_t</span> CTextBlock::length() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!lengthIsValid) &#123;</span><br><span class="line">        textLength = <span class="built_in">std</span>::<span class="built_in">strlen</span>(pText);</span><br><span class="line">        lengthIsValid = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> textLength;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-在-const-和-non-const-成员函数中避免重复"><a href="#5-在-const-和-non-const-成员函数中避免重复" class="headerlink" title="5. 在 const 和 non-const 成员函数中避免重复"></a>5. 在 <code>const</code> 和 <code>non-const</code> 成员函数中避免重复</h2><p>当某个成员函数执行很多操作时，我们要把这些操作同时放进 <code>const</code> 和 <code>non-const</code> 成员函数中，这样的代码就很长且重复。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBlock</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[] (<span class="built_in">std</span>::<span class="keyword">size_t</span> position) &#123;</span><br><span class="line">        ... <span class="comment">//</span></span><br><span class="line">        ... <span class="comment">// 其他操作</span></span><br><span class="line">        <span class="keyword">return</span> text[position];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[] (<span class="built_in">std</span>::<span class="keyword">size_t</span> position) <span class="keyword">const</span> &#123;</span><br><span class="line">        ... <span class="comment">//</span></span><br><span class="line">        ... <span class="comment">// 其他操作</span></span><br><span class="line">        <span class="keyword">return</span> text[position];</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> text;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此我们可以令其中一个去调用另一个。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBlock</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[] (<span class="built_in">std</span>::<span class="keyword">size_t</span> position) &#123;</span><br><span class="line">        ... <span class="comment">//</span></span><br><span class="line">        ... <span class="comment">// 其他操作</span></span><br><span class="line">        <span class="keyword">return</span> text[position];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span>&amp; <span class="keyword">operator</span>[] (<span class="built_in">std</span>::<span class="keyword">size_t</span> position) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>&amp;&gt;(<span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> TextBlock&amp;&gt;(*<span class="keyword">this</span>)[position]);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span>* pText;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们先将 <code>*this</code> 由原来的 <code>TextBlock&amp;</code> 转型为 <code>const TextBlock&amp;</code> ，使它可以调用 <code>cosnt</code> 版本的函数，<code>cosnt</code> 版本的函数返回的是一个 <code>const char&amp;</code>，因此我们还要对返回值转型，使用 <code>const_cat&lt;char&amp;&gt;</code> 移除返回值的 <code>const</code>。</p>
+<p><strong>注意</strong>：反向做法——令 <code>const</code> 版本调用 <code>non-const</code> 版本是错误的。<br>因为 <code>non-const</code> 函数并不承诺不改变成员变量，我们可能会改变 <em>不应改动的对象</em>。<br>同时，我们要想<code>const</code> 版本调用 <code>non-const</code> 版本，必须让 <code>*this</code> 由 <code>const TextBlock&amp;</code> 通过 <code>const_cast</code> 变为 <code>TextBlock&amp;</code>。这种做法是不安全的（反向操作是安全的）。</p>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><ul>
+<li>将某些东西声明为 <code>cosnt</code> 可帮助编译器侦测出错误用法。<code>const</code> 可以被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体。</li>
+<li>编译器强制实施 <strong>bitwise constness</strong> ，但你编写的程序应该使用 <strong>logical constness</strong> 。</li>
+<li>当 <code>const</code> 和 <code>non-const</code> 成员函数有着相同的实现时（内部代码相同），令 <code>nono-const</code> 版本调用 <code>const</code> 版本可以避免重复，反之则错误。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KMP 算法详解</title>
     <url>/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<ul>
