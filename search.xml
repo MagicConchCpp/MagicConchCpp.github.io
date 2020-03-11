@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>条款04-确定对象被使用前已被初始化</title>
+    <url>/2020/03/11/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE04-%E7%A1%AE%E5%AE%9A%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%BD%BF%E7%94%A8%E5%89%8D%E5%B7%B2%E8%A2%AB%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款04-确定对象被使用前已被初始化">条款04-确定对象被使用前已被初始化</a><ul>
+<li><a href="#1-切勿混淆赋值和初始化">1. 切勿混淆赋值和初始化</a></li>
+<li><a href="#2-内置类型的赋值操作移到函数里，以避免重复的工作">2. 内置类型的赋值操作移到函数里，以避免重复的工作</a></li>
+<li><a href="#3-成员初始化次序">3. 成员初始化次序</a><ul>
+<li><a href="#3-1-类的成员初始化次序">3.1 类的成员初始化次序</a></li>
+<li><a href="#3-2-不同编译单元内的-non-local-static-对象的初始化次序">3.2 不同编译单元内的 <code>non-local static</code> 对象的初始化次序</a></li>
+</ul>
+</li>
+<li><a href="#4-总结">4. 总结</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="条款04-确定对象被使用前已被初始化"><a href="#条款04-确定对象被使用前已被初始化" class="headerlink" title="条款04-确定对象被使用前已被初始化"></a>条款04-确定对象被使用前已被初始化</h1><p>对象的初始化动作何时一定发生，何时不一定发生，这些规则太过复杂。最佳的处理办法就是：永远在使用对象之前将它初始化。</p>
+<ul>
+<li><p>对于内置类型，我们必须手动完成初始化。例如：  </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *str = <span class="string">"A C-style String"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> d;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; d;  <span class="comment">// 以读取输入流的方式初始化</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于其他类型，初始化由<strong>构造函数</strong>完成，我们要确保每一个构造函数都将对象的每一个成员初始化。</p>
+</li>
+</ul>
+<h2 id="1-切勿混淆赋值和初始化"><a href="#1-切勿混淆赋值和初始化" class="headerlink" title="1. 切勿混淆赋值和初始化"></a>1. 切勿混淆赋值和初始化</h2><p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PhoneNumber</span> &#123;</span> ... &#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ABEntry</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> theName;</span><br><span class="line">    <span class="built_in">list</span>&lt;PhoneNumber&gt; thePhones;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">&#125;</span><br><span class="line">ABEntry::ABEntry(<span class="keyword">const</span> <span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">list</span>&lt;PhoneNumber&gt;&amp; phones) &#123;</span><br><span class="line">    theName = name;     <span class="comment">// 这些是赋值，而非初始化</span></span><br><span class="line">    thePhones = phone;</span><br><span class="line">    num = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象的成员变量的初始化动作发生在构造函数本体之前（即 <code>{</code> 之前）。所以上例中这些是赋值，而非初始化。例如 <code>theName</code> 它会先调用 <code>string</code> 类的默认构造函数，再对它进行赋新值。</p>
+<p>构造函数应该使用成员初值列代替赋值动作，下面的 <code>theName</code> 直接调用 <code>string</code> 类的拷贝构造函数。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ABEntry::ABEntry(<span class="keyword">const</span> <span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">list</span>&lt;PhoneNumber&gt;&amp; phones) :</span><br><span class="line">                 theName(name), thePhones(phone), num(<span class="number">0</span>) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对于大多数类型而言，先调用默认构造函数再赋值 没有 只调用一次拷贝构造函数高效。</li>
+<li>对于内置对象而言，初始化和赋值的成本相同。</li>
+</ul>
+<p><strong>注意：</strong> 如果成员变量是 <strong><code>const</code></strong> 或者是 <strong>引用</strong>，就更不能用赋值。</p>
+<h2 id="2-内置类型的赋值操作移到函数里，以避免重复的工作"><a href="#2-内置类型的赋值操作移到函数里，以避免重复的工作" class="headerlink" title="2. 内置类型的赋值操作移到函数里，以避免重复的工作"></a>2. 内置类型的赋值操作移到函数里，以避免重复的工作</h2><p>许多类拥有多个构造函数，如果某个类含有许多成员变量和基类，多份成员初值列就会导致重复的工作。在成员初值列中合理的遗漏那些 <strong>“赋值和初始化成本相同”</strong> 的成员变量，并将这些 赋值操作 移动到某个函数里（通常是 <code>private</code>），供所有构造函数使用。</p>
+<p>在 成员变量的初值<strong>由文件或者数据库导入</strong>时 特别适用。</p>
+<h2 id="3-成员初始化次序"><a href="#3-成员初始化次序" class="headerlink" title="3. 成员初始化次序"></a>3. 成员初始化次序</h2><h3 id="3-1-类的成员初始化次序"><a href="#3-1-类的成员初始化次序" class="headerlink" title="3.1 类的成员初始化次序"></a>3.1 类的成员初始化次序</h3><ol>
+<li>基类更早于其派生类初始化。</li>
+<li>类的成员变量初始化次序和声明次序相同，与成员初值列的次序无关。</li>
+</ol>
+<p>例如 <code>array</code> 必须要知道维度大小，所以一定要保证次序。</p>
+<h3 id="3-2-不同编译单元内的-non-local-static-对象的初始化次序"><a href="#3-2-不同编译单元内的-non-local-static-对象的初始化次序" class="headerlink" title="3.2 不同编译单元内的 non-local static 对象的初始化次序"></a>3.2 不同编译单元内的 <code>non-local static</code> 对象的初始化次序</h3><p>函数内的静态对象是 <code>local static</code>，其他静态对象是<code>non-local static</code>。</p>
+<p>假设在两个文件里，每个都至少含有一个 <code>non-local static</code> 对象。若某文件里的 <code>non-local static</code> 对象的初始化使用了另一个文件里的 <code>non-local static</code> 对象，它所用到的这个对象可能未被初始化，因为 C+++ 对于 “定义于不同编译单元内的对象” 的初始化次序没有明确规定。</p>
+<p>例如：</p>
+<ol>
+<li><p>某个文件系统：  </p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileSystem</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...</span><br><span class="line">    <span class="keyword">size_t</span> numDisks() <span class="keyword">const</span>;</span><br><span class="line">    ... ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">extern</span> FileSystem tfs;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>客户用于处理文件系统的目录</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Directory</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...</span><br><span class="line">    Directory( params ) &#123;</span><br><span class="line">        ... ...</span><br><span class="line">        <span class="keyword">size_t</span> disks = tfs.numDisks();</span><br><span class="line">        ... ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">Directory <span class="title">tempdir</span><span class="params">( params )</span></span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这里的初始化的次序非常重要：除非 <code>tfs</code> 在 <code>tempDir</code> 之前先被初始化，否则 <code>tempDir</code> 的构造函数会用到尚未初始化的 <code>tfs</code>。我们如何确定 <code>tfs</code> 会在 <code>tempDir</code> 之前被初始化呢？</p>
+<p>一个解决办法是：将每个 <code>non-local</code> 对象搬到自己的专属函数内（该对象在此函数内被声明为 <code>static</code>），函数返回一个<strong>引用</strong>绑定它所含的对象。然后用户调用这个函数，而不是直接使用其中的对象。（<strong>Singleton模式</strong>）</p>
+<p>C++保证函数内的 <code>local static</code> 对象会在 调用该函数时，首次遇到该表达式时，被初始化。</p>
+<p>这样不仅解决了初始化次序问题，并且如果你从未调用这个函数（从未有需求使用这个对象），就绝不会引发构造和析构的成本。真正的 <code>non-local static</code> 对象可不会这样。</p>
+<p>我们修改代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileSystem</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...</span><br><span class="line">    <span class="keyword">size_t</span> numDisks() <span class="keyword">const</span>;</span><br><span class="line">    ... ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">FileSystem&amp; <span class="title">tfs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> FileSystem fs;</span><br><span class="line">    <span class="keyword">return</span> fs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Directory</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...</span><br><span class="line">    Directory( params ) &#123;</span><br><span class="line">        ... ...</span><br><span class="line">        <span class="keyword">size_t</span> disks = tfs().numDisks();</span><br><span class="line">        ... ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">Directory&amp; <span class="title">tempdir</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Directory td;</span><br><span class="line">    <span class="keyword">return</span> td;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然这种 <code>reference-returning</code> 函数可以，避免初始化次序问题，前提是两个对象有着合理的次序。如果对象A必须在对象B前初始化，但A的初始化又受制于B是否已经初始化，这种情况无法解决，应该避免这种情况发生。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><ul>
+<li>为内置类型进行手动初始化，因为C++不保证初始化它们。</li>
+<li>构造函数最好使用成员初值列，而不要在构造函数本体内使用赋值操作。成员初值列的成员变量的次序应该和声明次序相同。</li>
+<li>为了避免 “不同编译单元的初始化次序” 问题，用  <code>reference-returning</code> 函数内的 <code>local static</code> 对象替代 <code>non-local static</code> 对象。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>条款03-尽可能使用const</title>
     <url>/2020/03/05/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE03-%E5%B0%BD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8const/</url>
     <content><![CDATA[<ul>
