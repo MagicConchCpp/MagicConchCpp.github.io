@@ -221,6 +221,333 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.ico">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/" class="post-title-link" itemprop="url">条款06-若不想使用编译器自动生成的函数，应该明确拒绝</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-12 17:21:37 / 修改时间：20:43:09" itemprop="dateCreated datePublished" datetime="2020-03-12T17:21:37+08:00">2020-03-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Effective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Effective C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>924</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="#条款06-若不想使用编译器自动生成的函数应该明确拒绝">条款06-若不想使用编译器自动生成的函数，应该明确拒绝</a><ul>
+<li><a href="#独一无二的对象">独一无二的对象</a></li>
+<li><a href="#在编译期间发现错误">在编译期间发现错误</a></li>
+<li><a href="#总结">总结</a></li></ul></li></ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE05-%E4%BA%86%E8%A7%A3C++%E9%BB%98%E9%BB%98%E7%BC%96%E5%86%99%E5%B9%B6%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.ico">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE05-%E4%BA%86%E8%A7%A3C++%E9%BB%98%E9%BB%98%E7%BC%96%E5%86%99%E5%B9%B6%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">条款05-了解C++默默编写并调用哪些函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-12 16:00:15 / 修改时间：17:20:13" itemprop="dateCreated datePublished" datetime="2020-03-12T16:00:15+08:00">2020-03-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Effective-C/" itemprop="url" rel="index">
+                    <span itemprop="name">Effective C++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE05-%E4%BA%86%E8%A7%A3C++%E9%BB%98%E9%BB%98%E7%BC%96%E5%86%99%E5%B9%B6%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE05-%E4%BA%86%E8%A7%A3C++%E9%BB%98%E9%BB%98%E7%BC%96%E5%86%99%E5%B9%B6%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>706</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="#条款05-了解c默默编写并调用哪些函数">条款05-了解C++默默编写并调用哪些函数</a><ul>
+<li><a href="#当我们写了一个空类意味着什么">当我们写了一个空类，意味着什么</a></li>
+<li><a href="#编译器什么时候拒绝生成拷贝赋值运算符">编译器什么时候拒绝生成拷贝赋值运算符</a></li>
+<li><a href="#总结">总结</a></li></ul></li></ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE05-%E4%BA%86%E8%A7%A3C++%E9%BB%98%E9%BB%98%E7%BC%96%E5%86%99%E5%B9%B6%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/CppQuiz/Question2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.ico">
+      <meta itemprop="name" content="ZhangYang">
+      <meta itemprop="description" content="Cpper的小破站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Magic Conch Cpp">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/11/CppQuiz/Question2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F/" class="post-title-link" itemprop="url">CppQuiz：Question-2，Difficulty-normal</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-11 20:54:58 / 修改时间：21:19:56" itemprop="dateCreated datePublished" datetime="2020-03-11T20:54:58+08:00">2020-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CppQuiz/" itemprop="url" rel="index">
+                    <span itemprop="name">CppQuiz</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/11/CppQuiz/Question2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/11/CppQuiz/Question2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>878</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-Question-2，Difficulty-normal"><a href="#1-Question-2，Difficulty-normal" class="headerlink" title="1. Question-2，Difficulty-normal"></a>1. Question-2，Difficulty-normal</h2><blockquote>
+<p><a href="http://cppquiz.org/quiz/question/2" target="_blank" rel="noopener">cppquiz: question#2</a></p>
+</blockquote>
+<p>根据C++ 17标准，该程序的输出是什么？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;)</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *)</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="number">2</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    f(<span class="string">"foo"</span>);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *bar = <span class="string">"bar"</span>;</span><br><span class="line">    f(bar);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/11/CppQuiz/Question2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE04-%E7%A1%AE%E5%AE%9A%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%BD%BF%E7%94%A8%E5%89%8D%E5%B7%B2%E8%A2%AB%E5%88%9D%E5%A7%8B%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -601,10 +928,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-14 20:53:24 / 修改时间：20:56:36" itemprop="dateCreated datePublished" datetime="2020-02-14T20:53:24+08:00">2020-02-14</time>
+              <time title="创建时间：2020-02-14 20:53:24" itemprop="dateCreated datePublished" datetime="2020-02-14T20:53:24+08:00">2020-02-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-11 21:19:32" itemprop="dateModified" datetime="2020-03-11T21:19:32+08:00">2020-03-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -659,7 +992,7 @@
           <h2 id="1-Question-42，Difficulty-normal"><a href="#1-Question-42，Difficulty-normal" class="headerlink" title="1. Question-42，Difficulty-normal"></a>1. Question-42，Difficulty-normal</h2><blockquote>
 <p><a href="http://cppquiz.org/quiz/question/42" target="_blank" rel="noopener">cppquiz: question#42</a></p>
 </blockquote>
-<p>根据C ++ 17标准，该程序的输出是什么？</p>
+<p>根据C++ 17标准，该程序的输出是什么？</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    A() &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">int</span>) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>; &#125;</span><br><span class="line">    A(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    A a1;</span><br><span class="line">    A a2&#123;&#125;;</span><br><span class="line">    A a3&#123; <span class="number">1</span> &#125;;</span><br><span class="line">    A a4&#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
@@ -1039,363 +1372,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar1.ico">
-      <meta itemprop="name" content="ZhangYang">
-      <meta itemprop="description" content="Cpper的小破站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Magic Conch Cpp">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" class="post-title-link" itemprop="url">条款02-尽量以const,enum,inline替换#define</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-06 13:21:16" itemprop="dateCreated datePublished" datetime="2020-02-06T13:21:16+08:00">2020-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-08 13:32:26" itemprop="dateModified" datetime="2020-02-08T13:32:26+08:00">2020-02-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Effective-C/" itemprop="url" rel="index">
-                    <span itemprop="name">Effective C++</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="#条款02-尽量以constenuminline替换define">条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></a><ul>
-<li><a href="#1-define-定义的名称无法追踪，不利于调试">1. <code>#define</code> 定义的名称无法追踪，不利于调试</a></li>
-<li><a href="#2-用常量替换-define-的两种特殊情况">2. 用常量替换 <code>#define</code> 的两种特殊情况</a><ul>
-<li><a href="#2-1-定义指针常量">2.1 定义指针常量</a></li>
-<li><a href="#2-2-类内常量成员">2.2 类内常量成员</a></li>
-<li><a href="#2-3-特殊情况">2.3 特殊情况</a></li>
-</ul>
-</li>
-<li><a href="#3-用-inline-函数替代类函数的宏-function-like-marco">3. 用 <code>inline</code> 函数替代类函数的宏 (function-like marco)</a></li>
-<li><a href="#总结">总结</a></li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar1.ico">
-      <meta itemprop="name" content="ZhangYang">
-      <meta itemprop="description" content="Cpper的小破站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Magic Conch Cpp">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/" class="post-title-link" itemprop="url">6.4 函数重载</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-31 17:14:18" itemprop="dateCreated datePublished" datetime="2020-01-31T17:14:18+08:00">2020-01-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-04 19:28:34" itemprop="dateModified" datetime="2020-02-04T19:28:34+08:00">2020-02-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-Primer-5th-Notes/" itemprop="url" rel="index">
-                    <span itemprop="name">C++Primer(5th) Notes</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C-Primer-5th-Notes/The-Basics-of-C/" itemprop="url" rel="index">
-                    <span itemprop="name">The Basics of C++</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>801</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="#6-4-函数重载">6.4 函数重载</a><ul>
-<li><a href="#【1】重载和-const-形参">【1】重载和 <code>const</code> 形参</a></li>
-<li><a href="#【2】const-cast-和重载">【2】<code>const_cast</code> 和重载</a></li>
-<li><a href="#【3】重载与作用域">【3】重载与作用域</a></li></ul></li></ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar1.ico">
-      <meta itemprop="name" content="ZhangYang">
-      <meta itemprop="description" content="Cpper的小破站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Magic Conch Cpp">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/" class="post-title-link" itemprop="url">Invalid address specified to RtlValidateHeap</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-18 20:34:52 / 修改时间：20:42:13" itemprop="dateCreated datePublished" datetime="2020-01-18T20:34:52+08:00">2020-01-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/Debug-Problems/" itemprop="url" rel="index">
-                    <span itemprop="name">Debug Problems</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Invalid-address-specified-to-RtlValidateHeap"><a href="#Invalid-address-specified-to-RtlValidateHeap" class="headerlink" title="Invalid address specified to RtlValidateHeap"></a>Invalid address specified to RtlValidateHeap</h1><h2 id="1-问题概述"><a href="#1-问题概述" class="headerlink" title="1. 问题概述"></a>1. 问题概述</h2><p>报错如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEAP[<span class="keyword">String</span>.exe]: <span class="function">Invalid address specified to <span class="title">RtlValidateHeap</span><span class="params">( <span class="number">02730000</span>, <span class="number">0274</span>ED98 )</span></span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/18/CPP/debug/1-Invalid%20address%20specified%20to%20RtlValidateHeap/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1468,7 +1444,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1540,12 +1516,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">116k</span>
+    <span title="站点总字数">119k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:46</span>
+    <span title="站点阅读时长">1:48</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>

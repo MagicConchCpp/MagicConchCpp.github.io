@@ -1,6 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>条款06-若不想使用编译器自动生成的函数，应该明确拒绝</title>
+    <url>/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款06-若不想使用编译器自动生成的函数应该明确拒绝">条款06-若不想使用编译器自动生成的函数，应该明确拒绝</a><ul>
+<li><a href="#独一无二的对象">独一无二的对象</a></li>
+<li><a href="#在编译期间发现错误">在编译期间发现错误</a></li>
+<li><a href="#总结">总结</a><a id="more"></a>
+
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="条款06-若不想使用编译器自动生成的函数，应该明确拒绝"><a href="#条款06-若不想使用编译器自动生成的函数，应该明确拒绝" class="headerlink" title="条款06-若不想使用编译器自动生成的函数，应该明确拒绝"></a>条款06-若不想使用编译器自动生成的函数，应该明确拒绝</h1><h2 id="独一无二的对象"><a href="#独一无二的对象" class="headerlink" title="独一无二的对象"></a>独一无二的对象</h2><p>“世界上没有两片相同的叶子”，我们定义一个类表示叶子 <code>class Leaf { ... }</code>。显然任何拷贝动作都是不合逻辑的：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Leaf l1;</span><br><span class="line">Leaf l2;</span><br><span class="line"><span class="function">Leaf <span class="title">l3</span><span class="params">(l1)</span></span>;  <span class="comment">// 编译不通过</span></span><br><span class="line">l1 = l2;      <span class="comment">// 编译不通过</span></span><br></pre></td></tr></table></figure>
+
+<p>如果我们不声明 拷贝构造函数 和 拷贝赋值运算符，那么编译器会为我们生成一个。所以我们要声明这两个函数，但是我们却不能用。因此我们可以把这两个函数声明为 <code>private</code>。</p>
+<p><strong>注意：</strong> C++11支持将构造函数声明为 <strong>删除</strong>的：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Leaf(<span class="keyword">const</span> Leaf&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">Leaf&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Leaf&amp;) = <span class="keyword">delete</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在编译期间发现错误"><a href="#在编译期间发现错误" class="headerlink" title="在编译期间发现错误"></a>在编译期间发现错误</h2><p>上节将拷贝构造函数 和 拷贝赋值运算符声明为 <code>private</code>，但是我们的成员函数和友元函数仍可以调用，这时会产生连接错误。我们要将连接期错误转移到编译期间，我们可以专门为阻止拷贝动作设计一个基类。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Uncopytable</span> &#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    Uncopytable() &#123; &#125;</span><br><span class="line">    ~Uncopytable() &#123; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Uncopytable(<span class="keyword">const</span> Uncopytable&amp;);</span><br><span class="line">    Uncopytable&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Uncopytable&amp;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Leaf</span> :</span> <span class="keyword">private</span> Uncopytable &#123;</span><br><span class="line">    ... ...;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>此时，以任何形式来拷贝 <code>Leaf</code> 对象，编译器就算给 <code>Leaf</code> 生成了拷贝构造函数，那么这个拷贝动作会调用<strong>基类</strong>的拷贝构造函数，这会被编译器拒绝。</p>
+<p>此代码还有几个微妙的地方：</p>
+<ol>
+<li><code>Uncopytable</code> 作为基类，析构函数是 <code>non-vitural</code> 的。</li>
+<li>继承方式是 <code>private</code>。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>避免编译器暗自生成的拷贝功能，可以将相应的成员函数声明为 <code>private</code> 的。注意：在C++11新标准下，可以直接声明为 <strong>删除</strong>的。</li>
+<li>继承像 <code>Uncopytable</code> 的基类也是可行的。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>条款05-了解C++默默编写并调用哪些函数</title>
+    <url>/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE05-%E4%BA%86%E8%A7%A3C++%E9%BB%98%E9%BB%98%E7%BC%96%E5%86%99%E5%B9%B6%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款05-了解c默默编写并调用哪些函数">条款05-了解C++默默编写并调用哪些函数</a><ul>
+<li><a href="#当我们写了一个空类意味着什么">当我们写了一个空类，意味着什么</a></li>
+<li><a href="#编译器什么时候拒绝生成拷贝赋值运算符">编译器什么时候拒绝生成拷贝赋值运算符</a></li>
+<li><a href="#总结">总结</a><a id="more"></a>
+<h1 id="条款05-了解C-默默编写并调用哪些函数"><a href="#条款05-了解C-默默编写并调用哪些函数" class="headerlink" title="条款05-了解C++默默编写并调用哪些函数"></a>条款05-了解C++默默编写并调用哪些函数</h1></li>
+</ul>
+</li>
+</ul>
+<h2 id="当我们写了一个空类，意味着什么"><a href="#当我们写了一个空类，意味着什么" class="headerlink" title="当我们写了一个空类，意味着什么"></a>当我们写了一个空类，意味着什么</h2><p>当我们定义一个空类时，编译器会为我们自动声明<strong>拷贝构造函数</strong>、<strong>拷贝赋值运算符</strong>和<strong>析构函数</strong>，若你没有声明任何构造函数，编译器会声明一个<strong>默认构造函数</strong>，这些函数都是 <code>public</code> 且 <code>inline</code>。</p>
+<p>例如我们定义一个空类：<code>class Empty { };</code>，等同于下面这段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Empty</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Empty() &#123; ... &#125;;</span><br><span class="line">    Empty(cosnt Empty&amp; rhs) &#123; ... &#125;</span><br><span class="line">    ~Empty() &#123; ... &#125;</span><br><span class="line">    Empty&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Empty&amp; rhs) &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ol>
+<li>编译器合成的析构函数是 <code>non-virtual</code> 的。</li>
+<li>对于拷贝构造函数和拷贝赋值运算符，编译器合成的版本只是单纯的将对象每个 <code>non-static</code> 成员拷贝到目标对象。</li>
+</ol>
+<h2 id="编译器什么时候拒绝生成拷贝赋值运算符"><a href="#编译器什么时候拒绝生成拷贝赋值运算符" class="headerlink" title="编译器什么时候拒绝生成拷贝赋值运算符"></a>编译器什么时候拒绝生成拷贝赋值运算符</h2><ol>
+<li>类的成员变量是 <strong>引用</strong> 类型时。因为C++不允许改变引用的对象。</li>
+<li>类的成员变量是 <code>const</code> 类型时。因为C+++不允许修改常量。</li>
+<li>基类的拷贝赋值运算符声明为 <strong>删除的(C++11)</strong> 或者 <strong>private</strong> 的，那么编译器拒绝为它的派生类生成拷贝赋值运算符。因为 若生成了拷贝赋值运算符，派生类的拷贝赋值运算符同时也会处理基类部分的成员变量，而基类没有该函数，所以没办法赋值。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>编译器会暗自为类声明<strong>拷贝构造函数</strong>、<strong>拷贝赋值运算符</strong>、<strong>析构函数</strong>、<strong>默认构造函数</strong>。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CppQuiz：Question-2，Difficulty-normal</title>
+    <url>/2020/03/11/CppQuiz/Question2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F/</url>
+    <content><![CDATA[<h2 id="1-Question-2，Difficulty-normal"><a href="#1-Question-2，Difficulty-normal" class="headerlink" title="1. Question-2，Difficulty-normal"></a>1. Question-2，Difficulty-normal</h2><blockquote>
+<p><a href="http://cppquiz.org/quiz/question/2" target="_blank" rel="noopener">cppquiz: question#2</a></p>
+</blockquote>
+<p>根据C++ 17标准，该程序的输出是什么？</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;)</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *)</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="number">2</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    f(<span class="string">"foo"</span>);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *bar = <span class="string">"bar"</span>;</span><br><span class="line">    f(bar);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        答案
+    </div>
+    <div class="spoiler-content">
+        <p><strong>22</strong></p>
+
+    </div>
+</div>
+
+<div class="spoiler collapsed">
+    <div class="spoiler-title">
+        解析
+    </div>
+    <div class="spoiler-content">
+        <p><code>&quot;bar&quot;</code> 是一个字符串字面值，默认类型是 <code>const char []</code>。（参考<a href="https://timsong-cpp.github.io/cppwp/n4659/lex.string#8" target="_blank" rel="noopener">[5] §5.13.5</a>），它更倾向于 <code>f(const void *)</code> 函数。如果选择了 <code>void f(const std::string &amp;)</code> 这个函数，那么首先要将 <code>const char []</code> 转为 <code>std::string</code> 类型，中间多了一次转换。</p>
+
+    </div>
+</div>
+
+<h2 id="2-Insight：编译器实际完成的工作"><a href="#2-Insight：编译器实际完成的工作" class="headerlink" title="2. Insight：编译器实际完成的工作"></a>2. Insight：编译器实际完成的工作</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::basic_string&lt;<span class="keyword">char</span>, <span class="built_in">std</span>::char_traits&lt;<span class="keyword">char</span>&gt;, <span class="built_in">std</span>::allocator&lt;<span class="keyword">char</span>&gt; &gt; &amp;)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>.<span class="keyword">operator</span>&lt;&lt;(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>.<span class="keyword">operator</span>&lt;&lt;(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    f(<span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span> *&gt;(<span class="string">"foo"</span>));</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * bar = <span class="string">"bar"</span>;</span><br><span class="line">    f(<span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">void</span> *&gt;(bar));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>CppQuiz</category>
+      </categories>
+      <tags>
+        <tag>string</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>条款04-确定对象被使用前已被初始化</title>
     <url>/2020/03/11/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE04-%E7%A1%AE%E5%AE%9A%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%BD%BF%E7%94%A8%E5%89%8D%E5%B7%B2%E8%A2%AB%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
     <content><![CDATA[<ul>
@@ -306,7 +423,7 @@ table th:nth-of-type(6) {
     <content><![CDATA[<h2 id="1-Question-42，Difficulty-normal"><a href="#1-Question-42，Difficulty-normal" class="headerlink" title="1. Question-42，Difficulty-normal"></a>1. Question-42，Difficulty-normal</h2><blockquote>
 <p><a href="http://cppquiz.org/quiz/question/42" target="_blank" rel="noopener">cppquiz: question#42</a></p>
 </blockquote>
-<p>根据C ++ 17标准，该程序的输出是什么？</p>
+<p>根据C++ 17标准，该程序的输出是什么？</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    A() &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"1"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">int</span>) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"2"</span>; &#125;</span><br><span class="line">    A(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"3"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    A a1;</span><br><span class="line">    A a2&#123;&#125;;</span><br><span class="line">    A a3&#123; <span class="number">1</span> &#125;;</span><br><span class="line">    A a4&#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <div class="spoiler collapsed">
@@ -3478,8 +3595,8 @@ $$
         <category>LeetCode(C++)</category>
       </categories>
       <tags>
-        <tag>hash-table</tag>
         <tag>string</tag>
+        <tag>hash-table</tag>
         <tag>two-pointers</tag>
         <tag>sliding-window</tag>
       </tags>
