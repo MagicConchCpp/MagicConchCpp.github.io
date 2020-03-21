@@ -1,6 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>条款08-别让异常逃离析构函数</title>
+    <url>/2020/03/21/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE08-%E5%88%AB%E8%AE%A9%E5%BC%82%E5%B8%B8%E9%80%83%E7%A6%BB%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款08-别让异常逃离析构函数">条款08-别让异常逃离析构函数</a><ul>
+<li><a href="#C-并不禁止析构函数抛出异常，但不鼓励你这么做。">C++ 并不禁止析构函数抛出异常，但不鼓励你这么做。</a></li>
+<li><a href="#析构函数的某个动作可能抛出异常，怎么办？">析构函数的某个动作可能抛出异常，怎么办？</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="条款08-别让异常逃离析构函数"><a href="#条款08-别让异常逃离析构函数" class="headerlink" title="条款08-别让异常逃离析构函数"></a>条款08-别让异常逃离析构函数</h1><h2 id="C-并不禁止析构函数抛出异常，但不鼓励你这么做。"><a href="#C-并不禁止析构函数抛出异常，但不鼓励你这么做。" class="headerlink" title="C++ 并不禁止析构函数抛出异常，但不鼓励你这么做。"></a>C++ 并不禁止析构函数抛出异常，但不鼓励你这么做。</h2><p>下面这段代码，试图在析构函数里抛出异常。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Object</span> &#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">   ~Object();</span><br><span class="line">&#125;;</span><br><span class="line">Object::~Object() &#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"Deconstructor is invoked."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">throw</span> invalid_argument(<span class="string">"another exception"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    Object obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们运行后，gcc会报错：大体意思就是C++11默认析构函数是无异常的。这个程序会在抛出异常后停止。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">7.cpp: In destructor 'Object::~Object()':</span><br><span class="line"><span class="number">7.</span>cpp:<span class="number">9</span>:<span class="number">45</span>: warning: <span class="keyword">throw</span> will always call terminate() [-Wterminate]</span><br><span class="line">   <span class="keyword">throw</span> invalid_argument(<span class="string">"another exception"</span>);</span><br><span class="line">                                             ^</span><br><span class="line"><span class="number">7.</span>cpp:<span class="number">9</span>:<span class="number">45</span>: note: in C++<span class="number">11</span> destructors <span class="keyword">default</span> to <span class="keyword">noexcept</span></span><br><span class="line">Deconstructor is invoked.</span><br><span class="line"></span><br><span class="line">This application has requested the Runtime to terminate it in an unusual way.</span><br><span class="line">Please contact the application<span class="number">'</span>s support team <span class="keyword">for</span> more information.</span><br><span class="line">terminate called after throwing an instance of 'std::invalid_argument'</span><br><span class="line">  what():  another exception</span><br></pre></td></tr></table></figure>
+
+<h2 id="析构函数的某个动作可能抛出异常，怎么办？"><a href="#析构函数的某个动作可能抛出异常，怎么办？" class="headerlink" title="析构函数的某个动作可能抛出异常，怎么办？"></a>析构函数的某个动作可能抛出异常，怎么办？</h2><p>假设我们有个类负责数据库连接。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BDConnection</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> DBConnection <span class="title">create</span><span class="params">()</span></span>;  <span class="comment">// 返回一个DBConnection对象</span></span><br><span class="line">    ... ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>;  <span class="comment">// 关闭连接；失败会抛出异常</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>为了确保用户不会忘记调用 <code>close()</code> 来关闭连接，我们创建一个用来管理 <code>DBConnection</code> 对象的类，在其析构函数里调用 <code>close()</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DBConn</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...</span><br><span class="line">    ~DBConn() &#123;</span><br><span class="line">        db.close();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    DBConnection dbc;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>客户此时会写出类似下面的这段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="function">DBConn <span class="title">dbc</span><span class="params">(DBConnection::create())</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在作用域结束时，会调用 <code>dbc</code> 的析构函数，从而调用 <code>close()</code> 关闭连接。但是如果调用 <code>close()</code> 抛出了异常，就会产生一些麻烦，例如程序终止或者其他的未定义行为。</p>
+<p>我们有两个办法来解决这个问题：</p>
+<ol>
+<li><p>若 <code>close()</code> 抛出异常，那么程序就结束。</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">DBConn::~DBConn() &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        db.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (...) &#123;</span><br><span class="line">        ... ...<span class="comment">//记录下 这次异常。</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>吞下异常，即：不作处理</p>
+ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">DBConn::~DBConn() &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        db.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (...) &#123;</span><br><span class="line">        ... ...<span class="comment">//记录下 这次异常。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这两个办法都不太好，一个较好的策略是重新设计 <code>DBConn</code>，使用户有机会对可能出现的问题作出反应。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DBConn</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ... ...</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        db.close();</span><br><span class="line">        closed = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~DBConn() &#123;</span><br><span class="line">        <span class="keyword">if</span> (!closed) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                db.close();  <span class="comment">// 如果客户没有手动调用close()</span></span><br><span class="line">            &#125; <span class="keyword">catch</span>(...) &#123;</span><br><span class="line">                ... ...<span class="comment">// //记录下 这次异常。</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    DBConnection db;</span><br><span class="line">    <span class="keyword">bool</span> closed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果某个操作可能抛出异常，又必须要处理该异常，那么这个异常必须来自析构函数之外的某个函数。因为析构函数内抛出异常，往往会程序结束或者发生未定义行为。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>析构函数绝对不要传播异常。如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下（不传播）它们或者结束程序。</li>
+<li>如果客户需要对某个操作在运行期间的异常作出反应，那么，类应该提供一个普通函数（而非析构函数）执行该操作。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>条款07-为多态基类声明virtual析构函数</title>
+    <url>/2020/03/16/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE07-%E4%B8%BA%E5%A4%9A%E6%80%81%E5%9F%BA%E7%B1%BB%E5%A3%B0%E6%98%8Evirtual%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<ul>
+<li><a href="#条款07-为多态基类声明virtual析构函数">条款07-为多态基类声明virtual析构函数</a><ul>
+<li><a href="#给基类一个虚析构函数">给基类一个虚析构函数</a></li>
+<li><a href="#不作为基类，则析构函数非虚">不作为基类，则析构函数非虚</a></li>
+<li><a href="#若类的析构函数非虚，则不能作为基类被继承">若类的析构函数非虚，则不能作为基类被继承</a></li>
+<li><a href="#抽象类作为基类">抽象类作为基类</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="条款07-为多态基类声明virtual析构函数"><a href="#条款07-为多态基类声明virtual析构函数" class="headerlink" title="条款07-为多态基类声明virtual析构函数"></a>条款07-为多态基类声明virtual析构函数</h1><h2 id="给基类一个虚析构函数"><a href="#给基类一个虚析构函数" class="headerlink" title="给基类一个虚析构函数"></a>给基类一个虚析构函数</h2><p>许多做法可以记录时间，下面是一个计时的例子。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeKeeper</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TimeKeeper();</span><br><span class="line">    ~TimeKeeper();</span><br><span class="line">    ... ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AtomicClock</span> :</span> <span class="keyword">public</span> TimeKeeper &#123; ... &#125;; <span class="comment">// 原子钟</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WaterClock</span> :</span> <span class="keyword">public</span> TimeKeeper &#123; ... &#125;; <span class="comment">// 水钟</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WristWatch</span> :</span> <span class="keyword">public</span> TimeKeeper &#123; ... &#125;; <span class="comment">// 腕表</span></span><br></pre></td></tr></table></figure>
+
+<p>我们设计一个 <strong>工厂函数</strong>，返回一个基类指针，指向一个派生类对象。<br><code>TimeKeeper* getTimeKeeper();</code>，同时 <code>getTimeKeeper()</code> 函数返回的对象必须位于 <strong>堆</strong> 上，这意味着我们要手动 <code>delete</code> 它。</p>
+<p>上述代码引起的问题是，基类有一个 <code>non-virtual</code> 析构函数，假设我们的工厂函数 <code>getTimeKeeper</code> 返回了一个 <code>AtomicClock</code> 对象。这时我们 <code>delete</code> 一个指向派生类对象的基类指针是未定义行为（c++Primer(5th) P522）。我们可能只销毁了基类成员，而派生类的成员没有被销毁，造成一个 <em>局部销毁</em> 的对象。</p>
+<p>最好的做法就是，给基类一个 虚析构函数。</p>
+<h2 id="不作为基类，则析构函数非虚"><a href="#不作为基类，则析构函数非虚" class="headerlink" title="不作为基类，则析构函数非虚"></a>不作为基类，则析构函数非虚</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Point(<span class="keyword">int</span> x, <span class="keyword">int</span> y);</span><br><span class="line">    ~Point();</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个类总共大小是 8字节，如果我们的虚函数是 <code>virtual</code> 的，那么就要携带一份vptr（虚函数指针），这份指针大小为 4字节。那么多添加一个虚函数，就多占用了 50% 的空间。</p>
+<h2 id="若类的析构函数非虚，则不能作为基类被继承"><a href="#若类的析构函数非虚，则不能作为基类被继承" class="headerlink" title="若类的析构函数非虚，则不能作为基类被继承"></a>若类的析构函数非虚，则不能作为基类被继承</h2><p>例如，我们继承标准库中的 <code>string</code> ，它不含任何虚函数。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpecialString</span> :</span> <span class="keyword">public</span> <span class="built_in">std</span>::<span class="built_in">string</span> &#123;</span><br><span class="line">    ... ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">SpecialString* pss = <span class="keyword">new</span> SpecialString(<span class="string">"Impending Doom"</span>);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> * ps = pss;</span><br><span class="line"><span class="keyword">delete</span> pa; <span class="comment">// 造成一个 局部销毁 的对象。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>： <code>STL</code> 所有容器都是不带 虚析构函数的类。</p>
+<h2 id="抽象类作为基类"><a href="#抽象类作为基类" class="headerlink" title="抽象类作为基类"></a>抽象类作为基类</h2><p>含有纯虚函数的类，被称作为抽象类。</p>
+<p>有时你想拥有一个抽象类，但是没有任何纯虚函数。这时就可以把析构函数声明为纯虚函数。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AWOV</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~AWOV() = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line">AMOV::~AWOV() &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>AWOV</code> 类有一个纯虚函数，所以是抽象类；它还有一个虚析构函数，所以被继承后的析构也没有问题。这里，我们<strong>必须为纯虚析构函数提供一份定义</strong>。</p>
+<p>析构函数的运作方式是，最深层的那个派生类的析构函数最先被调用，然后是其基类的析构函数。编译器会在 <code>AWOV</code> 的派生类的析构函数中，调用 <code>~AWOV()</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>带多态性质的基类应该声明一个虚析构函数。如果一个类有任何一个虚函数，它就应该拥有一个虚析构函数。</li>
+<li>某个类设计的目的如果不是为了作为基类来使用，或者不是为了具备多态性，就不该声明 虚析构函数。</li>
+<li>某个类的析构函数非虚，则不能被用来做基类。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>Effective C++</category>
+      </categories>
+      <tags>
+        <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>条款06-若不想使用编译器自动生成的函数，应该明确拒绝</title>
     <url>/2020/03/12/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE06-%E8%8B%A5%E4%B8%8D%E6%83%B3%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%98%8E%E7%A1%AE%E6%8B%92%E7%BB%9D/</url>
     <content><![CDATA[<ul>
