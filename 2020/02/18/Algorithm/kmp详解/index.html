@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.ico">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/MagicConch/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/MagicConch/images/avatar.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/MagicConch/images/avatar.ico">
+  <link rel="mask-icon" href="/MagicConch/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/MagicConch/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/MagicConch/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
-    root: '/',
+    hostname: new URL('https://csu_coder_yang.gitee.io').hostname,
+    root: '/MagicConch/',
     scheme: 'Gemini',
     version: '7.6.0',
     exturl: false,
@@ -50,18 +50,18 @@
 <meta name="keywords" content="String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KMP 算法详解">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="1. 暴力算法及其弊端 2. 最长的相同前后缀 2.1 最长的相同前后缀在KMP中发挥的作用 2.2 最长的相同前后缀的定义和求法 2.3 最长的相同前后缀的算法   3. KMP完整代码  KMP 是一种字符串匹配算法，即我们要在源字符串 src 中寻找目标字符串 dst。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-1.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-2.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-3.png">
 <meta property="og:updated_time" content="2020-02-19T09:47:16.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-1.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;18&#x2F;Algorithm&#x2F;kmp%E8%AF%A6%E8%A7%A3&#x2F;kmp-1.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/">
+<link rel="canonical" href="https://csu_coder_yang.gitee.io/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -124,7 +124,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/" class="brand" rel="start">
+      <a href="/MagicConch/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Magic Conch Cpp</span>
         <span class="logo-line-after"><i></i></span>
@@ -148,32 +148,32 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/MagicConch/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/MagicConch/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/MagicConch/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/MagicConch/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/MagicConch/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-schedule">
 
-    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+    <a href="/MagicConch/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -227,10 +227,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://csu_coder_yang.gitee.io/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar1.ico">
+      <meta itemprop="image" content="/MagicConch/images/avatar1.ico">
       <meta itemprop="name" content="ZhangYang">
       <meta itemprop="description" content="Cpper的小破站">
     </span>
@@ -265,7 +265,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                  <a href="/MagicConch/categories/Algorithm/" itemprop="url" rel="index">
                     <span itemprop="name">Algorithm</span>
                   </a>
                 </span>
@@ -287,8 +287,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
+    <a title="valine" href="/MagicConch/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/MagicConch/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -338,7 +338,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">strStr</span><span class="params">(<span class="built_in">string</span> src, <span class="built_in">string</span> dst)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> m = dst.size();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> n = src.size();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (j; j &lt; m; ++ j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (src[i + j] != dst[j])</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j == m)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        i ++;</span><br><span class="line">    &#125; <span class="keyword">while</span> (i &lt; n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-最长的相同前后缀"><a href="#2-最长的相同前后缀" class="headerlink" title="2. 最长的相同前后缀"></a>2. 最长的相同前后缀</h2><h3 id="2-1-最长的相同前后缀在KMP中发挥的作用"><a href="#2-1-最长的相同前后缀在KMP中发挥的作用" class="headerlink" title="2.1 最长的相同前后缀在KMP中发挥的作用"></a>2.1 最长的相同前后缀在KMP中发挥的作用</h3><p>我们在幻灯片(1) 中讲到（下图），因为当前比较位置（蓝色箭头）之前的 <code>dst[0] ~ dst[4]</code> 的前缀（<code>dst[0~1] = &quot;ab&quot;</code>）和后缀（<code>dst[3~4] = &quot;ab&quot;</code>）相同，并且显然 <code>dst[3~4] = src[3~4] = &quot;ab&quot;</code> ，因此必有<code>dst[0~1] = src[3~4]</code> ，我们才可以直接略过这部分的比较。</p>
-<img src="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-1.png" height="480" width="700">
+<img src="/MagicConch/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-1.png" height="480" width="700">
 
 <p>这里的主要功劳是 <code>dst</code> 前5个字符（比较位置之前） 的 <strong>最长的相同前后缀</strong>，他帮助我们省去了不必要的操作。</p>
 <h3 id="2-2-最长的相同前后缀的定义和求法"><a href="#2-2-最长的相同前后缀的定义和求法" class="headerlink" title="2.2 最长的相同前后缀的定义和求法"></a>2.2 最长的相同前后缀的定义和求法</h3><p>我们继续以 <code>dst = &quot;abcaba&quot;</code> 为例，它的最长前后缀数组（简称为 <strong>匹配数组</strong>）为 <code>F = {0, 0, 0, 1, 2, 1}</code>， <code>F</code> 也可表示字符串的<strong>对称程度</strong>。<br><code>F[i]</code> （i从0开始） 表示 <code>dst[0] ~ dst[i]</code> 组成的字符串 的最长相同前后缀。</p>
@@ -447,13 +447,13 @@ table th:nth-of-type(6) {
 </ol>
 <p>我们详细讲解 <strong>5</strong> 中的 子对称。</p>
 <p><strong>子对称</strong> 指当前字符和前面第一个 <code>F</code> 值不为 <code>0</code> 的字符 之间的所有字符，组成的字符串，是否有对称性。</p>
-<img src="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-2.png" height="350" width="700">
-<img src="/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-3.png" height="350" width="700">
+<img src="/MagicConch/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-2.png" height="350" width="700">
+<img src="/MagicConch/2020/02/18/Algorithm/kmp%E8%AF%A6%E8%A7%A3/kmp-3.png" height="350" width="700">
 
 <p>求 <code>F</code> 的实现代码：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> dst = <span class="string">"agctagcagctagct"</span>;</span><br><span class="line">    <span class="comment">// string dst = "abaabbabaab";</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(dst.size());</span><br><span class="line">    v[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; dst.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = v[i - <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 寻找子对称串</span></span><br><span class="line">        <span class="keyword">while</span> (dst[i] != dst[j] &amp;&amp; j != <span class="number">0</span>)</span><br><span class="line">            j = v[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (dst[j] == dst[i])</span><br><span class="line">            v[i] = j + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            v[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// for (auto elem : v)</span></span><br><span class="line">    <span class="comment">//     cout &lt;&lt; elem &lt;&lt; " ";</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-KMP完整代码"><a href="#3-KMP完整代码" class="headerlink" title="3. KMP完整代码"></a>3. KMP完整代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> dst = <span class="string">"abaabbabaab"</span>;</span><br><span class="line">    <span class="built_in">string</span> src = <span class="string">"abaabaabbabaaabaabbabaabaabbabaab"</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(dst.size());</span><br><span class="line">    v[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; dst.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = v[i - <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 寻找子对称串</span></span><br><span class="line">        <span class="keyword">while</span> (dst[i] != dst[j] &amp;&amp; j != <span class="number">0</span>)</span><br><span class="line">            j = v[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (dst[j] == dst[i])</span><br><span class="line">            v[i] = j + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            v[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// for (auto elem : v)</span></span><br><span class="line">    <span class="comment">//     cout &lt;&lt; elem &lt;&lt; " ";</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; src.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dst[i] != src[j])  &#123;</span><br><span class="line">            <span class="comment">// dst第一个字符无法匹配，直接匹配下一个。考虑数组越界。</span></span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                ++j;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                i = v[i - <span class="number">1</span>];  <span class="comment">// 直接略过dst中对称的部分</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == dst.size() - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 找到之后打印位置，继续寻找下一个</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; j - i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">                i = v[i - <span class="number">1</span>];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 没有匹配完成，继续匹配下一位</span></span><br><span class="line">                ++i;</span><br><span class="line">                ++j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<h2 id="3-KMP完整代码"><a href="#3-KMP完整代码" class="headerlink" title="3. KMP完整代码"></a>3. KMP完整代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> dst = <span class="string">"abaabbabaab"</span>;</span><br><span class="line">    <span class="built_in">string</span> src = <span class="string">"abaabaabbabaaabaabbabaabaabbabaab"</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(dst.size());</span><br><span class="line">    v[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; dst.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = v[i - <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 寻找子对称串</span></span><br><span class="line">        <span class="keyword">while</span> (dst[i] != dst[j] &amp;&amp; j != <span class="number">0</span>)</span><br><span class="line">            j = v[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (dst[j] == dst[i])</span><br><span class="line">            v[i] = j + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            v[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// for (auto elem : v)</span></span><br><span class="line">    <span class="comment">//     cout &lt;&lt; elem &lt;&lt; " ";</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; src.size()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dst[i] != src[j])  &#123;</span><br><span class="line">            <span class="comment">// dst第一个字符无法匹配，直接匹配下一个。考虑数组越界。</span></span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                ++j;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                i = v[i - <span class="number">1</span>];  <span class="comment">// 直接略过dst中对称的部分</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == dst.size() - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 找到之后打印位置，继续寻找下一个</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; j - i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">                i = v[i - <span class="number">1</span>];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 没有匹配完成，继续匹配下一位</span></span><br><span class="line">                ++i;</span><br><span class="line">                ++j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/MagicConch/css/spoiler.css" type="text/css"><script src="/MagicConch/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -462,7 +462,7 @@ table th:nth-of-type(6) {
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/String/" rel="tag"># String</a>
+              <a href="/MagicConch/tags/String/" rel="tag"># String</a>
           </div>
 
         
@@ -471,11 +471,11 @@ table th:nth-of-type(6) {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/14/CppQuiz/Question42-2-%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="prev" title="CppQuiz：Question-42，Difficulty-normal">
+    <a href="/MagicConch/2020/02/14/CppQuiz/Question42-2-%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="prev" title="CppQuiz：Question-42，Difficulty-normal">
       <i class="fa fa-chevron-left"></i> CppQuiz：Question-42，Difficulty-normal
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/05/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE03-%E5%B0%BD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8const/" rel="next" title="条款03-尽可能使用const">
+    <a href="/MagicConch/2020/03/05/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE03-%E5%B0%BD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8const/" rel="next" title="条款03-尽可能使用const">
       条款03-尽可能使用const <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -545,27 +545,27 @@ table th:nth-of-type(6) {
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="ZhangYang"
-      src="/images/avatar1.ico">
+      src="/MagicConch/images/avatar1.ico">
   <p class="site-author-name" itemprop="name">ZhangYang</p>
   <div class="site-description" itemprop="description">Cpper的小破站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+          <a href="/MagicConch/archives/">
         
           <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
+            <a href="/MagicConch/categories/">
           
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
+            <a href="/MagicConch/tags/">
           
         <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
@@ -574,7 +574,7 @@ table th:nth-of-type(6) {
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/MagicConch/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -673,10 +673,10 @@ table th:nth-of-type(6) {
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script>
-<script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script>
+  <script src="/MagicConch/lib/anime.min.js"></script>
+<script src="/MagicConch/js/utils.js"></script>
+<script src="/MagicConch/js/schemes/pisces.js"></script>
+<script src="/MagicConch/js/next-boot.js"></script>
 
 
 
@@ -694,7 +694,7 @@ table th:nth-of-type(6) {
 
 
 
-  <script src="/js/local-search.js"></script>
+  <script src="/MagicConch/js/local-search.js"></script>
 
 
 
