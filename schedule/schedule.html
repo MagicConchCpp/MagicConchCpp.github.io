@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/MagicConch/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/MagicConch/images/avatar.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/MagicConch/images/avatar.ico">
-  <link rel="mask-icon" href="/MagicConch/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/MagicConch/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/MagicConch/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     hostname: new URL('http://yoursite.com').hostname,
-    root: '/MagicConch/',
+    root: '/',
     scheme: 'Gemini',
     version: '7.6.0',
     exturl: false,
@@ -53,10 +53,10 @@
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="2020年1月2020-01-15今天一直在想如何把我的VS2017配置成 One Dark Pro主题。呃呃，差不多算是完成了吧。感谢以下网站的解答。关于一些代码风格的网站：    在Visual Studio 2017中添加MonokaiVisual Studio配色方案One Dark  visual studio版本兼容问题：    VSIX installer “安装无法将此扩展安装到所">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;MagicConch&#x2F;schedule&#x2F;2020-01-13_01.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;schedule&#x2F;2020-01-13_01.png">
 <meta property="og:updated_time" content="2020-01-15T13:56:08.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;MagicConch&#x2F;schedule&#x2F;2020-01-13_01.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;schedule&#x2F;2020-01-13_01.png">
 
 <link rel="canonical" href="http://yoursite.com/schedule/schedule">
 
@@ -122,7 +122,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/MagicConch/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Magic Conch Cpp</span>
         <span class="logo-line-after"><i></i></span>
@@ -146,32 +146,32 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/MagicConch/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/MagicConch/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/MagicConch/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/MagicConch/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/MagicConch/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-schedule">
 
-    <a href="/MagicConch/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -274,7 +274,7 @@
 <p>这个临时量又引出另一各问题：<strong>使用前置递增还是后置递增呢？</strong>。最好的建议是，除非必须使用前置递增，否则选用后置递增。前置递增浪费了一些空间，当我们使用指针、整型（4字节）的自增时，会浪费很大空间。</p>
 <p>今天还查阅了一下著名书籍《C++程序设计语言》（<em>The C++ Programming Language</em>），其实<strong>为什么不叫 <code>++C</code> ，而是叫 <code>C++</code> 呢？</strong> 这个问题就可在其中查询到。书很厚，中文版大概1100页，<strong>C++Primer</strong> 才不到900页吧。没有系统读过，但是应该很优秀，唯一的缺点是书中代码的字体让我不太喜欢。</p>
 <p>今天学到了移动操作 <code>std::move</code> ，还没学完，不过目前还是一脸懵逼。当我们赋值时，例如 <code>a = b</code>，我们首先会 构造出一个 <code>b</code> 的副本，然后将这个副本赋值给 <code>a</code> ，然后在销毁这个副本，我们为了避免这分配副本和销毁副本的开销，引入了 移动操作。这本书里面对于 移动操作 的引出给了一个很好地例子。<strong>当我借车给你用时，我会直接把车钥匙给你，而不是将我的车复制一个。</strong></p>
-<p><img src="/MagicConch/schedule/2020-01-13_01.png" alt="1"></p>
+<p><img src="/schedule/2020-01-13_01.png" alt="1"></p>
 <hr>
 <h3 id="2020-01-11"><a href="#2020-01-11" class="headerlink" title="2020-01-11"></a>2020-01-11</h3><p>好久没写啦，前几天想写的，不过躺在床上就不想起来了。</p>
 <p>最近看了 侯捷 老师的视频，哇，真的是讲的特别好，听完就感觉有进步。事无巨细，听他的课几乎提不出问题，因为你心里刚有疑问，下一秒他就讲到了。</p>
@@ -336,7 +336,7 @@
 <p>今日，跨年之日，又陷入了很尴尬的境地-markdown目录问题。</p>
 <p>icuras主题自带侧边目录功能，但其目录不能在文内展示，且和插件 hexo-toc 有冲突，不能同时存在(这就让人很纳闷)。<br>为了保留侧边目录，并且在文内也保留目录，且都具有跳转功能。（这个想法似乎很多余，但是为了使文章能够在摘要里显示目录，这是必须的）。<br>为此，我也试遍了许多方法。hexo-toc, doctoc, vscode插件里的各种toc，最后的结果都不尽人意。<br>按F12对比网站正常的跳转和非正常跳转的目录之间的区别，发现，两者的超链接是有细微差别的，对于标点字符和中文字符的处理不太相同。现在的目标是，将错误的如何改成正确的。但是，没有发现能够修改目录格式的插件。就是那么一点细微的处理差别，导致不能使用，也是很令人头疼。</p>
 <p>本想，直接写个c++代码处理一下文档，生成个正确格式的目录（按理说Python做这种事更简单）。<br>但是，每次都要改改代码中文件名似乎很麻烦，于是想着自己开发个VSCode插件，一个快捷键就生成了，岂不美哉！借用同性恋者Brad的一句话：I’ll try anything once。（我是直的！）<br><strong>人生苦短，何妨一试呢？</strong></p>
-<link rel="stylesheet" href="/MagicConch/css/spoiler.css" type="text/css"><script src="/MagicConch/js/spoiler.js" type="text/javascript" async></script>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       </div>
       
       
@@ -406,27 +406,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="ZhangYang"
-      src="/MagicConch/images/avatar1.ico">
+      src="/images/avatar1.ico">
   <p class="site-author-name" itemprop="name">ZhangYang</p>
   <div class="site-description" itemprop="description">Cpper的小破站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/MagicConch/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/MagicConch/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/MagicConch/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
@@ -435,7 +435,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="/MagicConch/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -534,10 +534,10 @@
   </div>
 
   
-  <script src="/MagicConch/lib/anime.min.js"></script>
-<script src="/MagicConch/js/utils.js"></script>
-<script src="/MagicConch/js/schemes/pisces.js"></script>
-<script src="/MagicConch/js/next-boot.js"></script>
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -555,7 +555,7 @@
 
 
 
-  <script src="/MagicConch/js/local-search.js"></script>
+  <script src="/js/local-search.js"></script>
 
 
 
