@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/MagicConch/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/MagicConch/images/avatar.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/MagicConch/images/avatar.ico">
-  <link rel="mask-icon" href="/MagicConch/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/MagicConch/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/MagicConch/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://csu_coder_yang.gitee.io').hostname,
-    root: '/MagicConch/',
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
     scheme: 'Gemini',
     version: '7.6.0',
     exturl: false,
@@ -50,14 +50,14 @@
 <meta name="keywords" content="Chapter02">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.3 复合类型">
-<meta property="og:url" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;2020&#x2F;01&#x2F;04&#x2F;CPP-Primer&#x2F;Notes&#x2F;2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;04&#x2F;CPP-Primer&#x2F;Notes&#x2F;2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="2.3.1 引用(reference) 2.3.2 指针(pointer) 【1】空指针 【2】指针操作 【3】void* 指针   2.3 复合类型的声明 【1】定义多个变量 【2】指向指针的指针 【3】指向指针的引用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-01-10T04:12:54.561Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://csu_coder_yang.gitee.io/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
+<link rel="canonical" href="http://yoursite.com/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -120,7 +120,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/MagicConch/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Magic Conch Cpp</span>
         <span class="logo-line-after"><i></i></span>
@@ -144,32 +144,32 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/MagicConch/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/MagicConch/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/MagicConch/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/MagicConch/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/MagicConch/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-schedule">
 
-    <a href="/MagicConch/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -223,10 +223,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://csu_coder_yang.gitee.io/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/MagicConch/images/avatar1.ico">
+      <meta itemprop="image" content="/images/avatar1.ico">
       <meta itemprop="name" content="ZhangYang">
       <meta itemprop="description" content="Cpper的小破站">
     </span>
@@ -261,13 +261,13 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MagicConch/categories/C-Primer-5th-Notes/" itemprop="url" rel="index">
+                  <a href="/categories/C-Primer-5th-Notes/" itemprop="url" rel="index">
                     <span itemprop="name">C++Primer(5th) Notes</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MagicConch/categories/C-Primer-5th-Notes/The-Basics-of-C/" itemprop="url" rel="index">
+                  <a href="/categories/C-Primer-5th-Notes/The-Basics-of-C/" itemprop="url" rel="index">
                     <span itemprop="name">The Basics of C++</span>
                   </a>
                 </span>
@@ -289,8 +289,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/MagicConch/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/MagicConch/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/04/CPP-Primer/Notes/2.3%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -389,7 +389,7 @@
 <li>首先看离 <code>r</code> 最近的声明符，即 <code>&amp;r</code>， 说明 <code>r</code> 是一个引用类型。</li>
 <li><code>r</code> 引用的什么类型，看剩余的。即 <code>int *</code>，说明 <code>r</code> 引用的是个<code>int</code> 型指针。</li>
 </ol>
-<link rel="stylesheet" href="/MagicConch/css/spoiler.css" type="text/css"><script src="/MagicConch/js/spoiler.js" type="text/javascript" async></script>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -398,7 +398,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/MagicConch/tags/Chapter02/" rel="tag"># Chapter02</a>
+              <a href="/tags/Chapter02/" rel="tag"># Chapter02</a>
           </div>
 
         
@@ -407,11 +407,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/MagicConch/2020/01/03/CPP-Primer/Notes/2.2%E5%8F%98%E9%87%8F/" rel="prev" title="2.2 变量(variable)">
+    <a href="/2020/01/03/CPP-Primer/Notes/2.2%E5%8F%98%E9%87%8F/" rel="prev" title="2.2 变量(variable)">
       <i class="fa fa-chevron-left"></i> 2.2 变量(variable)
     </a></div>
       <div class="post-nav-item">
-    <a href="/MagicConch/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/" rel="next" title="2.4 const限定符">
+    <a href="/2020/01/05/CPP-Primer/Notes/2.4const%E9%99%90%E5%AE%9A%E7%AC%A6/" rel="next" title="2.4 const限定符">
       2.4 const限定符 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -481,27 +481,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="ZhangYang"
-      src="/MagicConch/images/avatar1.ico">
+      src="/images/avatar1.ico">
   <p class="site-author-name" itemprop="name">ZhangYang</p>
   <div class="site-description" itemprop="description">Cpper的小破站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/MagicConch/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/MagicConch/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/MagicConch/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
@@ -510,7 +510,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="/MagicConch/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -609,10 +609,10 @@
   </div>
 
   
-  <script src="/MagicConch/lib/anime.min.js"></script>
-<script src="/MagicConch/js/utils.js"></script>
-<script src="/MagicConch/js/schemes/pisces.js"></script>
-<script src="/MagicConch/js/next-boot.js"></script>
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -630,7 +630,7 @@
 
 
 
-  <script src="/MagicConch/js/local-search.js"></script>
+  <script src="/js/local-search.js"></script>
 
 
 

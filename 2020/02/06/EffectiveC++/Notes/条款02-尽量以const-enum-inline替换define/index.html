@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/MagicConch/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/MagicConch/images/avatar.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/MagicConch/images/avatar.ico">
-  <link rel="mask-icon" href="/MagicConch/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/MagicConch/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/MagicConch/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://csu_coder_yang.gitee.io').hostname,
-    root: '/MagicConch/',
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
     scheme: 'Gemini',
     version: '7.6.0',
     exturl: false,
@@ -50,18 +50,18 @@
 <meta name="keywords" content="Effective C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="条款02-尽量以const,enum,inline替换#define">
-<meta property="og:url" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="条款02-尽量以 const, enum , inline 替换 #define 1. #define 定义的名称无法追踪，不利于调试 2. 用常量替换 #define 的两种特殊情况 2.1 定义指针常量 2.2 类内常量成员 2.3 特殊情况   3. 用 inline 函数替代类函数的宏 (function-like marco) 总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-01.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-02.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-03.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-01.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-02.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-03.png">
 <meta property="og:updated_time" content="2020-02-08T05:32:26.691Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-01.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;06&#x2F;EffectiveC++&#x2F;Notes&#x2F;%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define&#x2F;02-01.png">
 
-<link rel="canonical" href="https://csu_coder_yang.gitee.io/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
+<link rel="canonical" href="http://yoursite.com/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
 
 
 <script id="page-configurations">
@@ -124,7 +124,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/MagicConch/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Magic Conch Cpp</span>
         <span class="logo-line-after"><i></i></span>
@@ -148,32 +148,32 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/MagicConch/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/MagicConch/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/MagicConch/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/MagicConch/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/MagicConch/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-schedule">
 
-    <a href="/MagicConch/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -227,10 +227,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://csu_coder_yang.gitee.io/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/MagicConch/images/avatar1.ico">
+      <meta itemprop="image" content="/images/avatar1.ico">
       <meta itemprop="name" content="ZhangYang">
       <meta itemprop="description" content="Cpper的小破站">
     </span>
@@ -265,7 +265,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MagicConch/categories/Effective-C/" itemprop="url" rel="index">
+                  <a href="/categories/Effective-C/" itemprop="url" rel="index">
                     <span itemprop="name">Effective C++</span>
                   </a>
                 </span>
@@ -287,8 +287,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/MagicConch/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/MagicConch/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -336,7 +336,7 @@
 <h1 id="条款02-尽量以-const-enum-inline-替换-define"><a href="#条款02-尽量以-const-enum-inline-替换-define" class="headerlink" title="条款02-尽量以 const, enum , inline 替换 #define"></a>条款02-尽量以 <code>const</code>, <code>enum</code> , <code>inline</code> 替换 <code>#define</code></h1><h2 id="1-define-定义的名称无法追踪，不利于调试"><a href="#1-define-定义的名称无法追踪，不利于调试" class="headerlink" title="1. #define 定义的名称无法追踪，不利于调试"></a>1. <code>#define</code> 定义的名称无法追踪，不利于调试</h2><p>当我们使用预处理指令 <code>#define RATIO = 1.653</code> 时，<code>RATIO</code> 这个名称并 <strong>没有被编译器所知道</strong>。这意味着，我们在调试中无法追踪到这个名称。</p>
 <ol>
 <li><p>调试过程中，我们无法在 变量监视 窗口查看到 <code>RATIO</code> 的值。当然这并不是主要问题，因为 <code>RATIO</code>是不变的，我们无需监视它。主要是为了说明，编译器没有将这个名称存入到调试器的记号表（symbol table）中。</p>
-<p> <img src="/MagicConch/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-01.png" alt="1"></p>
+<p> <img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-01.png" alt="1"></p>
 </li>
 <li><p>当使用宏出现编译错误时，我们无法知道是不是宏出现了问题。<br>例如：</p>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ANIMAL_NAME dog_name</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> name = <span class="string">"Ben"</span>;</span><br><span class="line">    <span class="comment">// string dog_name;</span></span><br><span class="line">    ANIMAL_NAME = name;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -351,7 +351,7 @@
 </li>
 </ol>
 <p><strong>解决的方法是用一个常量替换掉宏：</strong><code>const double Ratio = 1.653;</code><br>这在VS中，也会建议这么做：</p>
-<p><img src="/MagicConch/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-02.png" alt="2"><br><img src="/MagicConch/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-03.png" alt="3"></p>
+<p><img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-02.png" alt="2"><br><img src="/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/02-03.png" alt="3"></p>
 <h2 id="2-用常量替换-define-的两种特殊情况"><a href="#2-用常量替换-define-的两种特殊情况" class="headerlink" title="2. 用常量替换 #define 的两种特殊情况"></a>2. 用常量替换 <code>#define</code> 的两种特殊情况</h2><h3 id="2-1-定义指针常量"><a href="#2-1-定义指针常量" class="headerlink" title="2.1 定义指针常量"></a>2.1 定义指针常量</h3><p>有必要将指针定义为 常量指针（指针本身为常量），并且还要所指对象也是常量，即 <code>const char* const musicName = &quot;So Cold&quot;</code>。</p>
 <p>当然我们更推荐使用 <code>string</code> 。<code>const std::string musicName(&quot;So Cold&quot;);</code></p>
 <h3 id="2-2-类内常量成员"><a href="#2-2-类内常量成员" class="headerlink" title="2.2 类内常量成员"></a>2.2 类内常量成员</h3><p>为了将常量的定义域限制在类内，我们必须使它成为类的一个成员。</p>
@@ -382,7 +382,7 @@
 <li>对于单纯常量，最好以 <code>const</code> 对象或者 <code>enum</code> 替换 <code>#define</code> 。</li>
 <li>对于类函数的宏 (function-like marco)，最好用 <code>inline</code> 函数替换 <code>#define</code> 。</li>
 </ul>
-<link rel="stylesheet" href="/MagicConch/css/spoiler.css" type="text/css"><script src="/MagicConch/js/spoiler.js" type="text/javascript" async></script>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -391,7 +391,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/MagicConch/tags/Effective-C/" rel="tag"># Effective C++</a>
+              <a href="/tags/Effective-C/" rel="tag"># Effective C++</a>
           </div>
 
         
@@ -400,11 +400,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/MagicConch/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/" rel="prev" title="6.4 函数重载">
+    <a href="/2020/01/31/CPP-Primer/Notes/6.4%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD/" rel="prev" title="6.4 函数重载">
       <i class="fa fa-chevron-left"></i> 6.4 函数重载
     </a></div>
       <div class="post-nav-item">
-    <a href="/MagicConch/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/" rel="next" title="为什么不推荐使用 rand &#37 n 来生成一定范围的随机数">
+    <a href="/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/" rel="next" title="为什么不推荐使用 rand &#37 n 来生成一定范围的随机数">
       为什么不推荐使用 rand &#37 n 来生成一定范围的随机数 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -474,27 +474,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="ZhangYang"
-      src="/MagicConch/images/avatar1.ico">
+      src="/images/avatar1.ico">
   <p class="site-author-name" itemprop="name">ZhangYang</p>
   <div class="site-description" itemprop="description">Cpper的小破站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/MagicConch/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/MagicConch/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/MagicConch/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
@@ -503,7 +503,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="/MagicConch/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -602,10 +602,10 @@
   </div>
 
   
-  <script src="/MagicConch/lib/anime.min.js"></script>
-<script src="/MagicConch/js/utils.js"></script>
-<script src="/MagicConch/js/schemes/pisces.js"></script>
-<script src="/MagicConch/js/next-boot.js"></script>
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -623,7 +623,7 @@
 
 
 
-  <script src="/MagicConch/js/local-search.js"></script>
+  <script src="/js/local-search.js"></script>
 
 
 

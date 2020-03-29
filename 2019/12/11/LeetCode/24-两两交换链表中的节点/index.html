@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/MagicConch/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/MagicConch/images/avatar.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/MagicConch/images/avatar.ico">
-  <link rel="mask-icon" href="/MagicConch/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/MagicConch/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/MagicConch/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://csu_coder_yang.gitee.io').hostname,
-    root: '/MagicConch/',
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
     scheme: 'Gemini',
     version: '7.6.0',
     exturl: false,
@@ -50,17 +50,17 @@
 <meta name="keywords" content="linked-list">
 <meta property="og:type" content="article">
 <meta property="og:title" content="24-两两交换链表中的节点">
-<meta property="og:url" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;index.html">
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="Category Difficulty Pass rate Tags Companies    algorithms Medium 72.20% linked-list bloomberg &#x2F; microsoft &#x2F; uber   1. 题目给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。 你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。 12示例:给定 1-&amp;gt;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;24_solution_1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;24_solution_2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;24_solution_1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;24_solution_2.png">
 <meta property="og:updated_time" content="2019-12-12T14:23:36.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;csu_coder_yang.gitee.io&#x2F;MagicConch&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;24_solution_1.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;LeetCode&#x2F;24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9&#x2F;24_solution_1.png">
 
-<link rel="canonical" href="https://csu_coder_yang.gitee.io/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">
+<link rel="canonical" href="http://yoursite.com/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">
 
 
 <script id="page-configurations">
@@ -123,7 +123,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/MagicConch/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Magic Conch Cpp</span>
         <span class="logo-line-after"><i></i></span>
@@ -147,32 +147,32 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/MagicConch/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/MagicConch/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/MagicConch/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/MagicConch/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/MagicConch/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-schedule">
 
-    <a href="/MagicConch/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
+    <a href="/schedule/schedule.html" rel="section"><i class="fa fa-fw fa-calendar"></i>札记</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -226,10 +226,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://csu_coder_yang.gitee.io/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/MagicConch/images/avatar1.ico">
+      <meta itemprop="image" content="/images/avatar1.ico">
       <meta itemprop="name" content="ZhangYang">
       <meta itemprop="description" content="Cpper的小破站">
     </span>
@@ -264,7 +264,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/MagicConch/categories/LeetCode-C/" itemprop="url" rel="index">
+                  <a href="/categories/LeetCode-C/" itemprop="url" rel="index">
                     <span itemprop="name">LeetCode(C++)</span>
                   </a>
                 </span>
@@ -286,8 +286,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/MagicConch/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/MagicConch/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -363,13 +363,13 @@
 <li>注意，<code>p</code> 指针最后会更新（如④所示）。</li>
 <li>当 <code>p</code> 之后的结点数不足两个时，循环结束。</li>
 </ul>
-<p><img src="/MagicConch/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_1.png" alt="1"></p>
-<p><img src="/MagicConch/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_2.png" alt="2"></p>
+<p><img src="/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_1.png" alt="1"></p>
+<p><img src="/2019/12/11/LeetCode/24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/24_solution_2.png" alt="2"></p>
 <blockquote>
 <p>执行用时: 8 ms, 在所有 cpp 提交中击败了49.37%的用户<br>内存消耗: 8.6 MB, 在所有 cpp 提交中击败了79.04%的用户</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode *p = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        p-&gt;next = head;</span><br><span class="line">        ListNode *h = p;</span><br><span class="line">        <span class="keyword">while</span>(p-&gt;next &amp;&amp; p-&gt;next-&gt;next) &#123;</span><br><span class="line">            ListNode *c = p-&gt;next;</span><br><span class="line">            ListNode *n = p-&gt;next-&gt;next;</span><br><span class="line">            p-&gt;next = c-&gt;next;</span><br><span class="line">            c-&gt;next = n-&gt;next;</span><br><span class="line">            n-&gt;next = c;</span><br><span class="line">            p = c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> h-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="/MagicConch/css/spoiler.css" type="text/css"><script src="/MagicConch/js/spoiler.js" type="text/javascript" async></script>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -378,7 +378,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/MagicConch/tags/linked-list/" rel="tag"># linked-list</a>
+              <a href="/tags/linked-list/" rel="tag"># linked-list</a>
           </div>
 
         
@@ -387,11 +387,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/MagicConch/2019/12/08/LeetCode/23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/" rel="prev" title="23-合并K个排序链表">
+    <a href="/2019/12/08/LeetCode/23-%E5%90%88%E5%B9%B6K%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/" rel="prev" title="23-合并K个排序链表">
       <i class="fa fa-chevron-left"></i> 23-合并K个排序链表
     </a></div>
       <div class="post-nav-item">
-    <a href="/MagicConch/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/" rel="next" title="hexo博客内图片不能正常显示，但本地文件可以显示">
+    <a href="/2019/12/11/Hexo/h2-hexo%E5%8D%9A%E5%AE%A2%E5%86%85%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA%EF%BC%8C%E4%BD%86%E6%9C%AC%E5%9C%B0%E5%8F%AF%E4%BB%A5/" rel="next" title="hexo博客内图片不能正常显示，但本地文件可以显示">
       hexo博客内图片不能正常显示，但本地文件可以显示 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -461,27 +461,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="ZhangYang"
-      src="/MagicConch/images/avatar1.ico">
+      src="/images/avatar1.ico">
   <p class="site-author-name" itemprop="name">ZhangYang</p>
   <div class="site-description" itemprop="description">Cpper的小破站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/MagicConch/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/MagicConch/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/MagicConch/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
@@ -490,7 +490,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="/MagicConch/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/mailto:csuzhangyang@gmail.com" title="E-Mail → mailto:csuzhangyang@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -589,10 +589,10 @@
   </div>
 
   
-  <script src="/MagicConch/lib/anime.min.js"></script>
-<script src="/MagicConch/js/utils.js"></script>
-<script src="/MagicConch/js/schemes/pisces.js"></script>
-<script src="/MagicConch/js/next-boot.js"></script>
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -610,7 +610,7 @@
 
 
 
-  <script src="/MagicConch/js/local-search.js"></script>
+  <script src="/js/local-search.js"></script>
 
 
 
