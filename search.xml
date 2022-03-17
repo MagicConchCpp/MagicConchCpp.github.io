@@ -1,6 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>XPCOM/XPCOM概述</title>
+    <url>/2022/03/17/XPCOM/XPCOM%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Mozilla/Tech/XPCOM/Guide/Creating_components/An_Overview_of_XPCOM" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Mozilla/Tech/XPCOM/Guide/Creating_components/An_Overview_of_XPCOM</a></p>
+</blockquote>
+<h1 id="nsISupports-基接口"><a href="#nsISupports-基接口" class="headerlink" title="nsISupports 基接口"></a><code>nsISupports</code> 基接口</h1><p>组件与基于接口的编程的两个最基本的问题是: 一个是<em>组件生存期</em>, 也称为<em>对象所属关系</em>; 另一个是<em>接口查询</em>, 它是在运行时刻确定接口能够提供哪些接口。 <code>nsISupports</code>它是 XPCOM 中所有接口的父接口。</p>
+<p>在 XPCOM 中, 由于组件可以实现任意多的不同接口, 接口必须是<strong>引用计数的</strong>。</p>
+<h2 id="XPCOM中的指针"><a href="#XPCOM中的指针" class="headerlink" title="XPCOM中的指针"></a>XPCOM中的指针</h2><p>但是 XPCOM <strong>接口指针</strong>指向的都是从 <code>nsISupports</code> 基接口_派生_而来的接口实现, 这个基接口包括三个基本的方法: <code>AddRef</code>, <code>Release</code>, 和 <code>QueryInterface</code>.</p>
+<h2 id="nsISupports-接口"><a href="#nsISupports-接口" class="headerlink" title="nsISupports 接口"></a><strong><code>nsISupports</code> 接口</strong></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sample</span>:</span> <span class="keyword">public</span> nsISupports</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    nsrefcnt mRefCnt;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Sample();</span><br><span class="line">    <span class="keyword">virtual</span> ~Sample();</span><br><span class="line"></span><br><span class="line">    <span class="function">NS_IMETHOD <span class="title">QueryInterface</span><span class="params">(<span class="keyword">const</span> nsIID &amp;aIID, <span class="keyword">void</span> **aResult)</span></span>;</span><br><span class="line">    NS_IMETHOD_(nsrefcnt) AddRef(<span class="keyword">void</span>);</span><br><span class="line">    NS_IMETHOD_(nsrefcnt) Release(<span class="keyword">void</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// initialize the reference count to 0</span></span><br><span class="line">Sample::Sample() : mRefCnt(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Sample::~Sample()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// typical, generic implementation of QI</span></span><br><span class="line">NS_IMETHODIMP Sample::QueryInterface(<span class="keyword">const</span> nsIID &amp;aIID,<span class="keyword">void</span> **aResult)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!aResult) &#123;</span><br><span class="line">    	<span class="keyword">return</span> NS_ERROR_NULL_POINTER;</span><br><span class="line">    &#125;</span><br><span class="line">    *aResult = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (aIID.Equals(kISupportsIID)) &#123;</span><br><span class="line">    	*aResult = (<span class="keyword">void</span> *) <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!*aResult) &#123;</span><br><span class="line">   		<span class="keyword">return</span> NS_ERROR_NO_INTERFACE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// add a reference</span></span><br><span class="line">    AddRef();</span><br><span class="line">    <span class="keyword">return</span> NS_OK;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">NS_IMETHODIMP_(nsrefcnt) Sample::AddRef()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> ++mRefCnt;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">NS_IMETHODIMP_(nsrefcnt) Sample::Release()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (--mRefCnt == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// optional: return the reference count</span></span><br><span class="line">    <span class="keyword">return</span> mRefCnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在XPCOM，所有接口类从<code>nsISupports</code>类派生，因此所有的对象都是<code>nsISupports</code>。</li>
+<li>XPCOM不直接支持C++ exceptions。 在组件内产生的异常必须在传递到接口边界之前全部由组件自己处理掉， 然后接口方法返回一个 <code>nsresult</code> 错误值。</li>
+<li>XPCOM 没有采用<strong>C++ RTTI</strong> 机制来实现对象指针的动态转化, 它使用 <code>QueryInterface</code> 方法来把一个对象指针 cast 成正确的接口指针.</li>
+<li>XPCOM里所有的接口方法应该返回一个<code>nsresult</code>值，记录错误代码。 有错误代码返回，表示XPCOM处理出现异常。</li>
+<li>每一个接口需要被分配一个唯一的标识符（可以通过uuidgen工具生成）。 这个标识符是唯一的，128-bit的数字。 在接口上下文中进行使用，他通常被叫做 <strong><code>IID</code></strong>。</li>
+<li>当客户程序<strong>想查询一个对象是否支持某个接口</strong>, 它把接口的 <code>IID</code> 值传递给这个对象的 <code>QueryInterface</code> 方法. 如果对象支持这个接口, 它就会对自己的<strong>引用计数加 1</strong>, 会<strong>返回指向接口的指针</strong>。不支持，则<strong>返回错误码</strong>。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nsISupports</span> &#123;</span> </span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">QueryInterface</span><span class="params">(<span class="keyword">const</span> nsIID &amp; uuid,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">void</span> **result)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">AddRef</span><span class="params">(<span class="keyword">void</span>)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="title">Release</span><span class="params">(<span class="keyword">void</span>)</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>QueryInterface</code> 的第一个参数是一个 <code>nsIID</code> 类型的引用, 它封装了 IID. <code>nsIID</code> 类有三种方法: <code>Equals</code>, <code>Parse</code>, 和 <code>ToString</code> 。其中<strong><code>Equals</code></strong>在接口查询中是最重要的, 它用来比较两个 <code>nsIID</code> 对象是否相同。<br>在 <code>QueryInterface</code> 方法的实现中, <code>IID</code> 参数与组件支持 <code>nsIID</code> 类进行比较. 如果匹配, <strong>对象的 <code>this</code> 指针转化为 <code>void</code> 指针, 引用计数加1</strong>, 把 <code>void</code> 指针返回给客户程序。</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Implementing_QueryInterface" target="_blank" rel="noopener">实现QueryInterface接口</a></p>
+</blockquote>
+<h2 id="XPCOM-的ID"><a href="#XPCOM-的ID" class="headerlink" title="XPCOM 的ID"></a>XPCOM 的ID</h2><ul>
+<li>一个CID是一个128位的数字，用于标识一个类或组件。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SAMPLE_CID \</span></span><br><span class="line">&#123; <span class="number">0x777f7150</span>, <span class="number">0x4a2b</span>, <span class="number">0x4301</span>, \</span><br><span class="line">&#123; <span class="number">0xad</span>, <span class="number">0x10</span>, <span class="number">0x5e</span>, <span class="number">0xab</span>, <span class="number">0x25</span>, <span class="number">0xb3</span>, <span class="number">0x22</span>, <span class="number">0xaa</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Contract ID 契约ID的格式由组件域，模块，组件名字和版本号组成，各部分之间用”/“分隔.，用于组件的访问。</li>
+</ul>
+<p><code>&quot;@mozilla.org/network/ldap-operation;1&quot;</code><br>     1个契约ID只是表示他想实现的一组接口。契约ID和CID不同之处在于，它可能重载组件。</p>
+<h2 id="工厂"><a href="#工厂" class="headerlink" title="工厂"></a>工厂</h2><p><code>SomeClass* component = new SomeClass();</code><br>在 <code>SomeClass</code> 例子中, 可以按照类厂模式把 <code>SomeClass</code> 对象的构造和初始化封装在 <code>New_SomeInterface</code> 函数中：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">New_SomeInterface</span><span class="params">(SomeInterface** ret)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// create the object</span></span><br><span class="line">  SomeClass* out = <span class="keyword">new</span> SomeClass();</span><br><span class="line">  <span class="keyword">if</span> (!out) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  <span class="comment">// init the object</span></span><br><span class="line">  <span class="keyword">if</span> (out-&gt;Init() == FALSE)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">delete</span> out;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// cast to the interface</span></span><br><span class="line">  *ret = <span class="keyword">static_cast</span>&lt;SomeInterface*&gt;(out);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>工厂就是一个类，用于管理，创建组件的实例。 在XPCOM里工厂由 <strong><code>nsIFactory</code></strong> 接口实现，它使用上面所示的工厂设计模式封装对象的创建和初始化。</p>
+<ul>
+<li>工厂需要保存它创建的对象的信息。 当工厂管理共享库的类的实例的时候，例如，他需要知道他什么时候可以卸载这个动态库。当类厂保存了这样的信息, 就可以向工厂查询一个对象是否已经被创建.</li>
+<li>工厂的另一个状态用于保存一个对象是否是单例对象。 例如，如果工厂创建了一个单例对象，那么后续的对象创建的请求都应该返回同一个对象。 </li>
+</ul>
+<h2 id="XPCOM-类型"><a href="#XPCOM-类型" class="headerlink" title="XPCOM 类型"></a>XPCOM 类型</h2><p>XPCOM 声明了许多数据类型和简单宏, 这些东西将在我们后面的例子中看到. 大多数的宏都是简单的重定义, 下一节我们会描述一些最常用的数据类型.</p>
+<h4 id="方法类型"><a href="#方法类型" class="headerlink" title="方法类型"></a>方法类型</h4><p>下面的类型用在 XPCOM 方法调用的参数和返回值定义中.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>NS_IMETHOD</code></th>
+<th align="left">方法声明返回值. XPCOM 的方法声明缺省的返回值.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>NS_IMETHODIMP</code></td>
+<td align="left">方法实现返回值. XPCOM 方法函数返回的时候缺省采用这种类型的返回值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_IMETHODIMP_(type)</code></td>
+<td align="left">特定类型的方法实现返回值. 诸如 <code>AddRef</code> 和 <code>Release</code> 的方法不返回缺省类型, 这种返回值的不一致虽然有点不舒服, 但是必需的.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_IMPORT</code></td>
+<td align="left">共享库内部使用的符号局部声明</td>
+</tr>
+<tr>
+<td align="left"><code>NS_EXPORT</code></td>
+<td align="left">共享库导出的符号声明.</td>
+</tr>
+</tbody></table>
+<h4 id><a href="#" class="headerlink" title></a></h4><h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p>下面的宏提供对引用计数的基本操作.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>NS_ADDREF</code></th>
+<th align="left">调用 <code>nsISupports</code> 对象的 <code>AddRef</code> 方法.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>NS_IF_ADDREF</code></td>
+<td align="left">与上一个方法类似, 不同之处在于这个宏在<code>AddRef</code>之前会检查对象指针是否为空(虚函数指针).</td>
+</tr>
+<tr>
+<td align="left"><code>NS_RELEASE</code></td>
+<td align="left">调用 <code>nsISupports</code> 对象的 <code>Release</code> 方法.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_IF_RELEASE</code></td>
+<td align="left">与上一个方法类似, 不同之处在于这个宏在调用<code>Release</code>之前会检查空指针.</td>
+</tr>
+</tbody></table>
+<h4 id="-1"><a href="#-1" class="headerlink" title></a></h4><h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p>下面的宏测试状态码.</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>NS_FAILED</code></th>
+<th align="left">如果传递的状态码为失败, 则返回真.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>NS_SUCCEEDED</code></td>
+<td align="left">如果传递的状态码为成功, 则返回真.</td>
+</tr>
+</tbody></table>
+<h4 id="-2"><a href="#-2" class="headerlink" title></a></h4><h4 id="变量映射"><a href="#变量映射" class="headerlink" title="变量映射"></a>变量映射</h4><table>
+<thead>
+<tr>
+<th align="left"><code>nsrefcnt</code></th>
+<th align="left">缺省的引用计数类型, 是一个 32-bit 整数.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>nsresult</code></td>
+<td align="left">缺省数据类型, 是一个 32-bit 整数.</td>
+</tr>
+<tr>
+<td align="left"><code>nsnull</code></td>
+<td align="left">缺省 null 类型.</td>
+</tr>
+</tbody></table>
+<h4 id="-3"><a href="#-3" class="headerlink" title></a></h4><h4 id="通用-XPCOM-错误码"><a href="#通用-XPCOM-错误码" class="headerlink" title="通用 XPCOM 错误码"></a>通用 XPCOM 错误码</h4><table>
+<thead>
+<tr>
+<th align="left"><code>NS_ERROR_NOT_INITIALIZED</code></th>
+<th align="left">如果实例未初试化, 返回该值.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>NS_ERROR_ALREADY_INITIALIZED</code></td>
+<td align="left">如果实例已初试化, 返回该值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_NOT_IMPLEMENTED</code></td>
+<td align="left">如果方法未实现, 返回该值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_NO_INTERFACE</code></td>
+<td align="left">如果组件不支持某种类型接口, 返回该值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_NULL_POINTER</code></td>
+<td align="left">如果指针指向 <code>nsnull</code>, 返回该值 .</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_FAILURE</code></td>
+<td align="left">如果某个方法失效, 返回该值, 这时一个通用的错误值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_UNEXPECTED</code></td>
+<td align="left">如果一个未预料的错误发生, 返回该值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_OUT_OF_MEMORY</code></td>
+<td align="left">如果无法进行内存分配, 返回该值.</td>
+</tr>
+<tr>
+<td align="left"><code>NS_ERROR_FACTORY_NOT_REGISTERED</code></td>
+<td align="left">如果一个请求的类型未注册, 返回该值.</td>
+</tr>
+</tbody></table>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+  </entry>
+  <entry>
     <title>vscode remote免密连接</title>
     <url>/2020/06/10/other/vscode%20remote%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5/</url>
     <content><![CDATA[<ol>
@@ -773,42 +935,6 @@ table th:nth-of-type(6) {
       </tags>
   </entry>
   <entry>
-    <title>为什么不推荐使用 rand &amp;#37 n 来生成一定范围的随机数</title>
-    <url>/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
-    <content><![CDATA[<ul>
-<li><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数">1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</a><ul>
-<li><a href="#1-1-rand-n-的弊端">1.1 <code>rand() % n</code> 的弊端</a></li>
-<li><a href="#1-2-一些解决办法">1.2 一些解决办法</a></li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="1-为什么不推荐使用-rand-n-来生成一定范围的随机数"><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数" class="headerlink" title="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数"></a>1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</h1><p>最初遇到这个问题是在学习随机数的时候，在 cppreference 上，有这么一段代码，它的写法让我眼前一亮。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 扔 6 面色子 20 次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n != <span class="number">20</span>; ++n) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">while</span>(x &gt; <span class="number">6</span>)</span><br><span class="line">            x = <span class="number">1</span> + rand() / ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>); <span class="comment">// 注意： 1 + rand() % 6 有偏差！</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>StackOverflow上也有个类似的问题。<a href="https://stackoverflow.com/questions/49878942/why-is-rand6-biased" target="_blank" rel="noopener">Why is <code>rand() % 6</code> biased?</a></p>
-<h2 id="1-1-rand-n-的弊端"><a href="#1-1-rand-n-的弊端" class="headerlink" title="1.1 rand() % n 的弊端"></a>1.1 <code>rand() % n</code> 的弊端</h2><p>首先，以 <code>n = 100</code>为例，我们要知道 <code>rand() % 100</code> 这段代码的作用是生成 <code>[0, 99]</code> 范围内的随机数。<code>rand()</code> 的范围是 <code>[0, RAND_MAX]</code> , <code>RAND_MAX</code> 的值不小于 <code>32767</code>。</p>
-<p>我们看这段代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> src = rand(); <span class="comment">// 假设均匀分布在 [0, 32767] 范围内</span></span><br><span class="line"><span class="keyword">int</span> dst = src % <span class="number">100</span>; <span class="comment">// 这个非均匀分布在 [0, 99]</span></span><br></pre></td></tr></table></figure>
-
-<p>$src \in [0, 99] \Rightarrow  dst \in [0, 99]$<br>$src \in [100, 199] \Rightarrow  dst \in [0, 99]$<br>$…\ …$<br>$src \in [32700, 32767] \Rightarrow  dst \in [0, 67]$  </p>
-<p>我们可以看到，<code>src</code> 取值在 <code>[0, 32700]</code> 之内的，<code>dst</code> 在 <code>[0, 99]</code> 之间的概率都是相等的。但是最后的 <code>[32700, 32767]</code> 使得 <code>dst</code> 只能取到 <code>[0, 67]</code> 范围内的值。这说明 <code>rand() % n</code> 会偏向于较小的数字。</p>
-<p>你也许认为这么一点小的偏差不需太过计较，确实，随着 <code>RAND_MAX</code> 的增大、或者 <code>n</code> 的变小，这种误差会越来越小。但是我们举个极端的例子，<code>rand()</code> 范围是 <code>[0, 6]</code> ，<code>n = 6</code>，我们依然要找的是 <code>[0, 5]</code> 之内的随机数。<br>此时 <code>0</code> 出现了频次是 <code>2</code>，其他 <code>1 ~ 5</code> 出现的频次都是 <code>1</code> 。这样看来，<code>0</code> 出现的频率是其他数字的整整2倍，这个误差就比较明显了。</p>
-<h2 id="1-2-一些解决办法"><a href="#1-2-一些解决办法" class="headerlink" title="1.2 一些解决办法"></a>1.2 一些解决办法</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">6</span> * ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>)</span><br><span class="line"><span class="keyword">int</span> value = rand();</span><br><span class="line"><span class="keyword">while</span> (value &gt;= max)</span><br><span class="line">    value = rand();</span><br></pre></td></tr></table></figure>
-
-<p>这样会使 <code>[0, 5]</code> 的分布频率更加接近。</p>
-<p>当然还有很多的办法，上述也未必是最佳的。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>rand</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>条款02-尽量以const,enum,inline替换#define</title>
     <url>/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/</url>
     <content><![CDATA[<ul>
@@ -882,6 +1008,42 @@ table th:nth-of-type(6) {
       </categories>
       <tags>
         <tag>Effective C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么不推荐使用 rand &amp;#37 n 来生成一定范围的随机数</title>
+    <url>/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
+    <content><![CDATA[<ul>
+<li><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数">1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</a><ul>
+<li><a href="#1-1-rand-n-的弊端">1.1 <code>rand() % n</code> 的弊端</a></li>
+<li><a href="#1-2-一些解决办法">1.2 一些解决办法</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="1-为什么不推荐使用-rand-n-来生成一定范围的随机数"><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数" class="headerlink" title="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数"></a>1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</h1><p>最初遇到这个问题是在学习随机数的时候，在 cppreference 上，有这么一段代码，它的写法让我眼前一亮。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 扔 6 面色子 20 次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n != <span class="number">20</span>; ++n) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">while</span>(x &gt; <span class="number">6</span>)</span><br><span class="line">            x = <span class="number">1</span> + rand() / ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>); <span class="comment">// 注意： 1 + rand() % 6 有偏差！</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>StackOverflow上也有个类似的问题。<a href="https://stackoverflow.com/questions/49878942/why-is-rand6-biased" target="_blank" rel="noopener">Why is <code>rand() % 6</code> biased?</a></p>
+<h2 id="1-1-rand-n-的弊端"><a href="#1-1-rand-n-的弊端" class="headerlink" title="1.1 rand() % n 的弊端"></a>1.1 <code>rand() % n</code> 的弊端</h2><p>首先，以 <code>n = 100</code>为例，我们要知道 <code>rand() % 100</code> 这段代码的作用是生成 <code>[0, 99]</code> 范围内的随机数。<code>rand()</code> 的范围是 <code>[0, RAND_MAX]</code> , <code>RAND_MAX</code> 的值不小于 <code>32767</code>。</p>
+<p>我们看这段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> src = rand(); <span class="comment">// 假设均匀分布在 [0, 32767] 范围内</span></span><br><span class="line"><span class="keyword">int</span> dst = src % <span class="number">100</span>; <span class="comment">// 这个非均匀分布在 [0, 99]</span></span><br></pre></td></tr></table></figure>
+
+<p>$src \in [0, 99] \Rightarrow  dst \in [0, 99]$<br>$src \in [100, 199] \Rightarrow  dst \in [0, 99]$<br>$…\ …$<br>$src \in [32700, 32767] \Rightarrow  dst \in [0, 67]$  </p>
+<p>我们可以看到，<code>src</code> 取值在 <code>[0, 32700]</code> 之内的，<code>dst</code> 在 <code>[0, 99]</code> 之间的概率都是相等的。但是最后的 <code>[32700, 32767]</code> 使得 <code>dst</code> 只能取到 <code>[0, 67]</code> 范围内的值。这说明 <code>rand() % n</code> 会偏向于较小的数字。</p>
+<p>你也许认为这么一点小的偏差不需太过计较，确实，随着 <code>RAND_MAX</code> 的增大、或者 <code>n</code> 的变小，这种误差会越来越小。但是我们举个极端的例子，<code>rand()</code> 范围是 <code>[0, 6]</code> ，<code>n = 6</code>，我们依然要找的是 <code>[0, 5]</code> 之内的随机数。<br>此时 <code>0</code> 出现了频次是 <code>2</code>，其他 <code>1 ~ 5</code> 出现的频次都是 <code>1</code> 。这样看来，<code>0</code> 出现的频率是其他数字的整整2倍，这个误差就比较明显了。</p>
+<h2 id="1-2-一些解决办法"><a href="#1-2-一些解决办法" class="headerlink" title="1.2 一些解决办法"></a>1.2 一些解决办法</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">6</span> * ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>)</span><br><span class="line"><span class="keyword">int</span> value = rand();</span><br><span class="line"><span class="keyword">while</span> (value &gt;= max)</span><br><span class="line">    value = rand();</span><br></pre></td></tr></table></figure>
+
+<p>这样会使 <code>[0, 5]</code> 的分布频率更加接近。</p>
+<p>当然还有很多的办法，上述也未必是最佳的。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>rand</tag>
       </tags>
   </entry>
   <entry>
@@ -1465,6 +1627,7 @@ table th:nth-of-type(6) {
 <li><p>若在多个文件里使用同一个变量，变量的定义只能出现在一个文件里，其他文件要使用该变量，必须对其声明，不能重复定义。</p>
 </li>
 </ol>
+<h2 id="2-2-3-标识符"><a href="#2-2-3-标识符" class="headerlink" title="2.2.3 标识符"></a>2.2.3 标识符</h2><p>C++的标识符（即变量命名）由数字、字母和下划线组成，必须以字母和下划线为开头，长度没有限制，对大小写敏感。</p>
 <h2 id="2-2-4-名字的作用域"><a href="#2-2-4-名字的作用域" class="headerlink" title="2.2.4 名字的作用域"></a>2.2.4 名字的作用域</h2><p>C++语言大部分作用域使用大括号 <code>{}</code> 分离，一个 <code>{}</code> 表示一个作用域。</p>
 <p>简单地名词：<strong>全局作用域</strong> ， <strong>块作用域</strong> 。</p>
 <h3 id="【1】嵌套的作用域"><a href="#【1】嵌套的作用域" class="headerlink" title="【1】嵌套的作用域"></a>【1】嵌套的作用域</h3><ol>
@@ -3742,7 +3905,15 @@ $$
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入：(<span class="number">2</span> -&gt; <span class="number">4</span> -&gt; <span class="number">3</span>) + (<span class="number">5</span> -&gt; <span class="number">6</span> -&gt; <span class="number">4</span>)</span><br><span class="line">输出：<span class="number">7</span> -&gt; <span class="number">0</span> -&gt; <span class="number">8</span></span><br><span class="line">原因：<span class="number">342</span> + <span class="number">465</span> = <span class="number">807</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><p>例如<br>(2 -&gt; 4 -&gt; 3) +<br>(5 -&gt; 6 -&gt; 4 -&gt; 2)<br>新建一个链表h，用于存储每一步相加的结果。<br>首先循环内的条件为l1 || l2，即l1或l2有一个不为空时。<br>对于l1和l2，如果没有到达尾部，则链表指向下一个（next），并且sum加上其值；如果某链表到达尾部之后（即为NULL时），链表则不动，也不再加上该链表的值。<br>将对应位置两个数相加，如果&gt;=10，进位标志(carry)为true。此时下一次循环的sum要额外加1。<br>循环结束后，如果最后两个数字相加&gt;=10（即carry==true），则还要增加一个节点，值为1。<br><strong>注意</strong>：我们并没有使用h的头结点，我们先是令其指向next，再赋值。主要是考虑最后一次循环，不这样的话会创建一个新的无用的节点。<br>最后我们释放掉无用的头结点，因为如果调用次数多会溢出。</p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><p>例如<br>(2 -&gt; 4 -&gt; 3) +<br>(5 -&gt; 6 -&gt; 4 -&gt; 2)</p>
+<ol>
+<li>新建一个链表h，用于存储每一步相加的结果。  </li>
+<li>首先循环内的条件为 <code>l1 || l2</code> ，即 <code>l1</code> 或 <code>l2</code> 有一个不为空时。  </li>
+<li>对于 <code>l1</code> 和 <code>l2</code>，如果没有到达尾部，则链表指向下一个（ <code>next</code>），并且 <code>sum</code> 加上其值；如果某链表到达尾部之后（即为NULL时），链表则不动，也不再加上该链表的值。  </li>
+<li>将对应位置两个数相加，如果 <code>&gt;=10</code>，进位标志(carry)为 <code>true</code>。此时下一次循环的 <code>sum</code> 要额外加 <code>1</code>。</li>
+<li>循环结束后，如果最后两个数字相加 <code>&gt;=10</code>（即carry==true），则还要增加一个节点，值为 <code>1</code>。</li>
+</ol>
+<p><strong>注意</strong>：我们并没有使用 <code>h</code> 的头结点，我们先是令其指向 <code>next</code> ，再赋值。主要是考虑最后一次循环，不这样的话会创建一个新的无用的节点。<br>最后我们释放掉无用的头结点，因为如果调用次数多会溢出。</p>
 <blockquote>
 <p>执行用时：28 ms, 在所有 cpp 提交中击败了91.26%的用户<br>内存消耗：10.3 MB, 在所有 cpp 提交中击败了84.73%的用户</p>
 </blockquote>
@@ -3781,7 +3952,11 @@ $$
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">示例:</span><br><span class="line">给定 nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>], target = <span class="number">9</span>  </span><br><span class="line">因为 nums[<span class="number">0</span>] + nums[<span class="number">1</span>] = <span class="number">2</span> + <span class="number">7</span> = <span class="number">9</span>  </span><br><span class="line">所以返回 [<span class="number">0</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><p>例如：nums = [1, 2, 3, 7, 11, 15], target = 9。<br>2和7是答案，对于7或者2(此例7在后面，所以是对于7)来说，在它前面的元素中必定有另一个答案。<br>所以我们将每个元素及其前面的元素都加入map中，遍历到下一个元素时就可以判断另一个答案在不在map中。</p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><p>例如：<code>nums = [1, 2, 3, 7, 11, 15], target = 9</code>。  </p>
+<ol>
+<li><code>2</code>和<code>7</code>是答案，对于<code>7</code>或者<code>2</code>(此例<code>7</code>在后面，所以是对于<code>7</code>)来说，在它前面的元素中必定有另一个答案。  </li>
+<li>所以我们将每个元素及其前面的元素都加入<code>map</code>中，遍历到下一个元素时就可以判断另一个答案在不在<code>map</code>中。</li>
+</ol>
 <blockquote>
 <p>执行用时: 12 ms, 在所有 cpp 提交中击败了92.01%的用户<br>内存消耗: 10.5 MB, 在所有 cpp 提交中击败了13.80%的用户</p>
 </blockquote>

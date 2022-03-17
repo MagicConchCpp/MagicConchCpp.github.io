@@ -54,7 +54,7 @@
 <meta property="og:site_name" content="Magic Conch Cpp">
 <meta property="og:description" content="Category Difficulty Pass rate Tags Companies    algorithms Easy 46.90% linked-list &#x2F; math adobe &#x2F; airbnb &#x2F; amazon &#x2F; bloomberg &#x2F; microsoft   1. 题目给出两个非空的链表用来表示两个非负的整数。其中，它们各自的位数是按照逆序的方式存储的，并且它们的每个节点">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-06T03:06:25.861Z">
+<meta property="og:updated_time" content="2020-07-10T08:56:06.536Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/10/16/LeetCode/2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
@@ -253,7 +253,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-06 11:06:25" itemprop="dateModified" datetime="2019-12-06T11:06:25+08:00">2019-12-06</time>
+                <time title="修改时间：2020-07-10 16:56:06" itemprop="dateModified" datetime="2020-07-10T16:56:06+08:00">2020-07-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,7 +335,15 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">示例:</span><br><span class="line">输入：(<span class="number">2</span> -&gt; <span class="number">4</span> -&gt; <span class="number">3</span>) + (<span class="number">5</span> -&gt; <span class="number">6</span> -&gt; <span class="number">4</span>)</span><br><span class="line">输出：<span class="number">7</span> -&gt; <span class="number">0</span> -&gt; <span class="number">8</span></span><br><span class="line">原因：<span class="number">342</span> + <span class="number">465</span> = <span class="number">807</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a></p>
-<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><p>例如<br>(2 -&gt; 4 -&gt; 3) +<br>(5 -&gt; 6 -&gt; 4 -&gt; 2)<br>新建一个链表h，用于存储每一步相加的结果。<br>首先循环内的条件为l1 || l2，即l1或l2有一个不为空时。<br>对于l1和l2，如果没有到达尾部，则链表指向下一个（next），并且sum加上其值；如果某链表到达尾部之后（即为NULL时），链表则不动，也不再加上该链表的值。<br>将对应位置两个数相加，如果&gt;=10，进位标志(carry)为true。此时下一次循环的sum要额外加1。<br>循环结束后，如果最后两个数字相加&gt;=10（即carry==true），则还要增加一个节点，值为1。<br><strong>注意</strong>：我们并没有使用h的头结点，我们先是令其指向next，再赋值。主要是考虑最后一次循环，不这样的话会创建一个新的无用的节点。<br>最后我们释放掉无用的头结点，因为如果调用次数多会溢出。</p>
+<h2 id="2-解法"><a href="#2-解法" class="headerlink" title="2. 解法"></a>2. 解法</h2><h3 id="2-1-解法一"><a href="#2-1-解法一" class="headerlink" title="2.1 解法一"></a>2.1 解法一</h3><p>例如<br>(2 -&gt; 4 -&gt; 3) +<br>(5 -&gt; 6 -&gt; 4 -&gt; 2)</p>
+<ol>
+<li>新建一个链表h，用于存储每一步相加的结果。  </li>
+<li>首先循环内的条件为 <code>l1 || l2</code> ，即 <code>l1</code> 或 <code>l2</code> 有一个不为空时。  </li>
+<li>对于 <code>l1</code> 和 <code>l2</code>，如果没有到达尾部，则链表指向下一个（ <code>next</code>），并且 <code>sum</code> 加上其值；如果某链表到达尾部之后（即为NULL时），链表则不动，也不再加上该链表的值。  </li>
+<li>将对应位置两个数相加，如果 <code>&gt;=10</code>，进位标志(carry)为 <code>true</code>。此时下一次循环的 <code>sum</code> 要额外加 <code>1</code>。</li>
+<li>循环结束后，如果最后两个数字相加 <code>&gt;=10</code>（即carry==true），则还要增加一个节点，值为 <code>1</code>。</li>
+</ol>
+<p><strong>注意</strong>：我们并没有使用 <code>h</code> 的头结点，我们先是令其指向 <code>next</code> ，再赋值。主要是考虑最后一次循环，不这样的话会创建一个新的无用的节点。<br>最后我们释放掉无用的头结点，因为如果调用次数多会溢出。</p>
 <blockquote>
 <p>执行用时：28 ms, 在所有 cpp 提交中击败了91.26%的用户<br>内存消耗：10.3 MB, 在所有 cpp 提交中击败了84.73%的用户</p>
 </blockquote>
@@ -442,7 +450,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -505,7 +513,7 @@
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -514,12 +522,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">123k</span>
+    <span title="站点总字数">127k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
   </div>
