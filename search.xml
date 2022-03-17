@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>XPCOM/XPCOM概述</title>
-    <url>/2022/03/17/XPCOM/XPCOM%E6%A6%82%E8%BF%B0/</url>
+    <title>Invalid address specified to RtlValidateHeap</title>
+    <url>/2020/09/23/XPCOM/XPCOM%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<blockquote>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Mozilla/Tech/XPCOM/Guide/Creating_components/An_Overview_of_XPCOM" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Mozilla/Tech/XPCOM/Guide/Creating_components/An_Overview_of_XPCOM</a></p>
 </blockquote>
@@ -161,6 +161,12 @@
 </tr>
 </tbody></table>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>XPCOM</category>
+      </categories>
+      <tags>
+        <tag>XPCOM</tag>
+      </tags>
   </entry>
   <entry>
     <title>vscode remote免密连接</title>
@@ -935,6 +941,42 @@ table th:nth-of-type(6) {
       </tags>
   </entry>
   <entry>
+    <title>为什么不推荐使用 rand &amp;#37 n 来生成一定范围的随机数</title>
+    <url>/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
+    <content><![CDATA[<ul>
+<li><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数">1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</a><ul>
+<li><a href="#1-1-rand-n-的弊端">1.1 <code>rand() % n</code> 的弊端</a></li>
+<li><a href="#1-2-一些解决办法">1.2 一些解决办法</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="1-为什么不推荐使用-rand-n-来生成一定范围的随机数"><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数" class="headerlink" title="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数"></a>1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</h1><p>最初遇到这个问题是在学习随机数的时候，在 cppreference 上，有这么一段代码，它的写法让我眼前一亮。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 扔 6 面色子 20 次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n != <span class="number">20</span>; ++n) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">while</span>(x &gt; <span class="number">6</span>)</span><br><span class="line">            x = <span class="number">1</span> + rand() / ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>); <span class="comment">// 注意： 1 + rand() % 6 有偏差！</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>StackOverflow上也有个类似的问题。<a href="https://stackoverflow.com/questions/49878942/why-is-rand6-biased" target="_blank" rel="noopener">Why is <code>rand() % 6</code> biased?</a></p>
+<h2 id="1-1-rand-n-的弊端"><a href="#1-1-rand-n-的弊端" class="headerlink" title="1.1 rand() % n 的弊端"></a>1.1 <code>rand() % n</code> 的弊端</h2><p>首先，以 <code>n = 100</code>为例，我们要知道 <code>rand() % 100</code> 这段代码的作用是生成 <code>[0, 99]</code> 范围内的随机数。<code>rand()</code> 的范围是 <code>[0, RAND_MAX]</code> , <code>RAND_MAX</code> 的值不小于 <code>32767</code>。</p>
+<p>我们看这段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> src = rand(); <span class="comment">// 假设均匀分布在 [0, 32767] 范围内</span></span><br><span class="line"><span class="keyword">int</span> dst = src % <span class="number">100</span>; <span class="comment">// 这个非均匀分布在 [0, 99]</span></span><br></pre></td></tr></table></figure>
+
+<p>$src \in [0, 99] \Rightarrow  dst \in [0, 99]$<br>$src \in [100, 199] \Rightarrow  dst \in [0, 99]$<br>$…\ …$<br>$src \in [32700, 32767] \Rightarrow  dst \in [0, 67]$  </p>
+<p>我们可以看到，<code>src</code> 取值在 <code>[0, 32700]</code> 之内的，<code>dst</code> 在 <code>[0, 99]</code> 之间的概率都是相等的。但是最后的 <code>[32700, 32767]</code> 使得 <code>dst</code> 只能取到 <code>[0, 67]</code> 范围内的值。这说明 <code>rand() % n</code> 会偏向于较小的数字。</p>
+<p>你也许认为这么一点小的偏差不需太过计较，确实，随着 <code>RAND_MAX</code> 的增大、或者 <code>n</code> 的变小，这种误差会越来越小。但是我们举个极端的例子，<code>rand()</code> 范围是 <code>[0, 6]</code> ，<code>n = 6</code>，我们依然要找的是 <code>[0, 5]</code> 之内的随机数。<br>此时 <code>0</code> 出现了频次是 <code>2</code>，其他 <code>1 ~ 5</code> 出现的频次都是 <code>1</code> 。这样看来，<code>0</code> 出现的频率是其他数字的整整2倍，这个误差就比较明显了。</p>
+<h2 id="1-2-一些解决办法"><a href="#1-2-一些解决办法" class="headerlink" title="1.2 一些解决办法"></a>1.2 一些解决办法</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">6</span> * ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>)</span><br><span class="line"><span class="keyword">int</span> value = rand();</span><br><span class="line"><span class="keyword">while</span> (value &gt;= max)</span><br><span class="line">    value = rand();</span><br></pre></td></tr></table></figure>
+
+<p>这样会使 <code>[0, 5]</code> 的分布频率更加接近。</p>
+<p>当然还有很多的办法，上述也未必是最佳的。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>C++</category>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>rand</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>条款02-尽量以const,enum,inline替换#define</title>
     <url>/2020/02/06/EffectiveC++/Notes/%E6%9D%A1%E6%AC%BE02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2define/</url>
     <content><![CDATA[<ul>
@@ -1008,42 +1050,6 @@ table th:nth-of-type(6) {
       </categories>
       <tags>
         <tag>Effective C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么不推荐使用 rand &amp;#37 n 来生成一定范围的随机数</title>
-    <url>/2020/02/06/CPP/summary/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8rand%E6%B1%82%E4%BD%99%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
-    <content><![CDATA[<ul>
-<li><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数">1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</a><ul>
-<li><a href="#1-1-rand-n-的弊端">1.1 <code>rand() % n</code> 的弊端</a></li>
-<li><a href="#1-2-一些解决办法">1.2 一些解决办法</a></li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="1-为什么不推荐使用-rand-n-来生成一定范围的随机数"><a href="#1-为什么不推荐使用-rand-n-来生成一定范围的随机数" class="headerlink" title="1. 为什么不推荐使用 rand % n 来生成一定范围的随机数"></a>1. 为什么不推荐使用 <code>rand % n</code> 来生成一定范围的随机数</h1><p>最初遇到这个问题是在学习随机数的时候，在 cppreference 上，有这么一段代码，它的写法让我眼前一亮。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 扔 6 面色子 20 次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n != <span class="number">20</span>; ++n) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">7</span>;</span><br><span class="line">        <span class="keyword">while</span>(x &gt; <span class="number">6</span>)</span><br><span class="line">            x = <span class="number">1</span> + rand() / ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>); <span class="comment">// 注意： 1 + rand() % 6 有偏差！</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>StackOverflow上也有个类似的问题。<a href="https://stackoverflow.com/questions/49878942/why-is-rand6-biased" target="_blank" rel="noopener">Why is <code>rand() % 6</code> biased?</a></p>
-<h2 id="1-1-rand-n-的弊端"><a href="#1-1-rand-n-的弊端" class="headerlink" title="1.1 rand() % n 的弊端"></a>1.1 <code>rand() % n</code> 的弊端</h2><p>首先，以 <code>n = 100</code>为例，我们要知道 <code>rand() % 100</code> 这段代码的作用是生成 <code>[0, 99]</code> 范围内的随机数。<code>rand()</code> 的范围是 <code>[0, RAND_MAX]</code> , <code>RAND_MAX</code> 的值不小于 <code>32767</code>。</p>
-<p>我们看这段代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> src = rand(); <span class="comment">// 假设均匀分布在 [0, 32767] 范围内</span></span><br><span class="line"><span class="keyword">int</span> dst = src % <span class="number">100</span>; <span class="comment">// 这个非均匀分布在 [0, 99]</span></span><br></pre></td></tr></table></figure>
-
-<p>$src \in [0, 99] \Rightarrow  dst \in [0, 99]$<br>$src \in [100, 199] \Rightarrow  dst \in [0, 99]$<br>$…\ …$<br>$src \in [32700, 32767] \Rightarrow  dst \in [0, 67]$  </p>
-<p>我们可以看到，<code>src</code> 取值在 <code>[0, 32700]</code> 之内的，<code>dst</code> 在 <code>[0, 99]</code> 之间的概率都是相等的。但是最后的 <code>[32700, 32767]</code> 使得 <code>dst</code> 只能取到 <code>[0, 67]</code> 范围内的值。这说明 <code>rand() % n</code> 会偏向于较小的数字。</p>
-<p>你也许认为这么一点小的偏差不需太过计较，确实，随着 <code>RAND_MAX</code> 的增大、或者 <code>n</code> 的变小，这种误差会越来越小。但是我们举个极端的例子，<code>rand()</code> 范围是 <code>[0, 6]</code> ，<code>n = 6</code>，我们依然要找的是 <code>[0, 5]</code> 之内的随机数。<br>此时 <code>0</code> 出现了频次是 <code>2</code>，其他 <code>1 ~ 5</code> 出现的频次都是 <code>1</code> 。这样看来，<code>0</code> 出现的频率是其他数字的整整2倍，这个误差就比较明显了。</p>
-<h2 id="1-2-一些解决办法"><a href="#1-2-一些解决办法" class="headerlink" title="1.2 一些解决办法"></a>1.2 一些解决办法</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">6</span> * ((RAND_MAX + <span class="number">1u</span>) / <span class="number">6</span>)</span><br><span class="line"><span class="keyword">int</span> value = rand();</span><br><span class="line"><span class="keyword">while</span> (value &gt;= max)</span><br><span class="line">    value = rand();</span><br></pre></td></tr></table></figure>
-
-<p>这样会使 <code>[0, 5]</code> 的分布频率更加接近。</p>
-<p>当然还有很多的办法，上述也未必是最佳的。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>C++</category>
-        <category>Notes</category>
-      </categories>
-      <tags>
-        <tag>rand</tag>
       </tags>
   </entry>
   <entry>
